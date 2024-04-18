@@ -11,4 +11,6 @@ module org.openjfx.fierydragons {
     opens org.openjfx.fierydragons.entities to javafx.fxml;
     exports org.openjfx.fierydragons.game;
     opens org.openjfx.fierydragons.game to javafx.fxml;
+    exports org.openjfx.fierydragons.render;
+    opens org.openjfx.fierydragons.render to javafx.fxml;
 }

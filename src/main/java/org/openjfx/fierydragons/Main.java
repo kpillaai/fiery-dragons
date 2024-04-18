@@ -1,7 +1,9 @@
 package org.openjfx.fierydragons;
 
+import org.openjfx.fierydragons.render.SceneController;
+
 public class Main {
     public static void main(String[] args) {
-        HelloApplication.main(args);
+        StartApplication.main(args);
     }
 }

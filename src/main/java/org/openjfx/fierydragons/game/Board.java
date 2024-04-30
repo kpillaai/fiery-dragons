@@ -43,10 +43,18 @@ public class Board {
         for (int i = 0; i < noOfPlayers; i++) {
             addMapPiece(new MapPiece(true, animals[i], i + 1));
             for (int j = 0; j < noOfSectionsBetweenCaves; j++) {
-                addMapPiece(new MapPiece(false, TileType.BABY_DRAGON));
-                addMapPiece(new MapPiece(false, TileType.SPIDER));
-                addMapPiece(new MapPiece(false, TileType.SALAMANDER));
-                //addMapPiece(new MapPiece(false, TileType.BAT));
+                if (i != 0) {
+                    addMapPiece(new MapPiece(false, TileType.BABY_DRAGON));
+                }
+                if (i != 1) {
+                    addMapPiece(new MapPiece(false, TileType.SPIDER));
+                }
+                if (i != 2) {
+                    addMapPiece(new MapPiece(false, TileType.SALAMANDER));
+                }
+                if (i != 3) {
+                    addMapPiece(new MapPiece(false, TileType.BAT));
+                }
             }
         }
         generateChitCards();

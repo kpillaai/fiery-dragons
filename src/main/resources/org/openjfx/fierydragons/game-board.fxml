@@ -8,29 +8,44 @@
    <children>
       <Circle fx:id="ringOuter" fill="#ff9d1f" layoutX="960.0" layoutY="540.0" radius="388.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fx:id="ringInner" fill="WHITE" layoutX="960.0" layoutY="540.0" radius="265.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="chitCard0" fill="#fff41f" layoutX="819.0" layoutY="385.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fx:id="caveSouth" fill="#665553" layoutX="960.0" layoutY="983.0" radius="55.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="caveEast" fill="#665553" layoutX="1403.0" layoutY="530.0" radius="55.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="caveWest" fill="#665553" layoutX="517.0" layoutY="530.0" radius="55.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="caveEast" fill="#665553" layoutX="1403.0" layoutY="540.0" radius="55.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="caveWest" fill="#665553" layoutX="517.0" layoutY="540.0" radius="55.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fx:id="caveNorth" fill="#665553" layoutX="960.0" layoutY="97.0" radius="55.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="chitCard1" fill="#fff41f" layoutX="913.0" layoutY="385.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="chitCard2" fill="#fff41f" layoutX="1008.0" layoutY="385.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="chitCard3" fill="#fff41f" layoutX="1100.0" layoutY="385.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="chitCard4" fill="#fff41f" layoutX="819.0" layoutY="490.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="chitCard5" fill="#fff41f" layoutX="913.0" layoutY="490.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="chitCard6" fill="#fff41f" layoutX="1008.0" layoutY="490.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="chitCard7" fill="#fff41f" layoutX="1100.0" layoutY="490.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="chitCard8" fill="#fff41f" layoutX="819.0" layoutY="595.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="chitCard9" fill="#fff41f" layoutX="913.0" layoutY="595.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="chitCard10" fill="#fff41f" layoutX="1008.0" layoutY="595.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="chitCard11" fill="#fff41f" layoutX="1100.0" layoutY="595.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="chitCard12" fill="#fff41f" layoutX="819.0" layoutY="695.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="chitCard13" fill="#fff41f" layoutX="913.0" layoutY="695.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="chitCard14" fill="#fff41f" layoutX="1008.0" layoutY="695.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="chitCard15" fill="#fff41f" layoutX="1100.0" layoutY="695.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
-      <ImageView fx:id="bat1" fitHeight="59.0" fitWidth="78.0" layoutX="780.0" layoutY="358.0" pickOnBounds="true" preserveRatio="true">
+      <Circle fx:id="chitCard0" fill="#fff41f" layoutX="819.0" layoutY="385.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="chitCard1" fill="#fff41f" layoutX="913.0" layoutY="385.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="chitCard2" fill="#fff41f" layoutX="1008.0" layoutY="385.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="chitCard3" fill="#fff41f" layoutX="1106.0" layoutY="385.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="chitCard4" fill="#fff41f" layoutX="819.0" layoutY="490.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="chitCard5" fill="#fff41f" layoutX="913.0" layoutY="490.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="chitCard6" fill="#fff41f" layoutX="1008.0" layoutY="490.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="chitCard7" fill="#fff41f" layoutX="1106.0" layoutY="490.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="chitCard8" fill="#fff41f" layoutX="819.0" layoutY="595.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="chitCard9" fill="#fff41f" layoutX="913.0" layoutY="595.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="chitCard10" fill="#fff41f" layoutX="1008.0" layoutY="595.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="chitCard11" fill="#fff41f" layoutX="1106.0" layoutY="595.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="chitCard12" fill="#fff41f" layoutX="819.0" layoutY="695.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="chitCard13" fill="#fff41f" layoutX="913.0" layoutY="695.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="chitCard14" fill="#fff41f" layoutX="1008.0" layoutY="695.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="chitCard15" fill="#fff41f" layoutX="1106.0" layoutY="695.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
+      <ImageView fx:id="batCave" fitHeight="64.0" fitWidth="92.0" layoutX="471.0" layoutY="508.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/bat.png" />
+            <Image url="@images/bat1.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="salamanderCave" fitHeight="64.0" fitWidth="92.0" layoutX="928.0" layoutY="951.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/salamander1.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="babyDragonCave" fitHeight="64.0" fitWidth="92.0" layoutX="933.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/baby_dragon1.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="spiderCave" fitHeight="64.0" fitWidth="92.0" layoutX="1357.0" layoutY="512.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/spider1.png" />
          </image>
       </ImageView>
    </children>

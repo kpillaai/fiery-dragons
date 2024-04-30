@@ -46,7 +46,7 @@ public class Board {
                 addMapPiece(new MapPiece(false, TileType.BABY_DRAGON));
                 addMapPiece(new MapPiece(false, TileType.SPIDER));
                 addMapPiece(new MapPiece(false, TileType.SALAMANDER));
-                addMapPiece(new MapPiece(false, TileType.BAT));
+                //addMapPiece(new MapPiece(false, TileType.BAT));
             }
         }
         generateChitCards();

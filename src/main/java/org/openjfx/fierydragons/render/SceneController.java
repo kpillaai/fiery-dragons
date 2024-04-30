@@ -27,4 +27,8 @@ public class SceneController {
         stage.setScene(scene);
         stage.show();
     }
+
+    public void initialize() {
+
+    }
 }

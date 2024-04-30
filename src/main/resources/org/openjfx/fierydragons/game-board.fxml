@@ -1,31 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.fierydragons.render.BoardController">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.fierydragons.render.BoardController">
    <children>
-      <Circle fill="#ff9d1f" layoutX="540.0" layoutY="540.0" radius="388.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fill="WHITE" layoutX="540.0" layoutY="540.0" radius="265.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="chitCard1" fill="#fff41f" layoutX="386.0" layoutY="459.0" onMouseReleased="#onCardClick" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fill="#665553" layoutX="540.0" layoutY="983.0" radius="55.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fill="#665553" layoutX="983.0" layoutY="530.0" radius="55.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fill="#665553" layoutX="97.0" layoutY="530.0" radius="55.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fill="#665553" layoutX="540.0" layoutY="97.0" radius="55.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fill="#fff41f" layoutX="464.0" layoutY="374.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fill="#fff41f" layoutX="571.0" layoutY="335.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fill="#fff41f" layoutX="680.0" layoutY="398.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fill="#fff41f" layoutX="739.0" layoutY="498.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fill="#fff41f" layoutX="585.0" layoutY="459.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fill="#fff41f" layoutX="470.0" layoutY="514.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fill="#fff41f" layoutX="347.0" layoutY="546.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fill="#fff41f" layoutX="641.0" layoutY="546.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fill="#fff41f" layoutX="556.0" layoutY="592.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fill="#fff41f" layoutX="370.0" layoutY="638.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fill="#fff41f" layoutX="470.0" layoutY="660.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fill="#fff41f" layoutX="739.0" layoutY="605.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fill="#fff41f" layoutX="663.0" layoutY="660.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fill="#fff41f" layoutX="595.0" layoutY="722.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fill="#fff41f" layoutX="493.0" layoutY="746.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="ringOuter" fill="#ff9d1f" layoutX="960.0" layoutY="540.0" radius="388.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="ringInner" fill="WHITE" layoutX="960.0" layoutY="540.0" radius="265.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="chitCard0" fill="#fff41f" layoutX="819.0" layoutY="385.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="caveSouth" fill="#665553" layoutX="960.0" layoutY="983.0" radius="55.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="caveEast" fill="#665553" layoutX="1403.0" layoutY="530.0" radius="55.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="caveWest" fill="#665553" layoutX="517.0" layoutY="530.0" radius="55.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="caveNorth" fill="#665553" layoutX="960.0" layoutY="97.0" radius="55.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="chitCard1" fill="#fff41f" layoutX="913.0" layoutY="385.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="chitCard2" fill="#fff41f" layoutX="1008.0" layoutY="385.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="chitCard3" fill="#fff41f" layoutX="1100.0" layoutY="385.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="chitCard4" fill="#fff41f" layoutX="819.0" layoutY="490.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="chitCard5" fill="#fff41f" layoutX="913.0" layoutY="490.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="chitCard6" fill="#fff41f" layoutX="1008.0" layoutY="490.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="chitCard7" fill="#fff41f" layoutX="1100.0" layoutY="490.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="chitCard8" fill="#fff41f" layoutX="819.0" layoutY="595.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="chitCard9" fill="#fff41f" layoutX="913.0" layoutY="595.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="chitCard10" fill="#fff41f" layoutX="1008.0" layoutY="595.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="chitCard11" fill="#fff41f" layoutX="1100.0" layoutY="595.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="chitCard12" fill="#fff41f" layoutX="819.0" layoutY="695.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="chitCard13" fill="#fff41f" layoutX="913.0" layoutY="695.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="chitCard14" fill="#fff41f" layoutX="1008.0" layoutY="695.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="chitCard15" fill="#fff41f" layoutX="1100.0" layoutY="695.0" radius="39.0" stroke="BLACK" strokeType="INSIDE" />
+      <ImageView fx:id="bat1" fitHeight="59.0" fitWidth="78.0" layoutX="780.0" layoutY="358.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/bat.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

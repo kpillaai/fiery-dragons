@@ -167,7 +167,7 @@ public class BoardController {
             double animalX = centreX + Math.cos(Math.toRadians(i * pieceAngle)) * middleRadius;
             double animalY = centreX + Math.sin(Math.toRadians(i * pieceAngle)) * middleRadius;
 
-            String filePath = STR."file:/D:/Monash/2024/FIT3077/FieryDragons/target/classes/org/openjfx/fierydragons/images/\{mapPieces.get(i + 1 + (Math.floorDiv(i, 6))).getTileType().toString().toLowerCase()}1.png";
+            String filePath = "file:/D:/Monash/2024/FIT3077/FieryDragons/target/classes/org/openjfx/fierydragons/images/" + mapPieces.get(i + 1 + (Math.floorDiv(i, 6))).getTileType().toString().toLowerCase() + "1.png";
 
             // Create new image
             Image image = new Image(filePath);

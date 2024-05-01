@@ -106,10 +106,10 @@ public class BoardController {
                 String fileNameKey = chits.get(idNumber).getKey().toString().toLowerCase();
                 String fileNameValue = chits.get(idNumber).getValue().toString();
                 String fileName = fileNameKey + fileNameValue + ".png";
-                String filePath = "file:/D:/Monash/2024/FIT3077/FieryDragons/target/classes/org/openjfx/fierydragons/images/" + fileName;
 
                 // Create new image
-                Image image = new Image(filePath);
+                System.out.println("/org/openjfx/fierydragons/images/" + fileName);
+                Image image = new Image(getClass().getResourceAsStream("/org/openjfx/fierydragons/images/" + fileName));
                 ImageView imageView = new ImageView(image);
                 imageView.setId(idString.substring(8));
                 imageView.setVisible(false);
@@ -167,10 +167,9 @@ public class BoardController {
             double animalX = centreX + Math.cos(Math.toRadians(i * pieceAngle)) * middleRadius;
             double animalY = centreX + Math.sin(Math.toRadians(i * pieceAngle)) * middleRadius;
 
-            String filePath = "file:/D:/Monash/2024/FIT3077/FieryDragons/target/classes/org/openjfx/fierydragons/images/" + mapPieces.get(i + 1 + (Math.floorDiv(i, 6))).getTileType().toString().toLowerCase() + "1.png";
-
+            String filePath = "/org/openjfx/fierydragons/images/" + mapPieces.get(i + 1 + (Math.floorDiv(i, 6))).getTileType().toString().toLowerCase() + "1.png";
             // Create new image
-            Image image = new Image(filePath);
+            Image image = new Image(getClass().getResourceAsStream(filePath));
             ImageView imageView = new ImageView(image);
             imageView.setVisible(true);
             imageView.setFitHeight(80);

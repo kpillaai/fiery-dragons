@@ -1,27 +1,42 @@
 package org.openjfx.fierydragons.game;
 
+import org.openjfx.fierydragons.entities.MapPiece;
 import org.openjfx.fierydragons.entities.Player;
 
+import java.util.ArrayList;
+
 public class Game {
-    private Board board;
-    public Game() {
-        this.board = Board.getInstance();
+
+    private static Game instance;
+
+    private ArrayList<Player> playerList;
+
+    private Player currentPlayer;
+
+    private Game() {
+        initialise();
     }
-    public Board getBoard() {
-        return board;
+
+    public static synchronized Game getInstance(){
+        if (instance == null) {
+            instance = new Game();
+        }
+        return instance;
     }
 
     public void initialise() {
         //set up the board
         Board.getInstance().initialiseBoard("");
         //set up players
-        Turn turn = new Turn();
-        turn.addPlayer(new Player("Player1", 1));
-        turn.addPlayer(new Player("Player2", 2));
-        turn.addPlayer(new Player("Player3", 3));
-        turn.addPlayer(new Player("Player4", 4));
+
+        Turn.getInstance().addPlayer(new Player("Player1", 1));
+        Turn.getInstance().addPlayer(new Player("Player2", 2));
+        Turn.getInstance().addPlayer(new Player("Player3", 3));
+        Turn.getInstance().addPlayer(new Player("Player4", 4));
         //set up turn requests
     }
+
+
 
     public void startGame() {
 
@@ -29,5 +44,13 @@ public class Game {
 
     public String fetchSettings() {
         return "";
+    }
+
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public void setCurrentPlayer(Player currentPlayer) {
+        this.currentPlayer = currentPlayer;
     }
 }

@@ -6,9 +6,18 @@ import java.util.ArrayList;
 
 public class Turn {
 
+    private static Turn instance;
+
     private ArrayList<Player> playerList;
-    public Turn() {
+    private Turn() {
         this.playerList = new ArrayList<Player>();
+    }
+
+    public static synchronized Turn getInstance(){
+        if (instance == null) {
+            instance = new Turn();
+        }
+        return instance;
     }
 
     public int getPlayerInput() {
@@ -19,7 +28,7 @@ public class Turn {
 
     }
 
-    private boolean handleTurn() {
+    public boolean handleTurn(Player player, Integer chitCardId) {
         return false;
     }
 

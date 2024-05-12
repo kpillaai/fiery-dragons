@@ -27,6 +27,6 @@ public class StartApplication extends Application {
     }
 
     private void startGame() {
-        Game game = new Game();
-        game.initialise();}
+        Game.getInstance().initialise();
+    }
 }

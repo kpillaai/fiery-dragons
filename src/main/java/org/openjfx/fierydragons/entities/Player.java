@@ -1,5 +1,7 @@
 package org.openjfx.fierydragons.entities;
 
+import org.openjfx.fierydragons.game.Turn;
+
 public class Player {
     private String name;
 
@@ -10,8 +12,8 @@ public class Player {
         this.id = id;
     }
 
-    public int flipCard() {
-        return 0;
+    public void flipCard(Integer chitCardId) {
+        Turn.getInstance().handleTurn(this, chitCardId);
     }
 
     public String getName() {

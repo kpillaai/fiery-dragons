@@ -22,6 +22,8 @@ import org.openjfx.fierydragons.StartApplication;
 import org.openjfx.fierydragons.entities.MapPiece;
 import org.openjfx.fierydragons.entities.TileType;
 import org.openjfx.fierydragons.game.Board;
+import org.openjfx.fierydragons.game.Game;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -61,6 +63,8 @@ public class BoardController {
         }
         animationInProgress = true;
         // Call the flipCard() method here
+
+        Game.getInstance().getCurrentPlayer().flipCard(Integer.parseInt(id.substring(8)));
 
 
         // Rendering card flipping

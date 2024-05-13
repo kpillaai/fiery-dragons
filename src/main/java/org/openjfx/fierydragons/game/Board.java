@@ -3,8 +3,10 @@ package org.openjfx.fierydragons.game;
 import javafx.util.Pair;
 import org.openjfx.fierydragons.entities.Deck;
 import org.openjfx.fierydragons.entities.MapPiece;
+import org.openjfx.fierydragons.entities.Tile;
 import org.openjfx.fierydragons.entities.TileType;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class Board {
@@ -39,22 +41,42 @@ public class Board {
 
     public void initialiseBoard(String settings) {
         TileType[] animals = {TileType.BABY_DRAGON, TileType.SPIDER, TileType.SALAMANDER, TileType.BAT};
-        int noOfSectionsBetweenCaves = 2;
-        int noOfPlayers = 4;
+
+        ArrayList<MapPiece> normalPiece = new ArrayList<>();
+        normalPiece.add(new MapPiece(new Tile(false, TileType.SPIDER), new Tile(false, TileType.BAT), new Tile(false, TileType.SALAMANDER)));
+        normalPiece.add(new MapPiece(new Tile(false, TileType.BABY_DRAGON), new Tile(false, TileType.SALAMANDER), new Tile(false, TileType.BAT)));
+        normalPiece.add(new MapPiece(new Tile(false, TileType.BAT), new Tile(false, TileType.BABY_DRAGON), new Tile(false, TileType.SALAMANDER)));
+        normalPiece.add(new MapPiece(new Tile(false, TileType.SALAMANDER), new Tile(false, TileType.BABY_DRAGON), new Tile(false, TileType.SPIDER)));
+
+        ArrayList<MapPiece> cavePiece = new ArrayList<>();
+        cavePiece.add(new MapPiece(new Tile(false, TileType.BABY_DRAGON), new Tile(false, TileType.BAT), new Tile(false, TileType.SPIDER)));
+        cavePiece.add(new MapPiece(new Tile(false, TileType.SALAMANDER), new Tile(false, TileType.SPIDER), new Tile(false, TileType.BAT)));
+        cavePiece.add(new MapPiece(new Tile(false, TileType.SPIDER), new Tile(false, TileType.SALAMANDER), new Tile(false, TileType.BABY_DRAGON)));
+        cavePiece.add(new MapPiece(new Tile(false, TileType.BAT), new Tile(false, TileType.SPIDER), new Tile(false, TileType.BABY_DRAGON)));
+
+        Collections.shuffle(normalPiece);
+        Collections.shuffle(cavePiece);
+
+        for (int i = 0; i < cavePiece.size(); i++) {
+            addMapPiece(cavePiece.get(i));
+            addMapPiece(normalPiece.get(i));
+        }
+
+        /*
         for (int i = 0; i < noOfPlayers; i++) {
-            addMapPiece(new MapPiece(true, animals[i], i + 1));
+            addMapPiece(new Tile(true, animals[i], i + 1));
             for (int j = 0; j < noOfSectionsBetweenCaves; j++) {
                 if (i != 0) {
-                    addMapPiece(new MapPiece(false, TileType.BABY_DRAGON));
+                    addMapPiece(new Tile(false, TileType.BABY_DRAGON));
                 }
                 if (i != 1) {
-                    addMapPiece(new MapPiece(false, TileType.SPIDER));
+                    addMapPiece(new Tile(false, TileType.SPIDER));
                 }
                 if (i != 2) {
-                    addMapPiece(new MapPiece(false, TileType.SALAMANDER));
+                    addMapPiece(new Tile(false, TileType.SALAMANDER));
                 }
                 if (i != 3) {
-                    addMapPiece(new MapPiece(false, TileType.BAT));
+                    addMapPiece(new Tile(false, TileType.BAT));
                 }
             }
         }

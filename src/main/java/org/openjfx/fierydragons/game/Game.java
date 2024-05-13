@@ -1,6 +1,5 @@
 package org.openjfx.fierydragons.game;
 
-import org.openjfx.fierydragons.entities.MapPiece;
 import org.openjfx.fierydragons.entities.Player;
 
 import java.util.ArrayList;
@@ -14,7 +13,7 @@ public class Game {
     private Player currentPlayer;
 
     private Game() {
-        initialise();
+        //initialise();
     }
 
     public static synchronized Game getInstance(){

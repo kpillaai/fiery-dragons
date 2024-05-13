@@ -20,6 +20,8 @@ import javafx.util.Duration;
 import org.openjfx.fierydragons.StartApplication;
 import org.openjfx.fierydragons.entities.Deck;
 import org.openjfx.fierydragons.entities.MapPiece;
+import org.openjfx.fierydragons.entities.Tile;
+import org.openjfx.fierydragons.entities.TileType;
 import org.openjfx.fierydragons.game.Board;
 import org.openjfx.fierydragons.game.Game;
 
@@ -87,9 +89,6 @@ public class BoardController {
             }
         }
         rotateTransition.play();
-
-
-
     }
 
     private void renderChits() {
@@ -142,49 +141,59 @@ public class BoardController {
         double outerRadius = 388;
         double innerRadius = 265;
         double middleRadius = (outerRadius + innerRadius) / 2;
-        int pieces = mapPieces.size() - 4;
+        int pieces = 0;
+        for (int i = 0; i < mapPieces.size(); i++) {
+            pieces += mapPieces.get(i).getTiles().size();
+        }
+
         double centreX = 960;
         double centreY = 540;
         double pieceAngle = 360.0/pieces;
         double offsetAngle = pieceAngle / 2;
 
+        // looping through mapPieces.size (8) and then looping through each MapPiece (3) results in 24 tiles
+        for (int i = 0; i < mapPieces.size(); i++) {
+            for (int j = 0; j < mapPieces.get(i).getTiles().size(); j++) {
+                // calculate what tile number. -1 offset for alignment of cave with middle of map piece when displaying
+                int tile_increment = (i * 3) + j - 1;
 
-        for (int i = 0; i < pieces; i++) {
-            // Calculating angles
-            double endAngle = i * pieceAngle + offsetAngle;
-            double angleRad = Math.toRadians(endAngle);
+                // Calculating angles
+                double endAngle = tile_increment * pieceAngle + offsetAngle;
+                double angleRad = Math.toRadians(endAngle);
 
-            // Calculate endpoints of the lines
-            double endX = centreX + Math.cos(angleRad) * outerRadius;
-            double endY = centreY + Math.sin(angleRad) * outerRadius;
-            double startX = centreX + Math.cos(angleRad) * innerRadius;
-            double startY = centreY + Math.sin(angleRad) * innerRadius;
+                // Calculate endpoints of the lines
+                double endX = centreX + Math.cos(angleRad) * outerRadius;
+                double endY = centreY + Math.sin(angleRad) * outerRadius;
+                double startX = centreX + Math.cos(angleRad) * innerRadius;
+                double startY = centreY + Math.sin(angleRad) * innerRadius;
 
-            // Creating and adding lines
-            Line sliceLine = new Line(startX, startY, endX, endY);
-            sliceLine.setStroke(Color.BLACK);
-            anchorPane.getChildren().add(sliceLine);
+                // Creating and adding lines
+                Line sliceLine = new Line(startX, startY, endX, endY);
+                sliceLine.setStroke(Color.BLACK);
+                anchorPane.getChildren().add(sliceLine);
 
-            // Generating Animals for each tile
-            double animalX = centreX + Math.cos(Math.toRadians(i * pieceAngle)) * middleRadius;
-            double animalY = centreX + Math.sin(Math.toRadians(i * pieceAngle)) * middleRadius;
+                // Generating Animals for each tile
+                double animalX = centreX + Math.cos(Math.toRadians(tile_increment * pieceAngle)) * middleRadius;
+                double animalY = centreX + Math.sin(Math.toRadians(tile_increment * pieceAngle)) * middleRadius;
 
-            String filePath = "/org/openjfx/fierydragons/images/" + mapPieces.get(i + 1 + (Math.floorDiv(i, 6))).getTileType().toString().toLowerCase() + "1.png";
-            // Create new image
-            Image image = new Image(getClass().getResourceAsStream(filePath));
-            ImageView imageView = new ImageView(image);
-            imageView.setVisible(true);
-            imageView.setFitHeight(80);
-            imageView.setFitWidth(80);
+                String filePath = "/org/openjfx/fierydragons/images/" + mapPieces.get(i).getTiles().get(j).getTileType().toString().toLowerCase() + "1.png";
 
-            // Get location on where it should be placed
-            double topLeftX = animalX - 40; // Figure out a way to do this better
-            double topLeftY = animalY - 460;
+                // Create new image
+                Image image = new Image(getClass().getResourceAsStream(filePath));
+                ImageView imageView = new ImageView(image);
+                imageView.setVisible(true);
+                imageView.setFitHeight(80);
+                imageView.setFitWidth(80);
 
-            // Add image
-            AnchorPane.setTopAnchor(imageView, topLeftY);
-            AnchorPane.setLeftAnchor(imageView, topLeftX);
-            anchorPane.getChildren().add(imageView);
+                // Get location on where it should be placed
+                double topLeftX = animalX - 40; // Figure out a way to do this better
+                double topLeftY = animalY - 460;
+
+                // Add image
+                AnchorPane.setTopAnchor(imageView, topLeftY);
+                AnchorPane.setLeftAnchor(imageView, topLeftX);
+                anchorPane.getChildren().add(imageView);
+            }
         }
     }
 }

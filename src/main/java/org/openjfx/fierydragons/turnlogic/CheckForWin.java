@@ -2,8 +2,9 @@ package org.openjfx.fierydragons.turnlogic;
 
 import java.util.ArrayList;
 
-public class CheckTile extends TurnHandler {
-    public CheckTile() {
+public class CheckForWin extends TurnHandler{
+
+    public CheckForWin() {
     }
 
     @Override

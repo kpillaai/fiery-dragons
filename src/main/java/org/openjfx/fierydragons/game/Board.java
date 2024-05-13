@@ -1,6 +1,7 @@
 package org.openjfx.fierydragons.game;
 
 import javafx.util.Pair;
+import org.openjfx.fierydragons.entities.Deck;
 import org.openjfx.fierydragons.entities.MapPiece;
 import org.openjfx.fierydragons.entities.Tile;
 import org.openjfx.fierydragons.entities.TileType;
@@ -14,7 +15,7 @@ public class Board {
 
     private static Board instance;
 
-    private List<Pair<TileType, Integer>> chitCards = new ArrayList<>();
+    private Deck deck;
 
     private Board() {
         this.mapPieces = new ArrayList<MapPiece>();
@@ -79,31 +80,10 @@ public class Board {
                 }
             }
         }
-         */
-        generateChitCards();
+        this.deck = new Deck();
     }
 
-    private void generateChitCards() {
-        this.chitCards.add(new Pair<>(TileType.BABY_DRAGON, 1));
-        this.chitCards.add(new Pair<>(TileType.BABY_DRAGON, 2));
-        this.chitCards.add(new Pair<>(TileType.BABY_DRAGON, 3));
-        this.chitCards.add(new Pair<>(TileType.BAT, 1));
-        this.chitCards.add(new Pair<>(TileType.BAT, 2));
-        this.chitCards.add(new Pair<>(TileType.BAT, 3));
-        this.chitCards.add(new Pair<>(TileType.SALAMANDER, 1));
-        this.chitCards.add(new Pair<>(TileType.SALAMANDER, 2));
-        this.chitCards.add(new Pair<>(TileType.SALAMANDER, 3));
-        this.chitCards.add(new Pair<>(TileType.SPIDER, 1));
-        this.chitCards.add(new Pair<>(TileType.SPIDER, 2));
-        this.chitCards.add(new Pair<>(TileType.SPIDER, 3));
-        this.chitCards.add(new Pair<>(TileType.PIRATE, 1));
-        this.chitCards.add(new Pair<>(TileType.PIRATE, 2));
-        this.chitCards.add(new Pair<>(TileType.PIRATE, 1));
-        this.chitCards.add(new Pair<>(TileType.PIRATE, 2));
-        Collections.shuffle(this.chitCards);
-    }
-
-    public List<Pair<TileType, Integer>> getChitCards() {
-        return chitCards;
+    public Deck getDeck() {
+        return this.deck;
     }
 }

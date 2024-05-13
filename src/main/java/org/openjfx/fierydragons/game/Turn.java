@@ -1,13 +1,8 @@
 package org.openjfx.fierydragons.game;
 
 import org.openjfx.fierydragons.entities.Player;
-import org.openjfx.fierydragons.turnlogic.CheckTile;
-import org.openjfx.fierydragons.turnlogic.MovePastCave;
-import org.openjfx.fierydragons.turnlogic.NextTileContainsPlayer;
-import org.openjfx.fierydragons.turnlogic.NextTileEmptyHandler;
-import org.openjfx.fierydragons.turnlogic.TurnHandler;
+import org.openjfx.fierydragons.turnlogic.*;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Turn {
@@ -15,18 +10,8 @@ public class Turn {
     private static Turn instance;
 
     private ArrayList<Player> playerList;
+
     private Turn() {
-        this.playerList = new ArrayList<Player>();
-
-        TurnHandler t1 = new CheckTile();
-        TurnHandler t2 = new MovePastCave();
-        TurnHandler t3 = new NextTileContainsPlayer();
-
-        t1.setNextStep(t2);
-        t2.setNextStep(t3);
-
-        ArrayList<Boolean> canPlayerMove = t1.handleTurn("HI");
-
 
     }
 
@@ -37,24 +22,36 @@ public class Turn {
         return instance;
     }
 
-    public int getPlayerInput() {
-        return 0;
+    public void endTurn() {
+        /*
+        Game.getInstance().iterateNextPlayer();
+         */
+    }
+    public void nextTurn(Integer chitCardId) {
+        TurnHandler t1 = new CheckTile();
+        TurnHandler t2 = new MovePastCave();
+        TurnHandler t3 = new NextTileContainsPlayer();
+        TurnHandler t4 = new CheckForWin();
+        t1.setNextStep(t2);
+        t2.setNextStep(t3);
+        t3.setNextStep(t4);
+
+        //Figure out a way to get the chitcard type and number here
+        /*
+        Deck chitCards = Board.getInstance().getDeck().getChitCards();
+        ArrayList<Boolean> canPlayerMove = t1.handleTurn(chitCards.get(chitCardId));
+        handleTurn(Game.getInstance.getCurrentPlayer());
+         */
     }
 
-    public void nextTurn() {
-
+    private boolean handleTurn(Player player, Integer chitCardId) {
+        return false;
     }
 
+    // delete this later
     public void addPlayer(Player player) {
         this.playerList.add(player);
     }
 
-    public boolean handleTurn(Player player, Integer chitCardId) {
-        return false;
-    }
 
-
-    public ArrayList<Player> getPlayerList() {
-        return playerList;
-    }
 }

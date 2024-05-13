@@ -13,7 +13,7 @@ public class Player {
     }
 
     public void flipCard(Integer chitCardId) {
-        Turn.getInstance().handleTurn(this, chitCardId);
+        Turn.getInstance().nextTurn(chitCardId);
     }
 
     public String getName() {

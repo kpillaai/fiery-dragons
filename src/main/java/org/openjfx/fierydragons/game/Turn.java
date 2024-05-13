@@ -2,6 +2,11 @@ package org.openjfx.fierydragons.game;
 
 import org.openjfx.fierydragons.entities.Player;
 import org.openjfx.fierydragons.turnlogic.*;
+import org.openjfx.fierydragons.turnlogic.CheckTile;
+import org.openjfx.fierydragons.turnlogic.MovePastCave;
+import org.openjfx.fierydragons.turnlogic.NextTileContainsPlayer;
+import org.openjfx.fierydragons.turnlogic.TurnHandler;
+
 
 import java.util.ArrayList;
 

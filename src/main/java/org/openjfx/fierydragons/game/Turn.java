@@ -4,7 +4,6 @@ import org.openjfx.fierydragons.entities.Player;
 import org.openjfx.fierydragons.turnlogic.CheckTile;
 import org.openjfx.fierydragons.turnlogic.MovePastCave;
 import org.openjfx.fierydragons.turnlogic.NextTileContainsPlayer;
-import org.openjfx.fierydragons.turnlogic.NextTileEmptyHandler;
 import org.openjfx.fierydragons.turnlogic.TurnHandler;
 
 import java.lang.reflect.Array;

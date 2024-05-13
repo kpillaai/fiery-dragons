@@ -11,7 +11,5 @@ public abstract class TurnHandler {
         this.nextStep = nextStep;
     }
 
-    public boolean handleTurn(String request) {
-        return false;
-    }
+    public abstract boolean handleTurn(String request);
 }

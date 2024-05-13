@@ -8,6 +8,11 @@ public class NextTileEmptyHandler extends TurnHandler {
 
     @Override
     public boolean handleTurn(String request) {
-        return super.handleTurn(request);
+        if (true) {
+            return false;
+        } else {
+            return this.nextStep.handleTurn(request);
+        }
+
     }
 }

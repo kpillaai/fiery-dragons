@@ -1,6 +1,10 @@
 package org.openjfx.fierydragons.game;
 
 import org.openjfx.fierydragons.entities.Player;
+import org.openjfx.fierydragons.turnlogic.CheckTile;
+import org.openjfx.fierydragons.turnlogic.MovePastCave;
+import org.openjfx.fierydragons.turnlogic.NextTileEmptyHandler;
+import org.openjfx.fierydragons.turnlogic.TurnHandler;
 
 import java.util.ArrayList;
 
@@ -11,6 +15,17 @@ public class Turn {
     private ArrayList<Player> playerList;
     private Turn() {
         this.playerList = new ArrayList<Player>();
+
+        TurnHandler t1 = new CheckTile();
+        TurnHandler t2 = new MovePastCave();
+        TurnHandler t3 = new NextTileEmptyHandler();
+
+        t1.setNextStep(t2);
+        t2.setNextStep(t3);
+
+        Boolean canPlayerMove = t1.handleTurn("HI");
+
+
     }
 
     public static synchronized Turn getInstance(){
@@ -32,13 +47,6 @@ public class Turn {
         return false;
     }
 
-    public void addPlayer(Player player) {
-        getPlayerList().add(player);
-    }
-
-    public void removePlayer(int index) {
-        getPlayerList().remove(index);
-    }
 
     public ArrayList<Player> getPlayerList() {
         return playerList;

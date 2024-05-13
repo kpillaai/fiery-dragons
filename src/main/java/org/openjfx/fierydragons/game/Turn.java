@@ -3,9 +3,11 @@ package org.openjfx.fierydragons.game;
 import org.openjfx.fierydragons.entities.Player;
 import org.openjfx.fierydragons.turnlogic.CheckTile;
 import org.openjfx.fierydragons.turnlogic.MovePastCave;
+import org.openjfx.fierydragons.turnlogic.NextTileContainsPlayer;
 import org.openjfx.fierydragons.turnlogic.NextTileEmptyHandler;
 import org.openjfx.fierydragons.turnlogic.TurnHandler;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Turn {
@@ -18,12 +20,12 @@ public class Turn {
 
         TurnHandler t1 = new CheckTile();
         TurnHandler t2 = new MovePastCave();
-        TurnHandler t3 = new NextTileEmptyHandler();
+        TurnHandler t3 = new NextTileContainsPlayer();
 
         t1.setNextStep(t2);
         t2.setNextStep(t3);
 
-        Boolean canPlayerMove = t1.handleTurn("HI");
+        ArrayList<Boolean> canPlayerMove = t1.handleTurn("HI");
 
 
     }
@@ -41,6 +43,10 @@ public class Turn {
 
     public void nextTurn() {
 
+    }
+
+    public void addPlayer(Player player) {
+        this.playerList.add(player);
     }
 
     public boolean handleTurn(Player player, Integer chitCardId) {

@@ -1,45 +1,31 @@
 package org.openjfx.fierydragons.entities;
 
+import java.util.ArrayList;
+
 public class MapPiece {
+    private ArrayList<Tile> tiles;
+    private Tile cave;
 
-    private boolean isCave;
-    private TileType tileType;
-
-    private int playerId;
-
-    public MapPiece(Boolean isCave, TileType tileType) {
-        this.tileType = tileType;
-        this.isCave = isCave;
-        this.playerId = 0;
+    public MapPiece(Tile tile1, Tile tile2, Tile tile3) {
+        this.tiles = new ArrayList<Tile>();
+        addTile(tile1);
+        addTile(tile2);
+        addTile(tile3);
     }
 
-    public MapPiece(Boolean isCave, TileType tileType, int playerId) {
-        this.tileType = tileType;
-        this.isCave = isCave;
-        this.playerId = playerId;
+    public void addTile(Tile newTile) {
+        this.tiles.add(newTile);
     }
 
-    public boolean isCave() {
-        return isCave;
+    public ArrayList<Tile> getTiles() {
+        return tiles;
     }
 
-    public void setCave(boolean cave) {
-        isCave = cave;
+    public void addCave(Tile cave) {
+        this.cave = cave;
     }
 
-    public TileType getTileType() {
-        return tileType;
-    }
-
-    public void setTileType(TileType tileType) {
-        this.tileType = tileType;
-    }
-
-    public int getCurrentPlayer() {
-        return playerId;
-    }
-
-    public void setCurrentPlayer(int currentPlayer) {
-        this.playerId = currentPlayer;
+    public Tile getCave() {
+        return cave;
     }
 }

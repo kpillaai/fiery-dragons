@@ -17,16 +17,14 @@ import javafx.scene.shape.Line;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import javafx.util.Pair;
 import org.openjfx.fierydragons.StartApplication;
+import org.openjfx.fierydragons.entities.Deck;
 import org.openjfx.fierydragons.entities.MapPiece;
-import org.openjfx.fierydragons.entities.TileType;
 import org.openjfx.fierydragons.game.Board;
 import org.openjfx.fierydragons.game.Game;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class BoardController {
@@ -96,7 +94,7 @@ public class BoardController {
 
     private void renderChits() {
         ObservableList<Node> circles = anchorPane.getChildren();
-        List<Pair<TileType, Integer>> chits = Board.getInstance().getChitCards();
+        Deck chits = Board.getInstance().getDeck();
 
         ObservableList<Node> images = FXCollections.observableArrayList();
 
@@ -107,8 +105,8 @@ public class BoardController {
                 String idString = chitCard.getId();
                 int idNumber = Integer.parseInt(idString.substring(8));
 
-                String fileNameKey = chits.get(idNumber).getKey().toString().toLowerCase();
-                String fileNameValue = chits.get(idNumber).getValue().toString();
+                String fileNameKey = chits.getChitCard(idNumber).getKey().toString().toLowerCase();
+                String fileNameValue = chits.getChitCard(idNumber).getValue().toString();
                 String fileName = fileNameKey + fileNameValue + ".png";
 
                 // Create new image

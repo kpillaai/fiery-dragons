@@ -1,8 +1,10 @@
 package org.openjfx.fierydragons.turnlogic;
 
 
+import javafx.util.Pair;
+import org.openjfx.fierydragons.entities.TileType;
+
 import java.util.ArrayList;
-import java.util.List;
 
 public abstract class TurnHandler {
     protected TurnHandler nextStep;
@@ -15,5 +17,5 @@ public abstract class TurnHandler {
         this.nextStep = nextStep;
     }
 
-    public abstract ArrayList<Boolean> handleTurn(String request);
+    public abstract ArrayList<Boolean> handleTurn(Pair<TileType, Integer> chitCard);
 }

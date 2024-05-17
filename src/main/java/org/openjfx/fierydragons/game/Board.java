@@ -37,47 +37,49 @@ public class Board {
     }
 
     public void initialiseBoard(String settings) {
-        TileType[] animals = {TileType.BABY_DRAGON, TileType.SPIDER, TileType.SALAMANDER, TileType.BAT};
-
+        // create normal pieces
         ArrayList<MapPiece> normalPiece = new ArrayList<>();
         normalPiece.add(new MapPiece(new Tile(false, TileType.SPIDER), new Tile(false, TileType.BAT), new Tile(false, TileType.SALAMANDER)));
         normalPiece.add(new MapPiece(new Tile(false, TileType.BABY_DRAGON), new Tile(false, TileType.SALAMANDER), new Tile(false, TileType.BAT)));
         normalPiece.add(new MapPiece(new Tile(false, TileType.BAT), new Tile(false, TileType.BABY_DRAGON), new Tile(false, TileType.SALAMANDER)));
         normalPiece.add(new MapPiece(new Tile(false, TileType.SALAMANDER), new Tile(false, TileType.BABY_DRAGON), new Tile(false, TileType.SPIDER)));
 
+        // create cave pieces
         ArrayList<MapPiece> cavePiece = new ArrayList<>();
         cavePiece.add(new MapPiece(new Tile(false, TileType.BABY_DRAGON), new Tile(false, TileType.BAT), new Tile(false, TileType.SPIDER)));
         cavePiece.add(new MapPiece(new Tile(false, TileType.SALAMANDER), new Tile(false, TileType.SPIDER), new Tile(false, TileType.BAT)));
         cavePiece.add(new MapPiece(new Tile(false, TileType.SPIDER), new Tile(false, TileType.SALAMANDER), new Tile(false, TileType.BABY_DRAGON)));
         cavePiece.add(new MapPiece(new Tile(false, TileType.BAT), new Tile(false, TileType.SPIDER), new Tile(false, TileType.BABY_DRAGON)));
 
+        // shuffle cave and normal pieces for random board
         Collections.shuffle(normalPiece);
         Collections.shuffle(cavePiece);
 
+        // In each loop, set the cave, add a cave piece and a normal piece in alternating order
         for (int i = 0; i < cavePiece.size(); i++) {
+            // setting the caves
+            switch (i) {
+                case 0:
+                    cavePiece.get(i).addCave(new Tile(true, TileType.SPIDER));
+                    break;
+                case 1:
+                    cavePiece.get(i).addCave(new Tile(true, TileType.SALAMANDER));
+                    break;
+                case 2:
+                    cavePiece.get(i).addCave(new Tile(true, TileType.BAT));
+                    break;
+                case 3:
+                    cavePiece.get(i).addCave(new Tile(true, TileType.BABY_DRAGON));
+                    break;
+            }
+
+            // adding pieces to mapPiece array list
             addMapPiece(cavePiece.get(i));
             addMapPiece(normalPiece.get(i));
         }
 
-        /*
-        for (int i = 0; i < noOfPlayers; i++) {
-            addMapPiece(new Tile(true, animals[i], i + 1));
-            for (int j = 0; j < noOfSectionsBetweenCaves; j++) {
-                if (i != 0) {
-                    addMapPiece(new Tile(false, TileType.BABY_DRAGON));
-                }
-                if (i != 1) {
-                    addMapPiece(new Tile(false, TileType.SPIDER));
-                }
-                if (i != 2) {
-                    addMapPiece(new Tile(false, TileType.SALAMANDER));
-                }
-                if (i != 3) {
-                    addMapPiece(new Tile(false, TileType.BAT));
-                }
-            }
-        }
-         */
+
+
         this.deck = new Deck();
     }
 

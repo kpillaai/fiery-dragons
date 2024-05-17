@@ -6,7 +6,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.fierydragons.render.SettingsController">
    <children>
       <Text layoutX="740.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Settings">
@@ -19,7 +18,7 @@
             <Font name="Papyrus" size="48.0" />
          </font>
       </Text>
-      <Slider fx:id="playerCountSlider" blockIncrement="1.0" layoutX="445.0" layoutY="385.0" majorTickUnit="1.0" max="4.0" maxHeight="-Infinity" maxWidth="-Infinity" min="2.0" minHeight="-Infinity" minWidth="-Infinity" minorTickCount="1" prefHeight="14.0" prefWidth="960.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="4.0" />
+      <Slider fx:id="playerCountSlider" blockIncrement="1.0" layoutX="445.0" layoutY="385.0" majorTickUnit="1.0" max="4.0" maxHeight="-Infinity" maxWidth="-Infinity" min="2.0" minHeight="-Infinity" minWidth="-Infinity" minorTickCount="0" onMouseReleased="#onSliderChanged" prefHeight="14.0" prefWidth="960.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="4.0" />
       <Button layoutX="767.0" layoutY="738.0" mnemonicParsing="false" onAction="#switchToBoardScene" text="Confirm" textAlignment="CENTER">
          <font>
             <Font name="Papyrus" size="64.0" />

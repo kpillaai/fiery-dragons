@@ -1,6 +1,9 @@
 package org.openjfx.fierydragons.game;
 
+import javafx.util.Pair;
+import org.openjfx.fierydragons.entities.Deck;
 import org.openjfx.fierydragons.entities.Player;
+import org.openjfx.fierydragons.entities.TileType;
 import org.openjfx.fierydragons.turnlogic.*;
 import org.openjfx.fierydragons.turnlogic.CheckTile;
 import org.openjfx.fierydragons.turnlogic.MovePastCave;
@@ -33,6 +36,13 @@ public class Turn {
          */
     }
     public void nextTurn(Integer chitCardId) {
+        boolean canPlayerMove = this.handleTurnLogic(chitCardId);
+        // Move player here
+
+    }
+
+    private boolean handleTurnLogic(Integer chitCardId) {
+        Player currentPlayer = Game.getInstance().getCurrentPlayer();
         TurnHandler t1 = new CheckTile();
         TurnHandler t2 = new MovePastCave();
         TurnHandler t3 = new NextTileContainsPlayer();
@@ -41,16 +51,10 @@ public class Turn {
         t2.setNextStep(t3);
         t3.setNextStep(t4);
 
-        //Figure out a way to get the chitcard type and number here
-        /*
-        Deck chitCards = Board.getInstance().getDeck().getChitCards();
-        ArrayList<Boolean> canPlayerMove = t1.handleTurn(chitCards.get(chitCardId));
-        handleTurn(Game.getInstance.getCurrentPlayer());
-         */
-    }
+        Pair<TileType, Integer> chitCard = Board.getInstance().getDeck().getChitCard(chitCardId);
+        ArrayList<Boolean> canPlayerMove = t1.handleTurn(chitCard);
 
-    private boolean handleTurn(Player player, Integer chitCardId) {
-        return false;
+        return canPlayerMove.getFirst();
     }
 
     // delete this later

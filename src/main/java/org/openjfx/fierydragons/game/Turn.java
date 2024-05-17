@@ -14,7 +14,7 @@ public class Turn {
 
     private static Turn instance;
 
-    private ArrayList<Player> playerList;
+    private ArrayList<Player> playerList = new ArrayList<>();
 
     private Turn() {
 

@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.fierydragons.render.BoardController">
+<?import javafx.scene.text.Font?>
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.fierydragons.render.BoardController">
    <children>
       <Circle fx:id="ringOuter" fill="#ff9d1f" layoutX="960.0" layoutY="540.0" radius="388.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fx:id="ringInner" fill="WHITE" layoutX="960.0" layoutY="540.0" radius="265.0" stroke="BLACK" strokeType="INSIDE" />
@@ -72,5 +74,9 @@
             <Image url="@images/spider1.png" />
          </image>
       </ImageView>
+      <Label fx:id="playerLabel" layoutX="249.0" layoutY="107.0" text="CurrentPlayerLabel" textAlignment="CENTER">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
    </children>
 </AnchorPane>

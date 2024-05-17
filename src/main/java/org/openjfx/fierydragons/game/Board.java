@@ -88,4 +88,11 @@ public class Board {
     public void movePlayer(Player player, int noOfMoves) {
         //Todo
     }
+
+    public int[] getPlayerLocation(Player player, int noOfTilesAhead) {
+        int first = 1; // replace with actual logic
+        int second = 2; // replace with actual logic
+        // first means index of mapPiece, second means index of tile within mapPiece
+        return new int[]{first, second};
+    }
 }

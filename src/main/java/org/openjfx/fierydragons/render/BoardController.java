@@ -74,8 +74,8 @@ public class BoardController   {
             return;
         }
         animationInProgress = true;
-        // Call the flipCard() method here
 
+        // Call the flipCard() to start turn logic
         Game.getInstance().getCurrentPlayer().flipCard(Integer.parseInt(id.substring(8)));
 
 

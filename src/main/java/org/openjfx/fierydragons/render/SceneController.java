@@ -20,14 +20,6 @@ public class SceneController {
         stage.show();
     }
 
-    public void switchToBoardScene(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("game-board.fxml"));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setScene(scene);
-        stage.show();
-    }
-
     public void initialize() {
 
     }

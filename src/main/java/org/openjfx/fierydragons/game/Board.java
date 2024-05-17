@@ -1,10 +1,7 @@
 package org.openjfx.fierydragons.game;
 
 import javafx.util.Pair;
-import org.openjfx.fierydragons.entities.Deck;
-import org.openjfx.fierydragons.entities.MapPiece;
-import org.openjfx.fierydragons.entities.Tile;
-import org.openjfx.fierydragons.entities.TileType;
+import org.openjfx.fierydragons.entities.*;
 
 import java.lang.reflect.Array;
 import java.util.*;
@@ -88,5 +85,9 @@ public class Board {
 
     public Deck getDeck() {
         return this.deck;
+    }
+
+    public void movePlayer(Player player, int noOfMoves) {
+        //Todo
     }
 }

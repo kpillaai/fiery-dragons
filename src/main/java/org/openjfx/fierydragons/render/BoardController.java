@@ -2,15 +2,19 @@ package org.openjfx.fierydragons.render;
 
 import javafx.animation.PauseTransition;
 import javafx.animation.RotateTransition;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -29,21 +33,18 @@ import org.openjfx.fierydragons.game.Board;
 import org.openjfx.fierydragons.game.Game;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
-public class BoardController {
+public class BoardController   {
 
     @FXML
     private AnchorPane anchorPane;
 
     @FXML
-    private Label playerLabel;
-
-    @FXML
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
+    private Label playerCountLabel;
 
     private boolean animationInProgress = false;
 
@@ -93,6 +94,7 @@ public class BoardController {
         }
         renderChits();
         renderVolcanoCards();
+        this.playerCountLabel.setText("Current Players: " + Game.getInstance().getPlayerCount());
     }
 
     private void flipCard(Node circle, String id) {

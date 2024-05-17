@@ -15,7 +15,8 @@ public class NextTileContainsPlayer extends TurnHandler {
 
     @Override
     public ArrayList<Boolean> handleTurn(Pair<TileType, Integer> chitCard) {
-        if (true) {
+
+        if (false) {
 
             ArrayList<Boolean> result = new ArrayList<>();
             result.add(true);

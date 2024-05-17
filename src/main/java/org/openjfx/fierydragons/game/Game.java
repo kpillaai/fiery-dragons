@@ -32,6 +32,7 @@ public class Game {
         Turn.getInstance().addPlayer(new Player("Player2", 2));
         Turn.getInstance().addPlayer(new Player("Player3", 3));
         Turn.getInstance().addPlayer(new Player("Player4", 4));
+        this.currentPlayer = Turn.getInstance().getPlayer(0);
         //set up turn requests
     }
 

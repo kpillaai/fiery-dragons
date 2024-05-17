@@ -10,7 +10,7 @@ public class Game {
 
     private ArrayList<Player> playerList;
 
-    private int playerCount = 2;
+    private int playerCount;
 
     private Player currentPlayer;
 
@@ -29,13 +29,16 @@ public class Game {
         //set up the board
         Board.getInstance().initialiseBoard("");
         //set up players
+        //set up turn requests
+    }
+
+    public void addPlayers() {
         this.playerList = new ArrayList<>();
 
         for (int i = 1; i < playerCount+1; i++) {
             this.playerList.add(new Player("Player" + i, i));
         }
         this.currentPlayer = this.playerList.get(0);
-        //set up turn requests
     }
 
 

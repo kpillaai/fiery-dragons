@@ -29,7 +29,7 @@ public class SettingsController implements Initializable {
     private FXMLLoader fxmlLoader;
     
     private Stage stage;
-    
+
     private Scene scene;
 
 
@@ -52,7 +52,9 @@ public class SettingsController implements Initializable {
         root = fxmlLoader.load();
 
         BoardController boardController = fxmlLoader.getController();
-        boardController.displayPlayerCount(this.playerCount);
+        boardController.displayPlayerCount(playerCount);
+        Game.getInstance().setPlayerCount(playerCount);
+        Game.getInstance().addPlayers();
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);

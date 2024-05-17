@@ -2,12 +2,17 @@ package org.openjfx.fierydragons.render;
 
 import javafx.animation.PauseTransition;
 import javafx.animation.RotateTransition;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -26,13 +31,20 @@ import org.openjfx.fierydragons.game.Board;
 import org.openjfx.fierydragons.game.Game;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
-public class BoardController {
+public class BoardController implements Initializable {
 
     @FXML
     private AnchorPane anchorPane;
+
+    @FXML
+    private Slider playerCountSlider;
+
+    private int playerCount;
 
     private boolean animationInProgress = false;
 
@@ -195,5 +207,24 @@ public class BoardController {
                 anchorPane.getChildren().add(imageView);
             }
         }
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        playerCountSlider.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+                playerCount = (int) playerCountSlider.getValue();
+
+            }
+        });
+    }
+
+    public void switchToBoardScene(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("game-board.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setScene(scene);
+        stage.show();
     }
 }

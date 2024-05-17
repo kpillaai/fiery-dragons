@@ -10,6 +10,8 @@ public class Game {
 
     private ArrayList<Player> playerList;
 
+    private int playerCount;
+
     private Player currentPlayer;
 
     private Game() {
@@ -27,11 +29,10 @@ public class Game {
         //set up the board
         Board.getInstance().initialiseBoard("");
         //set up players
-
-        Turn.getInstance().addPlayer(new Player("Player1", 1));
-        Turn.getInstance().addPlayer(new Player("Player2", 2));
-        Turn.getInstance().addPlayer(new Player("Player3", 3));
-        Turn.getInstance().addPlayer(new Player("Player4", 4));
+        for (int i = 1; i < playerCount+1; i++) {
+            Turn.getInstance().addPlayer(new Player("Player" + i, i));
+        }
+        this.currentPlayer = Turn.getInstance().getPlayer(0);
         //set up turn requests
     }
 
@@ -51,5 +52,9 @@ public class Game {
 
     public void setCurrentPlayer(Player currentPlayer) {
         this.currentPlayer = currentPlayer;
+    }
+
+    public void setPlayerCount(int playerCount) {
+        this.playerCount = playerCount;
     }
 }

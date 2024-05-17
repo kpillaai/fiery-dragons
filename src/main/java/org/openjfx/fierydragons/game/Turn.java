@@ -17,7 +17,7 @@ public class Turn {
 
     private static Turn instance;
 
-    private ArrayList<Player> playerList;
+    private ArrayList<Player> playerList = new ArrayList<>();
 
     private Turn() {
 
@@ -60,6 +60,10 @@ public class Turn {
     // delete this later
     public void addPlayer(Player player) {
         this.playerList.add(player);
+    }
+
+    public Player getPlayer(int index) {
+        return this.playerList.get(index);
     }
 
 

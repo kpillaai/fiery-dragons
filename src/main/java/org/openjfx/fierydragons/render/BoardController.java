@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
@@ -54,6 +55,33 @@ public class BoardController   {
         stage.setScene(scene);
         stage.show();
     }
+
+//    public void switchToWinScene(ActionEvent event) throws IOException {
+//        // load the win scene
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource(("win-scene.fxml")));
+//        root = loader.load();
+//
+//        // send the player name to the WinSceneController to display they have won the game
+//        WinSceneController winSceneController = loader.getController();
+//        String nameText = Game.getInstance().getCurrentPlayer().getName();
+//        winSceneController.displayName(nameText);
+//        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+//        scene = new Scene(root);
+//
+//        // add a pause of 2 seconds to show the game board after the game is won before going to the win scene
+//        PauseTransition pause = new PauseTransition(Duration.seconds(2));
+//        pause.setOnFinished(e -> {
+//            // Set the scene to the stage after the delay
+//            stage.setScene(scene);
+//            // Show the stage
+//            stage.show();
+//        });
+//        pause.play();
+//    }
+//
+//    public void showCurrentPlayer() {
+//        playerLabel.setText("Current Turn: " + Game.getInstance().getCurrentPlayer().getName());
+//    }
 
     public void initialize() {
         ObservableList<Node> circles = anchorPane.getChildren();

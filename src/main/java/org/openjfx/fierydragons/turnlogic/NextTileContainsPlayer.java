@@ -2,7 +2,10 @@ package org.openjfx.fierydragons.turnlogic;
 
 
 import javafx.util.Pair;
+import org.openjfx.fierydragons.entities.Tile;
 import org.openjfx.fierydragons.entities.TileType;
+import org.openjfx.fierydragons.game.Board;
+import org.openjfx.fierydragons.game.Game;
 
 import java.security.cert.TrustAnchor;
 import java.util.ArrayList;
@@ -15,16 +18,15 @@ public class NextTileContainsPlayer extends TurnHandler {
 
     @Override
     public ArrayList<Boolean> handleTurn(Pair<TileType, Integer> chitCard) {
+        int[] nextTileLocation = Board.getInstance().getPlayerLocation(Game.getInstance().getCurrentPlayer(), chitCard.getValue());
+        Tile nextTile = Board.getInstance().getMapPieces().get(nextTileLocation[0]).getTiles().get(nextTileLocation[1]);
 
-        if (false) {
-
+        if (nextTile.getCurrentPlayer() == 0) {
             ArrayList<Boolean> result = new ArrayList<>();
-            result.add(true);
+            result.add(false);
             result.add(false);
             return result;
-        } else {
-            return this.nextStep.handleTurn(chitCard);
         }
-
+        return this.nextStep.handleTurn(chitCard);
     }
 }

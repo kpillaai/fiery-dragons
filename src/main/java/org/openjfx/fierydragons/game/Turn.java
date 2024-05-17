@@ -1,7 +1,6 @@
 package org.openjfx.fierydragons.game;
 
 import javafx.util.Pair;
-import org.openjfx.fierydragons.entities.Deck;
 import org.openjfx.fierydragons.entities.Player;
 import org.openjfx.fierydragons.entities.TileType;
 import org.openjfx.fierydragons.turnlogic.*;

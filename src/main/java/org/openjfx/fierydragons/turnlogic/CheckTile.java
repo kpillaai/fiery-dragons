@@ -11,14 +11,14 @@ public class CheckTile extends TurnHandler {
 
     @Override
     public ArrayList<Boolean> handleTurn(Pair<TileType, Integer> chitCard) {
-        if (true) {
+        TileType currentPlayerTile = TileType.BABY_DRAGON; // Todo
+        TileType chitCardTileType = chitCard.getKey();
+        if (currentPlayerTile != chitCardTileType) {
             ArrayList<Boolean> result = new ArrayList<>();
-            result.add(true);
+            result.add(false);
             result.add(false);
             return result;
-        } else {
-            return this.nextStep.handleTurn(chitCard);
         }
-
+        return this.nextStep.handleTurn(chitCard);
     }
 }

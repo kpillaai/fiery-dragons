@@ -66,7 +66,6 @@ public class BoardController   {
         }
         renderChits();
         renderVolcanoCards();
-        this.playerCountLabel.setText("Current Players: " + Game.getInstance().getPlayerCount());
     }
 
     private void flipCard(Node circle, String id) {
@@ -207,5 +206,9 @@ public class BoardController   {
                 anchorPane.getChildren().add(imageView);
             }
         }
+    }
+
+    public void displayPlayerCount(int playerCount) {
+        playerCountLabel.setText("Current Players: " + playerCount);
     }
 }

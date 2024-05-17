@@ -58,9 +58,4 @@ public class Turn {
         this.playerList.add(player);
     }
 
-    public Player getPlayer(int index) {
-        return this.playerList.get(index);
-    }
-
-
 }

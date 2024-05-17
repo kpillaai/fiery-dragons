@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -36,15 +37,13 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class BoardController implements Initializable {
+public class BoardController   {
 
     @FXML
     private AnchorPane anchorPane;
 
     @FXML
-    private Slider playerCountSlider;
-
-    private int playerCount;
+    private Label playerCountLabel;
 
     private boolean animationInProgress = false;
 
@@ -67,6 +66,7 @@ public class BoardController implements Initializable {
         }
         renderChits();
         renderVolcanoCards();
+        this.playerCountLabel.setText("Current Players: " + Game.getInstance().getPlayerCount());
     }
 
     private void flipCard(Node circle, String id) {
@@ -207,24 +207,5 @@ public class BoardController implements Initializable {
                 anchorPane.getChildren().add(imageView);
             }
         }
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        playerCountSlider.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
-                playerCount = (int) playerCountSlider.getValue();
-
-            }
-        });
-    }
-
-    public void switchToBoardScene(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("game-board.fxml"));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setScene(scene);
-        stage.show();
     }
 }

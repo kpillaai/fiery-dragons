@@ -31,6 +31,7 @@ import org.openjfx.fierydragons.entities.Tile;
 import org.openjfx.fierydragons.entities.TileType;
 import org.openjfx.fierydragons.game.Board;
 import org.openjfx.fierydragons.game.Game;
+import org.openjfx.fierydragons.game.Turn;
 
 import java.io.IOException;
 import java.net.URL;
@@ -238,5 +239,9 @@ public class BoardController   {
 
     public void displayPlayerCount(int playerCount) {
         playerCountLabel.setText("Current Players: " + playerCount);
+    }
+
+    public void endTurn() {
+        Turn.getInstance().endTurn();
     }
 }

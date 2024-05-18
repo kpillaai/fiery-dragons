@@ -66,4 +66,15 @@ public class Game {
     public void setPlayerCount(int playerCount) {
         this.playerCount = playerCount;
     }
+
+    public void iterateNextPlayer() {
+        for (int i = 0; i < playerList.size(); i++) {
+            if (playerList.get(i) == this.getCurrentPlayer()) {
+                if (i == playerList.size() - 1) {
+                    this.currentPlayer = playerList.getFirst();
+                }
+                this.currentPlayer = playerList.get(i + 1);
+            }
+        }
+    }
 }

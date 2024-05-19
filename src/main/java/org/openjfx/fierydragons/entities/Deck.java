@@ -27,11 +27,11 @@ public class Deck {
         this.chitCards.add(new Pair<>(TileType.SPIDER, 1));
         this.chitCards.add(new Pair<>(TileType.SPIDER, 2));
         this.chitCards.add(new Pair<>(TileType.SPIDER, 3));
-        this.chitCards.add(new Pair<>(TileType.PIRATE, 1));
-        this.chitCards.add(new Pair<>(TileType.PIRATE, 2));
-        this.chitCards.add(new Pair<>(TileType.PIRATE, 1));
-        this.chitCards.add(new Pair<>(TileType.PIRATE, 2));
-        Collections.shuffle(this.chitCards);
+        this.chitCards.add(new Pair<>(TileType.PIRATE, -1));
+        this.chitCards.add(new Pair<>(TileType.PIRATE, -2));
+        this.chitCards.add(new Pair<>(TileType.PIRATE, -1));
+        this.chitCards.add(new Pair<>(TileType.PIRATE, -2));
+        //Collections.shuffle(this.chitCards);
     }
 
     public void addChitCard(TileType tileType, int value) {

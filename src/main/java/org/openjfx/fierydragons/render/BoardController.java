@@ -188,7 +188,7 @@ public class BoardController   {
                 int idNumber = Integer.parseInt(idString.substring(8));
 
                 String fileNameKey = chits.getChitCard(idNumber).getKey().toString().toLowerCase();
-                String fileNameValue = chits.getChitCard(idNumber).getValue().toString();
+                String fileNameValue = Integer.toString(Math.abs(chits.getChitCard(idNumber).getValue()));
                 String fileName = fileNameKey + fileNameValue + ".png";
 
                 // Create new image

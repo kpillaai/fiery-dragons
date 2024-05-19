@@ -1,6 +1,7 @@
 package org.openjfx.fierydragons.turnlogic;
 
 import javafx.util.Pair;
+import org.openjfx.fierydragons.entities.Tile;
 import org.openjfx.fierydragons.entities.TileType;
 import org.openjfx.fierydragons.game.Board;
 import org.openjfx.fierydragons.game.Game;
@@ -13,6 +14,10 @@ public class CheckTile extends TurnHandler {
 
     @Override
     public ArrayList<Boolean> handleTurn(Pair<TileType, Integer> chitCard) {
+        if (chitCard.getKey() == TileType.PIRATE) {
+            return this.nextStep.handleTurn(chitCard);
+        }
+
         int[] currentPlayerLocation = Board.getInstance().getPlayerLocation(Game.getInstance().getCurrentPlayer(), 0);
         TileType currentTileType;
         if (currentPlayerLocation[1] < 0) {
@@ -20,9 +25,6 @@ public class CheckTile extends TurnHandler {
         } else {
             currentTileType = Board.getInstance().getMapPieces().get(currentPlayerLocation[0]).getTiles().get(currentPlayerLocation[1]).getTileType();
         }
-
-
-
 
         TileType chitCardTileType = chitCard.getKey();
 

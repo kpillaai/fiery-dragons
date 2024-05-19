@@ -19,15 +19,26 @@ public class NextTileContainsPlayer extends TurnHandler {
     @Override
     public ArrayList<Boolean> handleTurn(Pair<TileType, Integer> chitCard) {
         int[] nextTileLocation = Board.getInstance().getPlayerLocation(Game.getInstance().getCurrentPlayer(), 0);
-        if (nextTileLocation[1] < 0) {
-            nextTileLocation[1] = chitCard.getValue();
+        if (nextTileLocation[1] < 0) { // Checks if dragon is in cave
+            if (chitCard.getValue() > 0) {
+                nextTileLocation[1] = chitCard.getValue();
+            } else { // Rolls a pirate inside a cave
+                ArrayList<Boolean> result = new ArrayList<>();
+                result.add(false);
+                result.add(false);
+                return result;
+            }
         }
         else {
             nextTileLocation[1] += chitCard.getValue();
         }
-        if (nextTileLocation[1] > 3) {
+
+        if (nextTileLocation[1] > 2) {
             nextTileLocation[0] += 1;
             nextTileLocation[1] = nextTileLocation[1] - 3;
+        } else if (nextTileLocation[1] < 0) { // Means pirate dragon has been flipped
+            nextTileLocation[0] -= 1;
+            nextTileLocation[1] = nextTileLocation[1] + 3;
         }
         for (int i = 0; i < Board.getInstance().getPlayerLocationArray().size() - 1; i++) {
             if (Board.getInstance().getPlayerLocationArray().get(i)[0] == nextTileLocation[0] && Board.getInstance().getPlayerLocationArray().get(i)[1] == nextTileLocation[1]) {

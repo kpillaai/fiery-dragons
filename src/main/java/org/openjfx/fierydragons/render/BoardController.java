@@ -34,6 +34,7 @@ import org.openjfx.fierydragons.game.Game;
 import org.openjfx.fierydragons.game.Turn;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -51,11 +52,25 @@ public class BoardController   {
     private Label currentPlayerLabel;
 
     @FXML
+    private AnchorPane dragonAnchorPane;
+
+    @FXML
+    private AnchorPane spiderAnchorPane;
+
+    @FXML
+    private AnchorPane salamanderAnchorPane;
+
+    @FXML
+    private AnchorPane batAnchorPane;
+
+    @FXML
     private Stage stage;
     private Scene scene;
     private Parent root;
 
     private boolean animationInProgress = false;
+
+    private ArrayList<ArrayList<Double>> tileLocationArray;
 
     public void switchToSettingScene(MouseEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("game-settings.fxml"));
@@ -200,6 +215,7 @@ public class BoardController   {
         double offsetAngle = pieceAngle / 2;
 
         // looping through mapPieces.size (8) and then looping through each MapPiece (3) results in 24 tiles
+        tileLocationArray = new ArrayList<>();
         for (int i = 0; i < mapPieces.size(); i++) {
             for (int j = 0; j < mapPieces.get(i).getTiles().size(); j++) {
                 // calculate what tile number. -1 offset for alignment of cave with middle of map piece when displaying
@@ -236,6 +252,10 @@ public class BoardController   {
                 // Get location on where it should be placed
                 double topLeftX = animalX - 40; // Figure out a way to do this better
                 double topLeftY = animalY - 460;
+                ArrayList<Double> location = new ArrayList<>();
+                location.add(topLeftX);
+                location.add(topLeftY);
+                tileLocationArray.add(location);
 
                 // Add image
                 AnchorPane.setTopAnchor(imageView, topLeftY);
@@ -245,8 +265,25 @@ public class BoardController   {
         }
     }
 
+    public void renderDragonTokens() {
+        int playerCount = Game.getInstance().getPlayerCount();
+        switch (playerCount) {
+            case 2:
+                anchorPane.getChildren().remove(batAnchorPane);
+                anchorPane.getChildren().remove(salamanderAnchorPane);
+            case 3:
+                anchorPane.getChildren().remove(batAnchorPane);
+            default:
+                break;
+        }
+    }
+
     public void displayPlayerCount(int playerCount) {
         playerCountLabel.setText("Current Players: " + playerCount);
+    }
+
+    public void moveTile(int playerId) {
+
     }
 
     public void endTurn() {

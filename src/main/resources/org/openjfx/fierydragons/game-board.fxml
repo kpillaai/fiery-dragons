@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.fierydragons.render.BoardController">
@@ -50,30 +51,6 @@
             <Image url="@images/spider1.png" />
          </image>
       </ImageView>
-      <Circle fx:id="batToken" fill="#e4f2ff" layoutX="517.0" layoutY="540.0" radius="27.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="babyDragonToken" fill="#e4f2ff" layoutX="962.0" layoutY="97.0" radius="27.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="spiderToken" fill="#e4f2ff" layoutX="1403.0" layoutY="540.0" radius="27.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="salamanderToken" fill="#e4f2ff" layoutX="959.0" layoutY="983.0" radius="27.0" stroke="BLACK" strokeType="INSIDE" />
-      <ImageView fx:id="batTokenImage" fitHeight="45.0" fitWidth="54.0" layoutX="490.0" layoutY="521.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@images/bat1.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="salamanderTokenImage" fitHeight="38.0" fitWidth="54.0" layoutX="943.0" layoutY="964.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@images/salamander1.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="babyDragonTokenImage" fitHeight="38.0" fitWidth="36.0" layoutX="946.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@images/baby_dragon1.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="spiderTokenImage" fitHeight="29.0" fitWidth="48.0" layoutX="1382.0" layoutY="527.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@images/spider1.png" />
-         </image>
-      </ImageView>
       <Label fx:id="playerCountLabel" layoutX="287.0" layoutY="129.0" text="Label">
          <font>
             <Font size="53.0" />
@@ -84,5 +61,45 @@
             <Font size="53.0" />
          </font>
       </Label>
+      <AnchorPane fx:id="batAnchorPane" layoutX="490.0" layoutY="521.0" prefHeight="55.0" prefWidth="54.0">
+         <children>
+            <Circle fx:id="batToken" fill="#e4f2ff" layoutX="27.0" layoutY="27.0" radius="27.0" stroke="BLACK" strokeType="INSIDE" />
+            <ImageView fx:id="batTokenImage" fitHeight="45.0" fitWidth="54.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/bat1.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="salamanderAnchorPane" layoutX="932.0" layoutY="956.0" prefHeight="54.0" prefWidth="54.0">
+         <children>
+            <Circle fx:id="salamanderToken" fill="#e4f2ff" layoutX="27.0" layoutY="27.0" radius="27.0" stroke="BLACK" strokeType="INSIDE" />
+            <ImageView fx:id="salamanderTokenImage" fitHeight="38.0" fitWidth="54.0" layoutX="8.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/salamander1.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="spiderAnchorPane" layoutX="1376.0" layoutY="509.0" prefHeight="54.0" prefWidth="54.0">
+         <children>
+            <Circle fx:id="spiderToken" fill="#e4f2ff" layoutX="27.0" layoutY="27.0" radius="27.0" stroke="BLACK" strokeType="INSIDE" />
+            <ImageView fx:id="spiderTokenImage" fitHeight="29.0" fitWidth="48.0" layoutX="4.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/spider1.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="dragonAnchorPane" layoutX="935.0" layoutY="70.0" prefHeight="54.0" prefWidth="54.0">
+         <children>
+            <Circle fx:id="babyDragonToken" fill="#e4f2ff" layoutX="27.0" layoutY="27.0" radius="27.0" stroke="BLACK" strokeType="INSIDE" />
+            <ImageView fx:id="babyDragonTokenImage" fitHeight="38.0" fitWidth="36.0" layoutX="10.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/baby_dragon1.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

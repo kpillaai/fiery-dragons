@@ -56,7 +56,7 @@ public class Game {
     }
 
     public int getPlayerCount() {
-        return this.playerList.size();
+        return this.playerCount;
     }
 
     public void setCurrentPlayer(Player currentPlayer) {

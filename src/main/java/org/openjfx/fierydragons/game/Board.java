@@ -14,7 +14,7 @@ public class Board {
 
     private Deck deck;
 
-    private ArrayList<ArrayList<Integer>> playerLocationArray;
+    private ArrayList<int[]> playerLocationArray;
 
     private Board() {
         this.mapPieces = new ArrayList<MapPiece>();
@@ -89,52 +89,27 @@ public class Board {
     public void createPlayerLocationArray() {
         int playerCount = Game.getInstance().getPlayerCount();
         playerLocationArray = new ArrayList<>();
-        ArrayList<Integer> playerLocation = new ArrayList<>();
         System.out.println(playerCount);
         switch (playerCount) {
             case 2:
-                playerLocation.add(6);
-                playerLocation.add(-1);
-                playerLocationArray.add(playerLocation);
-                playerLocation.clear();
-                playerLocation.add(0);
-                playerLocation.add(-1);
-                playerLocationArray.add(playerLocation);
+                playerLocationArray.add(new int[]{6, -1});
+                playerLocationArray.add(new int[]{0, -1});
             case 3:
-                playerLocation.add(6);
-                playerLocation.add(-1);
-                playerLocationArray.add(playerLocation);
-                playerLocation.clear();
-                playerLocation.add(0);
-                playerLocation.add(-1);
-                playerLocationArray.add(playerLocation);
-                playerLocation.clear();
-                playerLocation.add(2);
-                playerLocation.add(-1);
-                playerLocationArray.add(playerLocation);
+                playerLocationArray.add(new int[]{6, -1});
+                playerLocationArray.add(new int[]{0, -1});
+                playerLocationArray.add(new int[]{2, -1});
             case 4:
-                playerLocation.add(6);
-                playerLocation.add(-1);
-                playerLocationArray.add(playerLocation);
-                playerLocation.clear();
-                playerLocation.add(0);
-                playerLocation.add(-1);
-                playerLocationArray.add(playerLocation);
-                playerLocation.clear();
-                playerLocation.add(2);
-                playerLocation.add(-1);
-                playerLocationArray.add(playerLocation);
-                playerLocation.clear();
-                playerLocation.add(4);
-                playerLocation.add(-1);
-                playerLocationArray.add(playerLocation);
+                playerLocationArray.add(new int[]{6, -1});
+                playerLocationArray.add(new int[]{0, -1});
+                playerLocationArray.add(new int[]{2, -1});
+                playerLocationArray.add(new int[]{4, -1});
         }
     }
 
     public void movePlayer(Player player, int noOfMoves) {
         int playerId = player.getId();
-        int currVolcanoIndex = playerLocationArray.get(playerId - 1).get(0);
-        int currTileIndex = playerLocationArray.get(playerId - 1).get(1);
+        int currVolcanoIndex = playerLocationArray.get(playerId - 1)[0];
+        int currTileIndex = playerLocationArray.get(playerId - 1)[1];
         int newVolcanoIndex = currVolcanoIndex;
         int newTileIndex;
         // if on cave
@@ -147,8 +122,8 @@ public class Board {
                     newVolcanoIndex = 0;
                 }
             }
-            playerLocationArray.get(playerId - 1).set(0, newVolcanoIndex);
-            playerLocationArray.get(playerId - 1).set(1, newTileIndex);
+            playerLocationArray.get(playerId - 1)[0] = newVolcanoIndex;
+            playerLocationArray.get(playerId - 1)[1] = newTileIndex;
 
         } else {
             newTileIndex = currTileIndex + noOfMoves;
@@ -159,21 +134,21 @@ public class Board {
                     newVolcanoIndex = 0;
                 }
             }
-            playerLocationArray.get(playerId - 1).set(0, newVolcanoIndex);
-            playerLocationArray.get(playerId - 1).set(1, newTileIndex);
+            playerLocationArray.get(playerId - 1)[0] = newVolcanoIndex;
+            playerLocationArray.get(playerId - 1)[1] = newTileIndex;
         }
     }
 
     public int[] getPlayerLocation(Player player, int noOfTilesAhead) {
         int playerId = player.getId();
 
-        int volcanoIndex = playerLocationArray.get(playerId - 1).get(0);
-        int tileIndex = playerLocationArray.get(playerId - 1).get(1);
+        int volcanoIndex = playerLocationArray.get(playerId - 1)[0];
+        int tileIndex = playerLocationArray.get(playerId - 1)[1];
 
         return new int[]{volcanoIndex, tileIndex};
     }
 
-    public ArrayList<ArrayList<Integer>> getPlayerLocationArray() {
+    public ArrayList<int[]> getPlayerLocationArray() {
         return playerLocationArray;
     }
 

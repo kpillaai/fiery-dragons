@@ -25,6 +25,7 @@ import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.util.Pair;
+import jdk.swing.interop.SwingInterOpUtils;
 import org.openjfx.fierydragons.StartApplication;
 import org.openjfx.fierydragons.entities.Deck;
 import org.openjfx.fierydragons.entities.MapPiece;
@@ -261,6 +262,7 @@ public class BoardController   {
                 double animalX = centreX + Math.cos(Math.toRadians(tile_increment * pieceAngle)) * middleRadius;
                 double animalY = centreX + Math.sin(Math.toRadians(tile_increment * pieceAngle)) * middleRadius;
 
+                String hello = mapPieces.get(i).getTiles().get(j).getTileType().toString();
                 String filePath = "/org/openjfx/fierydragons/images/" + mapPieces.get(i).getTiles().get(j).getTileType().toString().toLowerCase() + "1.png";
 
                 // Create new image
@@ -304,12 +306,12 @@ public class BoardController   {
         locationIndexArray = new ArrayList<>();
         switch (playerCount) {
             case 2:
+                locationIndexArray.add(12);
                 locationIndexArray.add(18);
-                locationIndexArray.add(0);
             case 3:
+                locationIndexArray.add(12);
                 locationIndexArray.add(18);
                 locationIndexArray.add(0);
-                locationIndexArray.add(6);
             case 4:
                 locationIndexArray.add(18);
                 locationIndexArray.add(0);

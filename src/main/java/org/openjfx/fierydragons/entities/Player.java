@@ -10,6 +10,7 @@ public class Player {
     private String name;
 
     private int id;
+
     private int distanceToCave = 2;
 
     public Player(String name, int id) {

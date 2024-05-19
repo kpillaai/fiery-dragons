@@ -14,6 +14,8 @@ public class Board {
 
     private Deck deck;
 
+    private ArrayList<ArrayList<Integer>> playerLocationArray;
+
     private Board() {
         this.mapPieces = new ArrayList<MapPiece>();
     }
@@ -63,23 +65,62 @@ public class Board {
                     cavePiece.get(i).addCave(new Tile(true, TileType.SPIDER));
                     break;
                 case 1:
-                    cavePiece.get(i).addCave(new Tile(true, TileType.SALAMANDER));
+                    cavePiece.get(i).addCave(new Tile(true, TileType.SPIDER));
                     break;
                 case 2:
-                    cavePiece.get(i).addCave(new Tile(true, TileType.BAT));
+                    cavePiece.get(i).addCave(new Tile(true, TileType.SALAMANDER));
                     break;
                 case 3:
-                    cavePiece.get(i).addCave(new Tile(true, TileType.BABY_DRAGON));
+                    cavePiece.get(i).addCave(new Tile(true, TileType.BAT));
                     break;
             }
 
             // adding pieces to mapPiece array list
             addMapPiece(cavePiece.get(i));
             addMapPiece(normalPiece.get(i));
+
+            int playerCount = Game.getInstance().getPlayerCount();
+            playerLocationArray = new ArrayList<>();
+            ArrayList<Integer> playerLocation = new ArrayList<>();
+            switch (playerCount) {
+                case 2:
+                    playerLocation.add(6);
+                    playerLocation.add(-1);
+                    playerLocationArray.add(playerLocation);
+                    playerLocation.clear();
+                    playerLocation.add(0);
+                    playerLocation.add(-1);
+                    playerLocationArray.add(playerLocation);
+                case 3:
+                    playerLocation.add(6);
+                    playerLocation.add(-1);
+                    playerLocationArray.add(playerLocation);
+                    playerLocation.clear();
+                    playerLocation.add(0);
+                    playerLocation.add(-1);
+                    playerLocationArray.add(playerLocation);
+                    playerLocation.clear();
+                    playerLocation.add(2);
+                    playerLocation.add(-1);
+                    playerLocationArray.add(playerLocation);
+                case 4:
+                    playerLocation.add(6);
+                    playerLocation.add(-1);
+                    playerLocationArray.add(playerLocation);
+                    playerLocation.clear();
+                    playerLocation.add(0);
+                    playerLocation.add(-1);
+                    playerLocationArray.add(playerLocation);
+                    playerLocation.clear();
+                    playerLocation.add(2);
+                    playerLocation.add(-1);
+                    playerLocationArray.add(playerLocation);
+                    playerLocation.clear();
+                    playerLocation.add(4);
+                    playerLocation.add(-1);
+                    playerLocationArray.add(playerLocation);
+            }
         }
-
-
-
         this.deck = new Deck();
     }
 
@@ -88,13 +129,44 @@ public class Board {
     }
 
     public void movePlayer(Player player, int noOfMoves) {
-        //Todo
+        int playerId = player.getId();
+        int currVolcanoIndex = playerLocationArray.get(playerId - 1).get(0);
+        int currTileIndex = playerLocationArray.get(playerId - 1).get(1);
+        int newVolcanoIndex = currVolcanoIndex;
+        int newTileIndex;
+        // if on cave
+        if (currTileIndex < 0) {
+            newTileIndex = noOfMoves;
+            if (newTileIndex > 2) {
+                newTileIndex = newTileIndex - 3;
+                newVolcanoIndex = currVolcanoIndex + 1;
+                if (newVolcanoIndex > 7) {
+                    newVolcanoIndex = 0;
+                }
+            }
+            playerLocationArray.get(playerId - 1).set(0, newVolcanoIndex);
+            playerLocationArray.get(playerId - 1).set(1, newTileIndex);
+
+        } else {
+            newTileIndex = currTileIndex + noOfMoves;
+            if (newTileIndex > 2) {
+                newTileIndex = newTileIndex - 3;
+                newVolcanoIndex = currVolcanoIndex + 1;
+                if (newVolcanoIndex > 7) {
+                    newVolcanoIndex = 0;
+                }
+            }
+            playerLocationArray.get(playerId - 1).set(0, newVolcanoIndex);
+            playerLocationArray.get(playerId - 1).set(1, newTileIndex);
+        }
     }
 
     public int[] getPlayerLocation(Player player, int noOfTilesAhead) {
-        int first = 1; // replace with actual logic
-        int second = 2; // replace with actual logic
-        // first means index of mapPiece, second means index of tile within mapPiece
-        return new int[]{first, second};
+        int playerId = player.getId();
+
+        int volcanoIndex = playerLocationArray.get(playerId - 1).get(0);
+        int tileIndex = playerLocationArray.get(playerId - 1).get(1);
+
+        return new int[]{volcanoIndex, tileIndex};
     }
 }

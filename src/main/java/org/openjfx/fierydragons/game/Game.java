@@ -36,7 +36,6 @@ public class Game {
 
     public void addPlayers() {
         this.playerList = new ArrayList<>();
-
         for (int i = 1; i < playerCount+1; i++) {
             this.playerList.add(new Player("Player" + i, i));
         }

@@ -11,6 +11,7 @@ import org.openjfx.fierydragons.turnlogic.NextTileContainsPlayer;
 import org.openjfx.fierydragons.turnlogic.TurnHandler;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Turn {
@@ -45,7 +46,7 @@ public class Turn {
         }
     }
 
-    private boolean handleTurnLogic(Integer chitCardId) {
+    private boolean handleTurnLogic(Integer chitCardId) throws IOException {
         Player currentPlayer = Game.getInstance().getCurrentPlayer();
         TurnHandler t1 = new CheckTile();
         TurnHandler t2 = new MovePastCave();
@@ -57,6 +58,10 @@ public class Turn {
 
         Pair<TileType, Integer> chitCard = Board.getInstance().getDeck().getChitCard(chitCardId);
         ArrayList<Boolean> canPlayerMove = t1.handleTurn(chitCard);
+
+        if (canPlayerMove.get(1)) {
+            Game.getInstance().endGame();
+        }
 
         return canPlayerMove.getFirst();
     }

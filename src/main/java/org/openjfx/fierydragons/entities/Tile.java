@@ -4,7 +4,6 @@ public class Tile {
 
     private boolean isCave;
     private TileType tileType;
-
     private int playerId = 0;
 
     public Tile(Boolean isCave, TileType tileType) {

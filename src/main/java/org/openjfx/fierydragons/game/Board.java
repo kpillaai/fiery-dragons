@@ -169,4 +169,8 @@ public class Board {
 
         return new int[]{volcanoIndex, tileIndex};
     }
+
+    public ArrayList<ArrayList<Integer>> getPlayerLocationArray() {
+        return playerLocationArray;
+    }
 }

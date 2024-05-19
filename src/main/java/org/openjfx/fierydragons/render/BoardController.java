@@ -65,9 +65,13 @@ public class BoardController   {
     private AnchorPane batAnchorPane;
 
     @FXML
-    private Stage stage;
-    private Scene scene;
     private Parent root;
+
+    private FXMLLoader fxmlLoader;
+
+    private Stage stage;
+
+    private Scene scene;
 
     private boolean animationInProgress = false;
 
@@ -96,48 +100,53 @@ public class BoardController   {
     }
 
     public void switchToWinScene(Node node) throws IOException {
-        Player winningPlayer = Game.getInstance().getCurrentPlayer();
-        // move player's tile back to own cave
-        int playerId = winningPlayer.getId();
-        switch (playerId) {
-            case 1:
-                dragonAnchorPane.setLayoutX(caveLocationArray.get(playerId - 1)[0]);
-                dragonAnchorPane.setLayoutY(caveLocationArray.get(playerId - 1)[1]);
-            case 2:
-                spiderAnchorPane.setLayoutX(caveLocationArray.get(playerId - 1)[0]);
-                spiderAnchorPane.setLayoutY(caveLocationArray.get(playerId - 1)[1]);
-            case 3:
-                salamanderAnchorPane.setLayoutX(caveLocationArray.get(playerId - 1)[0]);
-                salamanderAnchorPane.setLayoutY(caveLocationArray.get(playerId - 1)[1]);
-            case 4:
-                batAnchorPane.setLayoutX(caveLocationArray.get(playerId - 1)[0]);
-                batAnchorPane.setLayoutY(caveLocationArray.get(playerId - 1)[1]);
+        try {
+            Player winningPlayer = Game.getInstance().getCurrentPlayer();
+            // move player's tile back to own cave
+            int playerId = winningPlayer.getId();
+            switch (playerId) {
+                case 1:
+                    dragonAnchorPane.setLayoutX(caveLocationArray.get(playerId - 1)[0]);
+                    dragonAnchorPane.setLayoutY(caveLocationArray.get(playerId - 1)[1]);
+                    break;
+                case 2:
+                    spiderAnchorPane.setLayoutX(caveLocationArray.get(playerId - 1)[0]);
+                    spiderAnchorPane.setLayoutY(caveLocationArray.get(playerId - 1)[1]);
+                    break;
+                case 3:
+                    salamanderAnchorPane.setLayoutX(caveLocationArray.get(playerId - 1)[0]);
+                    salamanderAnchorPane.setLayoutY(caveLocationArray.get(playerId - 1)[1]);
+                    break;
+                case 4:
+                    batAnchorPane.setLayoutX(caveLocationArray.get(playerId - 1)[0]);
+                    batAnchorPane.setLayoutY(caveLocationArray.get(playerId - 1)[1]);
+                    break;
+            }
+
+            // load the win scene
+            fxmlLoader = new FXMLLoader(StartApplication.class.getResource("win-scene.fxml"));
+            root = fxmlLoader.load();
+
+            // send the player name to the WinSceneController to display they have won the game
+            WinSceneController winSceneController = fxmlLoader.getController();
+            String nameText = winningPlayer.getName();
+            winSceneController.displayName(nameText);
+
+            stage = (Stage) node.getScene().getWindow();
+            scene = new Scene(root);
+
+            // add a pause of 2 seconds to show the game board after the game is won before going to the win scene
+            PauseTransition pause = new PauseTransition(Duration.seconds(5));
+            pause.setOnFinished(e -> {
+                // Set the scene to the stage after the delay
+                stage.setScene(scene);
+                // Show the stage
+                stage.show();
+            });
+            pause.play();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-        // load the win scene
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(("win-scene.fxml")));
-        root = loader.load();
-
-        // send the player name to the WinSceneController to display they have won the game
-        WinSceneController winSceneController = loader.getController();
-        String nameText = winningPlayer.getName();
-        winSceneController.displayName(nameText);
-
-        stage = (Stage) node.getScene().getWindow();
-        scene = new Scene(root);
-
-//        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-//        scene = new Scene(root);
-
-        // add a pause of 2 seconds to show the game board after the game is won before going to the win scene
-        PauseTransition pause = new PauseTransition(Duration.seconds(2));
-        pause.setOnFinished(e -> {
-            // Set the scene to the stage after the delay
-            stage.setScene(scene);
-            // Show the stage
-            stage.show();
-        });
-        pause.play();
     }
 
     public void showCurrentPlayer() {

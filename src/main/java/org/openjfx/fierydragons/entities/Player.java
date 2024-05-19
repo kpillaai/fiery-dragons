@@ -51,7 +51,8 @@ public class Player {
         this.distanceToCave = distanceToCave;
     }
 
-    public void addDistance(int moveValue) {
-        this.distanceToCave = this.distanceToCave + moveValue;
+    public void subtractDistance(int moveValue) {
+        this.distanceToCave = this.distanceToCave - moveValue;
     }
 }
+

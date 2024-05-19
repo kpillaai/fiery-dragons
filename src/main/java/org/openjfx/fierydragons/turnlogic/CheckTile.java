@@ -21,7 +21,15 @@ public class CheckTile extends TurnHandler {
             currentTileType = Board.getInstance().getMapPieces().get(currentPlayerLocation[0]).getTiles().get(currentPlayerLocation[1]).getTileType();
         }
 
+
+
+
         TileType chitCardTileType = chitCard.getKey();
+
+        System.out.println("current tile type");
+        System.out.println(currentTileType);
+        System.out.println("chitcard tile type");
+        System.out.println(chitCardTileType);
         if (currentTileType != chitCardTileType) {
             ArrayList<Boolean> result = new ArrayList<>();
             result.add(false);

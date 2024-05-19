@@ -58,11 +58,13 @@ public class Turn {
         Pair<TileType, Integer> chitCard = Board.getInstance().getDeck().getChitCard(chitCardId);
         ArrayList<Boolean> canPlayerMove = t1.handleTurn(chitCard);
 
-        if (canPlayerMove.get(1)) {
+        if (!canPlayerMove.getFirst()) { // End turn if player cannot move
+            endTurn();
+        }
+        if (canPlayerMove.get(1)) { // Win game if player won the game
             Game.getInstance().endGame();
         }
-
-        return canPlayerMove.getFirst();
+        return canPlayerMove.getFirst(); // Move the player
     }
 
     // delete this later

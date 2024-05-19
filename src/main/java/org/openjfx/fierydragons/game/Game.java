@@ -69,11 +69,13 @@ public class Game {
 
     public void iterateNextPlayer() {
         for (int i = 0; i < playerList.size(); i++) {
+            System.out.println(i);
             if (playerList.get(i) == this.getCurrentPlayer()) {
                 if (i == playerList.size() - 1) {
                     this.currentPlayer = playerList.getFirst();
+                } else {
+                    this.currentPlayer = playerList.get(i + 1);
                 }
-                this.currentPlayer = playerList.get(i + 1);
             }
         }
     }

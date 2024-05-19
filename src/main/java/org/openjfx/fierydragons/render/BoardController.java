@@ -25,7 +25,6 @@ import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.util.Pair;
-import jdk.swing.interop.SwingInterOpUtils;
 import org.openjfx.fierydragons.StartApplication;
 import org.openjfx.fierydragons.entities.Deck;
 import org.openjfx.fierydragons.entities.MapPiece;
@@ -379,5 +378,6 @@ public class BoardController   {
     public void endTurn() {
         Turn.getInstance().endTurn();
         System.out.println("ending ?");
+        showCurrentPlayer();
     }
 }

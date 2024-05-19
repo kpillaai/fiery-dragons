@@ -329,7 +329,7 @@ public class BoardController   {
                 newLocation = tileLocationArray.get(newLocationIndex);
                 System.out.println(newLocationIndex);
                 instance.moveToken(instance.dragonAnchorPane, newLocation);
-                locationIndexArray.set(playerId, newLocationIndex);
+                locationIndexArray.set(playerId - 1, newLocationIndex);
                 System.out.println(locationIndexArray);
                 break;
             case 2:
@@ -339,7 +339,7 @@ public class BoardController   {
                 }
                 newLocation = tileLocationArray.get(newLocationIndex);
                 instance.moveToken(instance.spiderAnchorPane, newLocation);
-                locationIndexArray.set(playerId, newLocationIndex);
+                locationIndexArray.set(playerId - 1, newLocationIndex);
                 break;
             case 3:
                 newLocationIndex = locationIndexArray.get(playerId - 1) + moveValue;
@@ -348,7 +348,7 @@ public class BoardController   {
                 }
                 newLocation = tileLocationArray.get(newLocationIndex);
                 instance.moveToken(instance.salamanderAnchorPane, newLocation);
-                locationIndexArray.set(playerId, newLocationIndex);
+                locationIndexArray.set(playerId - 1, newLocationIndex);
                 break;
             case 4:
                 newLocationIndex = locationIndexArray.get(playerId - 1) + moveValue;
@@ -357,7 +357,7 @@ public class BoardController   {
                 }
                 newLocation = tileLocationArray.get(newLocationIndex);
                 instance.moveToken(instance.batAnchorPane, newLocation);
-                locationIndexArray.set(playerId, newLocationIndex);
+                locationIndexArray.set(playerId - 1, newLocationIndex);
                 break;
         }
     }

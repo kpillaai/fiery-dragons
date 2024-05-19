@@ -21,6 +21,5 @@ public class CheckForWin extends TurnHandler{
         } else {
             return this.nextStep.handleTurn(chitCard);
         }
-
     }
 }

@@ -35,7 +35,10 @@ public class Turn {
     public void nextTurn(Integer chitCardId) {
         boolean canPlayerMove = this.handleTurnLogic(chitCardId);
         // Move player here
-
+        Pair<TileType, Integer> chitCard = Board.getInstance().getDeck().getChitCard(chitCardId);
+        if (canPlayerMove) {
+            Board.getInstance().movePlayer(Game.getInstance().getCurrentPlayer(), chitCard.getValue());
+        }
     }
 
     private boolean handleTurnLogic(Integer chitCardId) {

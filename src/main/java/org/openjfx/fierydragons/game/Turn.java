@@ -36,12 +36,11 @@ public class Turn {
         boolean canPlayerMove = this.handleTurnLogic(chitCardId);
         // Move player here
         Pair<TileType, Integer> chitCard = Board.getInstance().getDeck().getChitCard(chitCardId);
-        BoardController.movePlayer(chitCard);
-        System.out.println("wokring??");
+
         if (canPlayerMove) {
             Board.getInstance().movePlayer(Game.getInstance().getCurrentPlayer(), chitCard.getValue());
-
-
+            BoardController.movePlayer(chitCard);
+            System.out.println("wokring??");
         }
     }
 
@@ -57,7 +56,8 @@ public class Turn {
 
         Pair<TileType, Integer> chitCard = Board.getInstance().getDeck().getChitCard(chitCardId);
         ArrayList<Boolean> canPlayerMove = t1.handleTurn(chitCard);
-
+        System.out.println(currentPlayer.getId());
+        System.out.println(canPlayerMove);
         return canPlayerMove.getFirst();
     }
 

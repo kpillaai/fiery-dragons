@@ -377,5 +377,6 @@ public class BoardController   {
     public void endTurn() {
         Turn.getInstance().endTurn();
         System.out.println("ending ?");
+        showCurrentPlayer();
     }
 }

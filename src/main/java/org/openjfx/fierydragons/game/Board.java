@@ -78,54 +78,57 @@ public class Board {
             // adding pieces to mapPiece array list
             addMapPiece(cavePiece.get(i));
             addMapPiece(normalPiece.get(i));
-
-            int playerCount = Game.getInstance().getPlayerCount();
-            playerLocationArray = new ArrayList<>();
-            ArrayList<Integer> playerLocation = new ArrayList<>();
-            switch (playerCount) {
-                case 2:
-                    playerLocation.add(6);
-                    playerLocation.add(-1);
-                    playerLocationArray.add(playerLocation);
-                    playerLocation.clear();
-                    playerLocation.add(0);
-                    playerLocation.add(-1);
-                    playerLocationArray.add(playerLocation);
-                case 3:
-                    playerLocation.add(6);
-                    playerLocation.add(-1);
-                    playerLocationArray.add(playerLocation);
-                    playerLocation.clear();
-                    playerLocation.add(0);
-                    playerLocation.add(-1);
-                    playerLocationArray.add(playerLocation);
-                    playerLocation.clear();
-                    playerLocation.add(2);
-                    playerLocation.add(-1);
-                    playerLocationArray.add(playerLocation);
-                case 4:
-                    playerLocation.add(6);
-                    playerLocation.add(-1);
-                    playerLocationArray.add(playerLocation);
-                    playerLocation.clear();
-                    playerLocation.add(0);
-                    playerLocation.add(-1);
-                    playerLocationArray.add(playerLocation);
-                    playerLocation.clear();
-                    playerLocation.add(2);
-                    playerLocation.add(-1);
-                    playerLocationArray.add(playerLocation);
-                    playerLocation.clear();
-                    playerLocation.add(4);
-                    playerLocation.add(-1);
-                    playerLocationArray.add(playerLocation);
             }
-        }
         this.deck = new Deck();
     }
 
     public Deck getDeck() {
         return this.deck;
+    }
+
+    public void createPlayerLocationArray() {
+        int playerCount = Game.getInstance().getPlayerCount();
+        playerLocationArray = new ArrayList<>();
+        ArrayList<Integer> playerLocation = new ArrayList<>();
+        System.out.println(playerCount);
+        switch (playerCount) {
+            case 2:
+                playerLocation.add(6);
+                playerLocation.add(-1);
+                playerLocationArray.add(playerLocation);
+                playerLocation.clear();
+                playerLocation.add(0);
+                playerLocation.add(-1);
+                playerLocationArray.add(playerLocation);
+            case 3:
+                playerLocation.add(6);
+                playerLocation.add(-1);
+                playerLocationArray.add(playerLocation);
+                playerLocation.clear();
+                playerLocation.add(0);
+                playerLocation.add(-1);
+                playerLocationArray.add(playerLocation);
+                playerLocation.clear();
+                playerLocation.add(2);
+                playerLocation.add(-1);
+                playerLocationArray.add(playerLocation);
+            case 4:
+                playerLocation.add(6);
+                playerLocation.add(-1);
+                playerLocationArray.add(playerLocation);
+                playerLocation.clear();
+                playerLocation.add(0);
+                playerLocation.add(-1);
+                playerLocationArray.add(playerLocation);
+                playerLocation.clear();
+                playerLocation.add(2);
+                playerLocation.add(-1);
+                playerLocationArray.add(playerLocation);
+                playerLocation.clear();
+                playerLocation.add(4);
+                playerLocation.add(-1);
+                playerLocationArray.add(playerLocation);
+        }
     }
 
     public void movePlayer(Player player, int noOfMoves) {
@@ -172,5 +175,30 @@ public class Board {
 
     public ArrayList<ArrayList<Integer>> getPlayerLocationArray() {
         return playerLocationArray;
+    }
+
+    public int[] getNewLocation(int volcanoIndex, int tileIndex, int noOfMoves) {
+        int newVolcanoIndex = volcanoIndex;
+        int newTileIndex;
+        if (tileIndex < 0) {
+            newTileIndex = noOfMoves;
+            if (newTileIndex > 2) {
+                newTileIndex = newTileIndex - 3;
+                newVolcanoIndex = volcanoIndex + 1;
+                if (newVolcanoIndex > 7) {
+                    newVolcanoIndex = 0;
+                }
+            }
+        } else {
+            newTileIndex = tileIndex + noOfMoves;
+            if (newTileIndex > 2) {
+                newTileIndex = newTileIndex - 3;
+                newVolcanoIndex = volcanoIndex + 1;
+                if (newVolcanoIndex > 7) {
+                    newVolcanoIndex = 0;
+                }
+            }
+        }
+        return new int[]{newVolcanoIndex, newTileIndex};
     }
 }

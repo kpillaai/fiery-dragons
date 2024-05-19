@@ -40,6 +40,7 @@ public class Game {
             this.playerList.add(new Player("Player" + i, i));
         }
         this.currentPlayer = this.playerList.get(0);
+        Board.getInstance().createPlayerLocationArray();
     }
 
 

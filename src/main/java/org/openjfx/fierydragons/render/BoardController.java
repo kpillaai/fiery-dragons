@@ -34,6 +34,7 @@ import org.openjfx.fierydragons.game.Game;
 import org.openjfx.fierydragons.game.Turn;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -47,7 +48,29 @@ public class BoardController   {
     @FXML
     private Label playerCountLabel;
 
+    @FXML
+    private Label currentPlayerLabel;
+
+    @FXML
+    private AnchorPane dragonAnchorPane;
+
+    @FXML
+    private AnchorPane spiderAnchorPane;
+
+    @FXML
+    private AnchorPane salamanderAnchorPane;
+
+    @FXML
+    private AnchorPane batAnchorPane;
+
+    @FXML
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
+
     private boolean animationInProgress = false;
+
+    private ArrayList<ArrayList<Double>> tileLocationArray;
 
     public void switchToSettingScene(MouseEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("game-settings.fxml"));
@@ -57,32 +80,32 @@ public class BoardController   {
         stage.show();
     }
 
-//    public void switchToWinScene(ActionEvent event) throws IOException {
-//        // load the win scene
-//        FXMLLoader loader = new FXMLLoader(getClass().getResource(("win-scene.fxml")));
-//        root = loader.load();
-//
-//        // send the player name to the WinSceneController to display they have won the game
-//        WinSceneController winSceneController = loader.getController();
-//        String nameText = Game.getInstance().getCurrentPlayer().getName();
-//        winSceneController.displayName(nameText);
-//        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-//        scene = new Scene(root);
-//
-//        // add a pause of 2 seconds to show the game board after the game is won before going to the win scene
-//        PauseTransition pause = new PauseTransition(Duration.seconds(2));
-//        pause.setOnFinished(e -> {
-//            // Set the scene to the stage after the delay
-//            stage.setScene(scene);
-//            // Show the stage
-//            stage.show();
-//        });
-//        pause.play();
-//    }
-//
-//    public void showCurrentPlayer() {
-//        playerLabel.setText("Current Turn: " + Game.getInstance().getCurrentPlayer().getName());
-//    }
+    public void switchToWinScene(ActionEvent event) throws IOException {
+        // load the win scene
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(("win-scene.fxml")));
+        root = loader.load();
+
+        // send the player name to the WinSceneController to display they have won the game
+        WinSceneController winSceneController = loader.getController();
+        String nameText = Game.getInstance().getCurrentPlayer().getName();
+        winSceneController.displayName(nameText);
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+
+        // add a pause of 2 seconds to show the game board after the game is won before going to the win scene
+        PauseTransition pause = new PauseTransition(Duration.seconds(2));
+        pause.setOnFinished(e -> {
+            // Set the scene to the stage after the delay
+            stage.setScene(scene);
+            // Show the stage
+            stage.show();
+        });
+        pause.play();
+    }
+
+    public void showCurrentPlayer() {
+        currentPlayerLabel.setText("Current Turn: " + Game.getInstance().getCurrentPlayer().getName());
+    }
 
     public void initialize() {
         ObservableList<Node> circles = anchorPane.getChildren();
@@ -192,6 +215,7 @@ public class BoardController   {
         double offsetAngle = pieceAngle / 2;
 
         // looping through mapPieces.size (8) and then looping through each MapPiece (3) results in 24 tiles
+        tileLocationArray = new ArrayList<>();
         for (int i = 0; i < mapPieces.size(); i++) {
             for (int j = 0; j < mapPieces.get(i).getTiles().size(); j++) {
                 // calculate what tile number. -1 offset for alignment of cave with middle of map piece when displaying
@@ -228,6 +252,10 @@ public class BoardController   {
                 // Get location on where it should be placed
                 double topLeftX = animalX - 40; // Figure out a way to do this better
                 double topLeftY = animalY - 460;
+                ArrayList<Double> location = new ArrayList<>();
+                location.add(topLeftX);
+                location.add(topLeftY);
+                tileLocationArray.add(location);
 
                 // Add image
                 AnchorPane.setTopAnchor(imageView, topLeftY);
@@ -237,8 +265,25 @@ public class BoardController   {
         }
     }
 
+    public void renderDragonTokens() {
+        int playerCount = Game.getInstance().getPlayerCount();
+        switch (playerCount) {
+            case 2:
+                anchorPane.getChildren().remove(batAnchorPane);
+                anchorPane.getChildren().remove(salamanderAnchorPane);
+            case 3:
+                anchorPane.getChildren().remove(batAnchorPane);
+            default:
+                break;
+        }
+    }
+
     public void displayPlayerCount(int playerCount) {
         playerCountLabel.setText("Current Players: " + playerCount);
+    }
+
+    public void moveTile(int playerId) {
+
     }
 
     public void endTurn() {

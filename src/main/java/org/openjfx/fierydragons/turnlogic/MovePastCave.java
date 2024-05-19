@@ -3,6 +3,7 @@ package org.openjfx.fierydragons.turnlogic;
 
 import javafx.util.Pair;
 import org.openjfx.fierydragons.entities.TileType;
+import org.openjfx.fierydragons.game.Game;
 
 import java.util.ArrayList;
 
@@ -13,7 +14,7 @@ public class MovePastCave extends TurnHandler {
 
     @Override
     public ArrayList<Boolean> handleTurn(Pair<TileType, Integer> chitCard) {
-        if (true) {
+        if (Game.getInstance().getCurrentPlayer().getDistanceToCave() > chitCard.getValue()) {
             ArrayList<Boolean> result = new ArrayList<>();
             result.add(true);
             result.add(false);

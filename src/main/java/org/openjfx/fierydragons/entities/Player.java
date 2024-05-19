@@ -4,6 +4,8 @@ import org.openjfx.fierydragons.game.Board;
 import org.openjfx.fierydragons.game.Game;
 import org.openjfx.fierydragons.game.Turn;
 
+import java.io.IOException;
+
 public class Player {
     private String name;
 
@@ -20,7 +22,7 @@ public class Player {
         }
     }
 
-    public void flipCard(Integer chitCardId) {
+    public void flipCard(Integer chitCardId) throws IOException {
         Turn.getInstance().nextTurn(chitCardId);
     }
 

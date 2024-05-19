@@ -129,7 +129,11 @@ public class BoardController   {
         for (Node circle : circles) {
             if (circle.getId().startsWith("chitCard")) {
                 circle.setOnMouseClicked(mouseEvent -> {
-                    flipCard(circle, circle.getId());
+                    try {
+                        flipCard(circle, circle.getId());
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 });
             }
         }
@@ -137,7 +141,7 @@ public class BoardController   {
         renderVolcanoCards();
     }
 
-    private void flipCard(Node circle, String id) {
+    private void flipCard(Node circle, String id) throws IOException {
         if (animationInProgress) {
             return;
         }

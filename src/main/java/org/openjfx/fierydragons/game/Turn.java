@@ -33,7 +33,7 @@ public class Turn {
     public void endTurn() {
         Game.getInstance().iterateNextPlayer();
     }
-    public void nextTurn(Integer chitCardId) {
+    public void nextTurn(Integer chitCardId) throws IOException {
         boolean canPlayerMove = this.handleTurnLogic(chitCardId);
         // Move player here
         Pair<TileType, Integer> chitCard = Board.getInstance().getDeck().getChitCard(chitCardId);

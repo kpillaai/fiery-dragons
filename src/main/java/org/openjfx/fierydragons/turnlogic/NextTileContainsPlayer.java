@@ -18,7 +18,10 @@ public class NextTileContainsPlayer extends TurnHandler {
 
     @Override
     public ArrayList<Boolean> handleTurn(Pair<TileType, Integer> chitCard) {
-        int[] nextTileLocation = Board.getInstance().getPlayerLocation(Game.getInstance().getCurrentPlayer(), chitCard.getValue());
+        int[] nextTileLocation = Board.getInstance().getPlayerLocation(Game.getInstance().getCurrentPlayer(), 0);
+        nextTileLocation[1] += chitCard.getValue();
+
+
         Tile nextTile = Board.getInstance().getMapPieces().get(nextTileLocation[0]).getTiles().get(nextTileLocation[1]);
 
         if (nextTile.getCurrentPlayer() == 0) {

@@ -28,6 +28,7 @@ import javafx.util.Pair;
 import org.openjfx.fierydragons.StartApplication;
 import org.openjfx.fierydragons.entities.Deck;
 import org.openjfx.fierydragons.entities.MapPiece;
+import org.openjfx.fierydragons.entities.Player;
 import org.openjfx.fierydragons.entities.TileType;
 import org.openjfx.fierydragons.game.Board;
 import org.openjfx.fierydragons.game.Game;
@@ -72,6 +73,8 @@ public class BoardController   {
 
     private static ArrayList<ArrayList<Double>> tileLocationArray;
 
+    private ArrayList<double[]> caveLocationArray;
+
     private static BoardController instance;
 
     protected static ArrayList<Integer> locationIndexArray;
@@ -93,13 +96,31 @@ public class BoardController   {
     }
 
     public void switchToWinScene(Node node) throws IOException {
+        Player winningPlayer = Game.getInstance().getCurrentPlayer();
+        // move player's tile back to own cave
+        int playerId = winningPlayer.getId();
+        switch (playerId) {
+            case 1:
+                dragonAnchorPane.setLayoutX(caveLocationArray.get(playerId - 1)[0]);
+                dragonAnchorPane.setLayoutY(caveLocationArray.get(playerId - 1)[1]);
+            case 2:
+                spiderAnchorPane.setLayoutX(caveLocationArray.get(playerId - 1)[0]);
+                spiderAnchorPane.setLayoutY(caveLocationArray.get(playerId - 1)[1]);
+            case 3:
+                salamanderAnchorPane.setLayoutX(caveLocationArray.get(playerId - 1)[0]);
+                salamanderAnchorPane.setLayoutY(caveLocationArray.get(playerId - 1)[1]);
+            case 4:
+                batAnchorPane.setLayoutX(caveLocationArray.get(playerId - 1)[0]);
+                batAnchorPane.setLayoutY(caveLocationArray.get(playerId - 1)[1]);
+        }
+
         // load the win scene
         FXMLLoader loader = new FXMLLoader(getClass().getResource(("win-scene.fxml")));
         root = loader.load();
 
         // send the player name to the WinSceneController to display they have won the game
         WinSceneController winSceneController = loader.getController();
-        String nameText = Game.getInstance().getCurrentPlayer().getName();
+        String nameText = winningPlayer.getName();
         winSceneController.displayName(nameText);
 
         stage = (Stage) node.getScene().getWindow();
@@ -136,6 +157,12 @@ public class BoardController   {
                 });
             }
         }
+        // add initial token locations to an array so token can go back to cave after winning
+        caveLocationArray = new ArrayList<>();
+        caveLocationArray.add(new double[]{dragonAnchorPane.getLayoutX(), dragonAnchorPane.getLayoutY()});
+        caveLocationArray.add(new double[]{spiderAnchorPane.getLayoutX(), spiderAnchorPane.getLayoutY()});
+        caveLocationArray.add(new double[]{salamanderAnchorPane.getLayoutX(), salamanderAnchorPane.getLayoutY()});
+        caveLocationArray.add(new double[]{batAnchorPane.getLayoutX(), batAnchorPane.getLayoutY()});
         renderChits();
         renderVolcanoCards();
     }

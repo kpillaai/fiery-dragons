@@ -313,7 +313,7 @@ public class BoardController   {
     public static void movePlayer(Pair<TileType, Integer> chitCard) {
         int moveValue = chitCard.getValue();
         int playerId = Game.getInstance().getCurrentPlayer().getId();
-        System.out.println(playerId);
+        System.out.println(playerId + "moveplayer");
         BoardController instance = BoardController.getInstance();
         if (instance == null) {
             throw new IllegalStateException("BoardController instance is not initialized");
@@ -327,10 +327,8 @@ public class BoardController   {
                     newLocationIndex = newLocationIndex -  24;
                 }
                 newLocation = tileLocationArray.get(newLocationIndex);
-                System.out.println(newLocationIndex);
                 instance.moveToken(instance.dragonAnchorPane, newLocation);
                 locationIndexArray.set(playerId - 1, newLocationIndex);
-                System.out.println(locationIndexArray);
                 break;
             case 2:
                 newLocationIndex = locationIndexArray.get(playerId - 1) + moveValue;
@@ -370,5 +368,6 @@ public class BoardController   {
 
     public void endTurn() {
         Turn.getInstance().endTurn();
+        System.out.println("ending ?");
     }
 }

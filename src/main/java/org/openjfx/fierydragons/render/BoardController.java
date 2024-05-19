@@ -24,6 +24,7 @@ import javafx.scene.shape.Line;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import javafx.util.Pair;
 import org.openjfx.fierydragons.StartApplication;
 import org.openjfx.fierydragons.entities.Deck;
 import org.openjfx.fierydragons.entities.MapPiece;
@@ -70,7 +71,19 @@ public class BoardController   {
 
     private boolean animationInProgress = false;
 
-    private ArrayList<ArrayList<Double>> tileLocationArray;
+    private static ArrayList<ArrayList<Double>> tileLocationArray;
+
+    private static BoardController instance;
+
+    protected static ArrayList<Integer> locationIndexArray;
+
+    public BoardController() {
+        instance = this;
+    }
+
+    public static BoardController getInstance() {
+        return instance;
+    }
 
     public void switchToSettingScene(MouseEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("game-settings.fxml"));
@@ -280,10 +293,79 @@ public class BoardController   {
 
     public void displayPlayerCount(int playerCount) {
         playerCountLabel.setText("Current Players: " + playerCount);
+        locationIndexArray = new ArrayList<>();
+        switch (playerCount) {
+            case 2:
+                locationIndexArray.add(18);
+                locationIndexArray.add(0);
+            case 3:
+                locationIndexArray.add(18);
+                locationIndexArray.add(0);
+                locationIndexArray.add(6);
+            case 4:
+                locationIndexArray.add(18);
+                locationIndexArray.add(0);
+                locationIndexArray.add(6);
+                locationIndexArray.add(12);
+        }
     }
 
-    public void moveTile(int playerId) {
+    public static void movePlayer(Pair<TileType, Integer> chitCard) {
+        int moveValue = chitCard.getValue();
+        int playerId = Game.getInstance().getCurrentPlayer().getId();
+        System.out.println(playerId);
+        BoardController instance = BoardController.getInstance();
+        if (instance == null) {
+            throw new IllegalStateException("BoardController instance is not initialized");
+        }
+        int newLocationIndex;
+        ArrayList<Double> newLocation;
+        switch (playerId) {
+            case 1:
+                newLocationIndex = locationIndexArray.get(playerId - 1) + moveValue;
+                if (newLocationIndex > 23) {
+                    newLocationIndex = newLocationIndex -  24;
+                }
+                newLocation = tileLocationArray.get(newLocationIndex);
+                System.out.println(newLocationIndex);
+                instance.moveToken(instance.dragonAnchorPane, newLocation);
+                locationIndexArray.set(playerId, newLocationIndex);
+                System.out.println(locationIndexArray);
+                break;
+            case 2:
+                newLocationIndex = locationIndexArray.get(playerId - 1) + moveValue;
+                if (newLocationIndex > 23) {
+                    newLocationIndex = newLocationIndex -  24;
+                }
+                newLocation = tileLocationArray.get(newLocationIndex);
+                instance.moveToken(instance.spiderAnchorPane, newLocation);
+                locationIndexArray.set(playerId, newLocationIndex);
+                break;
+            case 3:
+                newLocationIndex = locationIndexArray.get(playerId - 1) + moveValue;
+                if (newLocationIndex > 23) {
+                    newLocationIndex = newLocationIndex -  24;
+                }
+                newLocation = tileLocationArray.get(newLocationIndex);
+                instance.moveToken(instance.salamanderAnchorPane, newLocation);
+                locationIndexArray.set(playerId, newLocationIndex);
+                break;
+            case 4:
+                newLocationIndex = locationIndexArray.get(playerId - 1) + moveValue;
+                if (newLocationIndex > 23) {
+                    newLocationIndex = newLocationIndex -  24;
+                }
+                newLocation = tileLocationArray.get(newLocationIndex);
+                instance.moveToken(instance.batAnchorPane, newLocation);
+                locationIndexArray.set(playerId, newLocationIndex);
+                break;
+        }
+    }
 
+    public void moveToken(AnchorPane anchorPane, ArrayList<Double> newLocation) {
+        anchorPane.setLayoutX(newLocation.get(0));
+        anchorPane.setLayoutY(newLocation.get(1));
+        anchorPane.toFront();
     }
 
     public void endTurn() {

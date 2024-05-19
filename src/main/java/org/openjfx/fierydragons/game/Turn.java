@@ -3,6 +3,7 @@ package org.openjfx.fierydragons.game;
 import javafx.util.Pair;
 import org.openjfx.fierydragons.entities.Player;
 import org.openjfx.fierydragons.entities.TileType;
+import org.openjfx.fierydragons.render.BoardController;
 import org.openjfx.fierydragons.turnlogic.*;
 import org.openjfx.fierydragons.turnlogic.CheckTile;
 import org.openjfx.fierydragons.turnlogic.MovePastCave;
@@ -19,7 +20,6 @@ public class Turn {
     private ArrayList<Player> playerList = new ArrayList<>();
 
     private Turn() {
-
     }
 
     public static synchronized Turn getInstance(){
@@ -36,8 +36,12 @@ public class Turn {
         boolean canPlayerMove = this.handleTurnLogic(chitCardId);
         // Move player here
         Pair<TileType, Integer> chitCard = Board.getInstance().getDeck().getChitCard(chitCardId);
+        BoardController.movePlayer(chitCard);
+        System.out.println("wokring??");
         if (canPlayerMove) {
             Board.getInstance().movePlayer(Game.getInstance().getCurrentPlayer(), chitCard.getValue());
+
+
         }
     }
 

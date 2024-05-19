@@ -50,4 +50,8 @@ public class Player {
     public void setDistanceToCave(int distanceToCave) {
         this.distanceToCave = distanceToCave;
     }
+
+    public void addDistance(int moveValue) {
+        this.distanceToCave = this.distanceToCave + moveValue;
+    }
 }

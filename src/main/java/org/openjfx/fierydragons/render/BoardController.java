@@ -332,7 +332,10 @@ public class BoardController   {
             case 1:
                 newLocationIndex = locationIndexArray.get(playerId - 1) + moveValue;
                 if (newLocationIndex > 23) {
-                    newLocationIndex = newLocationIndex -  24;
+                    newLocationIndex = newLocationIndex - 24;
+                }
+                if (newLocationIndex < 0) {
+                    newLocationIndex = newLocationIndex + 24;
                 }
                 newLocation = tileLocationArray.get(newLocationIndex);
                 instance.moveToken(instance.dragonAnchorPane, newLocation);
@@ -341,7 +344,10 @@ public class BoardController   {
             case 2:
                 newLocationIndex = locationIndexArray.get(playerId - 1) + moveValue;
                 if (newLocationIndex > 23) {
-                    newLocationIndex = newLocationIndex -  24;
+                    newLocationIndex = newLocationIndex - 24;
+                }
+                if (newLocationIndex < 0) {
+                    newLocationIndex = newLocationIndex + 24;
                 }
                 newLocation = tileLocationArray.get(newLocationIndex);
                 instance.moveToken(instance.spiderAnchorPane, newLocation);
@@ -350,7 +356,10 @@ public class BoardController   {
             case 3:
                 newLocationIndex = locationIndexArray.get(playerId - 1) + moveValue;
                 if (newLocationIndex > 23) {
-                    newLocationIndex = newLocationIndex -  24;
+                    newLocationIndex = newLocationIndex - 24;
+                }
+                if (newLocationIndex < 0) {
+                    newLocationIndex = newLocationIndex + 24;
                 }
                 newLocation = tileLocationArray.get(newLocationIndex);
                 instance.moveToken(instance.salamanderAnchorPane, newLocation);
@@ -359,7 +368,10 @@ public class BoardController   {
             case 4:
                 newLocationIndex = locationIndexArray.get(playerId - 1) + moveValue;
                 if (newLocationIndex > 23) {
-                    newLocationIndex = newLocationIndex -  24;
+                    newLocationIndex = newLocationIndex - 24;
+                }
+                if (newLocationIndex < 0) {
+                    newLocationIndex = newLocationIndex + 24;
                 }
                 newLocation = tileLocationArray.get(newLocationIndex);
                 instance.moveToken(instance.batAnchorPane, newLocation);

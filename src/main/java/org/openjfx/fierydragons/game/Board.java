@@ -125,7 +125,19 @@ public class Board {
             playerLocationArray.get(playerId - 1)[0] = newVolcanoIndex;
             playerLocationArray.get(playerId - 1)[1] = newTileIndex;
 
-        } else {
+        } else if (noOfMoves < 0) { // pirate card
+            newTileIndex = currTileIndex + noOfMoves;
+            if (newTileIndex < 0) {
+                newTileIndex = newTileIndex + 3;
+                newVolcanoIndex = currVolcanoIndex - 1;
+                if (newVolcanoIndex < 0) {
+                    newVolcanoIndex = 7;
+                }
+            }
+            playerLocationArray.get(playerId - 1)[0] = newVolcanoIndex;
+            playerLocationArray.get(playerId - 1)[1] = newTileIndex;
+        }
+        else { // if on board
             newTileIndex = currTileIndex + noOfMoves;
             if (newTileIndex > 2) {
                 newTileIndex = newTileIndex - 3;

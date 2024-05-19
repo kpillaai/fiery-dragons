@@ -40,7 +40,9 @@ public class Turn {
         Pair<TileType, Integer> chitCard = Board.getInstance().getDeck().getChitCard(chitCardId);
 
         if (canPlayerMove) {
-            Board.getInstance().movePlayer(Game.getInstance().getCurrentPlayer(), chitCard.getValue());
+            int moveValue = chitCard.getValue();
+            Board.getInstance().movePlayer(Game.getInstance().getCurrentPlayer(), moveValue);
+            Game.getInstance().getCurrentPlayer().addDistance(moveValue);
             BoardController.movePlayer(chitCard);
             System.out.println("wokring??");
         }
@@ -59,7 +61,7 @@ public class Turn {
         Pair<TileType, Integer> chitCard = Board.getInstance().getDeck().getChitCard(chitCardId);
         ArrayList<Boolean> canPlayerMove = t1.handleTurn(chitCard);
 
-        if (!canPlayerMove.getFirst()) { // End turn if player cannot move
+        if (!canPlayerMove.getFirst() || chitCard.getValue() < 0) { // End turn if player cannot move or pirate
             endTurn();
         }
         if (canPlayerMove.get(1)) { // Win game if player won the game

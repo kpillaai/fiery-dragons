@@ -15,7 +15,7 @@ public class CheckForWin extends TurnHandler{
     public ArrayList<Boolean> handleTurn(Pair<TileType, Integer> chitCard) {
         if (chitCard.getKey() == TileType.PIRATE) {
             ArrayList<Boolean> result = new ArrayList<>();
-            result.add(false);
+            result.add(true);
             result.add(false);
             return result;
         }

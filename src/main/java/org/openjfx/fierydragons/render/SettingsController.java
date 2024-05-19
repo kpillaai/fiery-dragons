@@ -55,6 +55,7 @@ public class SettingsController implements Initializable {
         boardController.displayPlayerCount(playerCount);
         Game.getInstance().setPlayerCount(playerCount);
         Game.getInstance().addPlayers();
+        boardController.showCurrentPlayer();
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);

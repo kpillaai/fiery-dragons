@@ -1,7 +1,9 @@
 package org.openjfx.fierydragons.game;
 
 import org.openjfx.fierydragons.entities.Player;
+import org.openjfx.fierydragons.render.BoardController;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Game {
@@ -81,5 +83,9 @@ public class Game {
                 }
             }
         }
+    }
+
+    public void endGame() throws IOException {
+        BoardController.getInstance().switchToWinScene(BoardController.getInstance().anchorPane);
     }
 }

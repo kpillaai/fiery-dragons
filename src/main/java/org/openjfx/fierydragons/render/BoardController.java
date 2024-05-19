@@ -44,7 +44,7 @@ import java.util.ResourceBundle;
 public class BoardController   {
 
     @FXML
-    private AnchorPane anchorPane;
+    public AnchorPane anchorPane;
 
     @FXML
     private Label playerCountLabel;
@@ -93,7 +93,7 @@ public class BoardController   {
         stage.show();
     }
 
-    public void switchToWinScene(ActionEvent event) throws IOException {
+    public void switchToWinScene(Node node) throws IOException {
         // load the win scene
         FXMLLoader loader = new FXMLLoader(getClass().getResource(("win-scene.fxml")));
         root = loader.load();
@@ -102,8 +102,12 @@ public class BoardController   {
         WinSceneController winSceneController = loader.getController();
         String nameText = Game.getInstance().getCurrentPlayer().getName();
         winSceneController.displayName(nameText);
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+        stage = (Stage) node.getScene().getWindow();
         scene = new Scene(root);
+
+//        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+//        scene = new Scene(root);
 
         // add a pause of 2 seconds to show the game board after the game is won before going to the win scene
         PauseTransition pause = new PauseTransition(Duration.seconds(2));

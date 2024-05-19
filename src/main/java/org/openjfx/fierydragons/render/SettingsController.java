@@ -40,6 +40,7 @@ public class SettingsController implements Initializable {
             public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
             }
         });
+        playerCount = 4;
     }
 
     public void onSliderChanged() {

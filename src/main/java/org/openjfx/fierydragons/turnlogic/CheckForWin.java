@@ -19,7 +19,10 @@ public class CheckForWin extends TurnHandler{
             result.add(false);
             return result;
         } else {
-            return this.nextStep.handleTurn(chitCard);
+            ArrayList<Boolean> result = new ArrayList<>();
+            result.add(true);
+            result.add(true);
+            return result;
         }
     }
 }

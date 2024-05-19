@@ -14,9 +14,9 @@ public class MovePastCave extends TurnHandler {
 
     @Override
     public ArrayList<Boolean> handleTurn(Pair<TileType, Integer> chitCard) {
-        if (Game.getInstance().getCurrentPlayer().getDistanceToCave() > chitCard.getValue()) {
+        if (Game.getInstance().getCurrentPlayer().getDistanceToCave() < chitCard.getValue()) {
             ArrayList<Boolean> result = new ArrayList<>();
-            result.add(true);
+            result.add(false);
             result.add(false);
             return result;
         } else {

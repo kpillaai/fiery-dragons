@@ -30,9 +30,7 @@ public class Turn {
     }
 
     public void endTurn() {
-        /*
         Game.getInstance().iterateNextPlayer();
-         */
     }
     public void nextTurn(Integer chitCardId) {
         boolean canPlayerMove = this.handleTurnLogic(chitCardId);

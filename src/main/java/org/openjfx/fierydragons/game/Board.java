@@ -65,13 +65,13 @@ public class Board {
                     cavePiece.get(i).addCave(new Tile(true, TileType.SPIDER));
                     break;
                 case 1:
-                    cavePiece.get(i).addCave(new Tile(true, TileType.SPIDER));
-                    break;
-                case 2:
                     cavePiece.get(i).addCave(new Tile(true, TileType.SALAMANDER));
                     break;
-                case 3:
+                case 2:
                     cavePiece.get(i).addCave(new Tile(true, TileType.BAT));
+                    break;
+                case 3:
+                    cavePiece.get(i).addCave(new Tile(true, TileType.BABY_DRAGON));
                     break;
             }
 

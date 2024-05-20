@@ -38,8 +38,11 @@ public class Turn {
         boolean[] turnResult = this.handleTurnLogic(chitCardId);
         boolean canPlayerMove = turnResult[0];
         boolean playerWon = turnResult[1];
-        // Move player here
         Pair<TileType, Integer> chitCard = Board.getInstance().getDeck().getChitCard(chitCardId);
+
+        if (!canPlayerMove) { // End turn if player cannot move
+            endTurn();
+        }
 
         if (canPlayerMove & !playerWon) {
             int moveValue = chitCard.getValue();
@@ -67,10 +70,6 @@ public class Turn {
 
         Pair<TileType, Integer> chitCard = Board.getInstance().getDeck().getChitCard(chitCardId);
         ArrayList<Boolean> canPlayerMove = t1.handleTurn(chitCard);
-
-        if (!canPlayerMove.getFirst()) { // End turn if player cannot move or pirate
-            endTurn();
-        }
 
         if (canPlayerMove.get(1)) { // Win game if player won the game
             playerWon = true;

@@ -149,6 +149,7 @@ public class Board {
             playerLocationArray.get(playerId - 1)[0] = newVolcanoIndex;
             playerLocationArray.get(playerId - 1)[1] = newTileIndex;
         }
+        Game.getInstance().getCurrentPlayer().subtractDistance(noOfMoves);
     }
 
     public int[] getPlayerLocation(Player player, int noOfTilesAhead) {

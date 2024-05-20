@@ -35,25 +35,28 @@ public class Turn {
         BoardController.getInstance().showCurrentPlayer();
     }
     public void nextTurn(Integer chitCardId) throws IOException {
-        boolean canPlayerMove = this.handleTurnLogic(chitCardId);
+        boolean[] turnResult = this.handleTurnLogic(chitCardId);
+        boolean canPlayerMove = turnResult[0];
+        boolean playerWon = turnResult[1];
         // Move player here
         Pair<TileType, Integer> chitCard = Board.getInstance().getDeck().getChitCard(chitCardId);
 
-        if (canPlayerMove) {
+        if (canPlayerMove & !playerWon) {
             int moveValue = chitCard.getValue();
             Board.getInstance().movePlayer(Game.getInstance().getCurrentPlayer(), moveValue);
-            Game.getInstance().getCurrentPlayer().subtractDistance(moveValue);
-            System.out.println(Game.getInstance().getCurrentPlayer().getDistanceToCave());
             BoardController.movePlayer(chitCard);
-            System.out.println("wokring??");
             if (chitCard.getValue() < 0) { // End turn if player cannot move or pirate
                 endTurn();
             }
         }
+        if (playerWon) {
+            Game.getInstance().endGame();
+        }
     }
 
-    private boolean handleTurnLogic(Integer chitCardId) throws IOException {
+    private boolean[] handleTurnLogic(Integer chitCardId) throws IOException {
         Player currentPlayer = Game.getInstance().getCurrentPlayer();
+        boolean playerWon = false;
         TurnHandler t1 = new CheckTile();
         TurnHandler t2 = new MovePastCave();
         TurnHandler t3 = new NextTileContainsPlayer();
@@ -70,9 +73,9 @@ public class Turn {
         }
 
         if (canPlayerMove.get(1)) { // Win game if player won the game
-            Game.getInstance().endGame();
+            playerWon = true;
         }
-        return canPlayerMove.getFirst(); // Move the player
+        return new boolean[]{canPlayerMove.getFirst(), playerWon};
     }
 
     // delete this later

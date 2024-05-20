@@ -100,29 +100,28 @@ public class BoardController   {
     }
 
     public void switchToWinScene(Node node) throws IOException {
+        Player winningPlayer = Game.getInstance().getCurrentPlayer();
+        // move player's tile back to own cave
+        int playerId = winningPlayer.getId();
+        switch (playerId) {
+            case 1:
+                dragonAnchorPane.setLayoutX(caveLocationArray.get(playerId - 1)[0]);
+                dragonAnchorPane.setLayoutY(caveLocationArray.get(playerId - 1)[1]);
+                break;
+            case 2:
+                spiderAnchorPane.setLayoutX(caveLocationArray.get(playerId - 1)[0]);
+                spiderAnchorPane.setLayoutY(caveLocationArray.get(playerId - 1)[1]);
+                break;
+            case 3:
+                salamanderAnchorPane.setLayoutX(caveLocationArray.get(playerId - 1)[0]);
+                salamanderAnchorPane.setLayoutY(caveLocationArray.get(playerId - 1)[1]);
+                break;
+            case 4:
+                batAnchorPane.setLayoutX(caveLocationArray.get(playerId - 1)[0]);
+                batAnchorPane.setLayoutY(caveLocationArray.get(playerId - 1)[1]);
+                break;
+        }
         try {
-            Player winningPlayer = Game.getInstance().getCurrentPlayer();
-            // move player's tile back to own cave
-            int playerId = winningPlayer.getId();
-            switch (playerId) {
-                case 1:
-                    dragonAnchorPane.setLayoutX(caveLocationArray.get(playerId - 1)[0]);
-                    dragonAnchorPane.setLayoutY(caveLocationArray.get(playerId - 1)[1]);
-                    break;
-                case 2:
-                    spiderAnchorPane.setLayoutX(caveLocationArray.get(playerId - 1)[0]);
-                    spiderAnchorPane.setLayoutY(caveLocationArray.get(playerId - 1)[1]);
-                    break;
-                case 3:
-                    salamanderAnchorPane.setLayoutX(caveLocationArray.get(playerId - 1)[0]);
-                    salamanderAnchorPane.setLayoutY(caveLocationArray.get(playerId - 1)[1]);
-                    break;
-                case 4:
-                    batAnchorPane.setLayoutX(caveLocationArray.get(playerId - 1)[0]);
-                    batAnchorPane.setLayoutY(caveLocationArray.get(playerId - 1)[1]);
-                    break;
-            }
-
             // load the win scene
             fxmlLoader = new FXMLLoader(StartApplication.class.getResource("win-scene.fxml"));
             root = fxmlLoader.load();

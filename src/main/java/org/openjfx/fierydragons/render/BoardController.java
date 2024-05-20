@@ -399,8 +399,8 @@ public class BoardController   {
         }
     }
 
-    public void displayPlayerCount(int playerCount) {
-        playerCountLabel.setText("Current Players: " + playerCount);
+    public void showPlayerCount(int playerCount) {
+        playerCountLabel.setText("Number of Players: " + playerCount);
         locationIndexArray = new ArrayList<>();
     }
 

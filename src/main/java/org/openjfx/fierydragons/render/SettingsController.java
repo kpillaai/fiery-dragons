@@ -53,7 +53,7 @@ public class SettingsController implements Initializable {
         root = fxmlLoader.load();
 
         BoardController boardController = fxmlLoader.getController();
-        boardController.displayPlayerCount(playerCount);
+        boardController.showPlayerCount(playerCount);
         Game.getInstance().setPlayerCount(playerCount);
         Game.getInstance().addPlayers();
         boardController.renderDragonTokens();

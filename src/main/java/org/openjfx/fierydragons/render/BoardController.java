@@ -179,34 +179,55 @@ public class BoardController   {
         if (animationInProgress) {
             return;
         }
-        animationInProgress = true;
-
-        // Call the flipCard() to start turn logic
-        Game.getInstance().getCurrentPlayer().flipCard(Integer.parseInt(id.substring(8)));
-
+        animationInProgress = false;
 
         // Rendering card flipping
         RotateTransition rotateTransition = new RotateTransition(Duration.seconds(1), circle);
         rotateTransition.setByAngle(180);
         rotateTransition.setAxis(Rotate.X_AXIS);
-        RotateTransition rotateTransition1 = new RotateTransition(Duration.seconds(1), circle);
-        rotateTransition1.setByAngle(180);
-        rotateTransition1.setAxis(Rotate.X_AXIS);
 
         PauseTransition pauseTransition = new PauseTransition(Duration.seconds(1));
 
         for (Node picture : anchorPane.getChildren()) {
-            if (Objects.equals(picture.getId(), id.substring(8))) {
+            if (Objects.equals(picture.getId(), "picture" + id.substring(8))) {
                 picture.setVisible(true);
                 rotateTransition.setOnFinished(event -> {
                     pauseTransition.play();
-                    picture.setVisible(false);
-                    rotateTransition1.play();
-                    animationInProgress = false;
+
+                    try {
+                        // Call the flipCard() to start turn logic
+                        Game.getInstance().getCurrentPlayer().flipCard(Integer.parseInt(id.substring(8)));
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 });
             }
         }
+
+        circle.setDisable(true);
         rotateTransition.play();
+    }
+
+    public void hideCard() {
+        ObservableList<Node> circles = anchorPane.getChildren();
+        for (Node circle : circles) {
+            if (circle.getId() != null) {
+                if (circle.getId().startsWith("chitCard")) {
+                    RotateTransition rotateTransition = new RotateTransition(Duration.seconds(1), circle);
+                    rotateTransition.setByAngle(180);
+                    rotateTransition.setAxis(Rotate.X_AXIS);
+                    rotateTransition.play();
+                    circle.setDisable(false);
+                }
+            }
+        }
+        for (Node picture : anchorPane.getChildren()) {
+            if (picture.getId() != null) {
+                if (picture.getId().startsWith("picture") && picture.getId() != null) {
+                    picture.setVisible(false);
+                }
+            }
+        }
     }
 
     private void renderChits() {
@@ -230,7 +251,7 @@ public class BoardController   {
                 System.out.println("/org/openjfx/fierydragons/images/" + fileName);
                 Image image = new Image(getClass().getResourceAsStream("/org/openjfx/fierydragons/images/" + fileName));
                 ImageView imageView = new ImageView(image);
-                imageView.setId(idString.substring(8));
+                imageView.setId("picture" + idString.substring(8));
                 imageView.setVisible(false);
                 imageView.setFitHeight(80);
                 imageView.setFitWidth(80);
@@ -425,5 +446,6 @@ public class BoardController   {
         Turn.getInstance().endTurn();
         System.out.println("ending ?");
         showCurrentPlayer();
+        hideCard();
     }
 }

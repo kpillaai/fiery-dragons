@@ -33,6 +33,7 @@ public class Turn {
     public void endTurn() {
         Game.getInstance().iterateNextPlayer();
         BoardController.getInstance().showCurrentPlayer();
+        BoardController.getInstance().hideCard();
     }
     public void nextTurn(Integer chitCardId) throws IOException {
         boolean[] turnResult = this.handleTurnLogic(chitCardId);

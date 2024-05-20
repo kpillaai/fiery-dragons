@@ -6,7 +6,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.fierydragons.render.BoardController">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.fierydragons.render.BoardController">
    <children>
       <Circle fx:id="ringOuter" fill="#ff9d1f" layoutX="960.0" layoutY="540.0" radius="388.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fx:id="ringInner" fill="WHITE" layoutX="960.0" layoutY="540.0" radius="265.0" stroke="BLACK" strokeType="INSIDE" />
@@ -63,7 +63,7 @@
       <Button fx:id="endTurnButton" layoutX="1678.0" layoutY="916.0" mnemonicParsing="false" onAction="#endTurn" text="End Turn" />
       <AnchorPane fx:id="batAnchorPane" layoutX="490.0" layoutY="521.0" prefHeight="55.0" prefWidth="54.0">
          <children>
-            <Circle fx:id="batToken" fill="#e4f2ff" layoutX="27.0" layoutY="27.0" radius="27.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="batToken" fill="#0ca143" layoutX="27.0" layoutY="27.0" radius="27.0" stroke="BLACK" strokeType="INSIDE" />
             <ImageView fx:id="batTokenImage" fitHeight="45.0" fitWidth="54.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/bat1.png" />
@@ -73,7 +73,7 @@
       </AnchorPane>
       <AnchorPane fx:id="salamanderAnchorPane" layoutX="932.0" layoutY="956.0" prefHeight="54.0" prefWidth="54.0">
          <children>
-            <Circle fx:id="salamanderToken" fill="#e4f2ff" layoutX="27.0" layoutY="27.0" radius="27.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="salamanderToken" fill="#ca24cd" layoutX="27.0" layoutY="27.0" radius="27.0" stroke="BLACK" strokeType="INSIDE" />
             <ImageView fx:id="salamanderTokenImage" fitHeight="38.0" fitWidth="54.0" layoutX="8.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/salamander1.png" />
@@ -83,7 +83,7 @@
       </AnchorPane>
       <AnchorPane fx:id="spiderAnchorPane" layoutX="1376.0" layoutY="509.0" prefHeight="54.0" prefWidth="54.0">
          <children>
-            <Circle fx:id="spiderToken" fill="#e4f2ff" layoutX="27.0" layoutY="27.0" radius="27.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="spiderToken" fill="#e13333" layoutX="27.0" layoutY="27.0" radius="27.0" stroke="BLACK" strokeType="INSIDE" />
             <ImageView fx:id="spiderTokenImage" fitHeight="29.0" fitWidth="48.0" layoutX="4.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/spider1.png" />
@@ -93,7 +93,7 @@
       </AnchorPane>
       <AnchorPane fx:id="dragonAnchorPane" layoutX="935.0" layoutY="70.0" prefHeight="54.0" prefWidth="54.0">
          <children>
-            <Circle fx:id="babyDragonToken" fill="#e4f2ff" layoutX="27.0" layoutY="27.0" radius="27.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="babyDragonToken" fill="#3a93e1" layoutX="27.0" layoutY="27.0" radius="27.0" stroke="BLACK" strokeType="INSIDE" />
             <ImageView fx:id="babyDragonTokenImage" fitHeight="38.0" fitWidth="36.0" layoutX="10.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/baby_dragon1.png" />

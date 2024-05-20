@@ -12,6 +12,10 @@ import java.io.IOException;
 
 public class SceneController {
 
+    /**
+     * @author  Zilei Chen
+     * @desc    Changes the scene and screen to the settings scene and screen through JavaFX
+     */
     public void switchToSettingScene(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("game-settings.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -20,15 +24,5 @@ public class SceneController {
         stage.show();
     }
 
-    public void switchToBoardScene(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("game-board.fxml"));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void initialize() {
-
-    }
+    public void initialize() {}
 }

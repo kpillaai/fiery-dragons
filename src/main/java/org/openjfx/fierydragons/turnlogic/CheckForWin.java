@@ -11,6 +11,12 @@ public class CheckForWin extends TurnHandler{
     public CheckForWin() {
     }
 
+    /**
+     * @author  Krishna Pillaai Manogaran
+     * @desc    This method extends TurnHandler, intends to check whether the player will win this turn.
+     * Returns 2 booleans representing if the player can move, and if the player will win this turn. Takes a Pair which
+     * represents chit cards and their number value.
+     */
     @Override
     public ArrayList<Boolean> handleTurn(Pair<TileType, Integer> chitCard) {
         if (chitCard.getKey() == TileType.PIRATE) {

@@ -19,6 +19,13 @@ public class Board {
     private Board() {
         this.mapPieces = new ArrayList<MapPiece>();
     }
+
+    /**
+     * @author  Zilei Chen
+     * @desc    This is a static constructor for Board class to allow access globally and only let one instance of this
+     * class to exist at any given time.
+     * Returns Board instance.
+     */
     public static synchronized Board getInstance(){
         if (instance == null) {
             instance = new Board();
@@ -26,18 +33,38 @@ public class Board {
         return instance;
     }
 
+    /**
+     * @author  Zilei Chen
+     * @desc    Getter for the MapPieces within the Board
+     * Returns MapPieces list.
+     */
     public ArrayList<MapPiece> getMapPieces() {
         return this.mapPieces;
     }
 
+    /**
+     * @author  Zilei Chen
+     * @desc    Adds MapPieces to the arraylist in Board
+     * Param is MapPiece class
+     */
     public void addMapPiece(MapPiece mapPiece) {
         getMapPieces().add(mapPiece);
     }
 
+    /**
+     * @author  Zilei Chen
+     * @desc    Removes MapPieces to the arraylist in Board
+     * Param is the index of the MapPiece to be removed from the arraylist
+     */
     public void removeMapPiece(int index) {
         getMapPieces().remove(index);
     }
 
+    /**
+     * @author  Krishna Pillaai Manogaran
+     * @desc    Initialises the Board by generating MapPieces and the Chit cards
+     * Param is a string of settings used for custom settings for extensions.
+     */
     public void initialiseBoard(String settings) {
         // create normal pieces
         ArrayList<MapPiece> normalPiece = new ArrayList<>();
@@ -82,10 +109,19 @@ public class Board {
         this.deck = new Deck();
     }
 
+    /**
+     * @author  Jeffrey Yan
+     * @desc    Getter for Deck attribute
+     * Returns Deck, a list of chit cards.
+     */
     public Deck getDeck() {
         return this.deck;
     }
 
+    /**
+     * @author  Jeffrey Yan
+     * @desc    Initialises a list of players for the game.
+     */
     public void createPlayerLocationArray() {
         int playerCount = Game.getInstance().getPlayerCount();
         playerLocationArray = new ArrayList<>();
@@ -105,6 +141,11 @@ public class Board {
         }
     }
 
+    /**
+     * @author  Jeffrey Yan
+     * @desc    Moves the player from one Tile to another and from one MapPiece to another
+     * Param is the Player to be moved, and the number of moves to be moved.
+     */
     public void movePlayer(Player player, int noOfMoves) {
         int playerId = player.getId();
         int currVolcanoIndex = playerLocationArray.get(playerId - 1)[0];
@@ -151,7 +192,12 @@ public class Board {
         Game.getInstance().getCurrentPlayer().subtractDistance(noOfMoves);
     }
 
-    public int[] getPlayerLocation(Player player, int noOfTilesAhead) {
+    /**
+     * @author  Jeffrey Yan
+     * @desc    Gets the player location for a specific player.
+     * Param is the Player that we want to find the location of.
+     */
+    public int[] getPlayerLocation(Player player) {
         int playerId = player.getId();
 
         int volcanoIndex = playerLocationArray.get(playerId - 1)[0];
@@ -160,32 +206,12 @@ public class Board {
         return new int[]{volcanoIndex, tileIndex};
     }
 
+    /**
+     * @author  Jeffrey Yan
+     * @desc    Getter for the PlayerLocationArray
+     * Returns an array listing the locations of each Player.
+     */
     public ArrayList<int[]> getPlayerLocationArray() {
         return playerLocationArray;
-    }
-
-    public int[] getNewLocation(int volcanoIndex, int tileIndex, int noOfMoves) {
-        int newVolcanoIndex = volcanoIndex;
-        int newTileIndex;
-        if (tileIndex < 0) {
-            newTileIndex = noOfMoves;
-            if (newTileIndex > 2) {
-                newTileIndex = newTileIndex - 3;
-                newVolcanoIndex = volcanoIndex + 1;
-                if (newVolcanoIndex > 7) {
-                    newVolcanoIndex = 0;
-                }
-            }
-        } else {
-            newTileIndex = tileIndex + noOfMoves;
-            if (newTileIndex > 2) {
-                newTileIndex = newTileIndex - 3;
-                newVolcanoIndex = volcanoIndex + 1;
-                if (newVolcanoIndex > 7) {
-                    newVolcanoIndex = 0;
-                }
-            }
-        }
-        return new int[]{newVolcanoIndex, newTileIndex};
     }
 }

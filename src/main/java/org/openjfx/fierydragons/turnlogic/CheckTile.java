@@ -12,13 +12,20 @@ public class CheckTile extends TurnHandler {
     public CheckTile() {
     }
 
+    /**
+     * @author  Zilei Chen
+     * @desc    This method extends TurnHandler, intends to check whether the chit card flipped matches the current
+     * tile the player is on.
+     * Returns 2 booleans representing if the player can move, and if the player will win this turn. Takes a Pair which
+     * represents chit cards and their number value.
+     */
     @Override
     public ArrayList<Boolean> handleTurn(Pair<TileType, Integer> chitCard) {
         if (chitCard.getKey() == TileType.PIRATE) {
             return this.nextStep.handleTurn(chitCard);
         }
 
-        int[] currentPlayerLocation = Board.getInstance().getPlayerLocation(Game.getInstance().getCurrentPlayer(), 0);
+        int[] currentPlayerLocation = Board.getInstance().getPlayerLocation(Game.getInstance().getCurrentPlayer());
         TileType currentTileType;
         if (currentPlayerLocation[1] < 0) {
             currentTileType = Board.getInstance().getMapPieces().get(currentPlayerLocation[0]).getCave().getTileType();

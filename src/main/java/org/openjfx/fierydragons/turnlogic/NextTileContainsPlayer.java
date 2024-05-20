@@ -16,10 +16,17 @@ public class NextTileContainsPlayer extends TurnHandler {
     public NextTileContainsPlayer() {
     }
 
+    /**
+     * @author  Zilei Chen
+     * @desc    This method extends TurnHandler, intends to calculate if the next tile the player will move to
+     * will contain a player.
+     * Returns 2 booleans representing if the player can move, and if the player will win this turn. Takes a Pair which
+     * represents chit cards and their number value.
+     */
     @Override
     public ArrayList<Boolean> handleTurn(Pair<TileType, Integer> chitCard) {
 
-        int[] currentLocation = Board.getInstance().getPlayerLocation(Game.getInstance().getCurrentPlayer(), 0);
+        int[] currentLocation = Board.getInstance().getPlayerLocation(Game.getInstance().getCurrentPlayer());
         int[] nextTileLocation = {0, 0};
         nextTileLocation[0] = currentLocation[0] + 0;
         nextTileLocation[1] = currentLocation[1] + 0;

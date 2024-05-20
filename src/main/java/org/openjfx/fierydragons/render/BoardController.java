@@ -205,9 +205,9 @@ public class BoardController   {
 
         for (Node picture : anchorPane.getChildren()) {
             if (Objects.equals(picture.getId(), "picture" + id.substring(8))) {
-                picture.setVisible(true);
                 rotateTransition.setOnFinished(event -> {
                     endTurnButton.setDisable(false);
+                    picture.setVisible(true);
                     pauseTransition.play();
 
                     try {

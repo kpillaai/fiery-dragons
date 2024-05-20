@@ -138,7 +138,7 @@ public class BoardController   {
             scene = new Scene(root);
 
             // add a pause of 2 seconds to show the game board after the game is won before going to the win scene
-            PauseTransition pause = new PauseTransition(Duration.seconds(5));
+            PauseTransition pause = new PauseTransition(Duration.seconds(2));
             pause.setOnFinished(e -> {
                 // Set the scene to the stage after the delay
                 stage.setScene(scene);

@@ -205,11 +205,11 @@ public class BoardController   {
         animationInProgress = false;
 
         // Rendering card flipping
-        RotateTransition rotateTransition = new RotateTransition(Duration.seconds(1), circle);
+        RotateTransition rotateTransition = new RotateTransition(Duration.millis(500), circle);
         rotateTransition.setByAngle(180);
         rotateTransition.setAxis(Rotate.X_AXIS);
 
-        PauseTransition pauseTransition = new PauseTransition(Duration.seconds(1));
+        PauseTransition pauseTransition = new PauseTransition(Duration.millis(500));
 
         for (Node picture : anchorPane.getChildren()) {
             if (Objects.equals(picture.getId(), "picture" + id.substring(8))) {

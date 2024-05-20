@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.fierydragons.render.BoardController">
    <children>
@@ -50,17 +52,20 @@
             <Image url="@images/spider1.png" />
          </image>
       </ImageView>
-      <Label fx:id="playerCountLabel" layoutX="287.0" layoutY="129.0" text="Label">
+      <Label fx:id="playerCountLabel" layoutX="134.0" layoutY="129.0" text="Label">
          <font>
-            <Font size="53.0" />
+            <Font name="Papyrus" size="53.0" />
          </font>
       </Label>
-      <Label fx:id="currentPlayerLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="134.0" layoutY="206.0" text="Label">
+      <Label fx:id="currentPlayerLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="134.0" layoutY="214.0" text="Label">
          <font>
-            <Font size="53.0" />
+            <Font name="Papyrus" size="53.0" />
          </font>
       </Label>
-      <Button fx:id="endTurnButton" layoutX="1678.0" layoutY="916.0" mnemonicParsing="false" onAction="#endTurn" text="End Turn" />
+      <Button fx:id="endTurnButton" layoutX="1520.0" layoutY="837.0" mnemonicParsing="false" onAction="#endTurn" prefHeight="78.0" prefWidth="235.0" text="End Turn">
+         <font>
+            <Font name="Papyrus" size="30.0" />
+         </font></Button>
       <AnchorPane fx:id="batAnchorPane" layoutX="490.0" layoutY="521.0" prefHeight="55.0" prefWidth="54.0">
          <children>
             <Circle fx:id="batToken" fill="#0ca143" layoutX="27.0" layoutY="27.0" radius="27.0" stroke="BLACK" strokeType="INSIDE" />

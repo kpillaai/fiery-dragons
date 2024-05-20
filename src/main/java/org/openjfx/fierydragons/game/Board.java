@@ -93,7 +93,7 @@ public class Board {
         switch (playerCount) {
             case 2:
                 playerLocationArray.add(new int[]{6, -1});
-                playerLocationArray.add(new int[]{0, -1});
+                playerLocationArray.add(new int[]{2, -1});
             case 3:
                 playerLocationArray.add(new int[]{6, -1});
                 playerLocationArray.add(new int[]{0, -1});

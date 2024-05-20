@@ -57,7 +57,7 @@
             <Font name="Papyrus" size="53.0" />
          </font>
       </Label>
-      <Label fx:id="currentPlayerLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="134.0" layoutY="214.0" text="Label">
+      <Label fx:id="currentPlayerLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="439.0" layoutY="206.0" text="Label">
          <font>
             <Font name="Papyrus" size="53.0" />
          </font>
@@ -106,5 +106,10 @@
             </ImageView>
          </children>
       </AnchorPane>
+      <Label fx:id="currentPlayerLabel1" alignment="CENTER" contentDisplay="CENTER" layoutX="87.0" layoutY="206.0" text="Current Player:">
+         <font>
+            <Font name="Papyrus" size="53.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

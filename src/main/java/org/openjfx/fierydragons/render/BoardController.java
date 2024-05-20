@@ -152,7 +152,7 @@ public class BoardController   {
     }
 
     public void showCurrentPlayer() {
-        currentPlayerLabel.setText("Current Turn: " + Game.getInstance().getCurrentPlayer().getName());
+        currentPlayerLabel.setText(Game.getInstance().getCurrentPlayer().getName());
         currentPlayerLabel.setTextFill(playerColours.get(Game.getInstance().getCurrentPlayer().getId() - 1));
     }
 

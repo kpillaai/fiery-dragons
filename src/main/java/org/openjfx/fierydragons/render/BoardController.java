@@ -170,12 +170,6 @@ public class BoardController   {
         }
 
         if (Game.getInstance().getPlayerCount() == 2) {
-            //ObservableList<Node> circleAndImage = salamanderAnchorPane.getChildren();
-            //for (Node circle: circleAndImage) {
-            //    if (circle instanceof Circle) {
-            //        ((Circle) circle).setFill(playerColours.get(1));
-            //    }
-            //}
             Color colour1 = playerColours.get(2);
             playerColours.set(1, colour1);
         }
@@ -219,9 +213,9 @@ public class BoardController   {
 
         for (Node picture : anchorPane.getChildren()) {
             if (Objects.equals(picture.getId(), "picture" + id.substring(8))) {
-                picture.setVisible(true);
                 rotateTransition.setOnFinished(event -> {
                     endTurnButton.setDisable(false);
+                    picture.setVisible(true);
                     pauseTransition.play();
 
                     try {

@@ -170,12 +170,6 @@ public class BoardController   {
         }
 
         if (Game.getInstance().getPlayerCount() == 2) {
-            //ObservableList<Node> circleAndImage = salamanderAnchorPane.getChildren();
-            //for (Node circle: circleAndImage) {
-            //    if (circle instanceof Circle) {
-            //        ((Circle) circle).setFill(playerColours.get(1));
-            //    }
-            //}
             Color colour1 = playerColours.get(2);
             playerColours.set(1, colour1);
         }

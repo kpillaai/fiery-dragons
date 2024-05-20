@@ -108,6 +108,10 @@ public class BoardController   {
                 dragonAnchorPane.setLayoutY(caveLocationArray.get(playerId - 1)[1]);
                 break;
             case 2:
+                if (Game.getInstance().getPlayerCount() == 2) {
+                    spiderAnchorPane.setLayoutX(caveLocationArray.get(2)[0]);
+                    spiderAnchorPane.setLayoutY(caveLocationArray.get(2)[1]);
+                }
                 spiderAnchorPane.setLayoutX(caveLocationArray.get(playerId - 1)[0]);
                 spiderAnchorPane.setLayoutY(caveLocationArray.get(playerId - 1)[1]);
                 break;
@@ -164,6 +168,17 @@ public class BoardController   {
                 }
             }
         }
+
+        if (Game.getInstance().getPlayerCount() == 2) {
+            //ObservableList<Node> circleAndImage = salamanderAnchorPane.getChildren();
+            //for (Node circle: circleAndImage) {
+            //    if (circle instanceof Circle) {
+            //        ((Circle) circle).setFill(playerColours.get(1));
+            //    }
+            //}
+            Color colour1 = playerColours.get(2);
+            playerColours.set(1, colour1);
+        }
     }
 
     public void initialize() {
@@ -187,7 +202,6 @@ public class BoardController   {
         caveLocationArray.add(new double[]{batAnchorPane.getLayoutX(), batAnchorPane.getLayoutY()});
         renderChits();
         renderVolcanoCards();
-        initialisePlayerColour();
     }
 
     private void flipCard(Node circle, String id) throws IOException {
@@ -367,31 +381,32 @@ public class BoardController   {
         switch (playerCount) {
             case 2:
                 anchorPane.getChildren().remove(batAnchorPane);
-                anchorPane.getChildren().remove(salamanderAnchorPane);
+                anchorPane.getChildren().remove(spiderAnchorPane);
             case 3:
                 anchorPane.getChildren().remove(batAnchorPane);
             default:
                 break;
         }
-    }
-
-    public void displayPlayerCount(int playerCount) {
-        playerCountLabel.setText("Current Players: " + playerCount);
-        locationIndexArray = new ArrayList<>();
+        // using player count generate starting positions for each token
         switch (playerCount) {
             case 2:
-                locationIndexArray.add(12);
                 locationIndexArray.add(18);
+                locationIndexArray.add(6);
             case 3:
-                locationIndexArray.add(12);
                 locationIndexArray.add(18);
                 locationIndexArray.add(0);
+                locationIndexArray.add(6);
             case 4:
                 locationIndexArray.add(18);
                 locationIndexArray.add(0);
                 locationIndexArray.add(6);
                 locationIndexArray.add(12);
         }
+    }
+
+    public void displayPlayerCount(int playerCount) {
+        playerCountLabel.setText("Current Players: " + playerCount);
+        locationIndexArray = new ArrayList<>();
     }
 
     public static void movePlayer(Pair<TileType, Integer> chitCard) {
@@ -426,6 +441,11 @@ public class BoardController   {
                     newLocationIndex = newLocationIndex + 24;
                 }
                 newLocation = tileLocationArray.get(newLocationIndex);
+                if (Game.getInstance().getPlayerCount() == 2) {
+                    instance.moveToken(instance.salamanderAnchorPane, newLocation);
+                    locationIndexArray.set(playerId - 1, newLocationIndex);
+                    break;
+                }
                 instance.moveToken(instance.spiderAnchorPane, newLocation);
                 locationIndexArray.set(playerId - 1, newLocationIndex);
                 break;

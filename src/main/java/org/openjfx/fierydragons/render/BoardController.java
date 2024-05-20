@@ -241,18 +241,19 @@ public class BoardController   {
                     RotateTransition rotateTransition = new RotateTransition(Duration.seconds(1), circle);
                     rotateTransition.setByAngle(180);
                     rotateTransition.setAxis(Rotate.X_AXIS);
-                    rotateTransition.play();
+
                     rotateTransition.setOnFinished(event -> {
                         endTurnButton.setDisable(false);
+                        for (Node picture : circles) {
+                            if (picture.getId() != null) {
+                                if (picture.getId().startsWith("picture")) {
+                                    picture.setVisible(false);
+                                }
+                            }
+                        }
                     });
+                    rotateTransition.play();
                     circle.setDisable(false);
-                }
-            }
-        }
-        for (Node picture : anchorPane.getChildren()) {
-            if (picture.getId() != null) {
-                if (picture.getId().startsWith("picture") && picture.getId() != null) {
-                    picture.setVisible(false);
                 }
             }
         }

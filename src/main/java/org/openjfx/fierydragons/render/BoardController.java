@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -59,6 +60,9 @@ public class BoardController   {
 
     @FXML
     private Parent root;
+
+    @FXML
+    private Button endTurnButton;
 
     private FXMLLoader fxmlLoader;
 
@@ -203,6 +207,7 @@ public class BoardController   {
             if (Objects.equals(picture.getId(), "picture" + id.substring(8))) {
                 picture.setVisible(true);
                 rotateTransition.setOnFinished(event -> {
+                    endTurnButton.setDisable(false);
                     pauseTransition.play();
 
                     try {
@@ -214,12 +219,13 @@ public class BoardController   {
                 });
             }
         }
-
+        endTurnButton.setDisable(true);
         circle.setDisable(true);
         rotateTransition.play();
     }
 
     public void hideCard() {
+        endTurnButton.setDisable(true);
         ObservableList<Node> circles = anchorPane.getChildren();
         for (Node circle : circles) {
             if (circle.getId() != null) {
@@ -228,6 +234,9 @@ public class BoardController   {
                     rotateTransition.setByAngle(180);
                     rotateTransition.setAxis(Rotate.X_AXIS);
                     rotateTransition.play();
+                    rotateTransition.setOnFinished(event -> {
+                        endTurnButton.setDisable(false);
+                    });
                     circle.setDisable(false);
                 }
             }

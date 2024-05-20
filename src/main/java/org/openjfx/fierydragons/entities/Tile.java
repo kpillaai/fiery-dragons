@@ -2,7 +2,7 @@ package org.openjfx.fierydragons.entities;
 
 public class Tile {
 
-    private boolean isCave;
+    private final boolean isCave;
     private TileType tileType;
     private int playerId = 0;
 
@@ -17,27 +17,19 @@ public class Tile {
         this.playerId = playerId;
     }
 
-    public boolean isCave() {
-        return isCave;
-    }
-
-    public void setCave(boolean cave) {
-        isCave = cave;
-    }
-
+    /**
+     * @author  Krishna Pillaai Manogaran
+     * @desc    returns the Tiletype of the Tile
+     */
     public TileType getTileType() {
         return tileType;
     }
 
+    /**
+     * @author  Krishna Pillaai Manogaran
+     * @desc    Takes an input of TileType and sets the TileType of this Tile
+     */
     public void setTileType(TileType tileType) {
         this.tileType = tileType;
-    }
-
-    public int getCurrentPlayer() {
-        return playerId;
-    }
-
-    public void setCurrentPlayer(int currentPlayer) {
-        this.playerId = currentPlayer;
     }
 }

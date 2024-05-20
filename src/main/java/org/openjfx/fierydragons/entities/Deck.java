@@ -14,6 +14,10 @@ public class Deck {
         generateChitCards();
     }
 
+    /**
+     * @author  Jeffrey Yan
+     * @desc    creates chit cards and shuffles
+     */
     private void generateChitCards() {
         this.chitCards.add(new Pair<>(TileType.BABY_DRAGON, 1));
         this.chitCards.add(new Pair<>(TileType.BABY_DRAGON, 2));
@@ -34,10 +38,10 @@ public class Deck {
         Collections.shuffle(this.chitCards);
     }
 
-    public void addChitCard(TileType tileType, int value) {
-        chitCards.add(new Pair<>(tileType, value));
-    }
-
+    /**
+     * @author  Jeffrey Yan
+     * @desc    takes an index in the chit cards array list and returns the corresponding chit card
+     */
     public Pair<TileType, Integer> getChitCard(int index) {
         return chitCards.get(index);
     }

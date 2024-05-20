@@ -33,6 +33,10 @@ public class SettingsController implements Initializable {
     private Scene scene;
 
 
+    /**
+     * @author  Jeffrey Yan
+     * @desc    used to get the desired number of players depending on the slider value selected. Uses listeners
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         playerCountSlider.valueProperty().addListener(new ChangeListener<Number>() {
@@ -43,19 +47,31 @@ public class SettingsController implements Initializable {
         playerCount = 4;
     }
 
+    /**
+     * @author  Jeffrey Yan
+     * @desc    sets the player count depending on the value of the slider
+     */
     public void onSliderChanged() {
         playerCount = (int) playerCountSlider.getValue();
     }
 
-
+    /**
+     * @author  Jeffrey Yan
+     * @desc    Takes an input of event which is an onclick. Switches to the Board scene where the game is played
+     */
     public void switchToBoardScene(ActionEvent event) throws IOException {
         fxmlLoader = new FXMLLoader(StartApplication.class.getResource("game-board.fxml"));
         root = fxmlLoader.load();
 
+        // setup the board controller and initialise values
         BoardController boardController = fxmlLoader.getController();
         boardController.showPlayerCount(playerCount);
+
+        // set player values
         Game.getInstance().setPlayerCount(playerCount);
         Game.getInstance().addPlayers();
+
+        // render the board
         boardController.renderDragonTokens();
         boardController.initialisePlayerColour();
         boardController.showCurrentPlayer();

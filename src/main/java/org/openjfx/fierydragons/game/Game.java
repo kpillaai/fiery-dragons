@@ -20,6 +20,10 @@ public class Game {
         //initialise();
     }
 
+    /**
+     * @author  Zilei Chen
+     * @desc    Creates an instance of the Game to make it a singleton
+     */
     public static synchronized Game getInstance(){
         if (instance == null) {
             instance = new Game();
@@ -27,51 +31,62 @@ public class Game {
         return instance;
     }
 
+    /**
+     * @author  Zilei Chen
+     * @desc    Initialises the ball by calling the initialiseBoard method
+     */
     public void initialise() {
-        //set up the board
         Board.getInstance().initialiseBoard("");
-        //set up players
-        //set up turn requests
     }
 
+    /**
+     * @author  Jeffrey Yan
+     * @desc    Adds players to an array list depending on the input to keep track of the players in the game
+     */
     public void addPlayers() {
         this.playerList = new ArrayList<>();
         for (int i = 1; i < playerCount+1; i++) {
             this.playerList.add(new Player("Player" + i, i));
         }
-        this.currentPlayer = this.playerList.get(0);
+        this.currentPlayer = this.playerList.getFirst();
+        // call createPlayerLocationArray to initialise player locations on the map
         Board.getInstance().createPlayerLocationArray();
     }
 
-
-
-    public void startGame() {
-
-    }
-
-    public String fetchSettings() {
-        return "";
-    }
-
+    /**
+     * @author  Zilei Chen
+     * @desc    returns the current player
+     */
     public Player getCurrentPlayer() {
         return currentPlayer;
     }
 
+    /**
+     * @author  Jeffrey Yan
+     * @desc    returns the current number of players in the game
+     */
     public int getPlayerCount() {
         return this.playerCount;
     }
 
-    public void setCurrentPlayer(Player currentPlayer) {
-        this.currentPlayer = currentPlayer;
-    }
-
+    /**
+     * @author  Jeffrey Yan
+     * @desc    Takes an integer input which is the number of players and sets the number of players
+     */
     public void setPlayerCount(int playerCount) {
         this.playerCount = playerCount;
     }
 
+    /**
+     * @author  Zilei Chen
+     * @desc    Used to set the next current player after a turn has ended
+     */
     public void iterateNextPlayer() {
+        // loop through all the players
         for (int i = 0; i < playerList.size(); i++) {
+            // get the current player
             if (playerList.get(i) == this.getCurrentPlayer()) {
+                // handle index errors, set the next player to be the one after the previous
                 if (i == playerList.size() - 1) {
                     this.currentPlayer = playerList.getFirst();
                     break;
@@ -83,6 +98,10 @@ public class Game {
         }
     }
 
+    /**
+     * @author  Krishna Pillaai Manogaran
+     * @desc    used when the game has ended, calls the switchToWinScene to display the winning player
+     */
     public void endGame() throws IOException {
         BoardController.getInstance().switchToWinScene(BoardController.getInstance().anchorPane);
     }

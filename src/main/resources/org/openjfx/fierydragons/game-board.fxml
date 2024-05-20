@@ -52,7 +52,7 @@
             <Image url="@images/spider1.png" />
          </image>
       </ImageView>
-      <Label fx:id="playerCountLabel" layoutX="134.0" layoutY="129.0" text="Label">
+      <Label fx:id="playerCountLabel" layoutX="87.0" layoutY="129.0" text="Label">
          <font>
             <Font name="Papyrus" size="53.0" />
          </font>

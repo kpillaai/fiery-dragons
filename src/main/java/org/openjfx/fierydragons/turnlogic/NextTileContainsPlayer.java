@@ -18,8 +18,11 @@ public class NextTileContainsPlayer extends TurnHandler {
 
     @Override
     public ArrayList<Boolean> handleTurn(Pair<TileType, Integer> chitCard) {
-        int[] nextTileLocation = {0, 0};
+
         int[] currentLocation = Board.getInstance().getPlayerLocation(Game.getInstance().getCurrentPlayer(), 0);
+        int[] nextTileLocation = {0, 0};
+        nextTileLocation[0] = currentLocation[0] + 0;
+        nextTileLocation[1] = currentLocation[1] + 0;
         if (currentLocation[1] < 0) { // Checks if dragon is in cave
             if (chitCard.getValue() > 0) {
                 nextTileLocation[1] = chitCard.getValue();
@@ -49,10 +52,9 @@ public class NextTileContainsPlayer extends TurnHandler {
                 nextTileLocation[0] = 7;
             }
         }
-        for (int i = 0; i < Board.getInstance().getPlayerLocationArray().size() - 1; i++) {
-            System.out.println(Board.getInstance().getPlayerLocationArray().get(i));
-            if (Board.getInstance().getPlayerLocationArray().get(i)[0] == nextTileLocation[0] && Board.getInstance().getPlayerLocationArray().get(i)[1] == nextTileLocation[1]) {
 
+        for (int i = 0; i < Board.getInstance().getPlayerLocationArray().size(); i++) {
+            if (Board.getInstance().getPlayerLocationArray().get(i)[0] == nextTileLocation[0] && Board.getInstance().getPlayerLocationArray().get(i)[1] == nextTileLocation[1]) {
                 ArrayList<Boolean> result = new ArrayList<>();
                 result.add(false);
                 result.add(false);

@@ -277,7 +277,6 @@ public class BoardController   {
                 String fileName = fileNameKey + fileNameValue + ".png";
 
                 // Create new image
-                System.out.println("/org/openjfx/fierydragons/images/" + fileName);
                 Image image = new Image(getClass().getResourceAsStream("/org/openjfx/fierydragons/images/" + fileName));
                 ImageView imageView = new ImageView(image);
                 imageView.setId("picture" + idString.substring(8));
@@ -407,7 +406,6 @@ public class BoardController   {
     public static void movePlayer(Pair<TileType, Integer> chitCard) {
         int moveValue = chitCard.getValue();
         int playerId = Game.getInstance().getCurrentPlayer().getId();
-        System.out.println(playerId + "moveplayer");
         BoardController instance = BoardController.getInstance();
         if (instance == null) {
             throw new IllegalStateException("BoardController instance is not initialized");
@@ -479,7 +477,6 @@ public class BoardController   {
 
     public void endTurn() {
         Turn.getInstance().endTurn();
-        System.out.println("ending ?");
         showCurrentPlayer();
         hideCard();
     }

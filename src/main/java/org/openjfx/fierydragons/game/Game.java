@@ -74,11 +74,9 @@ public class Game {
             if (playerList.get(i) == this.getCurrentPlayer()) {
                 if (i == playerList.size() - 1) {
                     this.currentPlayer = playerList.getFirst();
-                    System.out.println(this.currentPlayer.getId());
                     break;
                 } else {
                     this.currentPlayer = playerList.get(i + 1);
-                    System.out.println(this.currentPlayer.getId());
                     break;
                 }
             }

@@ -28,10 +28,6 @@ public class CheckTile extends TurnHandler {
 
         TileType chitCardTileType = chitCard.getKey();
 
-        System.out.println("current tile type");
-        System.out.println(currentTileType);
-        System.out.println("chitcard tile type");
-        System.out.println(chitCardTileType);
         if (currentTileType != chitCardTileType) {
             ArrayList<Boolean> result = new ArrayList<>();
             result.add(false);

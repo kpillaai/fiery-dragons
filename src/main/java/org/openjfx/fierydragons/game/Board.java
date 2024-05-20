@@ -89,7 +89,6 @@ public class Board {
     public void createPlayerLocationArray() {
         int playerCount = Game.getInstance().getPlayerCount();
         playerLocationArray = new ArrayList<>();
-        System.out.println(playerCount);
         switch (playerCount) {
             case 2:
                 playerLocationArray.add(new int[]{6, -1});

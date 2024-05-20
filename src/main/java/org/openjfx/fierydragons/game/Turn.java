@@ -56,15 +56,6 @@ public class Turn {
         if (playerWon) {
             Game.getInstance().endGame();
         }
-
-//        System.out.println(Board.getInstance().getPlayerLocationArray().get(0)[0]);
-//        System.out.println(Board.getInstance().getPlayerLocationArray().get(0)[1]);
-//        System.out.println(Board.getInstance().getPlayerLocationArray().get(1)[0]);
-//        System.out.println(Board.getInstance().getPlayerLocationArray().get(1)[1]);
-//        System.out.println(Board.getInstance().getPlayerLocationArray().get(2)[0]);
-//        System.out.println(Board.getInstance().getPlayerLocationArray().get(2)[1]);
-//        System.out.println(Board.getInstance().getPlayerLocationArray().get(3)[0]);
-//        System.out.println(Board.getInstance().getPlayerLocationArray().get(3)[1]);
     }
 
     private boolean[] handleTurnLogic(Integer chitCardId) throws IOException {
@@ -86,10 +77,4 @@ public class Turn {
         }
         return new boolean[]{canPlayerMove.getFirst(), playerWon};
     }
-
-    // delete this later
-    public void addPlayer(Player player) {
-        this.playerList.add(player);
-    }
-
 }

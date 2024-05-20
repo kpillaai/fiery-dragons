@@ -90,14 +90,10 @@ public class BoardController   {
         return instance;
     }
 
-    public void switchToSettingScene(MouseEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("game-settings.fxml"));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setScene(scene);
-        stage.show();
-    }
-
+    /**
+     * @author  Krishna Pillaai Manogaran
+     * @desc    Renders the winning game token back in its own cave, and switches to win scene.
+     */
     public void switchToWinScene(Node node) throws IOException {
         Player winningPlayer = Game.getInstance().getCurrentPlayer();
         // move player's tile back to own cave
@@ -151,11 +147,20 @@ public class BoardController   {
         }
     }
 
+    /**
+     * @author  Krishna Pillaai Manogaran
+     * @desc    Displays current player's turn on scene.
+     */
     public void showCurrentPlayer() {
         currentPlayerLabel.setText(Game.getInstance().getCurrentPlayer().getName());
         currentPlayerLabel.setTextFill(playerColours.get(Game.getInstance().getCurrentPlayer().getId() - 1));
     }
 
+    /**
+     * @author  Krishna Pillaai Manogaran
+     * @desc    Token colours are hard-coded in game-board.fxml, this array is used to store the associated colours for
+     *          showCurrentPlayer().
+     */
     public void initialisePlayerColour() {
         playerColours = new ArrayList<>();
         AnchorPane[] anchorPanes = {dragonAnchorPane, spiderAnchorPane, salamanderAnchorPane, batAnchorPane};
@@ -175,6 +180,11 @@ public class BoardController   {
         }
     }
 
+    /**
+     * @author  Zilei Chen, Jeffrey Yan
+     * @desc    Function is used when scene is initially generated; sets chit card ids and finds initial token
+     *          coordinates.
+     */
     public void initialize() {
         ObservableList<Node> circles = anchorPane.getChildren();
         for (Node circle : circles) {
@@ -198,6 +208,10 @@ public class BoardController   {
         renderVolcanoCards();
     }
 
+    /**
+     * @author  Krishna Pillaai Manogaran
+     * @desc    Renders the winning game token back in its own cave, and switches to win scene
+     */
     private void flipCard(Node circle, String id) throws IOException {
         if (animationInProgress) {
             return;
@@ -232,6 +246,10 @@ public class BoardController   {
         rotateTransition.play();
     }
 
+    /**
+     * @author  Zilei Chen
+     * @desc    Hides all chit cards after a player turn has ended.
+     */
     public void hideCard() {
         endTurnButton.setDisable(true);
         ObservableList<Node> circles = anchorPane.getChildren();
@@ -259,6 +277,11 @@ public class BoardController   {
         }
     }
 
+    /**
+     * @author  Zilei Chen
+     * @desc    Renders initial chit cards flipped down on the game board and adds the associated image to each chit
+     *          card according to their values.
+     */
     private void renderChits() {
         ObservableList<Node> circles = anchorPane.getChildren();
         Deck chits = Board.getInstance().getDeck();
@@ -303,6 +326,11 @@ public class BoardController   {
         }
     }
 
+    /**
+     * @author  Krishna Pillaai Manogaran, Zilei Chen, Jeffrey Yan
+     * @desc    Renders all volcano cards on the game board; stores each tile's location into an array so that it can be
+     *          referenced when moving dragon tokens.
+     */
     private void renderVolcanoCards() {
         ArrayList<MapPiece> mapPieces = Board.getInstance().getMapPieces();
         double outerRadius = 388;
@@ -360,6 +388,7 @@ public class BoardController   {
                 ArrayList<Double> location = new ArrayList<>();
                 location.add(topLeftX);
                 location.add(topLeftY);
+                // Add to array so tokens know the co-ordinates to move to
                 tileLocationArray.add(location);
 
                 // Add image
@@ -370,10 +399,19 @@ public class BoardController   {
         }
     }
 
+    /**
+     * @author  Jeffrey Yan
+     * @desc    Dragon tokens are hard-coded in game-board.fxml, function's purpose is to remove unnecessary dragon
+     *          tokens. Also based on number of players, initialise an array based on relative token position.
+     *          locationIndexArray stores indexes that refer to tileLocationArray, so tokens can be moved to the correct
+     *          co-ordinates during turns.
+     */
     public void renderDragonTokens() {
         int playerCount = Game.getInstance().getPlayerCount();
+        locationIndexArray = new ArrayList<>();
         switch (playerCount) {
             case 2:
+                // Case where two players, start opposite to each other
                 anchorPane.getChildren().remove(batAnchorPane);
                 anchorPane.getChildren().remove(spiderAnchorPane);
             case 3:
@@ -384,6 +422,7 @@ public class BoardController   {
         // using player count generate starting positions for each token
         switch (playerCount) {
             case 2:
+                // Case where two players, start opposite to each other
                 locationIndexArray.add(18);
                 locationIndexArray.add(6);
             case 3:
@@ -398,11 +437,21 @@ public class BoardController   {
         }
     }
 
+    /**
+     * @author  Jeffrey Yan
+     * @desc    Show number of players in a game after initialisation.
+     */
     public void showPlayerCount(int playerCount) {
         playerCountLabel.setText("Number of Players: " + playerCount);
-        locationIndexArray = new ArrayList<>();
     }
 
+    /**
+     * @author  Jeffrey Yan
+     * @desc    Given chit card as input, function renders the dragon token location of the player as according to game
+     *          state.
+     *          First determine new index from chit card value, then based on index, find the correct co-ordinates from
+     *          tileLocationArray.
+     */
     public static void movePlayer(Pair<TileType, Integer> chitCard) {
         int moveValue = chitCard.getValue();
         int playerId = Game.getInstance().getCurrentPlayer().getId();
@@ -434,6 +483,7 @@ public class BoardController   {
                     newLocationIndex = newLocationIndex + 24;
                 }
                 newLocation = tileLocationArray.get(newLocationIndex);
+                // If only two players, player 2 has a different token
                 if (Game.getInstance().getPlayerCount() == 2) {
                     instance.moveToken(instance.salamanderAnchorPane, newLocation);
                     locationIndexArray.set(playerId - 1, newLocationIndex);
@@ -469,12 +519,20 @@ public class BoardController   {
         }
     }
 
+    /**
+     * @author  Jeffrey Yan
+     * @desc    Helper function used in movePlayer(). Given the object to move and location to move to, move the object.
+     */
     public void moveToken(AnchorPane anchorPane, ArrayList<Double> newLocation) {
         anchorPane.setLayoutX(newLocation.get(0));
         anchorPane.setLayoutY(newLocation.get(1));
         anchorPane.toFront();
     }
 
+    /**
+     * @author  Zilei Chen
+     * @desc    endTurn() function called by end turn button in the scene.
+     */
     public void endTurn() {
         Turn.getInstance().endTurn();
         showCurrentPlayer();

@@ -7,7 +7,10 @@ public class WinSceneController {
     @FXML
     Label winLabel;
 
-    // display winning players name
+    /**
+     * @author  Krishna Pillai Manogaran
+     * @desc    Function used to set label and show who the winning player is.
+     */
     public void displayName(String playerName) {
         winLabel.setText("Game Over. " + playerName + " wins!");
     }

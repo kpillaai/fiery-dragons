@@ -2,6 +2,7 @@ package org.openjfx.fierydragons.render;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import javafx.animation.PauseTransition;
 import javafx.animation.RotateTransition;
 import javafx.collections.FXCollections;
@@ -71,6 +72,7 @@ public class BoardController   {
     @JsonIgnore
     private boolean animationInProgress = false;
 
+    @JsonProperty("tileLocationArray")
     private static ArrayList<ArrayList<Double>> tileLocationArray;
 
     private ArrayList<double[]> caveLocationArray;
@@ -79,6 +81,7 @@ public class BoardController   {
 
     private static BoardController instance;
 
+    @JsonProperty("locationIndexArray")
     protected static ArrayList<Integer> locationIndexArray;
 
     @JsonCreator
@@ -210,6 +213,9 @@ public class BoardController   {
         caveLocationArray.add(new double[]{batAnchorPane.getLayoutX(), batAnchorPane.getLayoutY()});
         renderChits();
         renderVolcanoCards();
+        if (locationIndexArray != null) {
+            updatePlayerLocation();
+        }
     }
 
     /**
@@ -441,7 +447,6 @@ public class BoardController   {
                     locationIndexArray.add(12);
             }
         }
-
     }
 
     /**
@@ -450,6 +455,18 @@ public class BoardController   {
      */
     public void showPlayerCount(int playerCount) {
         playerCountLabel.setText("Number of Players: " + playerCount);
+    }
+
+    public static void updatePlayerLocation() {
+        ArrayList<AnchorPane> anchorPanes = new ArrayList<>();
+        anchorPanes.add(BoardController.getInstance().getDragonAnchorPane());
+        anchorPanes.add(BoardController.getInstance().getSpiderAnchorPane());
+        anchorPanes.add(BoardController.getInstance().getSalamanderAnchorPane());
+        anchorPanes.add(BoardController.getInstance().getBatAnchorPane());
+
+        for (int i = 0; i < locationIndexArray.size(); i++) {
+            instance.moveToken(anchorPanes.get(i), tileLocationArray.get(locationIndexArray.get(i)));
+        }
     }
 
     /**
@@ -466,6 +483,7 @@ public class BoardController   {
         if (instance == null) {
             throw new IllegalStateException("BoardController instance is not initialized");
         }
+        // updatePlayerLocation();
         int newLocationIndex;
         ArrayList<Double> newLocation;
         switch (playerId) {
@@ -556,7 +574,12 @@ public class BoardController   {
 
         if (file != null) {
             try {
-                GameState gameState = new GameState(Board.getInstance().getDeck(), Game.getInstance(), Board.getInstance(), this);
+                GameState gameState = new GameState(Board.getInstance().getDeck(),
+                        Game.getInstance(),
+                        Board.getInstance(),
+                        this,
+                        BoardController.tileLocationArray,
+                        BoardController.locationIndexArray);
                 gameState.saveGame(file.getAbsolutePath());
                 System.out.println("Game saved successfully.");
             } catch (IOException ex) {
@@ -596,5 +619,37 @@ public class BoardController   {
 
     public static void setLocationIndexArray(ArrayList<Integer> locationIndexArray) {
         BoardController.locationIndexArray = locationIndexArray;
+    }
+
+    public AnchorPane getDragonAnchorPane() {
+        return dragonAnchorPane;
+    }
+
+    public void setDragonAnchorPane(AnchorPane dragonAnchorPane) {
+        this.dragonAnchorPane = dragonAnchorPane;
+    }
+
+    public AnchorPane getSpiderAnchorPane() {
+        return spiderAnchorPane;
+    }
+
+    public void setSpiderAnchorPane(AnchorPane spiderAnchorPane) {
+        this.spiderAnchorPane = spiderAnchorPane;
+    }
+
+    public AnchorPane getSalamanderAnchorPane() {
+        return salamanderAnchorPane;
+    }
+
+    public void setSalamanderAnchorPane(AnchorPane salamanderAnchorPane) {
+        this.salamanderAnchorPane = salamanderAnchorPane;
+    }
+
+    public AnchorPane getBatAnchorPane() {
+        return batAnchorPane;
+    }
+
+    public void setBatAnchorPane(AnchorPane batAnchorPane) {
+        this.batAnchorPane = batAnchorPane;
     }
 }

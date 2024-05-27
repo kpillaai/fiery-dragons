@@ -19,6 +19,7 @@ import org.openjfx.fierydragons.render.BoardController;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class GameState {
     private Deck deck;
@@ -26,13 +27,40 @@ public class GameState {
     private Board board;
     private BoardController boardController;
 
+    private ArrayList<ArrayList<Double>> tileLocationArray;
+    private ArrayList<Integer> locationIndexArray;
+
+
 
     @JsonCreator
-    public GameState(@JsonProperty("deck") Deck deck, @JsonProperty("game") Game game, @JsonProperty("board") Board board, @JsonProperty("boardController") BoardController boardController) {
+    public GameState(@JsonProperty("deck") Deck deck,
+                     @JsonProperty("game") Game game,
+                     @JsonProperty("board") Board board,
+                     @JsonProperty("boardController") BoardController boardController,
+                     @JsonProperty("tileLocationArray") ArrayList<ArrayList<Double>> tileLocationArray,
+                     @JsonProperty("locationIndexArray") ArrayList<Integer> locationIndexArray) {
         this.deck = deck;
         this.game = game;
         this.board = board;
         this.boardController = boardController;
+        this.tileLocationArray = tileLocationArray;
+        this.locationIndexArray = locationIndexArray;
+    }
+
+    public ArrayList<ArrayList<Double>> getTileLocationArray() {
+        return tileLocationArray;
+    }
+
+    public void setTileLocationArray(ArrayList<ArrayList<Double>> tileLocationArray) {
+        this.tileLocationArray = tileLocationArray;
+    }
+
+    public ArrayList<Integer> getLocationIndexArray() {
+        return locationIndexArray;
+    }
+
+    public void setLocationIndexArray(ArrayList<Integer> locationIndexArray) {
+        this.locationIndexArray = locationIndexArray;
     }
 
     public BoardController getBoardController() {
@@ -50,14 +78,6 @@ public class GameState {
     public void setDeck(Deck deck) {
         this.deck = deck;
     }
-
-//    public Turn getTurn() {
-//        return turn;
-//    }
-//
-//    public void setTurn(Turn turn) {
-//        this.turn = turn;
-//    }
 
     public Game getGame() {
         return game;

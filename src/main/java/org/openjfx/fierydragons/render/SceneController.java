@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.openjfx.fierydragons.GameState;
@@ -16,6 +17,7 @@ import org.openjfx.fierydragons.game.Game;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class SceneController {
     @FXML
@@ -49,6 +51,18 @@ public class SceneController {
                 Board.setInstance(gameState.getBoard());
                 Board.getInstance().setDeck(gameState.getDeck());
                 BoardController.setInstance(gameState.getBoardController());
+                BoardController.setLocationIndexArray(gameState.getLocationIndexArray());
+                BoardController.setTileLocationArray(gameState.getTileLocationArray());
+//                ArrayList<AnchorPane> anchorPanes = new ArrayList<>();
+//                anchorPanes.add(BoardController.getInstance().getDragonAnchorPane());
+//                anchorPanes.add(BoardController.getInstance().getSalamanderAnchorPane());
+//                anchorPanes.add(BoardController.getInstance().getSpiderAnchorPane());
+//                anchorPanes.add(BoardController.getInstance().getBatAnchorPane());
+//
+//                for (int i = 0; i < anchorPanes.size(); i++) {
+//                    BoardController.getInstance().moveToken(anchorPanes.get(i), BoardController.getTileLocationArray().get(BoardController.getLocationIndexArray().get(i)));
+//                }
+
                 // Update your UI with the loaded game state if necessary
                 SettingsController settingsController = new SettingsController();
                 settingsController.switchToBoardScene(event);

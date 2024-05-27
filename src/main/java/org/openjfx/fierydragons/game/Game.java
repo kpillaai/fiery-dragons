@@ -1,8 +1,12 @@
 package org.openjfx.fierydragons.game;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.openjfx.fierydragons.GameState;
 import org.openjfx.fierydragons.entities.Player;
 import org.openjfx.fierydragons.render.BoardController;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -16,8 +20,25 @@ public class Game {
 
     private Player currentPlayer;
 
+    @JsonCreator
     private Game() {
         //initialise();
+    }
+
+    public static void setInstance(Game instance) {
+        Game.instance = instance;
+    }
+
+    public ArrayList<Player> getPlayerList() {
+        return playerList;
+    }
+
+    public void setPlayerList(ArrayList<Player> playerList) {
+        this.playerList = playerList;
+    }
+
+    public void setCurrentPlayer(Player currentPlayer) {
+        this.currentPlayer = currentPlayer;
     }
 
     /**
@@ -104,5 +125,17 @@ public class Game {
      */
     public void endGame() throws IOException {
         BoardController.getInstance().switchToWinScene(BoardController.getInstance().anchorPane);
+    }
+
+    // Save the entire game state to a JSON file
+    public void saveGame(String filePath) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(filePath), this);
+    }
+
+    // Load the entire game state from a JSON file
+    public static Game loadGame(String filePath) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.readValue(new File(filePath), Game.class);
     }
 }

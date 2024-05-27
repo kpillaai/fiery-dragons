@@ -1,5 +1,7 @@
 package org.openjfx.fierydragons.entities;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.openjfx.fierydragons.game.Board;
 import org.openjfx.fierydragons.game.Game;
 import org.openjfx.fierydragons.game.Turn;
@@ -13,7 +15,8 @@ public class Player {
 
     private int distanceToCave = 2;
 
-    public Player(String name, int id) {
+    @JsonCreator
+    public Player(@JsonProperty("name") String name, @JsonProperty("id") int id) {
         this.name = name;
         this.id = id;
 
@@ -23,6 +26,10 @@ public class Player {
                 this.distanceToCave += 1;
             }
         }
+    }
+
+    public void setDistanceToCave(int distanceToCave) {
+        this.distanceToCave = distanceToCave;
     }
 
     /**

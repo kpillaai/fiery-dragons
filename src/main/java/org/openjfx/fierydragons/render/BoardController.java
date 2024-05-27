@@ -19,9 +19,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.transform.Rotate;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.util.Pair;
+import org.openjfx.fierydragons.CustomPair;
+import org.openjfx.fierydragons.GameState;
 import org.openjfx.fierydragons.StartApplication;
 import org.openjfx.fierydragons.entities.Deck;
 import org.openjfx.fierydragons.entities.MapPiece;
@@ -31,6 +34,7 @@ import org.openjfx.fierydragons.game.Board;
 import org.openjfx.fierydragons.game.Game;
 import org.openjfx.fierydragons.game.Turn;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -64,6 +68,9 @@ public class BoardController   {
     @FXML
     private Button endTurnButton;
 
+    @FXML
+    private Button saveGameButton;
+
     private FXMLLoader fxmlLoader;
 
     private Stage stage;
@@ -81,6 +88,8 @@ public class BoardController   {
     private static BoardController instance;
 
     protected static ArrayList<Integer> locationIndexArray;
+
+    private GameState gameState = new GameState(Board.getInstance().getDeck(), Game.getInstance(), Board.getInstance());
 
     public BoardController() {
         instance = this;
@@ -452,7 +461,7 @@ public class BoardController   {
      *          First determine new index from chit card value, then based on index, find the correct co-ordinates from
      *          tileLocationArray.
      */
-    public static void movePlayer(Pair<TileType, Integer> chitCard) {
+    public static void movePlayer(CustomPair<TileType, Integer> chitCard) {
         int moveValue = chitCard.getValue();
         int playerId = Game.getInstance().getCurrentPlayer().getId();
         BoardController instance = BoardController.getInstance();
@@ -537,5 +546,24 @@ public class BoardController   {
         Turn.getInstance().endTurn();
         showCurrentPlayer();
         hideCard();
+    }
+
+    @FXML
+    private void onSaveGameClick() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JSON files", "*.json"));
+
+        Stage stage = (Stage) saveGameButton.getScene().getWindow();
+        File file = fileChooser.showSaveDialog(stage);
+
+        if (file != null) {
+            try {
+                gameState.saveGame(file.getAbsolutePath());
+                System.out.println("Game saved successfully.");
+            } catch (IOException ex) {
+                ex.printStackTrace();
+                // Handle error saving game state
+            }
+        }
     }
 }

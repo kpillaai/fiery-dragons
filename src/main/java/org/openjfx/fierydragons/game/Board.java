@@ -1,8 +1,13 @@
 package org.openjfx.fierydragons.game;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.util.Pair;
+import org.openjfx.fierydragons.GameState;
 import org.openjfx.fierydragons.entities.*;
 
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.*;
 
@@ -16,6 +21,7 @@ public class Board {
 
     private ArrayList<int[]> playerLocationArray;
 
+    @JsonCreator
     private Board() {
         this.mapPieces = new ArrayList<MapPiece>();
     }
@@ -31,6 +37,22 @@ public class Board {
             instance = new Board();
         }
         return instance;
+    }
+
+    public void setMapPieces(ArrayList<MapPiece> mapPieces) {
+        this.mapPieces = mapPieces;
+    }
+
+    public static void setInstance(Board instance) {
+        Board.instance = instance;
+    }
+
+    public void setDeck(Deck deck) {
+        this.deck = deck;
+    }
+
+    public void setPlayerLocationArray(ArrayList<int[]> playerLocationArray) {
+        this.playerLocationArray = playerLocationArray;
     }
 
     /**
@@ -213,5 +235,17 @@ public class Board {
      */
     public ArrayList<int[]> getPlayerLocationArray() {
         return playerLocationArray;
+    }
+
+    // Save the entire game state to a JSON file
+    public void saveGame(String filePath) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(filePath), this);
+    }
+
+    // Load the entire game state from a JSON file
+    public static Board loadGame(String filePath) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.readValue(new File(filePath), Board.class);
     }
 }

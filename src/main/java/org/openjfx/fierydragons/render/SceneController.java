@@ -1,16 +1,25 @@
 package org.openjfx.fierydragons.render;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.openjfx.fierydragons.GameState;
 import org.openjfx.fierydragons.StartApplication;
+import org.openjfx.fierydragons.game.Board;
+import org.openjfx.fierydragons.game.Game;
 
 
+import java.io.File;
 import java.io.IOException;
 
 public class SceneController {
+    @FXML
+    private Button loadGameButton;
 
     /**
      * @author  Zilei Chen
@@ -22,6 +31,31 @@ public class SceneController {
         Scene scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
         stage.show();
+    }
+
+    @FXML
+    private void loadGame(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JSON files", "*.json"));
+
+        Stage stage = (Stage) loadGameButton.getScene().getWindow();
+        File file = fileChooser.showOpenDialog(stage);
+
+        if (file != null) {
+            try {
+                GameState gameState = GameState.loadGame(file.getAbsolutePath());
+                System.out.println("Game loaded successfully.");
+                Game.setInstance(gameState.getGame());
+                Board.setInstance(gameState.getBoard());
+                Board.getInstance().setDeck(gameState.getDeck());
+                // Update your UI with the loaded game state if necessary
+                SettingsController settingsController = new SettingsController();
+                settingsController.switchToBoardScene(event);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+                // Handle error loading game state
+            }
+        }
     }
 
     public void initialize() {}

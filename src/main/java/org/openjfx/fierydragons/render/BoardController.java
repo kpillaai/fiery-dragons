@@ -1,5 +1,7 @@
 package org.openjfx.fierydragons.render;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javafx.animation.PauseTransition;
 import javafx.animation.RotateTransition;
 import javafx.collections.FXCollections;
@@ -42,41 +44,31 @@ import java.util.Objects;
 public class BoardController   {
 
     @FXML
-    public AnchorPane anchorPane;
+    @JsonIgnore
+    public AnchorPane anchorPane, dragonAnchorPane, spiderAnchorPane, salamanderAnchorPane, batAnchorPane;
 
     @FXML
-    private Label playerCountLabel;
+    @JsonIgnore
+    private Label playerCountLabel, currentPlayerLabel;
 
     @FXML
-    private Label currentPlayerLabel;
-
-    @FXML
-    private AnchorPane dragonAnchorPane;
-
-    @FXML
-    private AnchorPane spiderAnchorPane;
-
-    @FXML
-    private AnchorPane salamanderAnchorPane;
-
-    @FXML
-    private AnchorPane batAnchorPane;
-
-    @FXML
+    @JsonIgnore
     private Parent root;
 
     @FXML
-    private Button endTurnButton;
+    @JsonIgnore
+    private Button endTurnButton, saveGameButton;
 
-    @FXML
-    private Button saveGameButton;
-
+    @JsonIgnore
     private FXMLLoader fxmlLoader;
 
+    @JsonIgnore
     private Stage stage;
 
+    @JsonIgnore
     private Scene scene;
 
+    @JsonIgnore
     private boolean animationInProgress = false;
 
     private static ArrayList<ArrayList<Double>> tileLocationArray;
@@ -89,14 +81,17 @@ public class BoardController   {
 
     protected static ArrayList<Integer> locationIndexArray;
 
-    private GameState gameState = new GameState(Board.getInstance().getDeck(), Game.getInstance(), Board.getInstance());
-
+    @JsonCreator
     public BoardController() {
         instance = this;
     }
 
     public static BoardController getInstance() {
         return instance;
+    }
+
+    public static void setInstance(BoardController instance) {
+        BoardController.instance = instance;
     }
 
     /**
@@ -417,33 +412,36 @@ public class BoardController   {
      */
     public void renderDragonTokens() {
         int playerCount = Game.getInstance().getPlayerCount();
-        locationIndexArray = new ArrayList<>();
-        switch (playerCount) {
-            case 2:
-                // Case where two players, start opposite to each other
-                anchorPane.getChildren().remove(batAnchorPane);
-                anchorPane.getChildren().remove(spiderAnchorPane);
-            case 3:
-                anchorPane.getChildren().remove(batAnchorPane);
-            default:
-                break;
+        if (locationIndexArray == null) {
+            locationIndexArray = new ArrayList<>();
+            switch (playerCount) {
+                case 2:
+                    // Case where two players, start opposite to each other
+                    anchorPane.getChildren().remove(batAnchorPane);
+                    anchorPane.getChildren().remove(spiderAnchorPane);
+                case 3:
+                    anchorPane.getChildren().remove(batAnchorPane);
+                default:
+                    break;
+            }
+            // using player count generate starting positions for each token
+            switch (playerCount) {
+                case 2:
+                    // Case where two players, start opposite to each other
+                    locationIndexArray.add(18);
+                    locationIndexArray.add(6);
+                case 3:
+                    locationIndexArray.add(18);
+                    locationIndexArray.add(0);
+                    locationIndexArray.add(6);
+                case 4:
+                    locationIndexArray.add(18);
+                    locationIndexArray.add(0);
+                    locationIndexArray.add(6);
+                    locationIndexArray.add(12);
+            }
         }
-        // using player count generate starting positions for each token
-        switch (playerCount) {
-            case 2:
-                // Case where two players, start opposite to each other
-                locationIndexArray.add(18);
-                locationIndexArray.add(6);
-            case 3:
-                locationIndexArray.add(18);
-                locationIndexArray.add(0);
-                locationIndexArray.add(6);
-            case 4:
-                locationIndexArray.add(18);
-                locationIndexArray.add(0);
-                locationIndexArray.add(6);
-                locationIndexArray.add(12);
-        }
+
     }
 
     /**
@@ -558,6 +556,7 @@ public class BoardController   {
 
         if (file != null) {
             try {
+                GameState gameState = new GameState(Board.getInstance().getDeck(), Game.getInstance(), Board.getInstance(), this);
                 gameState.saveGame(file.getAbsolutePath());
                 System.out.println("Game saved successfully.");
             } catch (IOException ex) {
@@ -565,5 +564,37 @@ public class BoardController   {
                 // Handle error saving game state
             }
         }
+    }
+
+    public static ArrayList<ArrayList<Double>> getTileLocationArray() {
+        return tileLocationArray;
+    }
+
+    public static void setTileLocationArray(ArrayList<ArrayList<Double>> tileLocationArray) {
+        BoardController.tileLocationArray = tileLocationArray;
+    }
+
+    public ArrayList<double[]> getCaveLocationArray() {
+        return caveLocationArray;
+    }
+
+    public void setCaveLocationArray(ArrayList<double[]> caveLocationArray) {
+        this.caveLocationArray = caveLocationArray;
+    }
+
+    public ArrayList<Color> getPlayerColours() {
+        return playerColours;
+    }
+
+    public void setPlayerColours(ArrayList<Color> playerColours) {
+        this.playerColours = playerColours;
+    }
+
+    public static ArrayList<Integer> getLocationIndexArray() {
+        return locationIndexArray;
+    }
+
+    public static void setLocationIndexArray(ArrayList<Integer> locationIndexArray) {
+        BoardController.locationIndexArray = locationIndexArray;
     }
 }

@@ -145,21 +145,23 @@ public class Board {
      * @desc    Initialises a list of players for the game.
      */
     public void createPlayerLocationArray() {
-        int playerCount = Game.getInstance().getPlayerCount();
-        playerLocationArray = new ArrayList<>();
-        switch (playerCount) {
-            case 2:
-                playerLocationArray.add(new int[]{6, -1});
-                playerLocationArray.add(new int[]{2, -1});
-            case 3:
-                playerLocationArray.add(new int[]{6, -1});
-                playerLocationArray.add(new int[]{0, -1});
-                playerLocationArray.add(new int[]{2, -1});
-            case 4:
-                playerLocationArray.add(new int[]{6, -1});
-                playerLocationArray.add(new int[]{0, -1});
-                playerLocationArray.add(new int[]{2, -1});
-                playerLocationArray.add(new int[]{4, -1});
+        if (playerLocationArray == null) {
+            int playerCount = Game.getInstance().getPlayerCount();
+            playerLocationArray = new ArrayList<>();
+            switch (playerCount) {
+                case 2:
+                    playerLocationArray.add(new int[]{6, -1});
+                    playerLocationArray.add(new int[]{2, -1});
+                case 3:
+                    playerLocationArray.add(new int[]{6, -1});
+                    playerLocationArray.add(new int[]{0, -1});
+                    playerLocationArray.add(new int[]{2, -1});
+                case 4:
+                    playerLocationArray.add(new int[]{6, -1});
+                    playerLocationArray.add(new int[]{0, -1});
+                    playerLocationArray.add(new int[]{2, -1});
+                    playerLocationArray.add(new int[]{4, -1});
+            }
         }
     }
 

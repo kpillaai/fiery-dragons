@@ -65,13 +65,17 @@ public class Game {
      * @desc    Adds players to an array list depending on the input to keep track of the players in the game
      */
     public void addPlayers() {
-        this.playerList = new ArrayList<>();
-        for (int i = 1; i < playerCount+1; i++) {
-            this.playerList.add(new Player("Player" + i, i));
+        if (playerList == null) {
+            this.playerList = new ArrayList<>();
+            for (int i = 1; i < playerCount+1; i++) {
+                this.playerList.add(new Player("Player" + i, i));
+            }
+            this.currentPlayer = this.playerList.getFirst();
+
         }
-        this.currentPlayer = this.playerList.getFirst();
         // call createPlayerLocationArray to initialise player locations on the map
         Board.getInstance().createPlayerLocationArray();
+
     }
 
     /**

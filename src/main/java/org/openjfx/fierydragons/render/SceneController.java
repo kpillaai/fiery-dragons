@@ -48,6 +48,7 @@ public class SceneController {
                 Game.setInstance(gameState.getGame());
                 Board.setInstance(gameState.getBoard());
                 Board.getInstance().setDeck(gameState.getDeck());
+                BoardController.setInstance(gameState.getBoardController());
                 // Update your UI with the loaded game state if necessary
                 SettingsController settingsController = new SettingsController();
                 settingsController.switchToBoardScene(event);

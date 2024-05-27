@@ -9,11 +9,13 @@ import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 
+import javafx.scene.paint.Color;
 import javafx.util.Pair;
 import org.openjfx.fierydragons.entities.Deck;
 import org.openjfx.fierydragons.entities.TileType;
 import org.openjfx.fierydragons.game.Board;
 import org.openjfx.fierydragons.game.Game;
+import org.openjfx.fierydragons.render.BoardController;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,17 +24,23 @@ public class GameState {
     private Deck deck;
     private Game game;
     private Board board;
-    // private Turn turn;
+    private BoardController boardController;
 
 
     @JsonCreator
-    public GameState(@JsonProperty("deck") Deck deck, @JsonProperty("game") Game game, @JsonProperty("board") Board board) {
+    public GameState(@JsonProperty("deck") Deck deck, @JsonProperty("game") Game game, @JsonProperty("board") Board board, @JsonProperty("boardController") BoardController boardController) {
         this.deck = deck;
         this.game = game;
         this.board = board;
-        // this.turn = turn;
-        // @JsonProperty("turn") Turn turn
+        this.boardController = boardController;
+    }
 
+    public BoardController getBoardController() {
+        return boardController;
+    }
+
+    public void setBoardController(BoardController boardController) {
+        this.boardController = boardController;
     }
 
     public Deck getDeck() {
@@ -76,6 +84,12 @@ public class GameState {
     // Load the entire game state from a JSON file
     public static GameState loadGame(String filePath) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
+
+        SimpleModule module = new SimpleModule();
+        module.addSerializer(Color.class, new ColorSerializer());
+        module.addDeserializer(Color.class, new ColorDeserializer());
+        objectMapper.registerModule(module);
+
         return objectMapper.readValue(new File(filePath), GameState.class);
     }
 }

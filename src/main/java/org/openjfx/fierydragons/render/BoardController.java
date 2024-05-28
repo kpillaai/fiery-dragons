@@ -42,6 +42,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import static java.lang.Integer.parseInt;
+
 public class BoardController   {
 
     @FXML
@@ -83,6 +85,9 @@ public class BoardController   {
 
     @JsonProperty("locationIndexArray")
     protected static ArrayList<Integer> locationIndexArray;
+
+    @JsonProperty("flippedCardId")
+    private static ArrayList<Integer> flippedCardId;
 
     @JsonCreator
     public BoardController() {
@@ -220,15 +225,40 @@ public class BoardController   {
         }
     }
 
+    public void initialiseFlippedCards() {
+        if (flippedCardId != null && !flippedCardId.isEmpty()) {
+            for (Node node : anchorPane.getChildren()) {
+                if (node.getId() != null) {
+                    if (node.getId().startsWith("chitCard")) {
+                        if (flippedCardId.contains(parseInt(node.getId().substring(8)))) {
+                            // disable the circle
+                            node.setDisable(true);
+                        }
+                    }
+                    if (node.getId().startsWith("picture")) {
+                        if (flippedCardId.contains(parseInt(node.getId().substring(7)))) {
+                            // show the picture
+                            node.setVisible(true);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     /**
-     * @author  Krishna Pillaai Manogaran
-     * @desc    Renders the winning game token back in its own cave, and switches to win scene
+     * @author  Zilei Chen
+     * @desc    Displays the animation for a card being flipped and begins the turn process
      */
     private void flipCard(Node circle, String id) throws IOException {
         if (animationInProgress) {
             return;
         }
         animationInProgress = false;
+
+        if (flippedCardId == null) {
+            flippedCardId = new ArrayList<>();
+        }
 
         // Rendering card flipping
         RotateTransition rotateTransition = new RotateTransition(Duration.millis(500), circle);
@@ -244,9 +274,11 @@ public class BoardController   {
                     picture.setVisible(true);
                     pauseTransition.play();
 
+                    flippedCardId.add(parseInt(id.substring(8)));
+
                     try {
                         // Call the flipCard() to start turn logic
-                        Game.getInstance().getCurrentPlayer().flipCard(Integer.parseInt(id.substring(8)));
+                        Game.getInstance().getCurrentPlayer().flipCard(parseInt(id.substring(8)));
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
@@ -287,6 +319,7 @@ public class BoardController   {
                 }
             }
         }
+        flippedCardId.clear();
     }
 
     /**
@@ -305,7 +338,7 @@ public class BoardController   {
             if (chitCard.getId().startsWith("chitCard")) {
                 // Generating filepath
                 String idString = chitCard.getId();
-                int idNumber = Integer.parseInt(idString.substring(8));
+                int idNumber = parseInt(idString.substring(8));
 
                 String fileNameKey = chits.getChitCard(idNumber).getKey().toString().toLowerCase();
                 String fileNameValue = Integer.toString(Math.abs(chits.getChitCard(idNumber).getValue()));
@@ -420,33 +453,38 @@ public class BoardController   {
      */
     public void renderDragonTokens() {
         int playerCount = Game.getInstance().getPlayerCount();
+        switch (playerCount) {
+            case 2:
+                // Case where two players, start opposite to each other
+                anchorPane.getChildren().remove(batAnchorPane);
+                anchorPane.getChildren().remove(spiderAnchorPane);
+                break;
+            case 3:
+                anchorPane.getChildren().remove(batAnchorPane);
+                break;
+            default:
+                break;
+        }
         if (locationIndexArray == null) {
             locationIndexArray = new ArrayList<>();
-            switch (playerCount) {
-                case 2:
-                    // Case where two players, start opposite to each other
-                    anchorPane.getChildren().remove(batAnchorPane);
-                    anchorPane.getChildren().remove(spiderAnchorPane);
-                case 3:
-                    anchorPane.getChildren().remove(batAnchorPane);
-                default:
-                    break;
-            }
             // using player count generate starting positions for each token
             switch (playerCount) {
                 case 2:
                     // Case where two players, start opposite to each other
                     locationIndexArray.add(18);
                     locationIndexArray.add(6);
+                    break;
                 case 3:
                     locationIndexArray.add(18);
                     locationIndexArray.add(0);
                     locationIndexArray.add(6);
+                    break;
                 case 4:
                     locationIndexArray.add(18);
                     locationIndexArray.add(0);
                     locationIndexArray.add(6);
                     locationIndexArray.add(12);
+                    break;
             }
         }
     }
@@ -459,19 +497,36 @@ public class BoardController   {
         playerCountLabel.setText("Number of Players: " + playerCount);
     }
 
-    public static void updatePlayerLocation() {
+    public void updatePlayerLocation() {
         ArrayList<AnchorPane> anchorPanes = new ArrayList<>();
-        anchorPanes.add(BoardController.getInstance().getDragonAnchorPane());
-        anchorPanes.add(BoardController.getInstance().getSpiderAnchorPane());
-        anchorPanes.add(BoardController.getInstance().getSalamanderAnchorPane());
-        anchorPanes.add(BoardController.getInstance().getBatAnchorPane());
-
-        for (int i = 0; i < locationIndexArray.size(); i++) {
-            // need to check if still in caves using Board and playerLocationArray.get(i)[1]
-            if (Board.getInstance().getPlayerLocationArray().get(i)[1] != -1) {
-                // adds them to tile on the board depending on locationIndexArray
-                instance.moveToken(anchorPanes.get(i), tileLocationArray.get(locationIndexArray.get(i)));
-            }
+        switch (locationIndexArray.size()) {
+            case 2:
+                anchorPanes.add(BoardController.getInstance().getDragonAnchorPane());
+                anchorPanes.add(BoardController.getInstance().getSalamanderAnchorPane());
+                for (int i = 0; i < locationIndexArray.size(); i++) {
+                    // need to check if still in caves using Board and playerLocationArray.get(i)[1]
+                    if (Board.getInstance().getPlayerLocationArray().get(i)[1] != -1) {
+                        // adds them to tile on the board depending on locationIndexArray
+                        instance.moveToken(anchorPanes.get(i), tileLocationArray.get(locationIndexArray.get(i)));
+                    }
+                }
+                break;
+            case 3:
+            case 4:
+                anchorPanes.add(BoardController.getInstance().getDragonAnchorPane());
+                anchorPanes.add(BoardController.getInstance().getSpiderAnchorPane());
+                anchorPanes.add(BoardController.getInstance().getSalamanderAnchorPane());
+                if (locationIndexArray.size() == 4) {
+                    anchorPanes.add(BoardController.getInstance().getBatAnchorPane());
+                }
+                for (int i = 0; i < locationIndexArray.size(); i++) {
+                    // need to check if still in caves using Board and playerLocationArray.get(i)[1]
+                    if (Board.getInstance().getPlayerLocationArray().get(i)[1] != -1) {
+                        // adds them to tile on the board depending on locationIndexArray
+                        instance.moveToken(anchorPanes.get(i), tileLocationArray.get(locationIndexArray.get(i)));
+                    }
+                }
+                break;
         }
     }
 
@@ -585,7 +640,8 @@ public class BoardController   {
                         Board.getInstance(),
                         this,
                         BoardController.tileLocationArray,
-                        BoardController.locationIndexArray);
+                        BoardController.locationIndexArray,
+                        BoardController.getInstance().getFlippedCardId());
                 gameState.saveGame(file.getAbsolutePath());
                 System.out.println("Game saved successfully.");
             } catch (IOException ex) {
@@ -657,5 +713,13 @@ public class BoardController   {
 
     public void setBatAnchorPane(AnchorPane batAnchorPane) {
         this.batAnchorPane = batAnchorPane;
+    }
+
+    public ArrayList<Integer> getFlippedCardId() {
+        return flippedCardId;
+    }
+
+    public void setFlippedCardId(ArrayList<Integer> flippedCardId) {
+        this.flippedCardId = flippedCardId;
     }
 }

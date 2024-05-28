@@ -29,6 +29,7 @@ public class GameState {
 
     private ArrayList<ArrayList<Double>> tileLocationArray;
     private ArrayList<Integer> locationIndexArray;
+    private ArrayList<Integer> flippedCardId;
 
 
 
@@ -38,13 +39,23 @@ public class GameState {
                      @JsonProperty("board") Board board,
                      @JsonProperty("boardController") BoardController boardController,
                      @JsonProperty("tileLocationArray") ArrayList<ArrayList<Double>> tileLocationArray,
-                     @JsonProperty("locationIndexArray") ArrayList<Integer> locationIndexArray) {
+                     @JsonProperty("locationIndexArray") ArrayList<Integer> locationIndexArray,
+                     @JsonProperty("flippedCardId") ArrayList<Integer> flippedCardId) {
         this.deck = deck;
         this.game = game;
         this.board = board;
         this.boardController = boardController;
         this.tileLocationArray = tileLocationArray;
         this.locationIndexArray = locationIndexArray;
+        this.flippedCardId = flippedCardId;
+    }
+
+    public ArrayList<Integer> getFlippedCardId() {
+        return flippedCardId;
+    }
+
+    public void setFlippedCardId(ArrayList<Integer> flippedCardId) {
+        this.flippedCardId = flippedCardId;
     }
 
     public ArrayList<ArrayList<Double>> getTileLocationArray() {

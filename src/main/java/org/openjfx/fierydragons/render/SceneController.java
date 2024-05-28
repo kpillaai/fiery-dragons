@@ -54,11 +54,6 @@ public class SceneController {
                 BoardController.setLocationIndexArray(gameState.getLocationIndexArray());
                 BoardController.setTileLocationArray(gameState.getTileLocationArray());
 
-                // ADD THINGS FROM SETTINGS CONTROLLER
-//                BoardController.getInstance().showPlayerCount(Game.getInstance().getPlayerCount());
-//                Game.getInstance().addPlayers();
-//                BoardController.getInstance().showCurrentPlayer();
-
                 // Update your UI with the loaded game state if necessary
                 SettingsController settingsController = new SettingsController();
                 settingsController.switchToBoardScene(event);

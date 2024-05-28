@@ -9,6 +9,7 @@ import org.openjfx.fierydragons.render.BoardController;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Game {
 
@@ -110,7 +111,7 @@ public class Game {
         // loop through all the players
         for (int i = 0; i < playerList.size(); i++) {
             // get the current player
-            if (playerList.get(i) == this.getCurrentPlayer()) {
+            if (Objects.equals(playerList.get(i).getName(), this.getCurrentPlayer().getName())) {
                 // handle index errors, set the next player to be the one after the previous
                 if (i == playerList.size() - 1) {
                     this.currentPlayer = playerList.getFirst();

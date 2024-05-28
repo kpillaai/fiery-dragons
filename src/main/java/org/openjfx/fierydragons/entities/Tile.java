@@ -17,7 +17,7 @@ public class Tile {
         this.isCave = isCave;
     }
 
-    public boolean isCave() {
+    public Boolean isCave() {
         return isCave;
     }
 

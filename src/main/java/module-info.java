@@ -13,5 +13,5 @@ module org.openjfx.fierydragons {
     exports org.openjfx.fierydragons.entities;
     opens org.openjfx.fierydragons.entities to javafx.fxml;
     exports org.openjfx.fierydragons.render;
-    opens org.openjfx.fierydragons.render to javafx.fxml;
+    opens org.openjfx.fierydragons.render to javafx.fxml, com.fasterxml.jackson.databind;
 }

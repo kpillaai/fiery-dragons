@@ -53,15 +53,11 @@ public class SceneController {
                 BoardController.setInstance(gameState.getBoardController());
                 BoardController.setLocationIndexArray(gameState.getLocationIndexArray());
                 BoardController.setTileLocationArray(gameState.getTileLocationArray());
-//                ArrayList<AnchorPane> anchorPanes = new ArrayList<>();
-//                anchorPanes.add(BoardController.getInstance().getDragonAnchorPane());
-//                anchorPanes.add(BoardController.getInstance().getSalamanderAnchorPane());
-//                anchorPanes.add(BoardController.getInstance().getSpiderAnchorPane());
-//                anchorPanes.add(BoardController.getInstance().getBatAnchorPane());
-//
-//                for (int i = 0; i < anchorPanes.size(); i++) {
-//                    BoardController.getInstance().moveToken(anchorPanes.get(i), BoardController.getTileLocationArray().get(BoardController.getLocationIndexArray().get(i)));
-//                }
+
+                // ADD THINGS FROM SETTINGS CONTROLLER
+//                BoardController.getInstance().showPlayerCount(Game.getInstance().getPlayerCount());
+//                Game.getInstance().addPlayers();
+//                BoardController.getInstance().showCurrentPlayer();
 
                 // Update your UI with the loaded game state if necessary
                 SettingsController settingsController = new SettingsController();

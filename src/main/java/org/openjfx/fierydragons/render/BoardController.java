@@ -206,11 +206,13 @@ public class BoardController   {
             }
         }
         // add initial token locations to an array so token can go back to cave after winning
-        caveLocationArray = new ArrayList<>();
-        caveLocationArray.add(new double[]{dragonAnchorPane.getLayoutX(), dragonAnchorPane.getLayoutY()});
-        caveLocationArray.add(new double[]{spiderAnchorPane.getLayoutX(), spiderAnchorPane.getLayoutY()});
-        caveLocationArray.add(new double[]{salamanderAnchorPane.getLayoutX(), salamanderAnchorPane.getLayoutY()});
-        caveLocationArray.add(new double[]{batAnchorPane.getLayoutX(), batAnchorPane.getLayoutY()});
+        if (caveLocationArray == null) {
+            caveLocationArray = new ArrayList<>();
+            caveLocationArray.add(new double[]{dragonAnchorPane.getLayoutX(), dragonAnchorPane.getLayoutY()});
+            caveLocationArray.add(new double[]{spiderAnchorPane.getLayoutX(), spiderAnchorPane.getLayoutY()});
+            caveLocationArray.add(new double[]{salamanderAnchorPane.getLayoutX(), salamanderAnchorPane.getLayoutY()});
+            caveLocationArray.add(new double[]{batAnchorPane.getLayoutX(), batAnchorPane.getLayoutY()});
+        }
         renderChits();
         renderVolcanoCards();
         if (locationIndexArray != null) {
@@ -465,7 +467,11 @@ public class BoardController   {
         anchorPanes.add(BoardController.getInstance().getBatAnchorPane());
 
         for (int i = 0; i < locationIndexArray.size(); i++) {
-            instance.moveToken(anchorPanes.get(i), tileLocationArray.get(locationIndexArray.get(i)));
+            // need to check if still in caves using Board and playerLocationArray.get(i)[1]
+            if (Board.getInstance().getPlayerLocationArray().get(i)[1] != -1) {
+                // adds them to tile on the board depending on locationIndexArray
+                instance.moveToken(anchorPanes.get(i), tileLocationArray.get(locationIndexArray.get(i)));
+            }
         }
     }
 

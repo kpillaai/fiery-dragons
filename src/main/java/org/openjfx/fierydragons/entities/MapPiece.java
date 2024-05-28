@@ -1,16 +1,28 @@
 package org.openjfx.fierydragons.entities;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.ArrayList;
 
 public class MapPiece {
     private ArrayList<Tile> tiles;
     private Tile cave;
 
-    public MapPiece(Tile tile1, Tile tile2, Tile tile3) {
+    @JsonCreator
+    public MapPiece(@JsonProperty("tile1") Tile tile1, @JsonProperty("tile2") Tile tile2, @JsonProperty("tile3") Tile tile3) {
         this.tiles = new ArrayList<Tile>();
         addTile(tile1);
         addTile(tile2);
         addTile(tile3);
+    }
+
+    public void setTiles(ArrayList<Tile> tiles) {
+        this.tiles = tiles;
+    }
+
+    public void setCave(Tile cave) {
+        this.cave = cave;
     }
 
     /**

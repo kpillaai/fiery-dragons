@@ -1,6 +1,8 @@
 package org.openjfx.fierydragons.turnlogic;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import javafx.util.Pair;
+import org.openjfx.fierydragons.CustomPair;
 import org.openjfx.fierydragons.entities.TileType;
 import org.openjfx.fierydragons.game.Game;
 
@@ -8,6 +10,7 @@ import java.util.ArrayList;
 
 public class CheckForWin extends TurnHandler{
 
+    @JsonCreator
     public CheckForWin() {
     }
 
@@ -18,7 +21,7 @@ public class CheckForWin extends TurnHandler{
      * represents chit cards and their number value.
      */
     @Override
-    public ArrayList<Boolean> handleTurn(Pair<TileType, Integer> chitCard) {
+    public ArrayList<Boolean> handleTurn(CustomPair<TileType, Integer> chitCard) {
         if (chitCard.getKey() == TileType.PIRATE) {
             ArrayList<Boolean> result = new ArrayList<>();
             result.add(true);

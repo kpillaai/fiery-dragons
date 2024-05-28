@@ -1,7 +1,9 @@
 package org.openjfx.fierydragons.turnlogic;
 
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import javafx.util.Pair;
+import org.openjfx.fierydragons.CustomPair;
 import org.openjfx.fierydragons.entities.TileType;
 
 import java.util.ArrayList;
@@ -10,6 +12,7 @@ public abstract class TurnHandler {
 
     protected TurnHandler nextStep;
 
+    @JsonCreator
     public TurnHandler() {
 
     }
@@ -28,5 +31,5 @@ public abstract class TurnHandler {
      * 2 booleans representing if the player can move, and if the player will win this turn. Takes a Pair which
      * represents chit cards and their number value.
      */
-    public abstract ArrayList<Boolean> handleTurn(Pair<TileType, Integer> chitCard);
+    public abstract ArrayList<Boolean> handleTurn(CustomPair<TileType, Integer> chitCard);
 }

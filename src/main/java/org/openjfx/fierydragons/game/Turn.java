@@ -1,6 +1,10 @@
 package org.openjfx.fierydragons.game;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.util.Pair;
+import org.openjfx.fierydragons.CustomPair;
+import org.openjfx.fierydragons.GameState;
 import org.openjfx.fierydragons.entities.Player;
 import org.openjfx.fierydragons.entities.TileType;
 import org.openjfx.fierydragons.render.BoardController;
@@ -11,6 +15,7 @@ import org.openjfx.fierydragons.turnlogic.NextTileContainsPlayer;
 import org.openjfx.fierydragons.turnlogic.TurnHandler;
 
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -18,6 +23,7 @@ public class Turn {
 
     private static Turn instance;
 
+    @JsonCreator
     private Turn() {
     }
 
@@ -31,6 +37,10 @@ public class Turn {
             instance = new Turn();
         }
         return instance;
+    }
+
+    public static void setInstance(Turn instance) {
+        Turn.instance = instance;
     }
 
     /**
@@ -54,7 +64,7 @@ public class Turn {
         boolean[] turnResult = this.handleTurnLogic(chitCardId);
         boolean canPlayerMove = turnResult[0];
         boolean playerWon = turnResult[1];
-        Pair<TileType, Integer> chitCard = Board.getInstance().getDeck().getChitCard(chitCardId);
+        CustomPair<TileType, Integer> chitCard = Board.getInstance().getDeck().getChitCard(chitCardId);
 
         if (!canPlayerMove) { // End turn if player cannot move
             endTurn();
@@ -88,12 +98,24 @@ public class Turn {
         t2.setNextStep(t3);
         t3.setNextStep(t4);
 
-        Pair<TileType, Integer> chitCard = Board.getInstance().getDeck().getChitCard(chitCardId);
+        CustomPair<TileType, Integer> chitCard = Board.getInstance().getDeck().getChitCard(chitCardId);
         ArrayList<Boolean> canPlayerMove = t1.handleTurn(chitCard);
 
         if (canPlayerMove.get(1)) { // Win game if player won the game
             playerWon = true;
         }
         return new boolean[]{canPlayerMove.getFirst(), playerWon};
+    }
+
+    // Save the entire game state to a JSON file
+    public void saveGame(String filePath) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(filePath), this);
+    }
+
+    // Load the entire game state from a JSON file
+    public static Turn loadGame(String filePath) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.readValue(new File(filePath), Turn.class);
     }
 }

@@ -1,10 +1,15 @@
 package org.openjfx.fierydragons.game;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.openjfx.fierydragons.GameState;
 import org.openjfx.fierydragons.entities.Player;
 import org.openjfx.fierydragons.render.BoardController;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Game {
 
@@ -16,8 +21,25 @@ public class Game {
 
     private Player currentPlayer;
 
+    @JsonCreator
     private Game() {
         //initialise();
+    }
+
+    public static void setInstance(Game instance) {
+        Game.instance = instance;
+    }
+
+    public ArrayList<Player> getPlayerList() {
+        return playerList;
+    }
+
+    public void setPlayerList(ArrayList<Player> playerList) {
+        this.playerList = playerList;
+    }
+
+    public void setCurrentPlayer(Player currentPlayer) {
+        this.currentPlayer = currentPlayer;
     }
 
     /**
@@ -44,13 +66,17 @@ public class Game {
      * @desc    Adds players to an array list depending on the input to keep track of the players in the game
      */
     public void addPlayers() {
-        this.playerList = new ArrayList<>();
-        for (int i = 1; i < playerCount+1; i++) {
-            this.playerList.add(new Player("Player" + i, i));
+        if (playerList == null) {
+            this.playerList = new ArrayList<>();
+            for (int i = 1; i < playerCount+1; i++) {
+                this.playerList.add(new Player("Player" + i, i));
+            }
+            this.currentPlayer = this.playerList.getFirst();
+
         }
-        this.currentPlayer = this.playerList.getFirst();
         // call createPlayerLocationArray to initialise player locations on the map
         Board.getInstance().createPlayerLocationArray();
+
     }
 
     /**
@@ -85,7 +111,7 @@ public class Game {
         // loop through all the players
         for (int i = 0; i < playerList.size(); i++) {
             // get the current player
-            if (playerList.get(i) == this.getCurrentPlayer()) {
+            if (Objects.equals(playerList.get(i).getName(), this.getCurrentPlayer().getName())) {
                 // handle index errors, set the next player to be the one after the previous
                 if (i == playerList.size() - 1) {
                     this.currentPlayer = playerList.getFirst();
@@ -104,5 +130,17 @@ public class Game {
      */
     public void endGame() throws IOException {
         BoardController.getInstance().switchToWinScene(BoardController.getInstance().anchorPane);
+    }
+
+    // Save the entire game state to a JSON file
+    public void saveGame(String filePath) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(filePath), this);
+    }
+
+    // Load the entire game state from a JSON file
+    public static Game loadGame(String filePath) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.readValue(new File(filePath), Game.class);
     }
 }

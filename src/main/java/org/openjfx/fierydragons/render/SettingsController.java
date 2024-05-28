@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Slider;
 import javafx.stage.Stage;
+import org.openjfx.fierydragons.GameState;
 import org.openjfx.fierydragons.StartApplication;
 import org.openjfx.fierydragons.game.Game;
 
@@ -53,6 +54,7 @@ public class SettingsController implements Initializable {
      */
     public void onSliderChanged() {
         playerCount = (int) playerCountSlider.getValue();
+
     }
 
     /**
@@ -62,6 +64,10 @@ public class SettingsController implements Initializable {
     public void switchToBoardScene(ActionEvent event) throws IOException {
         fxmlLoader = new FXMLLoader(StartApplication.class.getResource("game-board.fxml"));
         root = fxmlLoader.load();
+
+        if (playerCount == 0) {
+            playerCount = Game.getInstance().getPlayerCount();
+        }
 
         // setup the board controller and initialise values
         BoardController boardController = fxmlLoader.getController();
@@ -75,6 +81,7 @@ public class SettingsController implements Initializable {
         boardController.renderDragonTokens();
         boardController.initialisePlayerColour();
         boardController.showCurrentPlayer();
+        boardController.initialiseFlippedCards();
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);

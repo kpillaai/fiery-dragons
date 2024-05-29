@@ -94,7 +94,10 @@ public class BoardController   {
         instance = this;
     }
 
-    public static BoardController getInstance() {
+    public static synchronized BoardController getInstance() {
+        if (instance == null) {
+            instance = new BoardController();
+        }
         return instance;
     }
 
@@ -638,10 +641,10 @@ public class BoardController   {
                 GameState gameState = new GameState(Board.getInstance().getDeck(),
                         Game.getInstance(),
                         Board.getInstance(),
-                        this,
-                        BoardController.tileLocationArray,
-                        BoardController.locationIndexArray,
-                        BoardController.getInstance().getFlippedCardId());
+                        BoardController.getInstance(),
+                        tileLocationArray,
+                        locationIndexArray,
+                        flippedCardId);
                 gameState.saveGame(file.getAbsolutePath());
                 System.out.println("Game saved successfully.");
             } catch (IOException ex) {

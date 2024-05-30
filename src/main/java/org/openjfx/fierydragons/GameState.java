@@ -31,8 +31,6 @@ public class GameState {
     private ArrayList<Integer> locationIndexArray;
     private ArrayList<Integer> flippedCardId;
 
-
-
     @JsonCreator
     public GameState(@JsonProperty("deck") Deck deck,
                      @JsonProperty("game") Game game,

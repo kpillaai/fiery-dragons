@@ -3,8 +3,10 @@ package org.openjfx.fierydragons.render;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
 import javafx.animation.RotateTransition;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -57,6 +59,9 @@ public class BoardController   {
     @FXML
     @JsonIgnore
     private Parent root;
+
+    @FXML
+    private Label timeRemainingText;
 
     @FXML
     @JsonIgnore

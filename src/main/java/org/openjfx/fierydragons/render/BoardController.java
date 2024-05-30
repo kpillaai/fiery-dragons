@@ -172,8 +172,15 @@ public class BoardController   {
      * @desc    Displays current player's turn on scene.
      */
     public void showCurrentPlayer() {
-        currentPlayerLabel.setText(Game.getInstance().getCurrentPlayer().getName());
-        currentPlayerLabel.setTextFill(playerColours.get(Game.getInstance().getCurrentPlayer().getId() - 1));
+        Player currentPlayer = Game.getInstance().getCurrentPlayer();
+        currentPlayerLabel.setText(currentPlayer.getName());
+        currentPlayerLabel.setTextFill(playerColours.get(currentPlayer.getId() - 1));
+        this.renderPlayerTimer(currentPlayer.getTimeRemainingSeconds());
+    }
+
+    private void renderPlayerTimer(int timeRemaining) {
+        TimerController timerController = new TimerController(timeRemaining, timeRemainingText);
+        timerController.startTimer();
     }
 
     /**
@@ -233,7 +240,7 @@ public class BoardController   {
         }
 
         // Starting timer
-        TimerController timerController = new TimerController(timeRemainingText);
+        TimerController timerController = new TimerController(150, timeRemainingText);
         timerController.startTimer();
     }
 

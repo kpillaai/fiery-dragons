@@ -10,8 +10,8 @@ public class TimerController {
     private final Label timerLabel;
     private Timeline timeline;
 
-    public TimerController(Label timerLabel) {
-        this.timeRemainingSeconds = 150; // Default Game Clock
+    public TimerController(int timeRemainingSeconds, Label timerLabel) {
+        this.timeRemainingSeconds = timeRemainingSeconds; // Default Game Clock
         this.timerLabel = timerLabel;
         this.timerLabel.setText(formatTime(this.timeRemainingSeconds));
 
@@ -40,4 +40,6 @@ public class TimerController {
         int remainingSeconds = timeSeconds % 60;
         return String.format("%02d:%02d", minutes, remainingSeconds);
     }
+
+
 }

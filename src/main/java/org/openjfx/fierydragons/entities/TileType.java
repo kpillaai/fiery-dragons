@@ -5,5 +5,6 @@ public enum TileType {
     BABY_DRAGON,
     SPIDER,
     SALAMANDER,
-    PIRATE
+    PIRATE,
+    SWAP
 }

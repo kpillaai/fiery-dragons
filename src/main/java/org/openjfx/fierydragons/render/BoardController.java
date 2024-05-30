@@ -231,6 +231,9 @@ public class BoardController   {
         if (locationIndexArray != null) {
             updatePlayerLocation();
         }
+
+        TimerController timerController = new TimerController(timeRemainingText);
+        timerController.startTimer();
     }
 
     public void initialiseFlippedCards() {

@@ -50,6 +50,9 @@ public class Turn {
      */
     public void endTurn() {
         Game.getInstance().iterateNextPlayer();
+        while (Game.getInstance().getCurrentPlayer().getTimeRemainingSeconds() <= 0) {
+            Game.getInstance().iterateNextPlayer();
+        }
         BoardController.getInstance().showCurrentPlayer();
         BoardController.getInstance().hideCard();
     }

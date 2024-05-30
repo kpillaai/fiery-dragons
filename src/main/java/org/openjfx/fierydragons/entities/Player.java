@@ -15,6 +15,8 @@ public class Player {
 
     private int distanceToCave = 2;
 
+    private int timeRemaining;
+
     @JsonCreator
     public Player(@JsonProperty("name") String name, @JsonProperty("id") int id) {
         this.name = name;

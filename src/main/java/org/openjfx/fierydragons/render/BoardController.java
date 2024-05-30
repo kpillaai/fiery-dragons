@@ -232,6 +232,7 @@ public class BoardController   {
             updatePlayerLocation();
         }
 
+        // Starting timer
         TimerController timerController = new TimerController(timeRemainingText);
         timerController.startTimer();
     }

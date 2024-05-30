@@ -233,10 +233,62 @@ public class Board {
     /**
      * @author  Jeffrey Yan
      * @desc    Getter for the PlayerLocationArray
+     * param: position array where [volcanoIndex, tileIndex] represents a player's position
+     * returns: an int between 0 and 23 that represents the tile the player is currently on.
+     */
+    public int getTileLocation(int[] position) {
+        return position[0] * mapPieces.get(0).getTiles().size() + position[1];
+    }
+
+    /**
+     * @author  Jeffrey Yan
+     * @desc    Getter for the PlayerLocationArray
      * Returns an array listing the locations of each Player.
      */
     public ArrayList<int[]> getPlayerLocationArray() {
         return playerLocationArray;
+    }
+
+    /**
+     * @author  Jeffrey Yan
+     * @desc    Function used to find the closest player relative to target player
+     * param:   targetPlayer - the player that you want to find the closest player to
+     * returns: closest player to targetPlayer
+     */
+    public Player findClosestPlayer(Player targetPlayer) {
+        int targetPlayerId = targetPlayer.getId();
+        int targetPlayerTile = getTileLocation(getPlayerLocation(targetPlayer));
+        int closestPlayerIndex = 0;
+        int distanceFromPlayer = 50;
+
+        for (int i = 0; i < playerLocationArray.size(); i++) {
+            if (i != targetPlayerId) {
+                int checkPlayerTile = getTileLocation(playerLocationArray.get(i));
+                int directDistance = Math.abs(targetPlayerTile - checkPlayerTile);
+                int wrapAroundDistance = 24 - directDistance;
+                int circularDistance = Math.min(directDistance, wrapAroundDistance);
+                if (circularDistance < distanceFromPlayer) {
+                    closestPlayerIndex = i;
+                    distanceFromPlayer = circularDistance;
+                }
+            }
+        }
+        return Game.getInstance().getPlayerList().get(closestPlayerIndex);
+    }
+
+    /**
+     * @author  Jeffrey Yan
+     * @desc    Function used to swap two player locations, and update their distances from starting cave tile
+     *          accordingly so that they can win as expected
+     * param:   player1 player to swap
+     * param:   player2 player to swap
+     */
+    public void swapPlayers(Player player1, Player player2) {
+        int[] player1Location = getPlayerLocation(player1);
+        int[] player2Location = getPlayerLocation(player2);
+        int player1Tile = getTileLocation(player1Location);
+        int player2Tile = getTileLocation(player2Location);
+
     }
 
     // Save the entire game state to a JSON file

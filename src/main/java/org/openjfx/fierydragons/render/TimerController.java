@@ -41,5 +41,11 @@ public class TimerController {
         return String.format("%02d:%02d", minutes, remainingSeconds);
     }
 
+    public int getTimeRemainingSeconds() {
+        return timeRemainingSeconds;
+    }
 
+    public void setTimeRemainingSeconds(int timeRemainingSeconds) {
+        this.timeRemainingSeconds = timeRemainingSeconds;
+    }
 }

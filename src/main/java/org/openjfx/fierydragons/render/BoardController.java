@@ -94,6 +94,8 @@ public class BoardController   {
     @JsonProperty("flippedCardId")
     private static ArrayList<Integer> flippedCardId;
 
+    private TimerController timerController;
+
     @JsonCreator
     public BoardController() {
         instance = this;
@@ -175,7 +177,7 @@ public class BoardController   {
         Player currentPlayer = Game.getInstance().getCurrentPlayer();
         currentPlayerLabel.setText(currentPlayer.getName());
         currentPlayerLabel.setTextFill(playerColours.get(currentPlayer.getId() - 1));
-        this.renderPlayerTimer(currentPlayer.getTimeRemainingSeconds());
+        //this.renderPlayerTimer(currentPlayer.getTimeRemainingSeconds());
     }
 
     private void renderPlayerTimer(int timeRemaining) {
@@ -240,7 +242,7 @@ public class BoardController   {
         }
 
         // Starting timer
-        TimerController timerController = new TimerController(150, timeRemainingText);
+        this.timerController = new TimerController(150, timeRemainingText);
         timerController.startTimer();
     }
 
@@ -641,9 +643,17 @@ public class BoardController   {
      * @desc    endTurn() function called by end turn button in the scene.
      */
     public void endTurn() {
+        // Stop timer when turn ends
+        timerController.stopTimer();
+        Game.getInstance().getCurrentPlayer().setTimeRemainingSeconds(timerController.getTimeRemainingSeconds());
+
         Turn.getInstance().endTurn();
         showCurrentPlayer();
         hideCard();
+
+        //When the next player is iterated, start new timer
+        timerController.setTimeRemainingSeconds(Game.getInstance().getCurrentPlayer().getTimeRemainingSeconds());
+        timerController.startTimer();
     }
 
     @FXML

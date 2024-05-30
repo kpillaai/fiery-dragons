@@ -331,7 +331,9 @@ public class BoardController   {
                 }
             }
         }
-        flippedCardId.clear();
+        if (flippedCardId != null && !flippedCardId.isEmpty() ) {
+            flippedCardId.clear();
+        }
     }
 
     /**

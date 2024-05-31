@@ -28,6 +28,10 @@ public class MovePastCave extends TurnHandler {
             return this.nextStep.handleTurn(chitCard);
         }
 
+        if (chitCard.getKey() == TileType.SWAP) {
+            return this.nextStep.handleTurn(chitCard);
+        }
+
         if (Game.getInstance().getCurrentPlayer().getDistanceToCave() < chitCard.getValue()) {
             ArrayList<Boolean> result = new ArrayList<>();
             result.add(false);

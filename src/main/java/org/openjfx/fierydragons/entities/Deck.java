@@ -54,7 +54,9 @@ public class Deck {
         this.chitCards.add(new CustomPair<>(TileType.PIRATE, -2));
         this.chitCards.add(new CustomPair<>(TileType.PIRATE, -1));
         this.chitCards.add(new CustomPair<>(TileType.PIRATE, -2));
-        Collections.shuffle(this.chitCards);
+        this.chitCards.add(new CustomPair<>(TileType.SWAP, 0));
+        this.chitCards.add(new CustomPair<>(TileType.SWAP, 0));
+        //Collections.shuffle(this.chitCards);
     }
 
     /**

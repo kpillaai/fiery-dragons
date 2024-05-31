@@ -227,11 +227,23 @@ public class Board {
      */
     public int[] getPlayerLocation(Player player) {
         int playerId = player.getId();
-
         int volcanoIndex = playerLocationArray.get(playerId - 1)[0];
         int tileIndex = playerLocationArray.get(playerId - 1)[1];
-
         return new int[]{volcanoIndex, tileIndex};
+    }
+
+    private void setPlayerLocation(Player player, int[] newLocation) {
+        playerLocationArray.set(player.getId() - 1, newLocation);
+    }
+
+    /**
+     * @author  Jeffrey Yan
+     * @desc    Gets tile position on board given volcano and tile indexes, assumes player is not in cave
+     * param: position array where [volcanoIndex, tileIndex] represents a player's position
+     * returns: an int between 0 and 23 that represents the tile the player is currently on.
+     */
+    public int getTileLocation(int[] position) {
+        return position[0] * mapPieces.get(0).getTiles().size() + position[1];
     }
 
     /**
@@ -241,5 +253,109 @@ public class Board {
      */
     public ArrayList<int[]> getPlayerLocationArray() {
         return playerLocationArray;
+    }
+
+
+    /**
+     * @author  Jeffrey Yan
+     * @desc    Function used to find the closest player relative to target player
+     * param:   targetPlayer - the player that you want to find the closest player to
+     * returns: closest player to targetPlayer
+     */
+    public Player findClosestPlayer(Player targetPlayer) {
+        int targetPlayerId = targetPlayer.getId();
+        int targetPlayerTile = getTileLocation(getPlayerLocation(targetPlayer));
+        int closestPlayerIndex = 0;
+        int distanceFromPlayer = 50;
+
+        for (int i = 0; i < playerLocationArray.size(); i++) {
+            if (i != targetPlayerId - 1) {
+                int checkPlayerTile = getTileLocation(playerLocationArray.get(i));
+                // if not on cave
+                if (playerLocationArray.get(i)[1] >= 0) {
+                    int directDistance = Math.abs(targetPlayerTile - checkPlayerTile);
+                    int wrapAroundDistance = 24 - directDistance;
+                    int circularDistance = Math.min(directDistance, wrapAroundDistance);
+                    if (circularDistance < distanceFromPlayer) {
+                        closestPlayerIndex = i;
+                        distanceFromPlayer = circularDistance;
+                    }
+                }
+            }
+        }
+        return Game.getInstance().getPlayerList().get(closestPlayerIndex);
+    }
+
+    /**
+     * @author  Jeffrey Yan
+     * @desc    Function used to swap two player locations, and update their distances from starting cave tile
+     *          accordingly so that they can win as expected
+     * param:   player1 player to swap
+     * param:   player2 player to swap
+     */
+    public void swapPlayers(Player player1, Player player2) {
+        int[] player1Location = getPlayerLocation(player1);
+        int[] player2Location = getPlayerLocation(player2);
+        int player1Tile = getTileLocation(player1Location);
+        int player2Tile = getTileLocation(player2Location);
+
+        int numberTilesBetween = calculateTilesBetween(player1Location, player2Location);
+        System.out.println("tiles between " + numberTilesBetween);
+
+        System.out.println("Player " + player1.getId() + " old distance " + player1.getDistanceToCave());
+        System.out.println("Player " + player2.getId() + " old distance " + player2.getDistanceToCave());
+
+        int player1NewDistance = calculateDistanceToCave(player1, player2Location);
+        int player2NewDistance = calculateDistanceToCave(player2, player1Location);
+
+        player1.setDistanceToCave(player1NewDistance);
+        player2.setDistanceToCave(player2NewDistance);
+
+        setPlayerLocation(player1, player2Location);
+        setPlayerLocation(player2, player1Location);
+
+        System.out.println("Player " + player1.getId() + " new location " + Arrays.toString(getPlayerLocation(player1)));
+        System.out.println("Player " + player2.getId() + " new location " + Arrays.toString(getPlayerLocation(player2)));
+        System.out.println("Player " + player1.getId() + " new distance " + player1.getDistanceToCave());
+        System.out.println("Player " + player2.getId() + " new distance " + player2.getDistanceToCave());
+    }
+
+    private int calculateDistanceToCave(Player player, int[] targetLocation) {
+        int currentTile = getTileLocation(getPlayerLocation(player));
+        int targetTile = getTileLocation(targetLocation);
+        int distanceToCave = player.getDistanceToCave();
+
+        int forwardDistance = (targetTile - currentTile + 24) % 24;
+        int backwardDistance = (currentTile - targetTile + 24) % 24;
+        if (forwardDistance <= backwardDistance) {
+            return distanceToCave - forwardDistance;
+        } else {
+            return distanceToCave + backwardDistance;
+        }
+    }
+
+    public int calculateTilesBetween(int[] location1, int[] location2) {
+        int tile1Index = getTileLocation(location1);
+        int tile2Index = getTileLocation(location2);
+
+        // Calculate the direct distance
+        int directDistance = Math.abs(tile1Index - tile2Index);
+        // Calculate the wrap-around distance
+        int wrapAroundDistance = 24 - directDistance;
+
+        // Return the minimum distance
+        return Math.min(directDistance, wrapAroundDistance);
+    }
+
+    // Save the entire game state to a JSON file
+    public void saveGame(String filePath) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(filePath), this);
+    }
+
+    // Load the entire game state from a JSON file
+    public static Board loadGame(String filePath) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.readValue(new File(filePath), Board.class);
     }
 }

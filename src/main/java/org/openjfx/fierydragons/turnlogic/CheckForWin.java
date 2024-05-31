@@ -29,6 +29,13 @@ public class CheckForWin extends TurnHandler{
             return result;
         }
 
+        if (chitCard.getKey() == TileType.SWAP) {
+            ArrayList<Boolean> result = new ArrayList<>();
+            result.add(true);
+            result.add(false);
+            return result;
+        }
+
         if (Game.getInstance().getCurrentPlayer().getDistanceToCave() != chitCard.getValue()) {
             ArrayList<Boolean> result = new ArrayList<>();
             result.add(true);

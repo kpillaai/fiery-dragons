@@ -23,7 +23,6 @@ public class Board {
 
     @JsonCreator
     private Board() {
-        this.mapPieces = new ArrayList<MapPiece>();
     }
 
     /**
@@ -37,6 +36,10 @@ public class Board {
             instance = new Board();
         }
         return instance;
+    }
+
+    public static void resetBoard() {
+        instance = null;
     }
 
     public void setMapPieces(ArrayList<MapPiece> mapPieces) {
@@ -88,6 +91,7 @@ public class Board {
      * Param is a string of settings used for custom settings for extensions.
      */
     public void initialiseBoard(String settings) {
+        this.mapPieces = new ArrayList<MapPiece>();
         // create normal pieces
         ArrayList<MapPiece> normalPiece = new ArrayList<>();
         normalPiece.add(new MapPiece(new Tile(false, TileType.SPIDER), new Tile(false, TileType.BAT), new Tile(false, TileType.SALAMANDER)));
@@ -237,17 +241,5 @@ public class Board {
      */
     public ArrayList<int[]> getPlayerLocationArray() {
         return playerLocationArray;
-    }
-
-    // Save the entire game state to a JSON file
-    public void saveGame(String filePath) throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(filePath), this);
-    }
-
-    // Load the entire game state from a JSON file
-    public static Board loadGame(String filePath) throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.readValue(new File(filePath), Board.class);
     }
 }

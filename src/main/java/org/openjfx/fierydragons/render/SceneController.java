@@ -37,8 +37,12 @@ public class SceneController {
 
     @FXML
     private void loadGame(ActionEvent event) {
+        String jarDir = new File(getClass().getProtectionDomain().getCodeSource().getLocation().getPath()).getParent();
+
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JSON files", "*.json"));
+
+        fileChooser.setInitialDirectory(new File(jarDir));
 
         Stage stage = (Stage) loadGameButton.getScene().getWindow();
         File file = fileChooser.showOpenDialog(stage);

@@ -26,6 +26,10 @@ public class Game {
         //initialise();
     }
 
+    public static void resetGame() {
+        instance = null;
+    }
+
     public static void setInstance(Game instance) {
         Game.instance = instance;
     }
@@ -131,17 +135,5 @@ public class Game {
     public void endGame(Player winningPlayer) throws IOException {
         System.out.println("game is ending");
         BoardController.getInstance().switchToWinScene(BoardController.getInstance().anchorPane, winningPlayer);
-    }
-
-    // Save the entire game state to a JSON file
-    public void saveGame(String filePath) throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(filePath), this);
-    }
-
-    // Load the entire game state from a JSON file
-    public static Game loadGame(String filePath) throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.readValue(new File(filePath), Game.class);
     }
 }

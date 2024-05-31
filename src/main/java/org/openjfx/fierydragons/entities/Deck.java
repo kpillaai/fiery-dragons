@@ -17,7 +17,6 @@ public class Deck {
 
     @JsonCreator
     public Deck() {
-        this.chitCards = new ArrayList<>();
         generateChitCards();
     }
 
@@ -29,11 +28,16 @@ public class Deck {
         this.chitCards = chitCards;
     }
 
+    public void resetDeck() {
+        generateChitCards();
+    }
+
     /**
      * @author  Jeffrey Yan
      * @desc    creates chit cards and shuffles
      */
     private void generateChitCards() {
+        this.chitCards = new ArrayList<>();
         this.chitCards.add(new CustomPair<>(TileType.BABY_DRAGON, 1));
         this.chitCards.add(new CustomPair<>(TileType.BABY_DRAGON, 2));
         this.chitCards.add(new CustomPair<>(TileType.BABY_DRAGON, 3));
@@ -59,17 +63,5 @@ public class Deck {
      */
     public CustomPair<TileType, Integer> getChitCard(int index) {
         return chitCards.get(index);
-    }
-
-    // Save the entire game state to a JSON file
-    public void saveGame(String filePath) throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(filePath), this);
-    }
-
-    // Load the entire game state from a JSON file
-    public static Deck loadGame(String filePath) throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.readValue(new File(filePath), Deck.class);
     }
 }

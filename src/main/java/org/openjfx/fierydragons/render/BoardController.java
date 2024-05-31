@@ -129,8 +129,8 @@ public class BoardController   {
                 break;
             case 2:
                 if (Game.getInstance().getPlayerCount() == 2) {
-                    spiderAnchorPane.setLayoutX(caveLocationArray.get(2)[0]);
-                    spiderAnchorPane.setLayoutY(caveLocationArray.get(2)[1]);
+                    salamanderAnchorPane.setLayoutX(caveLocationArray.get(2)[0]);
+                    salamanderAnchorPane.setLayoutY(caveLocationArray.get(2)[1]);
                 }
                 spiderAnchorPane.setLayoutX(caveLocationArray.get(playerId - 1)[0]);
                 spiderAnchorPane.setLayoutY(caveLocationArray.get(playerId - 1)[1]);

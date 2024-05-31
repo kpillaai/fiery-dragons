@@ -76,11 +76,9 @@ public class Turn {
                 System.out.println("Closest Player: " + playerToSwap.getId());
                 Board.getInstance().swapPlayers(Game.getInstance().getCurrentPlayer(), playerToSwap);
                 BoardController.swapPlayerToken(Game.getInstance().getCurrentPlayer(), playerToSwap);
-                endTurn();
-                return; // Exit method after swap
-            } else {
-                endTurn();
             }
+            endTurn();
+            return; // Exit method after swap
         }
 
         if (canPlayerMove & !playerWon) {

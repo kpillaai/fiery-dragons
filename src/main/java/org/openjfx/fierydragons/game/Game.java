@@ -132,7 +132,8 @@ public class Game {
      * @author  Krishna Pillaai Manogaran
      * @desc    used when the game has ended, calls the switchToWinScene to display the winning player
      */
-    public void endGame() throws IOException {
-        BoardController.getInstance().switchToWinScene(BoardController.getInstance().anchorPane);
+    public void endGame(Player winningPlayer) throws IOException {
+        System.out.println("game is ending");
+        BoardController.getInstance().switchToWinScene(BoardController.getInstance().anchorPane, winningPlayer);
     }
 }

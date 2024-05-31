@@ -48,6 +48,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Optional;
 
+import static java.lang.Integer.MAX_VALUE;
 import static java.lang.Integer.parseInt;
 
 public class BoardController   {
@@ -97,6 +98,8 @@ public class BoardController   {
 
     @JsonProperty("flippedCardId")
     private static ArrayList<Integer> flippedCardId;
+
+    private TimerController timerController;
 
     @JsonCreator
     public BoardController() {
@@ -149,8 +152,7 @@ public class BoardController   {
      * @author  Krishna Pillaai Manogaran
      * @desc    Renders the winning game token back in its own cave, and switches to win scene.
      */
-    public void switchToWinScene(Node node) throws IOException {
-        Player winningPlayer = Game.getInstance().getCurrentPlayer();
+    public void switchToWinScene(Node node, Player winningPlayer) throws IOException {
         // move player's tile back to own cave
         int playerId = winningPlayer.getId();
         switch (playerId) {
@@ -182,8 +184,14 @@ public class BoardController   {
 
             // send the player name to the WinSceneController to display they have won the game
             WinSceneController winSceneController = fxmlLoader.getController();
-            String nameText = winningPlayer.getName();
-            winSceneController.displayName(nameText);
+
+            if (winningPlayer.getId() < 0) {
+                winSceneController.displayDraw(winningPlayer.getName());
+            } else {
+                String nameText = winningPlayer.getName();
+                winSceneController.displayName(nameText);
+            }
+
 
             stage = (Stage) node.getScene().getWindow();
             scene = new Scene(root);
@@ -207,8 +215,15 @@ public class BoardController   {
      * @desc    Displays current player's turn on scene.
      */
     public void showCurrentPlayer() {
-        currentPlayerLabel.setText(Game.getInstance().getCurrentPlayer().getName());
-        currentPlayerLabel.setTextFill(playerColours.get(Game.getInstance().getCurrentPlayer().getId() - 1));
+        Player currentPlayer = Game.getInstance().getCurrentPlayer();
+        currentPlayerLabel.setText(currentPlayer.getName());
+        currentPlayerLabel.setTextFill(playerColours.get(currentPlayer.getId() - 1));
+        //this.renderPlayerTimer(currentPlayer.getTimeRemainingSeconds());
+    }
+
+    private void renderPlayerTimer(int timeRemaining) {
+        TimerController timerController = new TimerController(timeRemaining, timeRemainingText);
+        timerController.startTimer();
     }
 
     /**
@@ -267,7 +282,8 @@ public class BoardController   {
             updatePlayerLocation();
         }
 
-        TimerController timerController = new TimerController(timeRemainingText);
+        // Starting timer
+        this.timerController = new TimerController(3, timeRemainingText);
         timerController.startTimer();
     }
 
@@ -667,10 +683,25 @@ public class BoardController   {
      * @author  Zilei Chen
      * @desc    endTurn() function called by end turn button in the scene.
      */
-    public void endTurn() {
-        Turn.getInstance().endTurn();
-        showCurrentPlayer();
-        hideCard();
+    public void endTurn() throws IOException {
+        pauseTimer();
+        if (Turn.getInstance().endTurn()) {
+            showCurrentPlayer();
+            hideCard();
+            resumeTimer();
+        }
+    }
+
+    public void pauseTimer() {
+        // Stop timer when turn ends
+        timerController.stopTimer();
+        Game.getInstance().getCurrentPlayer().setTimeRemainingSeconds(timerController.getTimeRemainingSeconds());
+    }
+
+    public void resumeTimer() {
+        //When the next player is iterated, start new timer
+        timerController.setTimeRemainingSeconds(Game.getInstance().getCurrentPlayer().getTimeRemainingSeconds());
+        timerController.startTimer();
     }
 
     @FXML

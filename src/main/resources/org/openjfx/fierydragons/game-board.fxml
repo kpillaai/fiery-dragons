@@ -111,7 +111,7 @@
             <Font name="Papyrus" size="53.0" />
          </font>
       </Label>
-      <Button fx:id="saveGameButton" layoutX="1520.0" layoutY="85.0" mnemonicParsing="false" onAction="#onSaveGameClick" prefHeight="78.0" prefWidth="235.0" text="Save Game">
+      <Button fx:id="saveGameButton" layoutX="1520.0" layoutY="152.0" mnemonicParsing="false" onAction="#onSaveGameClick" prefHeight="78.0" prefWidth="235.0" text="Save Game">
          <font>
             <Font name="Papyrus" size="30.0" />
          </font>
@@ -128,5 +128,10 @@
       </Label>
       <Circle fx:id="chitCard16" fill="#fff41f" layoutX="1118.0" layoutY="670.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fx:id="chitCard17" fill="#fff41f" layoutX="962.0" layoutY="751.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
+      <Button fx:id="backToStartButton" layoutX="1520.0" layoutY="65.0" mnemonicParsing="false" onAction="#switchToStartScene" prefHeight="78.0" prefWidth="235.0" text="Back to Start">
+         <font>
+            <Font name="Papyrus" size="30.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

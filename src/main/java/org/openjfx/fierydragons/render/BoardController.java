@@ -9,12 +9,15 @@ import javafx.animation.RotateTransition;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -45,7 +48,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
+import static java.lang.Integer.MAX_VALUE;
 import static java.lang.Integer.parseInt;
 
 public class BoardController   {
@@ -67,7 +72,7 @@ public class BoardController   {
 
     @FXML
     @JsonIgnore
-    private Button endTurnButton, saveGameButton;
+    private Button endTurnButton, saveGameButton, backToStartButton;
 
     @JsonIgnore
     private FXMLLoader fxmlLoader;
@@ -98,6 +103,8 @@ public class BoardController   {
     @JsonProperty("flippedCardId")
     private static ArrayList<Integer> flippedCardId;
 
+    private TimerController timerController;
+
     @JsonCreator
     public BoardController() {
         instance = this;
@@ -114,12 +121,42 @@ public class BoardController   {
         BoardController.instance = instance;
     }
 
+    public static void resetBoardController() {
+        instance = null;
+        tileLocationArray = null;
+        locationIndexArray = null;
+        flippedCardId = null;
+    }
+
+    public void switchToStartScene(ActionEvent event) throws IOException {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Warning");
+        alert.setContentText("Are you sure you want to return? Any unsaved changes will be lost.");
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.isEmpty()) {
+            //
+        } else if (result.get() == ButtonType.OK) {
+            Game.resetGame();
+            Board.resetBoard();
+            BoardController.resetBoardController();
+            Turn.resetTurn();
+            Game.getInstance().initialise();
+
+
+            FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("main-menu.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(fxmlLoader.load());
+            stage.setScene(scene);
+            stage.show();
+        }
+    }
+
     /**
      * @author  Krishna Pillaai Manogaran
      * @desc    Renders the winning game token back in its own cave, and switches to win scene.
      */
-    public void switchToWinScene(Node node) throws IOException {
-        Player winningPlayer = Game.getInstance().getCurrentPlayer();
+    public void switchToWinScene(Node node, Player winningPlayer) throws IOException {
         // move player's tile back to own cave
         int playerId = winningPlayer.getId();
         switch (playerId) {
@@ -151,8 +188,14 @@ public class BoardController   {
 
             // send the player name to the WinSceneController to display they have won the game
             WinSceneController winSceneController = fxmlLoader.getController();
-            String nameText = winningPlayer.getName();
-            winSceneController.displayName(nameText);
+
+            if (winningPlayer.getId() < 0) {
+                winSceneController.displayDraw(winningPlayer.getName());
+            } else {
+                String nameText = winningPlayer.getName();
+                winSceneController.displayName(nameText);
+            }
+
 
             stage = (Stage) node.getScene().getWindow();
             scene = new Scene(root);
@@ -176,8 +219,15 @@ public class BoardController   {
      * @desc    Displays current player's turn on scene.
      */
     public void showCurrentPlayer() {
-        currentPlayerLabel.setText(Game.getInstance().getCurrentPlayer().getName());
-        currentPlayerLabel.setTextFill(playerColours.get(Game.getInstance().getCurrentPlayer().getId() - 1));
+        Player currentPlayer = Game.getInstance().getCurrentPlayer();
+        currentPlayerLabel.setText(currentPlayer.getName());
+        currentPlayerLabel.setTextFill(playerColours.get(currentPlayer.getId() - 1));
+        //this.renderPlayerTimer(currentPlayer.getTimeRemainingSeconds());
+    }
+
+    private void renderPlayerTimer(int timeRemaining) {
+        TimerController timerController = new TimerController(timeRemaining, timeRemainingText);
+        timerController.startTimer();
     }
 
     /**
@@ -236,7 +286,8 @@ public class BoardController   {
             updatePlayerLocation();
         }
 
-        TimerController timerController = new TimerController(timeRemainingText);
+        // Starting timer
+        this.timerController = new TimerController(3, timeRemainingText);
         timerController.startTimer();
     }
 
@@ -647,16 +698,35 @@ public class BoardController   {
      * @author  Zilei Chen
      * @desc    endTurn() function called by end turn button in the scene.
      */
-    public void endTurn() {
-        Turn.getInstance().endTurn();
-        showCurrentPlayer();
-        hideCard();
+    public void endTurn() throws IOException {
+        pauseTimer();
+        if (Turn.getInstance().endTurn()) {
+            showCurrentPlayer();
+            hideCard();
+            resumeTimer();
+        }
+    }
+
+    public void pauseTimer() {
+        // Stop timer when turn ends
+        timerController.stopTimer();
+        Game.getInstance().getCurrentPlayer().setTimeRemainingSeconds(timerController.getTimeRemainingSeconds());
+    }
+
+    public void resumeTimer() {
+        //When the next player is iterated, start new timer
+        timerController.setTimeRemainingSeconds(Game.getInstance().getCurrentPlayer().getTimeRemainingSeconds());
+        timerController.startTimer();
     }
 
     @FXML
     private void onSaveGameClick() {
+        String jarDir = new File(getClass().getProtectionDomain().getCodeSource().getLocation().getPath()).getParent();
+
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JSON files", "*.json"));
+
+        fileChooser.setInitialDirectory(new File(jarDir));
 
         Stage stage = (Stage) saveGameButton.getScene().getWindow();
         File file = fileChooser.showSaveDialog(stage);

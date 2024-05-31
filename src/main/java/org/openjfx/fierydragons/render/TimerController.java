@@ -21,6 +21,7 @@ public class TimerController {
                 this.timerLabel.setText(formatTime(this.timeRemainingSeconds));
                 if (this.timeRemainingSeconds <= 0) {
                     timeline.stop();
+                    BoardController.getInstance().endTurn();
                 }
             })
         );

@@ -21,7 +21,7 @@ public class Player {
     public Player(@JsonProperty("name") String name, @JsonProperty("id") int id) {
         this.name = name;
         this.id = id;
-        this.timeRemainingSeconds = 150;
+        this.timeRemainingSeconds = 10;
         // incrementing the players distance to their cave based on the number of tiles in the volcano
         for (int i = 0; i < Board.getInstance().getMapPieces().size(); i++) {
             for (int j = 0; j < Board.getInstance().getMapPieces().get(i).getTiles().size(); j++) {

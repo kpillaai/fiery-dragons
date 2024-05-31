@@ -15,7 +15,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -44,6 +46,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Optional;
 
 import static java.lang.Integer.parseInt;
 
@@ -119,20 +122,27 @@ public class BoardController   {
     }
 
     public void switchToStartScene(ActionEvent event) throws IOException {
-        Game.resetGame();
-        Board.resetBoard();
-        BoardController.resetBoardController();
-        Turn.resetTurn();
-        Game.getInstance().initialise();
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Warning");
+        alert.setContentText("Are you sure you want to return? Any unsaved changes will be lost.");
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.isEmpty()) {
+            //
+        } else if (result.get() == ButtonType.OK) {
+            Game.resetGame();
+            Board.resetBoard();
+            BoardController.resetBoardController();
+            Turn.resetTurn();
+            Game.getInstance().initialise();
 
 
-        FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("main-menu.fxml"));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setScene(scene);
-        stage.show();
-
-
+            FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("main-menu.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(fxmlLoader.load());
+            stage.setScene(scene);
+            stage.show();
+        }
     }
 
     /**

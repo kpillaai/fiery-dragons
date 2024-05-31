@@ -27,6 +27,7 @@ public class CheckTimer extends TurnHandler {
     @Override
     public ArrayList<Boolean> handleTurn(CustomPair<TileType, Integer> chitCard) {
         // Check if current player runs out of time
+        System.out.println("this is run every time?");
         if (Game.getInstance().getCurrentPlayer().getTimeRemainingSeconds() <= 0) {
             ArrayList<Boolean> result = new ArrayList<>();
             result.add(false);

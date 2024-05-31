@@ -44,6 +44,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import static java.lang.Integer.MAX_VALUE;
 import static java.lang.Integer.parseInt;
 
 public class BoardController   {
@@ -148,8 +149,14 @@ public class BoardController   {
 
             // send the player name to the WinSceneController to display they have won the game
             WinSceneController winSceneController = fxmlLoader.getController();
-            String nameText = winningPlayer.getName();
-            winSceneController.displayName(nameText);
+
+            if (winningPlayer.getId() < 0) {
+                winSceneController.displayDraw(winningPlayer.getName());
+            } else {
+                String nameText = winningPlayer.getName();
+                winSceneController.displayName(nameText);
+            }
+
 
             stage = (Stage) node.getScene().getWindow();
             scene = new Scene(root);
@@ -241,7 +248,7 @@ public class BoardController   {
         }
 
         // Starting timer
-        this.timerController = new TimerController(10, timeRemainingText);
+        this.timerController = new TimerController(3, timeRemainingText);
         timerController.startTimer();
     }
 
@@ -641,12 +648,13 @@ public class BoardController   {
      * @author  Zilei Chen
      * @desc    endTurn() function called by end turn button in the scene.
      */
-    public void endTurn() {
+    public void endTurn() throws IOException {
         pauseTimer();
-        Turn.getInstance().endTurn();
-        showCurrentPlayer();
-        hideCard();
-        resumeTimer();
+        if (Turn.getInstance().endTurn()) {
+            showCurrentPlayer();
+            hideCard();
+            resumeTimer();
+        }
     }
 
     public void pauseTimer() {

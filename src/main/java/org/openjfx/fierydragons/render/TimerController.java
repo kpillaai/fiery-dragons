@@ -5,6 +5,8 @@ import javafx.animation.Timeline;
 import javafx.scene.control.Label;
 import javafx.util.Duration;
 
+import java.io.IOException;
+
 public class TimerController {
     private int timeRemainingSeconds;
     private final Label timerLabel;
@@ -21,7 +23,11 @@ public class TimerController {
                 this.timerLabel.setText(formatTime(this.timeRemainingSeconds));
                 if (this.timeRemainingSeconds <= 0) {
                     timeline.stop();
-                    BoardController.getInstance().endTurn();
+                    try {
+                        BoardController.getInstance().endTurn();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             })
         );
@@ -37,6 +43,9 @@ public class TimerController {
     }
 
     private String formatTime(int timeSeconds) {
+        if (timeSeconds < 0) {
+            timeSeconds = 0;
+        }
         int minutes = timeSeconds / 60;
         int remainingSeconds = timeSeconds % 60;
         return String.format("%02d:%02d", minutes, remainingSeconds);

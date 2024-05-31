@@ -48,12 +48,34 @@ public class Turn {
      * @desc    Ends the turn of the current player and iterates to the next player. Also tells BoardController to
      * render the changes.
      */
-    public void endTurn() {
+    public boolean endTurn() throws IOException {
+        boolean continueGame = checkTurnTimers();
+        if (!continueGame) {
+            return false;
+        }
         BoardController.getInstance().pauseTimer();
         Game.getInstance().iterateNextPlayer();
         BoardController.getInstance().showCurrentPlayer();
         BoardController.getInstance().hideCard();
         BoardController.getInstance().resumeTimer();
+        return true;
+    }
+
+    private boolean checkTurnTimers() throws IOException {
+        // Check if all players run out of time
+        ArrayList<Player> playerList = Game.getInstance().getPlayerList();
+        int timeRemainingEqualsZeroCounter = 0;
+        for (Player player : playerList) {
+            if (player.getTimeRemainingSeconds() <= 0) {
+                timeRemainingEqualsZeroCounter += 1;
+            }
+        }
+        if (timeRemainingEqualsZeroCounter == playerList.size()) {
+            Player winningPlayer = calculateTimeWin();
+            Game.getInstance().endGame(winningPlayer);
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -104,19 +126,6 @@ public class Turn {
 
         CustomPair<TileType, Integer> chitCard = Board.getInstance().getDeck().getChitCard(chitCardId);
 
-        // Check if all players run out of time
-        ArrayList<Player> playerList = Game.getInstance().getPlayerList();
-        int timeRemainingEqualsZeroCounter = 0;
-        for (Player player : playerList) {
-            if (player.getTimeRemainingSeconds() <= 0) {
-                timeRemainingEqualsZeroCounter += 1;
-            }
-        }
-        if (timeRemainingEqualsZeroCounter == playerList.size()) {
-            Player winningPlayer = calculateTimeWin();
-            Game.getInstance().endGame(winningPlayer);
-        }
-
         ArrayList<Boolean> canPlayerMove = t1.handleTurn(chitCard);
 
         if (canPlayerMove.get(1)) { // Win game if player won the game
@@ -139,12 +148,27 @@ public class Turn {
 
     private Player calculateTimeWin() {
         // Todo: find all player distances, find the least, they win, if tie, no one wins
-        Player minDistancePlayer = new Player("No one Wins", -149);
+        Player minDistancePlayer = new Player("ITS A TIE", 10000);
         Integer minDistance = Integer.MAX_VALUE;
+        // Find the player closest to winning
         for (Player player : Game.getInstance().getPlayerList()) {
-            if (player.getDistanceToCave() <= minDistance) {
+            if (player.getDistanceToCave() < minDistance) {
                 minDistance = player.getDistanceToCave();
                 minDistancePlayer = player;
+            }
+        }
+        // Find all other players the same distance away
+        ArrayList<Player> winnersList = new ArrayList<>();
+        for (Player player : Game.getInstance().getPlayerList()) {
+            if (player.getDistanceToCave() == minDistance) {
+                winnersList.add(player);
+            }
+        }
+        // If more than 1 player wins, all of them win/tie
+        if (winnersList.size() > 1) {
+            minDistancePlayer = new Player("", -100);
+            for (Player winner : winnersList) {
+                minDistancePlayer.setName(STR."\{minDistancePlayer.getName()} \{winner.getName()}");
             }
         }
         return minDistancePlayer;

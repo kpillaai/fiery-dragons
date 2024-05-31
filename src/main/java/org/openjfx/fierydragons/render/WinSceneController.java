@@ -14,5 +14,9 @@ public class WinSceneController {
     public void displayName(String playerName) {
         winLabel.setText("Game Over. " + playerName + " wins!");
     }
+
+    public void displayDraw(String playersWhoTied) {
+        winLabel.setText("All players ran out of time! Game Over." + playersWhoTied + "are Tied!");
+    }
 }
 

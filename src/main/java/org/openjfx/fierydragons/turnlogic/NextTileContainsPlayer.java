@@ -29,6 +29,10 @@ public class NextTileContainsPlayer extends TurnHandler {
     @Override
     public ArrayList<Boolean> handleTurn(CustomPair<TileType, Integer> chitCard) {
 
+        if (chitCard.getKey() == TileType.SWAP) {
+            return this.nextStep.handleTurn(chitCard);
+        }
+
         int[] currentLocation = Board.getInstance().getPlayerLocation(Game.getInstance().getCurrentPlayer());
         int[] nextTileLocation = {0, 0};
         nextTileLocation[0] = currentLocation[0] + 0;

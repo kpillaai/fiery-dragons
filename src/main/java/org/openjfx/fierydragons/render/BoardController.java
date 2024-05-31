@@ -42,6 +42,8 @@ import org.openjfx.fierydragons.game.Turn;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import static java.lang.Integer.parseInt;
@@ -85,6 +87,8 @@ public class BoardController   {
     private ArrayList<double[]> caveLocationArray;
 
     private ArrayList<Color> playerColours;
+
+    private static Map<Integer, AnchorPane> playerAnchorPaneMap;
 
     private static BoardController instance;
 
@@ -466,16 +470,26 @@ public class BoardController   {
      */
     public void renderDragonTokens() {
         int playerCount = Game.getInstance().getPlayerCount();
+        playerAnchorPaneMap = new HashMap<>();
         switch (playerCount) {
             case 2:
                 // Case where two players, start opposite to each other
                 anchorPane.getChildren().remove(batAnchorPane);
                 anchorPane.getChildren().remove(spiderAnchorPane);
+                playerAnchorPaneMap.put(1, dragonAnchorPane);
+                playerAnchorPaneMap.put(2, salamanderAnchorPane);
                 break;
             case 3:
                 anchorPane.getChildren().remove(batAnchorPane);
+                playerAnchorPaneMap.put(1, dragonAnchorPane);
+                playerAnchorPaneMap.put(2, spiderAnchorPane);
+                playerAnchorPaneMap.put(3, salamanderAnchorPane);
                 break;
-            default:
+            case 4:
+                playerAnchorPaneMap.put(1, dragonAnchorPane);
+                playerAnchorPaneMap.put(2, spiderAnchorPane);
+                playerAnchorPaneMap.put(3, salamanderAnchorPane);
+                playerAnchorPaneMap.put(4, batAnchorPane);
                 break;
         }
         if (locationIndexArray == null) {
@@ -500,6 +514,7 @@ public class BoardController   {
                     break;
             }
         }
+
     }
 
     /**
@@ -662,6 +677,37 @@ public class BoardController   {
                 // Handle error saving game state
             }
         }
+    }
+
+    public static void swapPlayerToken(Player player1, Player player2) {
+        AnchorPane player1AnchorPane = playerAnchorPaneMap.get(player1.getId());
+        AnchorPane player2AnchorPane = playerAnchorPaneMap.get(player2.getId());
+
+        int player1Index = player1.getId() - 1;
+        int player2Index = player2.getId() - 1;
+
+        // Retrieve the current tile indices of the players
+        int player1CurrentTile = locationIndexArray.get(player1Index);
+        int player2CurrentTile = locationIndexArray.get(player2Index);
+
+        // Swap the location indices in the locationIndexArray
+        locationIndexArray.set(player1Index, player2CurrentTile);
+        locationIndexArray.set(player2Index, player1CurrentTile);
+
+        // Retrieve the new locations from the tileLocationArray
+        ArrayList<Double> player1NewTileLocation = tileLocationArray.get(player2CurrentTile);
+        ArrayList<Double> player2NewTileLocation = tileLocationArray.get(player1CurrentTile);
+
+        // Move the tokens to their new locations
+        BoardController.getInstance().moveToken(player1AnchorPane, player1NewTileLocation);
+        BoardController.getInstance().moveToken(player2AnchorPane, player2NewTileLocation);
+
+        // Update the tileLocationArray to reflect the new positions
+        tileLocationArray.set(player2CurrentTile, player1NewTileLocation);
+        tileLocationArray.set(player1CurrentTile, player2NewTileLocation);
+
+        System.out.println("Player " + player1.getId() + " new tile location: " + locationIndexArray.get(player1Index));
+        System.out.println("Player " + player2.getId() + " new tile location: " + locationIndexArray.get(player2Index));
     }
 
     public static ArrayList<ArrayList<Double>> getTileLocationArray() {

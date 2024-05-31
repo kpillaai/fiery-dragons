@@ -136,6 +136,15 @@ public class Turn {
     }
 
     private Player calculateTimeWin() {
-        return Game.getInstance().getCurrentPlayer();
+        // Todo: find all player distances, find the least, they win, if tie, no one wins
+        Player minDistancePlayer = new Player("No one Wins", -149);
+        Integer minDistance = Integer.MAX_VALUE;
+        for (Player player : Game.getInstance().getPlayerList()) {
+            if (player.getDistanceToCave() <= minDistance) {
+                minDistance = player.getDistanceToCave();
+                minDistancePlayer = player;
+            }
+        }
+        return minDistancePlayer;
     }
 }

@@ -241,7 +241,7 @@ public class BoardController   {
         }
 
         // Starting timer
-        this.timerController = new TimerController(150, timeRemainingText);
+        this.timerController = new TimerController(10, timeRemainingText);
         timerController.startTimer();
     }
 
@@ -642,14 +642,20 @@ public class BoardController   {
      * @desc    endTurn() function called by end turn button in the scene.
      */
     public void endTurn() {
-        // Stop timer when turn ends
-        timerController.stopTimer();
-        Game.getInstance().getCurrentPlayer().setTimeRemainingSeconds(timerController.getTimeRemainingSeconds());
-
+        pauseTimer();
         Turn.getInstance().endTurn();
         showCurrentPlayer();
         hideCard();
+        resumeTimer();
+    }
 
+    public void pauseTimer() {
+        // Stop timer when turn ends
+        timerController.stopTimer();
+        Game.getInstance().getCurrentPlayer().setTimeRemainingSeconds(timerController.getTimeRemainingSeconds());
+    }
+
+    public void resumeTimer() {
         //When the next player is iterated, start new timer
         timerController.setTimeRemainingSeconds(Game.getInstance().getCurrentPlayer().getTimeRemainingSeconds());
         timerController.startTimer();

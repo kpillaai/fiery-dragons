@@ -49,9 +49,11 @@ public class Turn {
      * render the changes.
      */
     public void endTurn() {
+        BoardController.getInstance().pauseTimer();
         Game.getInstance().iterateNextPlayer();
         BoardController.getInstance().showCurrentPlayer();
         BoardController.getInstance().hideCard();
+        BoardController.getInstance().resumeTimer();
     }
 
     /**

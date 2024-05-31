@@ -64,16 +64,4 @@ public class Deck {
     public CustomPair<TileType, Integer> getChitCard(int index) {
         return chitCards.get(index);
     }
-
-    // Save the entire game state to a JSON file
-    public void saveGame(String filePath) throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(filePath), this);
-    }
-
-    // Load the entire game state from a JSON file
-    public static Deck loadGame(String filePath) throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.readValue(new File(filePath), Deck.class);
-    }
 }

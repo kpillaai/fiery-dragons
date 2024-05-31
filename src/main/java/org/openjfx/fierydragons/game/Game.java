@@ -135,16 +135,4 @@ public class Game {
     public void endGame() throws IOException {
         BoardController.getInstance().switchToWinScene(BoardController.getInstance().anchorPane);
     }
-
-    // Save the entire game state to a JSON file
-    public void saveGame(String filePath) throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(filePath), this);
-    }
-
-    // Load the entire game state from a JSON file
-    public static Game loadGame(String filePath) throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.readValue(new File(filePath), Game.class);
-    }
 }

@@ -17,7 +17,6 @@ public class Deck {
 
     @JsonCreator
     public Deck() {
-        this.chitCards = new ArrayList<>();
         generateChitCards();
     }
 
@@ -29,11 +28,16 @@ public class Deck {
         this.chitCards = chitCards;
     }
 
+    public void resetDeck() {
+        generateChitCards();
+    }
+
     /**
      * @author  Jeffrey Yan
      * @desc    creates chit cards and shuffles
      */
     private void generateChitCards() {
+        this.chitCards = new ArrayList<>();
         this.chitCards.add(new CustomPair<>(TileType.BABY_DRAGON, 1));
         this.chitCards.add(new CustomPair<>(TileType.BABY_DRAGON, 2));
         this.chitCards.add(new CustomPair<>(TileType.BABY_DRAGON, 3));

@@ -26,6 +26,10 @@ public class Game {
         //initialise();
     }
 
+    public static void resetGame() {
+        instance = null;
+    }
+
     public static void setInstance(Game instance) {
         Game.instance = instance;
     }

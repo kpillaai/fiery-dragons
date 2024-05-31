@@ -43,6 +43,10 @@ public class Turn {
         Turn.instance = instance;
     }
 
+    public static void resetTurn() {
+        instance = null;
+    }
+
     /**
      * @author  Zilei Chen
      * @desc    Ends the turn of the current player and iterates to the next player. Also tells BoardController to

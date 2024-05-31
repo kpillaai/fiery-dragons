@@ -116,8 +116,7 @@ public class BoardController   {
      * @author  Krishna Pillaai Manogaran
      * @desc    Renders the winning game token back in its own cave, and switches to win scene.
      */
-    public void switchToWinScene(Node node) throws IOException {
-        Player winningPlayer = Game.getInstance().getCurrentPlayer();
+    public void switchToWinScene(Node node, Player winningPlayer) throws IOException {
         // move player's tile back to own cave
         int playerId = winningPlayer.getId();
         switch (playerId) {

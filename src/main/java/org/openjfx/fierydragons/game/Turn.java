@@ -79,7 +79,7 @@ public class Turn {
             }
         }
         if (playerWon) {
-            Game.getInstance().endGame();
+            Game.getInstance().endGame(Game.getInstance().getCurrentPlayer());
         }
     }
 
@@ -90,15 +90,31 @@ public class Turn {
      */
     private boolean[] handleTurnLogic(Integer chitCardId) throws IOException {
         boolean playerWon = false;
+        TurnHandler t0 = new CheckTimer();
         TurnHandler t1 = new CheckTile();
         TurnHandler t2 = new MovePastCave();
         TurnHandler t3 = new NextTileContainsPlayer();
         TurnHandler t4 = new CheckForWin();
+        t0.setNextStep(t1);
         t1.setNextStep(t2);
         t2.setNextStep(t3);
         t3.setNextStep(t4);
 
         CustomPair<TileType, Integer> chitCard = Board.getInstance().getDeck().getChitCard(chitCardId);
+
+        // Check if all players run out of time
+        ArrayList<Player> playerList = Game.getInstance().getPlayerList();
+        int timeRemainingEqualsZeroCounter = 0;
+        for (Player player : playerList) {
+            if (player.getTimeRemainingSeconds() <= 0) {
+                timeRemainingEqualsZeroCounter += 1;
+            }
+        }
+        if (timeRemainingEqualsZeroCounter == playerList.size()) {
+            Player winningPlayer = calculateTimeWin();
+            Game.getInstance().endGame(winningPlayer);
+        }
+
         ArrayList<Boolean> canPlayerMove = t1.handleTurn(chitCard);
 
         if (canPlayerMove.get(1)) { // Win game if player won the game
@@ -117,5 +133,9 @@ public class Turn {
     public static Turn loadGame(String filePath) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.readValue(new File(filePath), Turn.class);
+    }
+
+    private Player calculateTimeWin() {
+        return Game.getInstance().getCurrentPlayer();
     }
 }

@@ -546,34 +546,13 @@ public class BoardController   {
 
     public void updatePlayerLocation() {
         ArrayList<AnchorPane> anchorPanes = new ArrayList<>();
-        switch (locationIndexArray.size()) {
-            case 2:
-                anchorPanes.add(BoardController.getInstance().getDragonAnchorPane());
-                anchorPanes.add(BoardController.getInstance().getSalamanderAnchorPane());
-                for (int i = 0; i < locationIndexArray.size(); i++) {
-                    // need to check if still in caves using Board and playerLocationArray.get(i)[1]
-                    if (Board.getInstance().getPlayerLocationArray().get(i)[1] != -1) {
-                        // adds them to tile on the board depending on locationIndexArray
-                        instance.moveToken(anchorPanes.get(i), tileLocationArray.get(locationIndexArray.get(i)));
-                    }
-                }
-                break;
-            case 3:
-            case 4:
-                anchorPanes.add(BoardController.getInstance().getDragonAnchorPane());
-                anchorPanes.add(BoardController.getInstance().getSpiderAnchorPane());
-                anchorPanes.add(BoardController.getInstance().getSalamanderAnchorPane());
-                if (locationIndexArray.size() == 4) {
-                    anchorPanes.add(BoardController.getInstance().getBatAnchorPane());
-                }
-                for (int i = 0; i < locationIndexArray.size(); i++) {
-                    // need to check if still in caves using Board and playerLocationArray.get(i)[1]
-                    if (Board.getInstance().getPlayerLocationArray().get(i)[1] != -1) {
-                        // adds them to tile on the board depending on locationIndexArray
-                        instance.moveToken(anchorPanes.get(i), tileLocationArray.get(locationIndexArray.get(i)));
-                    }
-                }
-                break;
+        for (int i = 0; i < locationIndexArray.size(); i++) {
+            // need to check if still in caves using Board and playerLocationArray.get(i)[1]
+            if (Board.getInstance().getPlayerLocationArray().get(i)[1] != -1) {
+                // adds them to tile on the board depending on locationIndexArray
+                AnchorPane playerAnchorPane = playerAnchorPaneMap.get(i + 1)
+                instance.moveToken(playerAnchorPane, tileLocationArray.get(locationIndexArray.get(i)));
+            }
         }
     }
 

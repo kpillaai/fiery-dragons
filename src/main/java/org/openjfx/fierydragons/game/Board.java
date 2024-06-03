@@ -21,6 +21,8 @@ public class Board {
 
     private ArrayList<int[]> playerLocationArray;
 
+    private int numTiles;
+
     @JsonCreator
     private Board() {
     }
@@ -133,6 +135,19 @@ public class Board {
             addMapPiece(normalPiece.get(i));
             }
         this.deck = new Deck();
+    }
+
+    public int getNumTiles() {
+        return numTiles;
+    }
+
+    public void setNumTiles() {
+        numTiles = 0;
+        for (int i = 0; i < mapPieces.size(); i++) {
+            for (int j = 0; j < mapPieces.get(i).getTiles().size(); i++) {
+                numTiles++;
+            }
+        }
     }
 
     /**
@@ -274,7 +289,7 @@ public class Board {
                 // if not on cave
                 if (playerLocationArray.get(i)[1] >= 0) {
                     int directDistance = Math.abs(targetPlayerTile - checkPlayerTile);
-                    int wrapAroundDistance = 24 - directDistance;
+                    int wrapAroundDistance = numTiles - directDistance;
                     int circularDistance = Math.min(directDistance, wrapAroundDistance);
                     if (circularDistance < distanceFromPlayer) {
                         closestPlayerIndex = i;
@@ -325,8 +340,8 @@ public class Board {
         int targetTile = getTileLocation(targetLocation);
         int distanceToCave = player.getDistanceToCave();
 
-        int forwardDistance = (targetTile - currentTile + 24) % 24;
-        int backwardDistance = (currentTile - targetTile + 24) % 24;
+        int forwardDistance = (targetTile - currentTile + numTiles) % numTiles;
+        int backwardDistance = (currentTile - targetTile + numTiles) % numTiles;
         if (forwardDistance <= backwardDistance) {
             return distanceToCave - forwardDistance;
         } else {
@@ -341,7 +356,7 @@ public class Board {
         // Calculate the direct distance
         int directDistance = Math.abs(tile1Index - tile2Index);
         // Calculate the wrap-around distance
-        int wrapAroundDistance = 24 - directDistance;
+        int wrapAroundDistance = numTiles - directDistance;
 
         // Return the minimum distance
         return Math.min(directDistance, wrapAroundDistance);

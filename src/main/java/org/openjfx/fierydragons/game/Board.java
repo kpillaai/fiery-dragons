@@ -141,7 +141,7 @@ public class Board {
     public void setNumTiles() {
         numTiles = 0;
         for (int i = 0; i < mapPieces.size(); i++) {
-            for (int j = 0; j < mapPieces.get(i).getTiles().size(); i++) {
+            for (int j = 0; j < mapPieces.get(j).getTiles().size(); j++) {
                 numTiles++;
             }
         }

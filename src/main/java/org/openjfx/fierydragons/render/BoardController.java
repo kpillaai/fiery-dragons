@@ -550,7 +550,7 @@ public class BoardController   {
             // need to check if still in caves using Board and playerLocationArray.get(i)[1]
             if (Board.getInstance().getPlayerLocationArray().get(i)[1] != -1) {
                 // adds them to tile on the board depending on locationIndexArray
-                AnchorPane playerAnchorPane = playerAnchorPaneMap.get(i + 1)
+                AnchorPane playerAnchorPane = playerAnchorPaneMap.get(i + 1);
                 instance.moveToken(playerAnchorPane, tileLocationArray.get(locationIndexArray.get(i)));
             }
         }

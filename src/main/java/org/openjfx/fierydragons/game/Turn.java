@@ -2,9 +2,7 @@ package org.openjfx.fierydragons.game;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import javafx.util.Pair;
-import org.openjfx.fierydragons.CustomPair;
-import org.openjfx.fierydragons.GameState;
+import org.openjfx.fierydragons.gameSaving.CustomPair;
 import org.openjfx.fierydragons.entities.Player;
 import org.openjfx.fierydragons.entities.TileType;
 import org.openjfx.fierydragons.render.BoardController;

@@ -1,15 +1,9 @@
 package org.openjfx.fierydragons.entities;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import javafx.util.Pair;
-import org.openjfx.fierydragons.CustomPair;
-import org.openjfx.fierydragons.GameState;
+import org.openjfx.fierydragons.gameSaving.CustomPair;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Deck {

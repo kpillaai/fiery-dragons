@@ -2,13 +2,10 @@ package org.openjfx.fierydragons.game;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import javafx.util.Pair;
-import org.openjfx.fierydragons.GameState;
 import org.openjfx.fierydragons.entities.*;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class Board {

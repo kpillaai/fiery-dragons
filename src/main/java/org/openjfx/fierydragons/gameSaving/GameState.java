@@ -1,18 +1,12 @@
-package org.openjfx.fierydragons;
+package org.openjfx.fierydragons.gameSaving;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.fasterxml.jackson.databind.type.TypeFactory;
 
 import javafx.scene.paint.Color;
-import javafx.util.Pair;
 import org.openjfx.fierydragons.entities.Deck;
-import org.openjfx.fierydragons.entities.TileType;
 import org.openjfx.fierydragons.game.Board;
 import org.openjfx.fierydragons.game.Game;
 import org.openjfx.fierydragons.render.BoardController;

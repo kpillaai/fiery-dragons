@@ -1,4 +1,4 @@
-package org.openjfx.fierydragons;
+package org.openjfx.fierydragons.gameSaving;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;

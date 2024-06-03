@@ -159,28 +159,9 @@ public class BoardController   {
     public void switchToWinScene(Node node, Player winningPlayer) throws IOException {
         // move player's tile back to own cave
         int playerId = winningPlayer.getId();
-        switch (playerId) {
-            case 1:
-                dragonAnchorPane.setLayoutX(caveLocationArray.get(playerId - 1)[0]);
-                dragonAnchorPane.setLayoutY(caveLocationArray.get(playerId - 1)[1]);
-                break;
-            case 2:
-                if (Game.getInstance().getPlayerCount() == 2) {
-                    salamanderAnchorPane.setLayoutX(caveLocationArray.get(2)[0]);
-                    salamanderAnchorPane.setLayoutY(caveLocationArray.get(2)[1]);
-                }
-                spiderAnchorPane.setLayoutX(caveLocationArray.get(playerId - 1)[0]);
-                spiderAnchorPane.setLayoutY(caveLocationArray.get(playerId - 1)[1]);
-                break;
-            case 3:
-                salamanderAnchorPane.setLayoutX(caveLocationArray.get(playerId - 1)[0]);
-                salamanderAnchorPane.setLayoutY(caveLocationArray.get(playerId - 1)[1]);
-                break;
-            case 4:
-                batAnchorPane.setLayoutX(caveLocationArray.get(playerId - 1)[0]);
-                batAnchorPane.setLayoutY(caveLocationArray.get(playerId - 1)[1]);
-                break;
-        }
+        AnchorPane playerAnchorPane = playerAnchorPaneMap.get(playerId);
+        playerAnchorPane.setLayoutX(caveLocationArray.get(playerId - 1)[0]);
+        playerAnchorPane.setLayoutY(caveLocationArray.get(playerId - 1)[1]);
         try {
             // load the win scene
             fxmlLoader = new FXMLLoader(StartApplication.class.getResource("win-scene.fxml"));
@@ -287,7 +268,7 @@ public class BoardController   {
         }
 
         // Starting timer
-        this.timerController = new TimerController(3, timeRemainingText);
+        this.timerController = new TimerController(900, timeRemainingText);
         timerController.startTimer();
     }
 
@@ -522,6 +503,7 @@ public class BoardController   {
     public void renderDragonTokens() {
         int playerCount = Game.getInstance().getPlayerCount();
         playerAnchorPaneMap = new HashMap<>();
+        locationIndexArray = new ArrayList<>();
         switch (playerCount) {
             case 2:
                 // Case where two players, start opposite to each other
@@ -529,43 +511,29 @@ public class BoardController   {
                 anchorPane.getChildren().remove(spiderAnchorPane);
                 playerAnchorPaneMap.put(1, dragonAnchorPane);
                 playerAnchorPaneMap.put(2, salamanderAnchorPane);
+                locationIndexArray.add(18);
+                locationIndexArray.add(6);
                 break;
             case 3:
                 anchorPane.getChildren().remove(batAnchorPane);
                 playerAnchorPaneMap.put(1, dragonAnchorPane);
                 playerAnchorPaneMap.put(2, spiderAnchorPane);
                 playerAnchorPaneMap.put(3, salamanderAnchorPane);
+                locationIndexArray.add(18);
+                locationIndexArray.add(0);
+                locationIndexArray.add(6);
                 break;
             case 4:
                 playerAnchorPaneMap.put(1, dragonAnchorPane);
                 playerAnchorPaneMap.put(2, spiderAnchorPane);
                 playerAnchorPaneMap.put(3, salamanderAnchorPane);
                 playerAnchorPaneMap.put(4, batAnchorPane);
+                locationIndexArray.add(18);
+                locationIndexArray.add(0);
+                locationIndexArray.add(6);
+                locationIndexArray.add(12);
                 break;
         }
-        if (locationIndexArray == null) {
-            locationIndexArray = new ArrayList<>();
-            // using player count generate starting positions for each token
-            switch (playerCount) {
-                case 2:
-                    // Case where two players, start opposite to each other
-                    locationIndexArray.add(18);
-                    locationIndexArray.add(6);
-                    break;
-                case 3:
-                    locationIndexArray.add(18);
-                    locationIndexArray.add(0);
-                    locationIndexArray.add(6);
-                    break;
-                case 4:
-                    locationIndexArray.add(18);
-                    locationIndexArray.add(0);
-                    locationIndexArray.add(6);
-                    locationIndexArray.add(12);
-                    break;
-            }
-        }
-
     }
 
     /**
@@ -624,64 +592,18 @@ public class BoardController   {
             throw new IllegalStateException("BoardController instance is not initialized");
         }
         // updatePlayerLocation();
-        int newLocationIndex;
-        ArrayList<Double> newLocation;
-        switch (playerId) {
-            case 1:
-                newLocationIndex = locationIndexArray.get(playerId - 1) + moveValue;
-                if (newLocationIndex > 23) {
-                    newLocationIndex = newLocationIndex - 24;
-                }
-                if (newLocationIndex < 0) {
-                    newLocationIndex = newLocationIndex + 24;
-                }
-                newLocation = tileLocationArray.get(newLocationIndex);
-                instance.moveToken(instance.dragonAnchorPane, newLocation);
-                locationIndexArray.set(playerId - 1, newLocationIndex);
-                break;
-            case 2:
-                newLocationIndex = locationIndexArray.get(playerId - 1) + moveValue;
-                if (newLocationIndex > 23) {
-                    newLocationIndex = newLocationIndex - 24;
-                }
-                if (newLocationIndex < 0) {
-                    newLocationIndex = newLocationIndex + 24;
-                }
-                newLocation = tileLocationArray.get(newLocationIndex);
-                // If only two players, player 2 has a different token
-                if (Game.getInstance().getPlayerCount() == 2) {
-                    instance.moveToken(instance.salamanderAnchorPane, newLocation);
-                    locationIndexArray.set(playerId - 1, newLocationIndex);
-                    break;
-                }
-                instance.moveToken(instance.spiderAnchorPane, newLocation);
-                locationIndexArray.set(playerId - 1, newLocationIndex);
-                break;
-            case 3:
-                newLocationIndex = locationIndexArray.get(playerId - 1) + moveValue;
-                if (newLocationIndex > 23) {
-                    newLocationIndex = newLocationIndex - 24;
-                }
-                if (newLocationIndex < 0) {
-                    newLocationIndex = newLocationIndex + 24;
-                }
-                newLocation = tileLocationArray.get(newLocationIndex);
-                instance.moveToken(instance.salamanderAnchorPane, newLocation);
-                locationIndexArray.set(playerId - 1, newLocationIndex);
-                break;
-            case 4:
-                newLocationIndex = locationIndexArray.get(playerId - 1) + moveValue;
-                if (newLocationIndex > 23) {
-                    newLocationIndex = newLocationIndex - 24;
-                }
-                if (newLocationIndex < 0) {
-                    newLocationIndex = newLocationIndex + 24;
-                }
-                newLocation = tileLocationArray.get(newLocationIndex);
-                instance.moveToken(instance.batAnchorPane, newLocation);
-                locationIndexArray.set(playerId - 1, newLocationIndex);
-                break;
+
+        AnchorPane playerAnchorPane = playerAnchorPaneMap.get(playerId);
+        int newLocationIndex = locationIndexArray.get(playerId - 1) + moveValue;
+        if (newLocationIndex > 23) {
+            newLocationIndex = newLocationIndex - 24;
         }
+        if (newLocationIndex < 0) {
+            newLocationIndex = newLocationIndex + 24;
+        }
+        ArrayList<Double> newLocation = tileLocationArray.get(newLocationIndex);
+        instance.moveToken(playerAnchorPane, newLocation);
+        locationIndexArray.set(playerId - 1, newLocationIndex);
     }
 
     /**

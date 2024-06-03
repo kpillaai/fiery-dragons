@@ -6,10 +6,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import org.openjfx.fierydragons.GameState;
+import org.openjfx.fierydragons.gameSaving.GameState;
 import org.openjfx.fierydragons.StartApplication;
 import org.openjfx.fierydragons.game.Board;
 import org.openjfx.fierydragons.game.Game;
@@ -17,7 +16,6 @@ import org.openjfx.fierydragons.game.Game;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class SceneController {
     @FXML

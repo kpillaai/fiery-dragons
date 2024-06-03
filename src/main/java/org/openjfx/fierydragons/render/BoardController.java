@@ -3,10 +3,8 @@ package org.openjfx.fierydragons.render;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
 import javafx.animation.RotateTransition;
-import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,7 +19,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -30,9 +27,8 @@ import javafx.scene.transform.Rotate;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import javafx.util.Pair;
-import org.openjfx.fierydragons.CustomPair;
-import org.openjfx.fierydragons.GameState;
+import org.openjfx.fierydragons.gameSaving.CustomPair;
+import org.openjfx.fierydragons.gameSaving.GameState;
 import org.openjfx.fierydragons.StartApplication;
 import org.openjfx.fierydragons.entities.Deck;
 import org.openjfx.fierydragons.entities.MapPiece;
@@ -50,7 +46,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-import static java.lang.Integer.MAX_VALUE;
 import static java.lang.Integer.parseInt;
 
 public class BoardController   {

@@ -1,16 +1,11 @@
 package org.openjfx.fierydragons.turnlogic;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import javafx.util.Pair;
-import org.openjfx.fierydragons.CustomPair;
-import org.openjfx.fierydragons.entities.Player;
-import org.openjfx.fierydragons.entities.Tile;
+import org.openjfx.fierydragons.gameSaving.CustomPair;
 import org.openjfx.fierydragons.entities.TileType;
-import org.openjfx.fierydragons.game.Board;
 import org.openjfx.fierydragons.game.Game;
 
 import java.util.ArrayList;
-import java.util.NavigableMap;
 
 public class CheckTimer extends TurnHandler {
 

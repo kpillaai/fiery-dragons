@@ -422,7 +422,7 @@ public class BoardController   {
      */
     private void renderVolcanoCards() {
         ArrayList<MapPiece> mapPieces = Board.getInstance().getMapPieces();
-        double outerRadius = 388;
+        double outerRadius = 385;
         double innerRadius = 265;
         double middleRadius = (outerRadius + innerRadius) / 2;
         int pieces = 0;
@@ -440,7 +440,7 @@ public class BoardController   {
         for (int i = 0; i < mapPieces.size(); i++) {
             for (int j = 0; j < mapPieces.get(i).getTiles().size(); j++) {
                 // calculate what tile number. -1 offset for alignment of cave with middle of map piece when displaying
-                int tile_increment = (i * 3) + j - 1;
+                int tile_increment = (i * mapPieces.get(i).getTiles().size()) + j - 1;
 
                 // Calculating angles
                 double endAngle = tile_increment * pieceAngle + offsetAngle;
@@ -456,6 +456,9 @@ public class BoardController   {
                 Line sliceLine = new Line(startX, startY, endX, endY);
                 sliceLine.setStroke(Color.BLACK);
                 anchorPane.getChildren().add(sliceLine);
+                if (j - 2 == 0 || j - 2 % mapPieces.get(i).getTiles().size() == 0) {
+                    sliceLine.setStrokeWidth(3);
+                }
 
                 // Generating Animals for each tile
                 double animalX = centreX + Math.cos(Math.toRadians(tile_increment * pieceAngle)) * middleRadius;

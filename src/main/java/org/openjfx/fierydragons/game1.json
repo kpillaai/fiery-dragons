@@ -48,6 +48,12 @@
     }, {
       "key" : "PIRATE",
       "value" : -2
+    }, {
+      "key" : "SWAP",
+      "value" : 0
+    }, {
+      "key" : "SWAP",
+      "value" : 0
     } ]
   },
   "game" : {

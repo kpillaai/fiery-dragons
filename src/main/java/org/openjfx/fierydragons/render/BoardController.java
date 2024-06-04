@@ -88,6 +88,7 @@ public class BoardController   {
 
     private ArrayList<Color> playerColours;
 
+    @JsonProperty("playerAnchorPaneMap")
     private static Map<Integer, String> playerAnchorPaneMap;
 
     private static BoardController instance;
@@ -646,7 +647,8 @@ public class BoardController   {
                         BoardController.getInstance(),
                         tileLocationArray,
                         locationIndexArray,
-                        flippedCardId);
+                        flippedCardId,
+                        playerAnchorPaneMap);
                 gameState.saveGame(file.getAbsolutePath());
                 System.out.println("Game saved successfully.");
             } catch (IOException ex) {
@@ -757,5 +759,13 @@ public class BoardController   {
 
     public void setFlippedCardId(ArrayList<Integer> flippedCardId) {
         this.flippedCardId = flippedCardId;
+    }
+
+    public static Map<Integer, String> getPlayerAnchorPaneMap() {
+        return playerAnchorPaneMap;
+    }
+
+    public static void setPlayerAnchorPaneMap(Map<Integer, String> playerAnchorPaneMap) {
+        BoardController.playerAnchorPaneMap = playerAnchorPaneMap;
     }
 }

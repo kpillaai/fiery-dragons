@@ -56,7 +56,7 @@ public class SceneController {
                 BoardController.setLocationIndexArray(gameState.getLocationIndexArray());
                 BoardController.setTileLocationArray(gameState.getTileLocationArray());
                 BoardController.getInstance().setFlippedCardId(gameState.getFlippedCardId());
-
+                BoardController.setPlayerAnchorPaneMap(gameState.getPlayerAnchorPaneMap());
                 // Update your UI with the loaded game state if necessary
                 SettingsController settingsController = new SettingsController();
                 settingsController.switchToBoardScene(event);

@@ -14,6 +14,7 @@ import org.openjfx.fierydragons.render.BoardController;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class GameState {
     private Deck deck;
@@ -24,6 +25,7 @@ public class GameState {
     private ArrayList<ArrayList<Double>> tileLocationArray;
     private ArrayList<Integer> locationIndexArray;
     private ArrayList<Integer> flippedCardId;
+    private Map<Integer, String> playerAnchorPaneMap;
 
     @JsonCreator
     public GameState(@JsonProperty("deck") Deck deck,
@@ -32,7 +34,8 @@ public class GameState {
                      @JsonProperty("boardController") BoardController boardController,
                      @JsonProperty("tileLocationArray") ArrayList<ArrayList<Double>> tileLocationArray,
                      @JsonProperty("locationIndexArray") ArrayList<Integer> locationIndexArray,
-                     @JsonProperty("flippedCardId") ArrayList<Integer> flippedCardId) {
+                     @JsonProperty("flippedCardId") ArrayList<Integer> flippedCardId,
+                     @JsonProperty("playerAnchorPaneMap") Map<Integer, String> playerAnchorPaneMap) {
         this.deck = deck;
         this.game = game;
         this.board = board;
@@ -40,6 +43,7 @@ public class GameState {
         this.tileLocationArray = tileLocationArray;
         this.locationIndexArray = locationIndexArray;
         this.flippedCardId = flippedCardId;
+        this.playerAnchorPaneMap = playerAnchorPaneMap;
     }
 
     public ArrayList<Integer> getFlippedCardId() {
@@ -96,6 +100,14 @@ public class GameState {
 
     public void setBoard(Board board) {
         this.board = board;
+    }
+
+    public Map<Integer, String> getPlayerAnchorPaneMap() {
+        return playerAnchorPaneMap;
+    }
+
+    public void setPlayerAnchorPaneMap(Map<Integer, String> playerAnchorPaneMap) {
+        this.playerAnchorPaneMap = playerAnchorPaneMap;
     }
 
     // Save the entire game state to a JSON file

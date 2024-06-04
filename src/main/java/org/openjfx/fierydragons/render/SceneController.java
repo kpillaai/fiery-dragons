@@ -16,6 +16,7 @@ import org.openjfx.fierydragons.game.Game;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 public class SceneController {
     @FXML
@@ -35,12 +36,25 @@ public class SceneController {
 
     @FXML
     private void loadGame(ActionEvent event) {
-        String jarDir = new File(getClass().getProtectionDomain().getCodeSource().getLocation().getPath()).getParent();
+        // Get the directory containing the JAR file and decode the path
+        String jarDirPath = getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
+        try {
+            jarDirPath = java.net.URLDecoder.decode(jarDirPath, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        File jarDir = new File(jarDirPath).getParentFile();
 
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JSON files", "*.json"));
 
-        fileChooser.setInitialDirectory(new File(jarDir));
+        // Validate if jarDir is a valid directory
+        if (jarDir.exists() && jarDir.isDirectory()) {
+            fileChooser.setInitialDirectory(jarDir);
+        } else {
+            // Optionally handle the case where the initial directory is invalid
+            System.err.println("Initial directory is invalid: " + jarDirPath);
+        }
 
         Stage stage = (Stage) loadGameButton.getScene().getWindow();
         File file = fileChooser.showOpenDialog(stage);

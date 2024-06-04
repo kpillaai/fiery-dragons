@@ -16,7 +16,7 @@
       </font></Button>
 
   <Label fx:id="welcomeText" />
-   <Button fx:id="loadGameButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#loadGame" onMousePressed="#loadGame" prefHeight="169.0" prefWidth="595.0" text="Load Game">
+   <Button fx:id="loadGameButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#loadGame" prefHeight="169.0" prefWidth="595.0" text="Load Game">
       <font>
          <Font size="90.0" />
       </font>

@@ -641,8 +641,7 @@ public class BoardController   {
 
         if (file != null) {
             try {
-                GameState gameState = new GameState(Board.getInstance().getDeck(),
-                        Game.getInstance(),
+                GameState gameState = new GameState(Game.getInstance(),
                         Board.getInstance(),
                         BoardController.getInstance(),
                         tileLocationArray,

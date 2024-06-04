@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class GameState {
-    private Deck deck;
     private Game game;
     private Board board;
     private BoardController boardController;
@@ -28,15 +27,13 @@ public class GameState {
     private Map<Integer, String> playerAnchorPaneMap;
 
     @JsonCreator
-    public GameState(@JsonProperty("deck") Deck deck,
-                     @JsonProperty("game") Game game,
+    public GameState(@JsonProperty("game") Game game,
                      @JsonProperty("board") Board board,
                      @JsonProperty("boardController") BoardController boardController,
                      @JsonProperty("tileLocationArray") ArrayList<ArrayList<Double>> tileLocationArray,
                      @JsonProperty("locationIndexArray") ArrayList<Integer> locationIndexArray,
                      @JsonProperty("flippedCardId") ArrayList<Integer> flippedCardId,
                      @JsonProperty("playerAnchorPaneMap") Map<Integer, String> playerAnchorPaneMap) {
-        this.deck = deck;
         this.game = game;
         this.board = board;
         this.boardController = boardController;
@@ -76,14 +73,6 @@ public class GameState {
 
     public void setBoardController(BoardController boardController) {
         this.boardController = boardController;
-    }
-
-    public Deck getDeck() {
-        return deck;
-    }
-
-    public void setDeck(Deck deck) {
-        this.deck = deck;
     }
 
     public Game getGame() {

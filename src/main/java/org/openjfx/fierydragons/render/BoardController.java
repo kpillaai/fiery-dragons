@@ -373,6 +373,9 @@ public class BoardController   {
     private void renderChits() {
         ObservableList<Node> circles = anchorPane.getChildren();
         Deck chits = Board.getInstance().getDeck();
+        for (int i = 0; i < chits.getChitCards().size(); i++) {
+            System.out.println(chits.getChitCard(i).getKey());
+        }
 
         ObservableList<Node> images = FXCollections.observableArrayList();
 
@@ -382,7 +385,6 @@ public class BoardController   {
                 // Generating filepath
                 String idString = chitCard.getId();
                 int idNumber = parseInt(idString.substring(8));
-
                 String fileNameKey = chits.getChitCard(idNumber).getKey().toString().toLowerCase();
                 String fileNameValue = Integer.toString(Math.abs(chits.getChitCard(idNumber).getValue()));
                 String fileName = fileNameKey + fileNameValue + ".png";

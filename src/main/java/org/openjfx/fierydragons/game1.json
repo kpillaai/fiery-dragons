@@ -116,6 +116,21 @@
         "playerId" : 0,
         "cave" : false
       }, {
+        "tileType" : "SALAMANDER",
+        "playerId" : 0,
+        "cave" : false
+      }, {
+        "tileType" : "BAT",
+        "playerId" : 0,
+        "cave" : false
+      } ],
+      "cave" : null
+    }, {
+      "tiles" : [ {
+        "tileType" : "BABY_DRAGON",
+        "playerId" : 0,
+        "cave" : false
+      }, {
         "tileType" : "BAT",
         "playerId" : 0,
         "cave" : false
@@ -262,6 +277,12 @@
       }, {
         "key" : "PIRATE",
         "value" : -2
+      }, {
+        "key" : "SWAP",
+        "value" : 0
+      }, {
+        "key" : "SWAP",
+        "value" : 0
       } ]
     },
     "playerLocationArray" : [ [ 6, -1 ], [ 0, 1 ], [ 2, -1 ], [ 4, -1 ] ]

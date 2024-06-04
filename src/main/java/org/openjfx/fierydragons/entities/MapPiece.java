@@ -8,6 +8,8 @@ public class MapPiece {
     private ArrayList<Tile> tiles;
     private Tile cave;
 
+    private int caveIndex;
+
     @JsonCreator
     public MapPiece(@JsonProperty("tile1") Tile tile1, @JsonProperty("tile2") Tile tile2, @JsonProperty("tile3") Tile tile3) {
         this.tiles = new ArrayList<Tile>();

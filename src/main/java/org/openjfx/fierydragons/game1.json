@@ -134,6 +134,21 @@
       "cave" : null
     }, {
       "tiles" : [ {
+        "tileType" : "BABY_DRAGON",
+        "playerId" : 0,
+        "cave" : false
+      }, {
+        "tileType" : "SALAMANDER",
+        "playerId" : 0,
+        "cave" : false
+      }, {
+        "tileType" : "BAT",
+        "playerId" : 0,
+        "cave" : false
+      } ],
+      "cave" : null
+    },{
+      "tiles" : [ {
         "tileType" : "SALAMANDER",
         "playerId" : 0,
         "cave" : false

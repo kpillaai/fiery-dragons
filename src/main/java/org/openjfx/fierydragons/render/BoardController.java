@@ -443,13 +443,15 @@ public class BoardController   {
 
         // looping through mapPieces.size (8) and then looping through each MapPiece (3) results in 24 tiles
         tileLocationArray = new ArrayList<>();
+        int loopCounter = 0;
         for (int i = 0; i < mapPieces.size(); i++) {
             for (int j = 0; j < mapPieces.get(i).getTiles().size(); j++) {
                 // calculate what tile number. -1 offset for alignment of cave with middle of map piece when displaying
+                loopCounter += 1;
                 int tile_increment = (i * mapPieces.get(i).getTiles().size()) + j - 1;
 
                 // Calculating angles
-                double endAngle = tile_increment * pieceAngle + offsetAngle;
+                double endAngle = loopCounter * pieceAngle + offsetAngle;
                 double angleRad = Math.toRadians(endAngle);
 
                 // Calculate endpoints of the lines
@@ -467,8 +469,8 @@ public class BoardController   {
                 }
 
                 // Generating Animals for each tile
-                double animalX = centreX + Math.cos(Math.toRadians(tile_increment * pieceAngle)) * middleRadius;
-                double animalY = centreX + Math.sin(Math.toRadians(tile_increment * pieceAngle)) * middleRadius;
+                double animalX = centreX + Math.cos(Math.toRadians(loopCounter * pieceAngle)) * middleRadius;
+                double animalY = centreX + Math.sin(Math.toRadians(loopCounter * pieceAngle)) * middleRadius;
 
                 String hello = mapPieces.get(i).getTiles().get(j).getTileType().toString();
                 String filePath = "/org/openjfx/fierydragons/images/" + mapPieces.get(i).getTiles().get(j).getTileType().toString().toLowerCase() + "1.png";
@@ -493,6 +495,27 @@ public class BoardController   {
                 AnchorPane.setTopAnchor(imageView, topLeftY);
                 AnchorPane.setLeftAnchor(imageView, topLeftX);
                 anchorPane.getChildren().add(imageView);
+
+                // Add Cave (if exist)
+                if (mapPieces.get(i).getCave() != null) {
+                    // generate circle
+                    Circle caveCircle = new Circle();
+                    caveCircle.setRadius(55);
+
+                    //generate image of circle
+                    String filePathCaveImage = "/org/openjfx/fierydragons/images/" + mapPieces.get(i).getCave().getTileType().toString().toLowerCase() + "1.png";
+                    Image imageCave = new Image(getClass().getResourceAsStream(filePathCaveImage));
+                    ImageView imageViewCave = new ImageView(imageCave);
+                    imageViewCave.setVisible(true);
+                    imageViewCave.setFitHeight(80);
+                    imageViewCave.setFitWidth(80);
+
+                    //find specific coordinates
+
+
+                    //add circle + image to that location
+                }
+
             }
         }
     }

@@ -51,7 +51,7 @@ public class SceneController {
                 System.out.println("Game loaded successfully.");
                 Game.setInstance(gameState.getGame());
                 Board.setInstance(gameState.getBoard());
-                Board.getInstance().setDeck(gameState.getDeck());
+                Board.getInstance().setDeck(gameState.getBoard().getDeck());
                 BoardController.setInstance(gameState.getBoardController());
                 BoardController.setLocationIndexArray(gameState.getLocationIndexArray());
                 BoardController.setTileLocationArray(gameState.getTileLocationArray());

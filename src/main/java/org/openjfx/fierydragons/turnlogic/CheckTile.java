@@ -27,10 +27,6 @@ public class CheckTile extends TurnHandler {
             return this.nextStep.handleTurn(chitCard);
         }
 
-        if (chitCard.getKey() == TileType.SWAP) {
-            return this.nextStep.handleTurn(chitCard);
-        }
-
         int[] currentPlayerLocation = Board.getInstance().getPlayerLocation(Game.getInstance().getCurrentPlayer());
         TileType currentTileType;
 
@@ -44,6 +40,7 @@ public class CheckTile extends TurnHandler {
 
         if (currentTileType != chitCardTileType) {
             ArrayList<Boolean> result = new ArrayList<>();
+            result.add(false);
             result.add(false);
             result.add(false);
             return result;

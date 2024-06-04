@@ -27,6 +27,7 @@ public class CheckTimer extends TurnHandler {
             ArrayList<Boolean> result = new ArrayList<>();
             result.add(false);
             result.add(false);
+            result.add(false);
             return result;
         }
         return this.nextStep.handleTurn(chitCard);

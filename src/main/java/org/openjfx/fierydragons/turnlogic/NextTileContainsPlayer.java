@@ -23,11 +23,6 @@ public class NextTileContainsPlayer extends TurnHandler {
      */
     @Override
     public ArrayList<Boolean> handleTurn(CustomPair<TileType, Integer> chitCard) {
-
-        if (chitCard.getKey() == TileType.SWAP) {
-            return this.nextStep.handleTurn(chitCard);
-        }
-
         int[] currentLocation = Board.getInstance().getPlayerLocation(Game.getInstance().getCurrentPlayer());
         int[] nextTileLocation = {0, 0};
         nextTileLocation[0] = currentLocation[0] + 0;
@@ -38,6 +33,7 @@ public class NextTileContainsPlayer extends TurnHandler {
                 nextTileLocation[0] = currentLocation[0];
             } else { // Rolls a pirate inside a cave
                 ArrayList<Boolean> result = new ArrayList<>();
+                result.add(false);
                 result.add(false);
                 result.add(false);
                 return result;
@@ -65,6 +61,7 @@ public class NextTileContainsPlayer extends TurnHandler {
         for (int i = 0; i < Board.getInstance().getPlayerLocationArray().size(); i++) {
             if (Board.getInstance().getPlayerLocationArray().get(i)[0] == nextTileLocation[0] && Board.getInstance().getPlayerLocationArray().get(i)[1] == nextTileLocation[1]) {
                 ArrayList<Boolean> result = new ArrayList<>();
+                result.add(false);
                 result.add(false);
                 result.add(false);
                 return result;

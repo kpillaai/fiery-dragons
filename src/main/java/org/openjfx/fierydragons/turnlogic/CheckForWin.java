@@ -25,12 +25,6 @@ public class CheckForWin extends TurnHandler{
             ArrayList<Boolean> result = new ArrayList<>();
             result.add(true);
             result.add(false);
-            return result;
-        }
-
-        if (chitCard.getKey() == TileType.SWAP) {
-            ArrayList<Boolean> result = new ArrayList<>();
-            result.add(true);
             result.add(false);
             return result;
         }
@@ -39,11 +33,13 @@ public class CheckForWin extends TurnHandler{
             ArrayList<Boolean> result = new ArrayList<>();
             result.add(true);
             result.add(false);
+            result.add(false);
             return result;
         } else {
             ArrayList<Boolean> result = new ArrayList<>();
             result.add(true);
             result.add(true);
+            result.add(false);
             return result;
         }
     }

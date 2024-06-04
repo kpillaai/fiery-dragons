@@ -87,16 +87,17 @@ public class Turn {
      * Param is the index of the Chit Card the player flipped.
      */
     public void nextTurn(Integer chitCardId) throws IOException, NoSuchFieldException, IllegalAccessException {
-        boolean[] turnResult = this.handleTurnLogic(chitCardId);
-        boolean canPlayerMove = turnResult[0];
-        boolean playerWon = turnResult[1];
+        ArrayList<Boolean> turnOutcome = this.handleTurnLogic(chitCardId);
+        boolean canPlayerMove = turnOutcome.get(0);
+        boolean playerWon = turnOutcome.get(1);
+        boolean isSwap = turnOutcome.get(2);
         CustomPair<TileType, Integer> chitCard = Board.getInstance().getDeck().getChitCard(chitCardId);
 
         if (!canPlayerMove) { // End turn if player cannot move
             endTurn();
         }
 
-        if (chitCard.getKey() == TileType.SWAP) {
+        if (isSwap) {
             if (Board.getInstance().getPlayerLocation(Game.getInstance().getCurrentPlayer())[1] >= 0 ) {
                 Player playerToSwap = Board.getInstance().findClosestPlayer(Game.getInstance().getCurrentPlayer());
                 System.out.println("Closest Player: " + playerToSwap.getId());
@@ -126,26 +127,22 @@ public class Turn {
      * @desc    Handles the Turn Logic of a turn using the Chain of Responsibility design pattern.
      * Param is the index of the Chit Card the player flipped.
      */
-    private boolean[] handleTurnLogic(Integer chitCardId) throws IOException {
-        boolean playerWon = false;
+    private ArrayList<Boolean> handleTurnLogic(Integer chitCardId) throws IOException {
         TurnHandler t0 = new CheckTimer();
-        TurnHandler t1 = new CheckTile();
-        TurnHandler t2 = new MovePastCave();
-        TurnHandler t3 = new NextTileContainsPlayer();
-        TurnHandler t4 = new CheckForWin();
+        TurnHandler t1 = new CheckSwap();
+        TurnHandler t2 = new CheckTile();
+        TurnHandler t3 = new MovePastCave();
+        TurnHandler t4 = new NextTileContainsPlayer();
+        TurnHandler t5 = new CheckForWin();
         t0.setNextStep(t1);
         t1.setNextStep(t2);
         t2.setNextStep(t3);
         t3.setNextStep(t4);
+        t4.setNextStep(t5);
 
         CustomPair<TileType, Integer> chitCard = Board.getInstance().getDeck().getChitCard(chitCardId);
 
-        ArrayList<Boolean> canPlayerMove = t1.handleTurn(chitCard);
-
-        if (canPlayerMove.get(1)) { // Win game if player won the game
-            playerWon = true;
-        }
-        return new boolean[]{canPlayerMove.getFirst(), playerWon};
+        return t0.handleTurn(chitCard);
     }
 
     // Save the entire game state to a JSON file

@@ -2,7 +2,7 @@ package org.openjfx.fierydragons.game;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.openjfx.fierydragons.CustomPair;
+import org.openjfx.fierydragons.gameSaving.CustomPair;
 import org.openjfx.fierydragons.entities.Player;
 import org.openjfx.fierydragons.entities.TileType;
 import org.openjfx.fierydragons.render.BoardController;
@@ -96,10 +96,22 @@ public class Turn {
             endTurn();
         }
 
+        if (chitCard.getKey() == TileType.SWAP) {
+            if (Board.getInstance().getPlayerLocation(Game.getInstance().getCurrentPlayer())[1] >= 0 ) {
+                Player playerToSwap = Board.getInstance().findClosestPlayer(Game.getInstance().getCurrentPlayer());
+                System.out.println("Closest Player: " + playerToSwap.getId());
+                Board.getInstance().swapPlayers(Game.getInstance().getCurrentPlayer(), playerToSwap);
+                BoardController.swapPlayerToken(Game.getInstance().getCurrentPlayer(), playerToSwap);
+            }
+            endTurn();
+            return; // Exit method after swap
+        }
+
         if (canPlayerMove & !playerWon) {
             int moveValue = chitCard.getValue();
             Board.getInstance().movePlayer(Game.getInstance().getCurrentPlayer(), moveValue);
             BoardController.movePlayer(chitCard);
+
             if (chitCard.getValue() < 0) { // End turn if player cannot move or pirate
                 endTurn();
             }

@@ -27,8 +27,8 @@ import javafx.scene.transform.Rotate;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import org.openjfx.fierydragons.CustomPair;
-import org.openjfx.fierydragons.GameState;
+import org.openjfx.fierydragons.gameSaving.CustomPair;
+import org.openjfx.fierydragons.gameSaving.GameState;
 import org.openjfx.fierydragons.StartApplication;
 import org.openjfx.fierydragons.entities.Deck;
 import org.openjfx.fierydragons.entities.MapPiece;
@@ -40,6 +40,8 @@ import org.openjfx.fierydragons.game.Turn;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -84,6 +86,8 @@ public class BoardController   {
     private ArrayList<double[]> caveLocationArray;
 
     private ArrayList<Color> playerColours;
+
+    private static Map<Integer, AnchorPane> playerAnchorPaneMap;
 
     private static BoardController instance;
 
@@ -149,28 +153,9 @@ public class BoardController   {
     public void switchToWinScene(Node node, Player winningPlayer) throws IOException {
         // move player's tile back to own cave
         int playerId = winningPlayer.getId();
-        switch (playerId) {
-            case 1:
-                dragonAnchorPane.setLayoutX(caveLocationArray.get(playerId - 1)[0]);
-                dragonAnchorPane.setLayoutY(caveLocationArray.get(playerId - 1)[1]);
-                break;
-            case 2:
-                if (Game.getInstance().getPlayerCount() == 2) {
-                    spiderAnchorPane.setLayoutX(caveLocationArray.get(2)[0]);
-                    spiderAnchorPane.setLayoutY(caveLocationArray.get(2)[1]);
-                }
-                spiderAnchorPane.setLayoutX(caveLocationArray.get(playerId - 1)[0]);
-                spiderAnchorPane.setLayoutY(caveLocationArray.get(playerId - 1)[1]);
-                break;
-            case 3:
-                salamanderAnchorPane.setLayoutX(caveLocationArray.get(playerId - 1)[0]);
-                salamanderAnchorPane.setLayoutY(caveLocationArray.get(playerId - 1)[1]);
-                break;
-            case 4:
-                batAnchorPane.setLayoutX(caveLocationArray.get(playerId - 1)[0]);
-                batAnchorPane.setLayoutY(caveLocationArray.get(playerId - 1)[1]);
-                break;
-        }
+        AnchorPane playerAnchorPane = playerAnchorPaneMap.get(playerId);
+        playerAnchorPane.setLayoutX(caveLocationArray.get(playerId - 1)[0]);
+        playerAnchorPane.setLayoutY(caveLocationArray.get(playerId - 1)[1]);
         try {
             // load the win scene
             fxmlLoader = new FXMLLoader(StartApplication.class.getResource("win-scene.fxml"));
@@ -277,7 +262,7 @@ public class BoardController   {
         }
 
         // Starting timer
-        this.timerController = new TimerController(3, timeRemainingText);
+        this.timerController = new TimerController(900, timeRemainingText);
         timerController.startTimer();
     }
 
@@ -436,7 +421,7 @@ public class BoardController   {
      */
     private void renderVolcanoCards() {
         ArrayList<MapPiece> mapPieces = Board.getInstance().getMapPieces();
-        double outerRadius = 388;
+        double outerRadius = 385;
         double innerRadius = 265;
         double middleRadius = (outerRadius + innerRadius) / 2;
         int pieces = 0;
@@ -454,7 +439,7 @@ public class BoardController   {
         for (int i = 0; i < mapPieces.size(); i++) {
             for (int j = 0; j < mapPieces.get(i).getTiles().size(); j++) {
                 // calculate what tile number. -1 offset for alignment of cave with middle of map piece when displaying
-                int tile_increment = (i * 3) + j - 1;
+                int tile_increment = (i * mapPieces.get(i).getTiles().size()) + j - 1;
 
                 // Calculating angles
                 double endAngle = tile_increment * pieceAngle + offsetAngle;
@@ -470,6 +455,9 @@ public class BoardController   {
                 Line sliceLine = new Line(startX, startY, endX, endY);
                 sliceLine.setStroke(Color.BLACK);
                 anchorPane.getChildren().add(sliceLine);
+                if (j - 2 == 0 || j - 2 % mapPieces.get(i).getTiles().size() == 0) {
+                    sliceLine.setStrokeWidth(3);
+                }
 
                 // Generating Animals for each tile
                 double animalX = centreX + Math.cos(Math.toRadians(tile_increment * pieceAngle)) * middleRadius;
@@ -511,39 +499,37 @@ public class BoardController   {
      */
     public void renderDragonTokens() {
         int playerCount = Game.getInstance().getPlayerCount();
+        playerAnchorPaneMap = new HashMap<>();
+        locationIndexArray = new ArrayList<>();
         switch (playerCount) {
             case 2:
                 // Case where two players, start opposite to each other
                 anchorPane.getChildren().remove(batAnchorPane);
                 anchorPane.getChildren().remove(spiderAnchorPane);
+                playerAnchorPaneMap.put(1, dragonAnchorPane);
+                playerAnchorPaneMap.put(2, salamanderAnchorPane);
+                locationIndexArray.add(18);
+                locationIndexArray.add(6);
                 break;
             case 3:
                 anchorPane.getChildren().remove(batAnchorPane);
+                playerAnchorPaneMap.put(1, dragonAnchorPane);
+                playerAnchorPaneMap.put(2, spiderAnchorPane);
+                playerAnchorPaneMap.put(3, salamanderAnchorPane);
+                locationIndexArray.add(18);
+                locationIndexArray.add(0);
+                locationIndexArray.add(6);
                 break;
-            default:
+            case 4:
+                playerAnchorPaneMap.put(1, dragonAnchorPane);
+                playerAnchorPaneMap.put(2, spiderAnchorPane);
+                playerAnchorPaneMap.put(3, salamanderAnchorPane);
+                playerAnchorPaneMap.put(4, batAnchorPane);
+                locationIndexArray.add(18);
+                locationIndexArray.add(0);
+                locationIndexArray.add(6);
+                locationIndexArray.add(12);
                 break;
-        }
-        if (locationIndexArray == null) {
-            locationIndexArray = new ArrayList<>();
-            // using player count generate starting positions for each token
-            switch (playerCount) {
-                case 2:
-                    // Case where two players, start opposite to each other
-                    locationIndexArray.add(18);
-                    locationIndexArray.add(6);
-                    break;
-                case 3:
-                    locationIndexArray.add(18);
-                    locationIndexArray.add(0);
-                    locationIndexArray.add(6);
-                    break;
-                case 4:
-                    locationIndexArray.add(18);
-                    locationIndexArray.add(0);
-                    locationIndexArray.add(6);
-                    locationIndexArray.add(12);
-                    break;
-            }
         }
     }
 
@@ -557,34 +543,13 @@ public class BoardController   {
 
     public void updatePlayerLocation() {
         ArrayList<AnchorPane> anchorPanes = new ArrayList<>();
-        switch (locationIndexArray.size()) {
-            case 2:
-                anchorPanes.add(BoardController.getInstance().getDragonAnchorPane());
-                anchorPanes.add(BoardController.getInstance().getSalamanderAnchorPane());
-                for (int i = 0; i < locationIndexArray.size(); i++) {
-                    // need to check if still in caves using Board and playerLocationArray.get(i)[1]
-                    if (Board.getInstance().getPlayerLocationArray().get(i)[1] != -1) {
-                        // adds them to tile on the board depending on locationIndexArray
-                        instance.moveToken(anchorPanes.get(i), tileLocationArray.get(locationIndexArray.get(i)));
-                    }
-                }
-                break;
-            case 3:
-            case 4:
-                anchorPanes.add(BoardController.getInstance().getDragonAnchorPane());
-                anchorPanes.add(BoardController.getInstance().getSpiderAnchorPane());
-                anchorPanes.add(BoardController.getInstance().getSalamanderAnchorPane());
-                if (locationIndexArray.size() == 4) {
-                    anchorPanes.add(BoardController.getInstance().getBatAnchorPane());
-                }
-                for (int i = 0; i < locationIndexArray.size(); i++) {
-                    // need to check if still in caves using Board and playerLocationArray.get(i)[1]
-                    if (Board.getInstance().getPlayerLocationArray().get(i)[1] != -1) {
-                        // adds them to tile on the board depending on locationIndexArray
-                        instance.moveToken(anchorPanes.get(i), tileLocationArray.get(locationIndexArray.get(i)));
-                    }
-                }
-                break;
+        for (int i = 0; i < locationIndexArray.size(); i++) {
+            // need to check if still in caves using Board and playerLocationArray.get(i)[1]
+            if (Board.getInstance().getPlayerLocationArray().get(i)[1] != -1) {
+                // adds them to tile on the board depending on locationIndexArray
+                AnchorPane playerAnchorPane = playerAnchorPaneMap.get(i + 1);
+                instance.moveToken(playerAnchorPane, tileLocationArray.get(locationIndexArray.get(i)));
+            }
         }
     }
 
@@ -603,64 +568,18 @@ public class BoardController   {
             throw new IllegalStateException("BoardController instance is not initialized");
         }
         // updatePlayerLocation();
-        int newLocationIndex;
-        ArrayList<Double> newLocation;
-        switch (playerId) {
-            case 1:
-                newLocationIndex = locationIndexArray.get(playerId - 1) + moveValue;
-                if (newLocationIndex > 23) {
-                    newLocationIndex = newLocationIndex - 24;
-                }
-                if (newLocationIndex < 0) {
-                    newLocationIndex = newLocationIndex + 24;
-                }
-                newLocation = tileLocationArray.get(newLocationIndex);
-                instance.moveToken(instance.dragonAnchorPane, newLocation);
-                locationIndexArray.set(playerId - 1, newLocationIndex);
-                break;
-            case 2:
-                newLocationIndex = locationIndexArray.get(playerId - 1) + moveValue;
-                if (newLocationIndex > 23) {
-                    newLocationIndex = newLocationIndex - 24;
-                }
-                if (newLocationIndex < 0) {
-                    newLocationIndex = newLocationIndex + 24;
-                }
-                newLocation = tileLocationArray.get(newLocationIndex);
-                // If only two players, player 2 has a different token
-                if (Game.getInstance().getPlayerCount() == 2) {
-                    instance.moveToken(instance.salamanderAnchorPane, newLocation);
-                    locationIndexArray.set(playerId - 1, newLocationIndex);
-                    break;
-                }
-                instance.moveToken(instance.spiderAnchorPane, newLocation);
-                locationIndexArray.set(playerId - 1, newLocationIndex);
-                break;
-            case 3:
-                newLocationIndex = locationIndexArray.get(playerId - 1) + moveValue;
-                if (newLocationIndex > 23) {
-                    newLocationIndex = newLocationIndex - 24;
-                }
-                if (newLocationIndex < 0) {
-                    newLocationIndex = newLocationIndex + 24;
-                }
-                newLocation = tileLocationArray.get(newLocationIndex);
-                instance.moveToken(instance.salamanderAnchorPane, newLocation);
-                locationIndexArray.set(playerId - 1, newLocationIndex);
-                break;
-            case 4:
-                newLocationIndex = locationIndexArray.get(playerId - 1) + moveValue;
-                if (newLocationIndex > 23) {
-                    newLocationIndex = newLocationIndex - 24;
-                }
-                if (newLocationIndex < 0) {
-                    newLocationIndex = newLocationIndex + 24;
-                }
-                newLocation = tileLocationArray.get(newLocationIndex);
-                instance.moveToken(instance.batAnchorPane, newLocation);
-                locationIndexArray.set(playerId - 1, newLocationIndex);
-                break;
+
+        AnchorPane playerAnchorPane = playerAnchorPaneMap.get(playerId);
+        int newLocationIndex = locationIndexArray.get(playerId - 1) + moveValue;
+        if (newLocationIndex > 23) {
+            newLocationIndex = newLocationIndex - 24;
         }
+        if (newLocationIndex < 0) {
+            newLocationIndex = newLocationIndex + 24;
+        }
+        ArrayList<Double> newLocation = tileLocationArray.get(newLocationIndex);
+        instance.moveToken(playerAnchorPane, newLocation);
+        locationIndexArray.set(playerId - 1, newLocationIndex);
     }
 
     /**
@@ -726,6 +645,37 @@ public class BoardController   {
                 // Handle error saving game state
             }
         }
+    }
+
+    public static void swapPlayerToken(Player player1, Player player2) {
+        AnchorPane player1AnchorPane = playerAnchorPaneMap.get(player1.getId());
+        AnchorPane player2AnchorPane = playerAnchorPaneMap.get(player2.getId());
+
+        int player1Index = player1.getId() - 1;
+        int player2Index = player2.getId() - 1;
+
+        // Retrieve the current tile indices of the players
+        int player1CurrentTile = locationIndexArray.get(player1Index);
+        int player2CurrentTile = locationIndexArray.get(player2Index);
+
+        // Swap the location indices in the locationIndexArray
+        locationIndexArray.set(player1Index, player2CurrentTile);
+        locationIndexArray.set(player2Index, player1CurrentTile);
+
+        // Retrieve the new locations from the tileLocationArray
+        ArrayList<Double> player1NewTileLocation = tileLocationArray.get(player2CurrentTile);
+        ArrayList<Double> player2NewTileLocation = tileLocationArray.get(player1CurrentTile);
+
+        // Move the tokens to their new locations
+        BoardController.getInstance().moveToken(player1AnchorPane, player1NewTileLocation);
+        BoardController.getInstance().moveToken(player2AnchorPane, player2NewTileLocation);
+
+        // Update the tileLocationArray to reflect the new positions
+        tileLocationArray.set(player2CurrentTile, player1NewTileLocation);
+        tileLocationArray.set(player1CurrentTile, player2NewTileLocation);
+
+        System.out.println("Player " + player1.getId() + " new tile location: " + locationIndexArray.get(player1Index));
+        System.out.println("Player " + player2.getId() + " new tile location: " + locationIndexArray.get(player2Index));
     }
 
     public static ArrayList<ArrayList<Double>> getTileLocationArray() {

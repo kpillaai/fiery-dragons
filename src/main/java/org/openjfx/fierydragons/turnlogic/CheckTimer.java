@@ -1,7 +1,7 @@
 package org.openjfx.fierydragons.turnlogic;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import org.openjfx.fierydragons.CustomPair;
+import org.openjfx.fierydragons.gameSaving.CustomPair;
 import org.openjfx.fierydragons.entities.TileType;
 import org.openjfx.fierydragons.game.Game;
 

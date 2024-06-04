@@ -59,6 +59,7 @@ public class Game {
      */
     public void initialise() {
         Board.getInstance().initialiseBoard("");
+        Board.getInstance().setNumTiles();
     }
 
     /**

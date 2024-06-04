@@ -10,28 +10,28 @@
 
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.fierydragons.render.BoardController">
    <children>
-      <Circle fx:id="ringOuter" fill="#ff9d1f" layoutX="960.0" layoutY="540.0" radius="388.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="ringInner" fill="WHITE" layoutX="960.0" layoutY="540.0" radius="265.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="ringOuter" fill="#ff9d1f" layoutX="960.0" layoutY="540.0" radius="388.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" />
+      <Circle fx:id="ringInner" fill="WHITE" layoutX="960.0" layoutY="540.0" radius="265.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" />
       <Circle fx:id="caveSouth" fill="#665553" layoutX="960.0" layoutY="983.0" radius="55.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fx:id="caveEast" fill="#665553" layoutX="1403.0" layoutY="540.0" radius="55.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fx:id="caveWest" fill="#665553" layoutX="517.0" layoutY="540.0" radius="55.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fx:id="caveNorth" fill="#665553" layoutX="960.0" layoutY="97.0" radius="55.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="chitCard0" fill="#fff41f" layoutX="819.0" layoutY="385.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="chitCard1" fill="#fff41f" layoutX="913.0" layoutY="385.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="chitCard2" fill="#fff41f" layoutX="1008.0" layoutY="385.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="chitCard3" fill="#fff41f" layoutX="1106.0" layoutY="385.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="chitCard4" fill="#fff41f" layoutX="819.0" layoutY="490.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="chitCard5" fill="#fff41f" layoutX="913.0" layoutY="490.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="chitCard6" fill="#fff41f" layoutX="1008.0" layoutY="490.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="chitCard7" fill="#fff41f" layoutX="1106.0" layoutY="490.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="chitCard8" fill="#fff41f" layoutX="819.0" layoutY="595.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="chitCard9" fill="#fff41f" layoutX="913.0" layoutY="595.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="chitCard10" fill="#fff41f" layoutX="1008.0" layoutY="595.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="chitCard11" fill="#fff41f" layoutX="1106.0" layoutY="595.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="chitCard12" fill="#fff41f" layoutX="819.0" layoutY="695.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="chitCard13" fill="#fff41f" layoutX="913.0" layoutY="695.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="chitCard14" fill="#fff41f" layoutX="1008.0" layoutY="695.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="chitCard15" fill="#fff41f" layoutX="1106.0" layoutY="695.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="chitCard0" fill="#fff41f" layoutX="813.0" layoutY="385.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="chitCard1" fill="#fff41f" layoutX="897.0" layoutY="339.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="chitCard2" fill="#fff41f" layoutX="993.0" layoutY="333.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="chitCard3" fill="#fff41f" layoutX="1085.0" layoutY="367.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="chitCard4" fill="#fff41f" layoutX="759.0" layoutY="485.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="chitCard5" fill="#fff41f" layoutX="859.0" layoutY="485.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="chitCard6" fill="#fff41f" layoutX="951.0" layoutY="431.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="chitCard7" fill="#fff41f" layoutX="1051.0" layoutY="485.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="chitCard8" fill="#fff41f" layoutX="1145.0" layoutY="466.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="chitCard9" fill="#fff41f" layoutX="759.0" layoutY="595.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="chitCard10" fill="#fff41f" layoutX="859.0" layoutY="595.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="chitCard11" fill="#fff41f" layoutX="960.0" layoutY="631.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="chitCard12" fill="#fff41f" layoutX="1066.0" layoutY="585.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="chitCard13" fill="#fff41f" layoutX="1164.0" layoutY="576.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="chitCard14" fill="#fff41f" layoutX="813.0" layoutY="687.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="chitCard15" fill="#fff41f" layoutX="905.0" layoutY="733.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
       <ImageView fx:id="batCave" fitHeight="64.0" fitWidth="92.0" layoutX="471.0" layoutY="508.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/bat1.png" />
@@ -57,7 +57,7 @@
             <Font name="Papyrus" size="53.0" />
          </font>
       </Label>
-      <Label fx:id="currentPlayerLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="439.0" layoutY="206.0" text="Label">
+      <Label fx:id="currentPlayerLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="449.0" layoutY="206.0" text="Label">
          <font>
             <Font name="Papyrus" size="53.0" />
          </font>
@@ -126,6 +126,8 @@
             <Font name="Papyrus" size="50.0" />
          </font>
       </Label>
+      <Circle fx:id="chitCard16" fill="#fff41f" layoutX="1005.0" layoutY="733.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="chitCard17" fill="#fff41f" layoutX="1112.0" layoutY="677.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
       <Button fx:id="backToStartButton" layoutX="1520.0" layoutY="65.0" mnemonicParsing="false" onAction="#switchToStartScene" prefHeight="78.0" prefWidth="235.0" text="Back to Start">
          <font>
             <Font name="Papyrus" size="30.0" />

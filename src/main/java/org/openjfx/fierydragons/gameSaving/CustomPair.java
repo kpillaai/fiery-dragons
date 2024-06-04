@@ -1,4 +1,4 @@
-package org.openjfx.fierydragons;
+package org.openjfx.fierydragons.gameSaving;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

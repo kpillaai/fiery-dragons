@@ -14,4 +14,6 @@ module org.openjfx.fierydragons {
     opens org.openjfx.fierydragons.entities to javafx.fxml;
     exports org.openjfx.fierydragons.render;
     opens org.openjfx.fierydragons.render to javafx.fxml, com.fasterxml.jackson.databind;
+    exports org.openjfx.fierydragons.gameSaving;
+    opens org.openjfx.fierydragons.gameSaving to javafx.fxml;
 }

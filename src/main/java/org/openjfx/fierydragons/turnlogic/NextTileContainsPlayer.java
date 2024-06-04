@@ -2,10 +2,10 @@ package org.openjfx.fierydragons.turnlogic;
 
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import org.openjfx.fierydragons.CustomPair;
 import org.openjfx.fierydragons.entities.TileType;
 import org.openjfx.fierydragons.game.Board;
 import org.openjfx.fierydragons.game.Game;
+import org.openjfx.fierydragons.gameSaving.CustomPair;
 import java.util.ArrayList;
 
 public class NextTileContainsPlayer extends TurnHandler {
@@ -23,6 +23,10 @@ public class NextTileContainsPlayer extends TurnHandler {
      */
     @Override
     public ArrayList<Boolean> handleTurn(CustomPair<TileType, Integer> chitCard) {
+
+        if (chitCard.getKey() == TileType.SWAP) {
+            return this.nextStep.handleTurn(chitCard);
+        }
 
         int[] currentLocation = Board.getInstance().getPlayerLocation(Game.getInstance().getCurrentPlayer());
         int[] nextTileLocation = {0, 0};

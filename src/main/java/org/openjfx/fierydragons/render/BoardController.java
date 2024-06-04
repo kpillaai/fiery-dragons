@@ -381,9 +381,12 @@ public class BoardController   {
 
         ObservableList<Node> images = FXCollections.observableArrayList();
 
+        int numCards = Board.getInstance().getDeck().getChitCards().size();
         // Adding Chit card images
+
         for (Node chitCard: circles) {
-            if (chitCard.getId().startsWith("chitCard")) {
+            if (chitCard.getId().startsWith("chitCard") && numCards > 0) {
+                numCards -= 1;
                 // Generating filepath
                 String idString = chitCard.getId();
                 int idNumber = parseInt(idString.substring(8));

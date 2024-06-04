@@ -39,6 +39,7 @@ import org.openjfx.fierydragons.game.Game;
 import org.openjfx.fierydragons.game.Turn;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -87,7 +88,7 @@ public class BoardController   {
 
     private ArrayList<Color> playerColours;
 
-    private static Map<Integer, AnchorPane> playerAnchorPaneMap;
+    private static Map<Integer, String> playerAnchorPaneMap;
 
     private static BoardController instance;
 
@@ -150,10 +151,10 @@ public class BoardController   {
      * @author  Krishna Pillaai Manogaran
      * @desc    Renders the winning game token back in its own cave, and switches to win scene.
      */
-    public void switchToWinScene(Node node, Player winningPlayer) throws IOException {
+    public void switchToWinScene(Node node, Player winningPlayer) throws IOException, NoSuchFieldException, IllegalAccessException {
         // move player's tile back to own cave
         int playerId = winningPlayer.getId();
-        AnchorPane playerAnchorPane = playerAnchorPaneMap.get(playerId);
+        AnchorPane playerAnchorPane = (AnchorPane) getAnchorPane(playerAnchorPaneMap.get(playerId));
         playerAnchorPane.setLayoutX(caveLocationArray.get(playerId - 1)[0]);
         playerAnchorPane.setLayoutY(caveLocationArray.get(playerId - 1)[1]);
         try {
@@ -234,7 +235,7 @@ public class BoardController   {
      * @desc    Function is used when scene is initially generated; sets chit card ids and finds initial token
      *          coordinates.
      */
-    public void initialize() {
+    public void initialize() throws NoSuchFieldException, IllegalAccessException {
         ObservableList<Node> circles = anchorPane.getChildren();
         for (Node circle : circles) {
             if (circle.getId().startsWith("chitCard")) {
@@ -320,7 +321,7 @@ public class BoardController   {
                     try {
                         // Call the flipCard() to start turn logic
                         Game.getInstance().getCurrentPlayer().flipCard(parseInt(id.substring(8)));
-                    } catch (IOException e) {
+                    } catch (IOException | NoSuchFieldException | IllegalAccessException e) {
                         throw new RuntimeException(e);
                     }
                 });
@@ -508,25 +509,25 @@ public class BoardController   {
                 // Case where two players, start opposite to each other
                 anchorPane.getChildren().remove(batAnchorPane);
                 anchorPane.getChildren().remove(spiderAnchorPane);
-                playerAnchorPaneMap.put(1, dragonAnchorPane);
-                playerAnchorPaneMap.put(2, salamanderAnchorPane);
+                playerAnchorPaneMap.put(1, "dragon");
+                playerAnchorPaneMap.put(2, "salamander");
                 locationIndexArray.add(18);
                 locationIndexArray.add(6);
                 break;
             case 3:
                 anchorPane.getChildren().remove(batAnchorPane);
-                playerAnchorPaneMap.put(1, dragonAnchorPane);
-                playerAnchorPaneMap.put(2, spiderAnchorPane);
-                playerAnchorPaneMap.put(3, salamanderAnchorPane);
+                playerAnchorPaneMap.put(1, "dragon");
+                playerAnchorPaneMap.put(2, "spider");
+                playerAnchorPaneMap.put(3, "salamander");
                 locationIndexArray.add(18);
                 locationIndexArray.add(0);
                 locationIndexArray.add(6);
                 break;
             case 4:
-                playerAnchorPaneMap.put(1, dragonAnchorPane);
-                playerAnchorPaneMap.put(2, spiderAnchorPane);
-                playerAnchorPaneMap.put(3, salamanderAnchorPane);
-                playerAnchorPaneMap.put(4, batAnchorPane);
+                playerAnchorPaneMap.put(1, "dragon");
+                playerAnchorPaneMap.put(2, "spider");
+                playerAnchorPaneMap.put(3, "salamander");
+                playerAnchorPaneMap.put(4, "bat");
                 locationIndexArray.add(18);
                 locationIndexArray.add(0);
                 locationIndexArray.add(6);
@@ -543,16 +544,22 @@ public class BoardController   {
         playerCountLabel.setText("Number of Players: " + playerCount);
     }
 
-    public void updatePlayerLocation() {
+    public void updatePlayerLocation() throws NoSuchFieldException, IllegalAccessException {
         ArrayList<AnchorPane> anchorPanes = new ArrayList<>();
         for (int i = 0; i < locationIndexArray.size(); i++) {
             // need to check if still in caves using Board and playerLocationArray.get(i)[1]
             if (Board.getInstance().getPlayerLocationArray().get(i)[1] != -1) {
                 // adds them to tile on the board depending on locationIndexArray
-                AnchorPane playerAnchorPane = playerAnchorPaneMap.get(i + 1);
+                AnchorPane playerAnchorPane = (AnchorPane) getAnchorPane(playerAnchorPaneMap.get(i + 1));
                 instance.moveToken(playerAnchorPane, tileLocationArray.get(locationIndexArray.get(i)));
             }
         }
+    }
+
+    public Object getAnchorPane(String creature) throws NoSuchFieldException, IllegalAccessException {
+        String fieldName = creature + "AnchorPane";
+        Field field = this.getClass().getDeclaredField(fieldName);
+        return field.get(this);
     }
 
     /**
@@ -562,7 +569,7 @@ public class BoardController   {
      *          First determine new index from chit card value, then based on index, find the correct co-ordinates from
      *          tileLocationArray.
      */
-    public static void movePlayer(CustomPair<TileType, Integer> chitCard) {
+    public static void movePlayer(CustomPair<TileType, Integer> chitCard) throws NoSuchFieldException, IllegalAccessException {
         int moveValue = chitCard.getValue();
         int playerId = Game.getInstance().getCurrentPlayer().getId();
         BoardController instance = BoardController.getInstance();
@@ -571,7 +578,7 @@ public class BoardController   {
         }
         // updatePlayerLocation();
 
-        AnchorPane playerAnchorPane = playerAnchorPaneMap.get(playerId);
+        AnchorPane playerAnchorPane = (AnchorPane) instance.getAnchorPane(playerAnchorPaneMap.get(playerId));
         int newLocationIndex = locationIndexArray.get(playerId - 1) + moveValue;
         if (newLocationIndex > 23) {
             newLocationIndex = newLocationIndex - 24;
@@ -598,7 +605,7 @@ public class BoardController   {
      * @author  Zilei Chen
      * @desc    endTurn() function called by end turn button in the scene.
      */
-    public void endTurn() throws IOException {
+    public void endTurn() throws IOException, NoSuchFieldException, IllegalAccessException {
         pauseTimer();
         if (Turn.getInstance().endTurn()) {
             showCurrentPlayer();
@@ -649,9 +656,9 @@ public class BoardController   {
         }
     }
 
-    public static void swapPlayerToken(Player player1, Player player2) {
-        AnchorPane player1AnchorPane = playerAnchorPaneMap.get(player1.getId());
-        AnchorPane player2AnchorPane = playerAnchorPaneMap.get(player2.getId());
+    public void swapPlayerToken(Player player1, Player player2) throws NoSuchFieldException, IllegalAccessException {
+        AnchorPane player1AnchorPane = (AnchorPane) getAnchorPane(playerAnchorPaneMap.get(player1.getId()));
+        AnchorPane player2AnchorPane = (AnchorPane) getAnchorPane(playerAnchorPaneMap.get(player2.getId()));
 
         int player1Index = player1.getId() - 1;
         int player2Index = player2.getId() - 1;

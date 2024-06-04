@@ -37,7 +37,7 @@ public class Player {
      * @author  Zilei Chen
      * @desc    Takes an input of Integer which is a chit card ID and calls the next turn method, parsing the chit card
      */
-    public void flipCard(Integer chitCardId) throws IOException {
+    public void flipCard(Integer chitCardId) throws IOException, NoSuchFieldException, IllegalAccessException {
         Turn.getInstance().nextTurn(chitCardId);
     }
 

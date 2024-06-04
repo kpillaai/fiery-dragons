@@ -50,7 +50,7 @@ public class Turn {
      * @desc    Ends the turn of the current player and iterates to the next player. Also tells BoardController to
      * render the changes.
      */
-    public boolean endTurn() throws IOException {
+    public boolean endTurn() throws IOException, NoSuchFieldException, IllegalAccessException {
         boolean continueGame = checkTurnTimers();
         if (!continueGame) {
             return false;
@@ -63,7 +63,7 @@ public class Turn {
         return true;
     }
 
-    private boolean checkTurnTimers() throws IOException {
+    private boolean checkTurnTimers() throws IOException, NoSuchFieldException, IllegalAccessException {
         // Check if all players run out of time
         ArrayList<Player> playerList = Game.getInstance().getPlayerList();
         int timeRemainingEqualsZeroCounter = 0;
@@ -86,7 +86,7 @@ public class Turn {
      * turn
      * Param is the index of the Chit Card the player flipped.
      */
-    public void nextTurn(Integer chitCardId) throws IOException {
+    public void nextTurn(Integer chitCardId) throws IOException, NoSuchFieldException, IllegalAccessException {
         boolean[] turnResult = this.handleTurnLogic(chitCardId);
         boolean canPlayerMove = turnResult[0];
         boolean playerWon = turnResult[1];
@@ -101,7 +101,7 @@ public class Turn {
                 Player playerToSwap = Board.getInstance().findClosestPlayer(Game.getInstance().getCurrentPlayer());
                 System.out.println("Closest Player: " + playerToSwap.getId());
                 Board.getInstance().swapPlayers(Game.getInstance().getCurrentPlayer(), playerToSwap);
-                BoardController.swapPlayerToken(Game.getInstance().getCurrentPlayer(), playerToSwap);
+                BoardController.getInstance().swapPlayerToken(Game.getInstance().getCurrentPlayer(), playerToSwap);
             }
             endTurn();
             return; // Exit method after swap

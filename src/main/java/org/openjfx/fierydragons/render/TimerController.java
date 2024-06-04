@@ -25,7 +25,7 @@ public class TimerController {
                     timeline.stop();
                     try {
                         BoardController.getInstance().endTurn();
-                    } catch (IOException e) {
+                    } catch (IOException | NoSuchFieldException | IllegalAccessException e) {
                         throw new RuntimeException(e);
                     }
                 }

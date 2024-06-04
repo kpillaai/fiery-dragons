@@ -2,7 +2,6 @@ package org.openjfx.fierydragons.turnlogic;
 
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import javafx.util.Pair;
 import org.openjfx.fierydragons.CustomPair;
 import org.openjfx.fierydragons.entities.TileType;
 

@@ -3,7 +3,6 @@ package org.openjfx.fierydragons.entities;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.openjfx.fierydragons.game.Board;
-import org.openjfx.fierydragons.game.Game;
 import org.openjfx.fierydragons.game.Turn;
 
 import java.io.IOException;

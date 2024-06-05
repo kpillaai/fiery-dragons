@@ -547,6 +547,7 @@ public class BoardController   {
                 playerAnchorPaneMap.put(2, "salamander");
                 locationIndexArray.add(18);
                 locationIndexArray.add(6);
+                break;
             case 3:
                 anchorPane.getChildren().remove(batAnchorPane);
                 playerAnchorPaneMap.put(1, "dragon");
@@ -555,6 +556,7 @@ public class BoardController   {
                 locationIndexArray.add(18);
                 locationIndexArray.add(0);
                 locationIndexArray.add(6);
+                break;
             case 4:
                 playerAnchorPaneMap.put(1, "dragon");
                 playerAnchorPaneMap.put(2, "spider");
@@ -564,6 +566,7 @@ public class BoardController   {
                 locationIndexArray.add(0);
                 locationIndexArray.add(6);
                 locationIndexArray.add(12);
+                break;
         }
         for (int i = 0; i <  playerCount; i++) {
             AnchorPane playerAnchorPane = (AnchorPane) getAnchorPane(playerAnchorPaneMap.get(i+1));

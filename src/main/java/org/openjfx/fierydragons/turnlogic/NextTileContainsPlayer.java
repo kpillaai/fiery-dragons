@@ -44,15 +44,15 @@ public class NextTileContainsPlayer extends TurnHandler {
             nextTileLocation[0] = currentLocation[0];
         }
 
-        if (nextTileLocation[1] > 2) { // Moving to next volcano piece
+        if (nextTileLocation[1] > Board.getInstance().getMapPieces().get(currentLocation[0]).getTiles().size() - 1) { // Moving to next volcano piece
             nextTileLocation[0] += 1;
-            nextTileLocation[1] = nextTileLocation[1] - 3;
-            if (nextTileLocation[0] > 7) { // Index errors
+            nextTileLocation[1] = nextTileLocation[1] - Board.getInstance().getMapPieces().get(currentLocation[0]).getTiles().size();
+            if (nextTileLocation[0] > Board.getInstance().getMapPieces().size() - 1) { // Index errors
                 nextTileLocation[0] = 0;
             }
         } else if (nextTileLocation[1] < 0) { // Means pirate dragon has been flipped
             nextTileLocation[0] -= 1;
-            nextTileLocation[1] = nextTileLocation[1] + 3;
+            nextTileLocation[1] = nextTileLocation[1] + Board.getInstance().getMapPieces().get(currentLocation[0] - 1).getTiles().size();
             if (nextTileLocation[0] < 0) { // Index errors
                 nextTileLocation[0] = 7;
             }

@@ -515,7 +515,23 @@ public class BoardController   {
                     caveLocation.add(caveCoordX - caveCentreOffset);
                     caveLocation.add(caveCoordY - caveCentreOffset);
                     caveLocationArray.add(caveLocation);
+
+//                    for (int[] playerLocation: Board.getInstance().getPlayerLocationArray()) {
+//                        if (playerLocation[0] == i && playerLocation[1] == -1) {
+//                            // generate token
+//                            // add coloured circle, image etc
+//
+//                        }
+//                    }
                 }
+                // render dragon tokens
+//                for (int[] playerLocation: Board.getInstance().getPlayerLocationArray()) {
+//                    if (playerLocation[0] == i && playerLocation[1] == j) {
+//                        // generate token
+//                    }
+//                }
+
+
             }
         }
         ArrayList<Double> lastLocation = caveLocationArray.removeLast();
@@ -531,38 +547,43 @@ public class BoardController   {
      */
     public void renderDragonTokens() throws NoSuchFieldException, IllegalAccessException {
         int playerCount = Game.getInstance().getPlayerCount();
-        playerAnchorPaneMap = new HashMap<>();
-        locationIndexArray = new ArrayList<>();
-        switch (playerCount) {
-            case 2:
-                // Case where two players, start opposite to each other
-                anchorPane.getChildren().remove(batAnchorPane);
-                anchorPane.getChildren().remove(spiderAnchorPane);
-                playerAnchorPaneMap.put(1, "dragon");
-                playerAnchorPaneMap.put(2, "salamander");
-                locationIndexArray.add(18);
-                locationIndexArray.add(6);
-                break;
-            case 3:
-                anchorPane.getChildren().remove(batAnchorPane);
-                playerAnchorPaneMap.put(1, "dragon");
-                playerAnchorPaneMap.put(2, "spider");
-                playerAnchorPaneMap.put(3, "salamander");
-                locationIndexArray.add(18);
-                locationIndexArray.add(0);
-                locationIndexArray.add(6);
-                break;
-            case 4:
-                playerAnchorPaneMap.put(1, "dragon");
-                playerAnchorPaneMap.put(2, "spider");
-                playerAnchorPaneMap.put(3, "salamander");
-                playerAnchorPaneMap.put(4, "bat");
-                locationIndexArray.add(18);
-                locationIndexArray.add(0);
-                locationIndexArray.add(6);
-                locationIndexArray.add(12);
-                break;
+        if (locationIndexArray == null) {
+            locationIndexArray = new ArrayList<>();
+            playerAnchorPaneMap = new HashMap<>();
+            switch (playerCount) {
+                case 2:
+                    // Case where two players, start opposite to each other
+                    anchorPane.getChildren().remove(batAnchorPane);
+                    anchorPane.getChildren().remove(spiderAnchorPane);
+                    playerAnchorPaneMap.put(1, "dragon");
+                    playerAnchorPaneMap.put(2, "salamander");
+                    locationIndexArray.add(18);
+                    locationIndexArray.add(6);
+                    break;
+                case 3:
+                    anchorPane.getChildren().remove(batAnchorPane);
+                    playerAnchorPaneMap.put(1, "dragon");
+                    playerAnchorPaneMap.put(2, "spider");
+                    playerAnchorPaneMap.put(3, "salamander");
+                    locationIndexArray.add(18);
+                    locationIndexArray.add(0);
+                    locationIndexArray.add(6);
+                    break;
+                case 4:
+                    playerAnchorPaneMap.put(1, "dragon");
+                    playerAnchorPaneMap.put(2, "spider");
+                    playerAnchorPaneMap.put(3, "salamander");
+                    playerAnchorPaneMap.put(4, "bat");
+                    for (int i = 0; i < playerCount; i++) {
+                        int[] player1Location = Board.getInstance().getPlayerLocationArray().get(i);
+                        locationIndexArray.add(Board.getInstance().getTileLocation(player1Location) - 1);
+                        System.out.println(Board.getInstance().getTileLocation(player1Location) - 1);
+                    }
+                    break;
+
+            }
         }
+
         if (playerCount == 2) {
             caveLocationArray.set(1, caveLocationArray.get(2));
         }
@@ -570,6 +591,7 @@ public class BoardController   {
             AnchorPane playerAnchorPane = (AnchorPane) getAnchorPane(playerAnchorPaneMap.get(i+1));
             moveToken(playerAnchorPane, caveLocationArray.get(i));
         }
+        updatePlayerLocation();
     }
 
     /**

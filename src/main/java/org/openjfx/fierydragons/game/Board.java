@@ -237,6 +237,9 @@ public class Board {
             playerLocationArray.get(playerId - 1)[1] = newTileIndex;
         }
         Game.getInstance().getCurrentPlayer().subtractDistance(noOfMoves);
+        System.out.println(playerLocationArray.get(playerId - 1)[0]);
+        System.out.println(playerLocationArray.get(playerId - 1)[1]);
+        System.out.println(mapPieces.get(playerLocationArray.get(playerId - 1)[0]).getTiles().get(playerLocationArray.get(playerId - 1)[1]).getTileType());
     }
 
     /**
@@ -262,7 +265,18 @@ public class Board {
      * returns: an int between 0 and 23 that represents the tile the player is currently on.
      */
     public int getTileLocation(int[] position) {
-        return position[0] * mapPieces.get(0).getTiles().size() + position[1];
+        int counter = 0;
+        for (int i = 0; i < mapPieces.size(); i++) {
+            for (int j = 0; j < mapPieces.get(i).getTiles().size(); j++) {
+                if (i == position[0] && j == position[1]) {
+                    return counter;
+                } else if (i == position[0] && j == mapPieces.get(i).getCaveIndex()) {
+                    return counter;
+                }
+                counter++;
+            }
+        }
+        return counter;
     }
 
     /**

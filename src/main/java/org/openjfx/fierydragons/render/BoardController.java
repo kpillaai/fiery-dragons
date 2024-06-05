@@ -499,6 +499,7 @@ public class BoardController   {
                     Circle caveCircle = new Circle();
                     caveCircle.setRadius(55);
                     caveCircle.setFill(Color.CHOCOLATE);
+                    caveCircle.setStrokeWidth(5);
 
                     //generate image of circle
                     String filePathCaveImage = "/org/openjfx/fierydragons/images/" + mapPieces.get(i).getCave().getTileType().toString().toLowerCase() + "1.png";
@@ -533,7 +534,7 @@ public class BoardController   {
      *          locationIndexArray stores indexes that refer to tileLocationArray, so tokens can be moved to the correct
      *          co-ordinates during turns.
      */
-    public void renderDragonTokens() {
+    public void renderDragonTokens() throws NoSuchFieldException, IllegalAccessException {
         int playerCount = Game.getInstance().getPlayerCount();
         playerAnchorPaneMap = new HashMap<>();
         locationIndexArray = new ArrayList<>();
@@ -546,7 +547,6 @@ public class BoardController   {
                 playerAnchorPaneMap.put(2, "salamander");
                 locationIndexArray.add(18);
                 locationIndexArray.add(6);
-                break;
             case 3:
                 anchorPane.getChildren().remove(batAnchorPane);
                 playerAnchorPaneMap.put(1, "dragon");
@@ -555,7 +555,6 @@ public class BoardController   {
                 locationIndexArray.add(18);
                 locationIndexArray.add(0);
                 locationIndexArray.add(6);
-                break;
             case 4:
                 playerAnchorPaneMap.put(1, "dragon");
                 playerAnchorPaneMap.put(2, "spider");
@@ -565,7 +564,10 @@ public class BoardController   {
                 locationIndexArray.add(0);
                 locationIndexArray.add(6);
                 locationIndexArray.add(12);
-                break;
+        }
+        for (int i = 0; i <  playerCount; i++) {
+            AnchorPane playerAnchorPane = (AnchorPane) getAnchorPane(playerAnchorPaneMap.get(i+1));
+            playerAnchorPane.toFront();
         }
     }
 
@@ -581,9 +583,9 @@ public class BoardController   {
         ArrayList<AnchorPane> anchorPanes = new ArrayList<>();
         for (int i = 0; i < locationIndexArray.size(); i++) {
             // need to check if still in caves using Board and playerLocationArray.get(i)[1]
+            AnchorPane playerAnchorPane = (AnchorPane) getAnchorPane(playerAnchorPaneMap.get(i + 1));
             if (Board.getInstance().getPlayerLocationArray().get(i)[1] != -1) {
                 // adds them to tile on the board depending on locationIndexArray
-                AnchorPane playerAnchorPane = (AnchorPane) getAnchorPane(playerAnchorPaneMap.get(i + 1));
                 instance.moveToken(playerAnchorPane, tileLocationArray.get(locationIndexArray.get(i)));
             }
         }

@@ -60,7 +60,7 @@ public class SettingsController implements Initializable {
      * @author  Jeffrey Yan
      * @desc    Takes an input of event which is an onclick. Switches to the Board scene where the game is played
      */
-    public void switchToBoardScene(ActionEvent event) throws IOException {
+    public void switchToBoardScene(ActionEvent event) throws IOException, NoSuchFieldException, IllegalAccessException {
         fxmlLoader = new FXMLLoader(StartApplication.class.getResource("game-board.fxml"));
         root = fxmlLoader.load();
 

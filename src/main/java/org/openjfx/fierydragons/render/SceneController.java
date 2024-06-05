@@ -77,6 +77,8 @@ public class SceneController {
             } catch (IOException ex) {
                 ex.printStackTrace();
                 // Handle error loading game state
+            } catch (NoSuchFieldException | IllegalAccessException ex) {
+                ex.printStackTrace();
             }
         }
     }

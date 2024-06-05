@@ -28,7 +28,6 @@ public class CheckForWin extends TurnHandler{
             result.add(false);
             return result;
         }
-
         if (Game.getInstance().getCurrentPlayer().getDistanceToCave() != chitCard.getValue()) {
             ArrayList<Boolean> result = new ArrayList<>();
             result.add(true);

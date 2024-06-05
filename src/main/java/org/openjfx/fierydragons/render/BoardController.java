@@ -642,15 +642,15 @@ public class BoardController   {
         if (instance == null) {
             throw new IllegalStateException("BoardController instance is not initialized");
         }
-        // updatePlayerLocation();
+        //updatePlayerLocation();
 
         AnchorPane playerAnchorPane = (AnchorPane) instance.getAnchorPane(playerAnchorPaneMap.get(playerId));
         int newLocationIndex = locationIndexArray.get(playerId - 1) + moveValue;
-        if (newLocationIndex > 23) {
-            newLocationIndex = newLocationIndex - 24;
+        if (newLocationIndex > Board.getInstance().getNumTiles() - 1) {
+            newLocationIndex = newLocationIndex - Board.getInstance().getNumTiles();
         }
         if (newLocationIndex < 0) {
-            newLocationIndex = newLocationIndex + 24;
+            newLocationIndex = newLocationIndex + Board.getInstance().getNumTiles();
         }
         ArrayList<Double> newLocation = tileLocationArray.get(newLocationIndex);
         instance.moveToken(playerAnchorPane, newLocation);

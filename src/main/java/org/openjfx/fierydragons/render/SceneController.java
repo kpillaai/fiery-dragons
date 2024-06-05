@@ -74,6 +74,13 @@ public class SceneController {
                 // Update your UI with the loaded game state if necessary
                 SettingsController settingsController = new SettingsController();
                 settingsController.switchToBoardScene(event);
+
+                for (int i = 0; i < Game.getInstance().getPlayerList().size(); i++) { // Loading using JSON creates 2 separate objects rather than pointers
+                    if (Game.getInstance().getCurrentPlayer().getId() == Game.getInstance().getPlayerList().get(i).getId()) {
+                        Game.getInstance().setCurrentPlayer(Game.getInstance().getPlayerList().get(i));
+                    }
+                }
+
             } catch (IOException ex) {
                 ex.printStackTrace();
                 // Handle error loading game state

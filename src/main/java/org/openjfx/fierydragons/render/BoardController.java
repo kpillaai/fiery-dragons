@@ -443,11 +443,9 @@ public class BoardController   {
 
         // looping through mapPieces.size (8) and then looping through each MapPiece (3) results in 24 tiles
         tileLocationArray = new ArrayList<>();
-        int loopCounter = 0;
+        int loopCounter = -1;
         for (int i = 0; i < mapPieces.size(); i++) {
             for (int j = 0; j < mapPieces.get(i).getTiles().size(); j++) {
-                // calculate what tile number. -1 offset for alignment of cave with middle of map piece when displaying
-                int tile_increment = (i * mapPieces.get(i).getTiles().size()) + j - 1;
 
                 // Calculating angles
                 double endAngle = loopCounter * pieceAngle + offsetAngle;

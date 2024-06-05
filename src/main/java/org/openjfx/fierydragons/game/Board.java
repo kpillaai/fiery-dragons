@@ -99,10 +99,18 @@ public class Board {
 
         // create cave pieces
         ArrayList<MapPiece> cavePiece = new ArrayList<>();
-        cavePiece.add(new MapPiece(new Tile(false, TileType.BABY_DRAGON), new Tile(false, TileType.BAT), new Tile(false, TileType.SPIDER)));
-        cavePiece.add(new MapPiece(new Tile(false, TileType.SALAMANDER), new Tile(false, TileType.SPIDER), new Tile(false, TileType.BAT)));
-        cavePiece.add(new MapPiece(new Tile(false, TileType.SPIDER), new Tile(false, TileType.SALAMANDER), new Tile(false, TileType.BABY_DRAGON)));
-        cavePiece.add(new MapPiece(new Tile(false, TileType.BAT), new Tile(false, TileType.SPIDER), new Tile(false, TileType.BABY_DRAGON)));
+        MapPiece mapPiece1 = new MapPiece(new Tile(false, TileType.BABY_DRAGON), new Tile(false, TileType.BAT), new Tile(false, TileType.SPIDER));
+        mapPiece1.setCaveIndex(1);
+        cavePiece.add(mapPiece1);
+        MapPiece mapPiece2 = new MapPiece(new Tile(false, TileType.SALAMANDER), new Tile(false, TileType.SPIDER), new Tile(false, TileType.BAT));
+        mapPiece2.setCaveIndex(1);
+        cavePiece.add(mapPiece2);
+        MapPiece mapPiece3 = new MapPiece(new Tile(false, TileType.SPIDER), new Tile(false, TileType.SALAMANDER), new Tile(false, TileType.BABY_DRAGON));
+        mapPiece3.setCaveIndex(1);
+        cavePiece.add(mapPiece3);
+        MapPiece mapPiece4 = new MapPiece(new Tile(false, TileType.BAT), new Tile(false, TileType.SPIDER), new Tile(false, TileType.BABY_DRAGON));
+        mapPiece4.setCaveIndex(1);
+        cavePiece.add(mapPiece4);
 
         // shuffle cave and normal pieces for random board
         Collections.shuffle(normalPiece);

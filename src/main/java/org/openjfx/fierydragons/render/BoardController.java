@@ -443,7 +443,7 @@ public class BoardController   {
 
         // looping through mapPieces.size (8) and then looping through each MapPiece (3) results in 24 tiles
         tileLocationArray = new ArrayList<>();
-        int loopCounter = -1;
+        int loopCounter = 0;
         for (int i = 0; i < mapPieces.size(); i++) {
             for (int j = 0; j < mapPieces.get(i).getTiles().size(); j++) {
                 // calculate what tile number. -1 offset for alignment of cave with middle of map piece when displaying
@@ -512,8 +512,8 @@ public class BoardController   {
 
                     //find specific coordinates
                     int caveOffsetDistance = 118;
-                    double caveCoordX = centreX + Math.cos(Math.toRadians(loopCounter * pieceAngle)) * (middleRadius + caveOffsetDistance);
-                    double caveCoordY = centreY + Math.sin(Math.toRadians(loopCounter * pieceAngle)) * (middleRadius + caveOffsetDistance);
+                    double caveCoordX = centreX + Math.cos(Math.toRadians((loopCounter - 1)* pieceAngle)) * (middleRadius + caveOffsetDistance);
+                    double caveCoordY = centreY + Math.sin(Math.toRadians((loopCounter - 1)* pieceAngle)) * (middleRadius + caveOffsetDistance);
                     caveCircle.setLayoutX(caveCoordX);
                     caveCircle.setLayoutY(caveCoordY);
                     imageViewCave.setLayoutX(caveCoordX - imageViewCave.getFitWidth() / 2);

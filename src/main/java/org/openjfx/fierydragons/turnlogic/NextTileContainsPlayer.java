@@ -52,10 +52,10 @@ public class NextTileContainsPlayer extends TurnHandler {
             }
         } else if (nextTileLocation[1] < 0) { // Means pirate dragon has been flipped
             nextTileLocation[0] -= 1;
-            nextTileLocation[1] = nextTileLocation[1] + Board.getInstance().getMapPieces().get(currentLocation[0] - 1).getTiles().size();
             if (nextTileLocation[0] < 0) { // Index errors
-                nextTileLocation[0] = 7;
+                nextTileLocation[0] = Board.getInstance().getMapPieces().size() - 1;
             }
+            nextTileLocation[1] = nextTileLocation[1] + Board.getInstance().getMapPieces().get(nextTileLocation[0]).getTiles().size();
         }
 
         for (int i = 0; i < Board.getInstance().getPlayerLocationArray().size(); i++) {

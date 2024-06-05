@@ -443,11 +443,10 @@ public class BoardController   {
 
         // looping through mapPieces.size (8) and then looping through each MapPiece (3) results in 24 tiles
         tileLocationArray = new ArrayList<>();
-        int loopCounter = 0;
+        int loopCounter = -1;
         for (int i = 0; i < mapPieces.size(); i++) {
             for (int j = 0; j < mapPieces.get(i).getTiles().size(); j++) {
                 // calculate what tile number. -1 offset for alignment of cave with middle of map piece when displaying
-                loopCounter += 1;
                 int tile_increment = (i * mapPieces.get(i).getTiles().size()) + j - 1;
 
                 // Calculating angles
@@ -465,7 +464,7 @@ public class BoardController   {
                 sliceLine.setStroke(Color.BLACK);
                 anchorPane.getChildren().add(sliceLine);
                 if (j - 2 == 0 || j - 2 % mapPieces.get(i).getTiles().size() == 0) {
-                    sliceLine.setStrokeWidth(3);
+                    sliceLine.setStrokeWidth(4);
                 }
 
                 // Generating Animals for each tile
@@ -482,19 +481,19 @@ public class BoardController   {
                 imageView.setFitHeight(80);
                 imageView.setFitWidth(80);
 
-                // Get location on where it should be placed
-                double topLeftX = animalX - 40; // Figure out a way to do this better
-                double topLeftY = animalY - 460;
-                ArrayList<Double> location = new ArrayList<>();
-                location.add(topLeftX);
-                location.add(topLeftY);
+                // Add image
+                double layoutX = animalX - imageView.getFitWidth() / 2;
+                double layoutY = animalY - imageView.getFitHeight() / 2;
+                imageView.setLayoutX(layoutX);
+                imageView.setLayoutY(layoutY);
+                anchorPane.getChildren().add(imageView);
                 // Add to array so tokens know the co-ordinates to move to
+                ArrayList<Double> location = new ArrayList<>();
+                location.add(layoutX);
+                location.add(layoutY);
                 tileLocationArray.add(location);
 
-                // Add image
-                imageView.setLayoutX(animalX - imageView.getFitWidth() / 2);
-                imageView.setLayoutY(animalY - imageView.getFitHeight() / 2);
-                anchorPane.getChildren().add(imageView);
+                loopCounter += 1;
 
                 // Add Cave (if exist)
                 if (mapPieces.get(i).getCave() != null && mapPieces.get(i).getCaveIndex() == j) {

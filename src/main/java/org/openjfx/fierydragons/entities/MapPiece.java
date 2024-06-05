@@ -8,6 +8,7 @@ public class MapPiece {
     private ArrayList<Tile> tiles;
     private Tile cave;
 
+    @JsonProperty("caveIndex")
     private int caveIndex;
 
     @JsonCreator

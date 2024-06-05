@@ -12,10 +12,6 @@
    <children>
       <Circle fx:id="ringOuter" fill="#ff9d1f" layoutX="960.0" layoutY="540.0" radius="388.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="4.0" />
       <Circle fx:id="ringInner" fill="WHITE" layoutX="960.0" layoutY="540.0" radius="265.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="4.0" />
-      <Circle fx:id="caveSouth" fill="#665553" layoutX="960.0" layoutY="983.0" radius="55.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="caveEast" fill="#665553" layoutX="1403.0" layoutY="540.0" radius="55.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="caveWest" fill="#665553" layoutX="517.0" layoutY="540.0" radius="55.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="caveNorth" fill="#665553" layoutX="960.0" layoutY="97.0" radius="55.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fx:id="chitCard0" fill="#fff41f" layoutX="813.0" layoutY="385.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fx:id="chitCard1" fill="#fff41f" layoutX="897.0" layoutY="339.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fx:id="chitCard2" fill="#fff41f" layoutX="993.0" layoutY="333.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
@@ -32,26 +28,6 @@
       <Circle fx:id="chitCard13" fill="#fff41f" layoutX="1164.0" layoutY="576.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fx:id="chitCard14" fill="#fff41f" layoutX="813.0" layoutY="687.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fx:id="chitCard15" fill="#fff41f" layoutX="905.0" layoutY="733.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
-      <ImageView fx:id="batCave" fitHeight="64.0" fitWidth="92.0" layoutX="471.0" layoutY="508.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@images/bat1.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="salamanderCave" fitHeight="64.0" fitWidth="92.0" layoutX="928.0" layoutY="951.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@images/salamander1.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="babyDragonCave" fitHeight="64.0" fitWidth="92.0" layoutX="933.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@images/baby_dragon1.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="spiderCave" fitHeight="64.0" fitWidth="92.0" layoutX="1357.0" layoutY="512.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@images/spider1.png" />
-         </image>
-      </ImageView>
       <Label fx:id="playerCountLabel" layoutX="87.0" layoutY="129.0" text="Label">
          <font>
             <Font name="Papyrus" size="53.0" />

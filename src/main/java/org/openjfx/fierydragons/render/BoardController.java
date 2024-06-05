@@ -40,11 +40,7 @@ import org.openjfx.fierydragons.game.Turn;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 import static java.lang.Integer.parseInt;
 
@@ -84,7 +80,7 @@ public class BoardController   {
     @JsonProperty("tileLocationArray")
     private static ArrayList<ArrayList<Double>> tileLocationArray;
 
-    private ArrayList<double[]> caveLocationArray;
+    private ArrayList<ArrayList<Double>> caveLocationArray;
 
     private ArrayList<Color> playerColours;
 
@@ -156,8 +152,7 @@ public class BoardController   {
         // move player's tile back to own cave
         int playerId = winningPlayer.getId();
         AnchorPane playerAnchorPane = (AnchorPane) getAnchorPane(playerAnchorPaneMap.get(playerId));
-        playerAnchorPane.setLayoutX(caveLocationArray.get(playerId - 1)[0]);
-        playerAnchorPane.setLayoutY(caveLocationArray.get(playerId - 1)[1]);
+        moveToken(playerAnchorPane, caveLocationArray.get(playerId - 1));
         try {
             // load the win scene
             fxmlLoader = new FXMLLoader(StartApplication.class.getResource("win-scene.fxml"));
@@ -248,14 +243,6 @@ public class BoardController   {
                     }
                 });
             }
-        }
-        // add initial token locations to an array so token can go back to cave after winning
-        if (caveLocationArray == null) {
-            caveLocationArray = new ArrayList<>();
-            caveLocationArray.add(new double[]{dragonAnchorPane.getLayoutX(), dragonAnchorPane.getLayoutY()});
-            caveLocationArray.add(new double[]{spiderAnchorPane.getLayoutX(), spiderAnchorPane.getLayoutY()});
-            caveLocationArray.add(new double[]{salamanderAnchorPane.getLayoutX(), salamanderAnchorPane.getLayoutY()});
-            caveLocationArray.add(new double[]{batAnchorPane.getLayoutX(), batAnchorPane.getLayoutY()});
         }
         renderChits();
         renderVolcanoCards();
@@ -443,6 +430,7 @@ public class BoardController   {
 
         // looping through mapPieces.size (8) and then looping through each MapPiece (3) results in 24 tiles
         tileLocationArray = new ArrayList<>();
+        caveLocationArray = new ArrayList<>();
         int loopCounter = -1;
         for (int i = 0; i < mapPieces.size(); i++) {
             for (int j = 0; j < mapPieces.get(i).getTiles().size(); j++) {
@@ -521,10 +509,17 @@ public class BoardController   {
                     //add circle + image to that location
                     anchorPane.getChildren().add(caveCircle);
                     anchorPane.getChildren().add(imageViewCave);
-                }
 
+                    double caveCentreOffset = 25;
+                    ArrayList<Double> caveLocation = new ArrayList<>();
+                    caveLocation.add(caveCoordX - caveCentreOffset);
+                    caveLocation.add(caveCoordY - caveCentreOffset);
+                    caveLocationArray.add(caveLocation);
+                }
             }
         }
+        ArrayList<Double> lastLocation = caveLocationArray.removeLast();
+        caveLocationArray.add(0, lastLocation);
     }
 
     /**
@@ -568,9 +563,12 @@ public class BoardController   {
                 locationIndexArray.add(12);
                 break;
         }
+        if (playerCount == 2) {
+            caveLocationArray.set(1, caveLocationArray.get(2));
+        }
         for (int i = 0; i <  playerCount; i++) {
             AnchorPane playerAnchorPane = (AnchorPane) getAnchorPane(playerAnchorPaneMap.get(i+1));
-            playerAnchorPane.toFront();
+            moveToken(playerAnchorPane, caveLocationArray.get(i));
         }
     }
 
@@ -733,11 +731,11 @@ public class BoardController   {
         BoardController.tileLocationArray = tileLocationArray;
     }
 
-    public ArrayList<double[]> getCaveLocationArray() {
+    public ArrayList<ArrayList<Double>> getCaveLocationArray() {
         return caveLocationArray;
     }
 
-    public void setCaveLocationArray(ArrayList<double[]> caveLocationArray) {
+    public void setCaveLocationArray(ArrayList<ArrayList<Double>> caveLocationArray) {
         this.caveLocationArray = caveLocationArray;
     }
 

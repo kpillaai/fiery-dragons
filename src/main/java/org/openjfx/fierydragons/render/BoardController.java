@@ -449,7 +449,10 @@ public class BoardController   {
                 Line sliceLine = new Line(startX, startY, endX, endY);
                 sliceLine.setStroke(Color.BLACK);
                 anchorPane.getChildren().add(sliceLine);
-                if (j - 2 == 0 || j - 2 % mapPieces.get(i).getTiles().size() == 0) {
+
+                // checks to see if j is about to be the same as the number of tiles, if yes, it adds a line as that
+                // mapPiece is about to finish printing all its images
+                if (j + 1 == mapPieces.get(i).getTiles().size()) {
                     sliceLine.setStrokeWidth(4);
                 }
 

@@ -470,7 +470,7 @@ public class BoardController   {
 
                 // Generating Animals for each tile
                 double animalX = centreX + Math.cos(Math.toRadians(loopCounter * pieceAngle)) * middleRadius;
-                double animalY = centreX + Math.sin(Math.toRadians(loopCounter * pieceAngle)) * middleRadius;
+                double animalY = centreY + Math.sin(Math.toRadians(loopCounter * pieceAngle)) * middleRadius;
 
                 String hello = mapPieces.get(i).getTiles().get(j).getTileType().toString();
                 String filePath = "/org/openjfx/fierydragons/images/" + mapPieces.get(i).getTiles().get(j).getTileType().toString().toLowerCase() + "1.png";
@@ -492,8 +492,8 @@ public class BoardController   {
                 tileLocationArray.add(location);
 
                 // Add image
-                AnchorPane.setTopAnchor(imageView, topLeftY);
-                AnchorPane.setLeftAnchor(imageView, topLeftX);
+                imageView.setLayoutX(animalX - imageView.getFitWidth() / 2);
+                imageView.setLayoutY(animalY - imageView.getFitHeight() / 2);
                 anchorPane.getChildren().add(imageView);
 
                 // Add Cave (if exist)
@@ -501,6 +501,7 @@ public class BoardController   {
                     // generate circle
                     Circle caveCircle = new Circle();
                     caveCircle.setRadius(55);
+                    caveCircle.setFill(Color.CHOCOLATE);
 
                     //generate image of circle
                     String filePathCaveImage = "/org/openjfx/fierydragons/images/" + mapPieces.get(i).getCave().getTileType().toString().toLowerCase() + "1.png";
@@ -511,12 +512,17 @@ public class BoardController   {
                     imageViewCave.setFitWidth(80);
 
                     //find specific coordinates
-                    int caveOffsetDistance = 30;
-                    double caveCoordX = centreX + Math.cos(Math.toRadians(loopCounter * pieceAngle)) * middleRadius + caveOffsetDistance;
-                    double caveCoordY = centreX + Math.sin(Math.toRadians(loopCounter * pieceAngle)) * middleRadius + caveOffsetDistance;
+                    int caveOffsetDistance = 118;
+                    double caveCoordX = centreX + Math.cos(Math.toRadians(loopCounter * pieceAngle)) * (middleRadius + caveOffsetDistance);
+                    double caveCoordY = centreY + Math.sin(Math.toRadians(loopCounter * pieceAngle)) * (middleRadius + caveOffsetDistance);
+                    caveCircle.setLayoutX(caveCoordX);
+                    caveCircle.setLayoutY(caveCoordY);
+                    imageViewCave.setLayoutX(caveCoordX - imageViewCave.getFitWidth() / 2);
+                    imageViewCave.setLayoutY(caveCoordY - imageViewCave.getFitHeight() / 2);
 
                     //add circle + image to that location
-
+                    anchorPane.getChildren().add(caveCircle);
+                    anchorPane.getChildren().add(imageViewCave);
                 }
 
             }

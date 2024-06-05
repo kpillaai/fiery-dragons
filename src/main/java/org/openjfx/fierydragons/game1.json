@@ -132,7 +132,7 @@
         "cave" : false
       } ],
       "cave" : null
-    }, {
+    },{
       "tiles" : [ {
         "tileType" : "BABY_DRAGON",
         "playerId" : 0,

@@ -497,7 +497,7 @@ public class BoardController   {
                 anchorPane.getChildren().add(imageView);
 
                 // Add Cave (if exist)
-                if (mapPieces.get(i).getCave() != null) {
+                if (mapPieces.get(i).getCave() != null && mapPieces.get(i).getCaveIndex() == j) {
                     // generate circle
                     Circle caveCircle = new Circle();
                     caveCircle.setRadius(55);
@@ -511,9 +511,12 @@ public class BoardController   {
                     imageViewCave.setFitWidth(80);
 
                     //find specific coordinates
-
+                    int caveOffsetDistance = 30;
+                    double caveCoordX = centreX + Math.cos(Math.toRadians(loopCounter * pieceAngle)) * middleRadius + caveOffsetDistance;
+                    double caveCoordY = centreX + Math.sin(Math.toRadians(loopCounter * pieceAngle)) * middleRadius + caveOffsetDistance;
 
                     //add circle + image to that location
+
                 }
 
             }

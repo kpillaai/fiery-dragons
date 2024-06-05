@@ -57,4 +57,12 @@ public class MapPiece {
     public Tile getCave() {
         return cave;
     }
+
+    public int getCaveIndex() {
+        return caveIndex;
+    }
+
+    public void setCaveIndex(int caveIndex) {
+        this.caveIndex = caveIndex;
+    }
 }

@@ -201,7 +201,7 @@ public class Board {
         int newTileIndex;
         // if on cave
         if (currTileIndex < 0) {
-            newTileIndex = noOfMoves;
+            newTileIndex = mapPieces.get(playerLocationArray.get(playerId - 1)[0]).getCaveIndex() + noOfMoves - 1;
             if (newTileIndex > 2) {
                 newTileIndex = newTileIndex - 3;
                 newVolcanoIndex = currVolcanoIndex + 1;

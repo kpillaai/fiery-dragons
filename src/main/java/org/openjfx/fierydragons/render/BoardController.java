@@ -560,17 +560,22 @@ public class BoardController   {
                     anchorPane.getChildren().remove(spiderAnchorPane);
                     playerAnchorPaneMap.put(1, "dragon");
                     playerAnchorPaneMap.put(2, "salamander");
-                    locationIndexArray.add(18);
-                    locationIndexArray.add(6);
+                    for (int i = 0; i < playerCount; i++) {
+                        int[] player1Location = Board.getInstance().getPlayerLocationArray().get(i);
+                        locationIndexArray.add(Board.getInstance().getTileLocation(player1Location) - 1);
+                        System.out.println(Board.getInstance().getTileLocation(player1Location) - 1);
+                    }
                     break;
                 case 3:
                     anchorPane.getChildren().remove(batAnchorPane);
                     playerAnchorPaneMap.put(1, "dragon");
                     playerAnchorPaneMap.put(2, "spider");
                     playerAnchorPaneMap.put(3, "salamander");
-                    locationIndexArray.add(18);
-                    locationIndexArray.add(0);
-                    locationIndexArray.add(6);
+                    for (int i = 0; i < playerCount; i++) {
+                        int[] player1Location = Board.getInstance().getPlayerLocationArray().get(i);
+                        locationIndexArray.add(Board.getInstance().getTileLocation(player1Location) - 1);
+                        System.out.println(Board.getInstance().getTileLocation(player1Location) - 1);
+                    }
                     break;
                 case 4:
                     playerAnchorPaneMap.put(1, "dragon");

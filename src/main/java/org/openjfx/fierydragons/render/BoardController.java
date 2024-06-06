@@ -589,7 +589,6 @@ public class BoardController   {
 
             }
         }
-
         if (playerCount == 2) {
             caveLocationArray.set(1, caveLocationArray.get(2));
             anchorPane.getChildren().remove(batAnchorPane);

@@ -229,7 +229,6 @@ public class Board {
             newTileIndex = currTileIndex + noOfMoves;
             while (newTileIndex > mapPieces.get(currVolcanoIndex).getTiles().size() - 1) {
                 newTileIndex = newTileIndex - mapPieces.get(currVolcanoIndex).getTiles().size();
-                System.out.println("calculating movement");
                 newVolcanoIndex++;
                 if (newVolcanoIndex > mapPieces.size() - 1) {
                     newVolcanoIndex = 0;
@@ -328,14 +327,6 @@ public class Board {
     public void swapPlayers(Player player1, Player player2) {
         int[] player1Location = getPlayerLocation(player1);
         int[] player2Location = getPlayerLocation(player2);
-        int player1Tile = getTileLocation(player1Location);
-        int player2Tile = getTileLocation(player2Location);
-
-        int numberTilesBetween = calculateTilesBetween(player1Location, player2Location);
-        System.out.println("tiles between " + numberTilesBetween);
-
-        System.out.println("Player " + player1.getId() + " old distance " + player1.getDistanceToCave());
-        System.out.println("Player " + player2.getId() + " old distance " + player2.getDistanceToCave());
 
         int player1NewDistance = calculateDistanceToCave(player1, player2Location);
         int player2NewDistance = calculateDistanceToCave(player2, player1Location);
@@ -345,11 +336,6 @@ public class Board {
 
         setPlayerLocation(player1, player2Location);
         setPlayerLocation(player2, player1Location);
-
-        System.out.println("Player " + player1.getId() + " new location " + Arrays.toString(getPlayerLocation(player1)));
-        System.out.println("Player " + player2.getId() + " new location " + Arrays.toString(getPlayerLocation(player2)));
-        System.out.println("Player " + player1.getId() + " new distance " + player1.getDistanceToCave());
-        System.out.println("Player " + player2.getId() + " new distance " + player2.getDistanceToCave());
     }
 
     private int calculateDistanceToCave(Player player, int[] targetLocation) {

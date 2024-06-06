@@ -368,9 +368,6 @@ public class BoardController   {
     private void renderChits() {
         ObservableList<Node> circles = anchorPane.getChildren();
         Deck chits = Board.getInstance().getDeck();
-        for (int i = 0; i < chits.getChitCards().size(); i++) {
-            System.out.println(chits.getChitCard(i).getKey());
-        }
 
         ObservableList<Node> images = FXCollections.observableArrayList();
 
@@ -568,7 +565,6 @@ public class BoardController   {
                     for (int i = 0; i < playerCount; i++) {
                         int[] player1Location = Board.getInstance().getPlayerLocationArray().get(i);
                         locationIndexArray.add(Board.getInstance().getTileLocation(player1Location) - 1);
-                        System.out.println(Board.getInstance().getTileLocation(player1Location) - 1);
                     }
                     break;
                 case 3:
@@ -578,7 +574,6 @@ public class BoardController   {
                     for (int i = 0; i < playerCount; i++) {
                         int[] player1Location = Board.getInstance().getPlayerLocationArray().get(i);
                         locationIndexArray.add(Board.getInstance().getTileLocation(player1Location) - 1);
-                        System.out.println(Board.getInstance().getTileLocation(player1Location) - 1);
                     }
                     break;
                 case 4:
@@ -589,7 +584,6 @@ public class BoardController   {
                     for (int i = 0; i < playerCount; i++) {
                         int[] player1Location = Board.getInstance().getPlayerLocationArray().get(i);
                         locationIndexArray.add(Board.getInstance().getTileLocation(player1Location) - 1);
-                        System.out.println(Board.getInstance().getTileLocation(player1Location) - 1);
                     }
                     break;
 
@@ -758,9 +752,6 @@ public class BoardController   {
         // Update the tileLocationArray to reflect the new positions
         tileLocationArray.set(player2CurrentTile, player1NewTileLocation);
         tileLocationArray.set(player1CurrentTile, player2NewTileLocation);
-
-        System.out.println("Player " + player1.getId() + " new tile location: " + locationIndexArray.get(player1Index));
-        System.out.println("Player " + player2.getId() + " new tile location: " + locationIndexArray.get(player2Index));
     }
 
     public static ArrayList<ArrayList<Double>> getTileLocationArray() {

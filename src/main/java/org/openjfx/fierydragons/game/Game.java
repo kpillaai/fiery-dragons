@@ -130,7 +130,6 @@ public class Game {
      * @desc    used when the game has ended, calls the switchToWinScene to display the winning player
      */
     public void endGame(Player winningPlayer) throws IOException, NoSuchFieldException, IllegalAccessException {
-        System.out.println("game is ending");
         BoardController.getInstance().switchToWinScene(BoardController.getInstance().anchorPane, winningPlayer);
     }
 }

@@ -100,7 +100,6 @@ public class Turn {
         if (isSwap) {
             if (Board.getInstance().getPlayerLocation(Game.getInstance().getCurrentPlayer())[1] >= 0 ) {
                 Player playerToSwap = Board.getInstance().findClosestPlayer(Game.getInstance().getCurrentPlayer());
-                System.out.println("Closest Player: " + playerToSwap.getId());
                 Board.getInstance().swapPlayers(Game.getInstance().getCurrentPlayer(), playerToSwap);
                 BoardController.getInstance().swapPlayerToken(Game.getInstance().getCurrentPlayer(), playerToSwap);
             }
@@ -112,14 +111,6 @@ public class Turn {
             int moveValue = chitCard.getValue();
             Board.getInstance().movePlayer(Game.getInstance().getCurrentPlayer(), moveValue);
             BoardController.movePlayer(chitCard);
-
-            System.out.println();
-
-            System.out.println(Game.getInstance().getCurrentPlayer().getDistanceToCave());
-            System.out.println(Game.getInstance().getCurrentPlayer().getName());
-
-
-            System.out.println(Board.getInstance().getMapPieces().get(Board.getInstance().getPlayerLocation(Game.getInstance().getCurrentPlayer())[0]).getTiles().get(Board.getInstance().getPlayerLocation(Game.getInstance().getCurrentPlayer())[1]).getTileType());
 
             if (chitCard.getValue() < 0) { // End turn if player cannot move or pirate
                 endTurn();

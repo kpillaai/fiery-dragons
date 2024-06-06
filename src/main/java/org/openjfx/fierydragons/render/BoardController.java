@@ -113,6 +113,10 @@ public class BoardController   {
         BoardController.instance = instance;
     }
 
+    /**
+     * @author  Krishna Pillaai Manogaran
+     * @desc    Reset the instance of the Board Controller
+     */
     public static void resetBoardController() {
         instance = null;
         tileLocationArray = null;
@@ -120,6 +124,10 @@ public class BoardController   {
         flippedCardId = null;
     }
 
+    /**
+     * @author  Krishna Pillaai Manogaran
+     * @desc    Switches back to the starting screen, so that can exit the game after saving
+     */
     public void switchToStartScene(ActionEvent event) throws IOException {
         timerController.stopTimer();
         Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -262,6 +270,10 @@ public class BoardController   {
         timerController.startTimer();
     }
 
+    /**
+     * @author  Krishna Pillaai Manogaran
+     * @desc    If there are saved cards that are flipped, it will flip those cards
+     */
     public void initialiseFlippedCards() {
         if (flippedCardId != null && !flippedCardId.isEmpty()) {
             for (Node node : anchorPane.getChildren()) {
@@ -522,23 +534,7 @@ public class BoardController   {
                     caveLocation.add(caveCoordX - caveCentreOffset);
                     caveLocation.add(caveCoordY - caveCentreOffset);
                     caveLocationArray.add(caveLocation);
-
-//                    for (int[] playerLocation: Board.getInstance().getPlayerLocationArray()) {
-//                        if (playerLocation[0] == i && playerLocation[1] == -1) {
-//                            // generate token
-//                            // add coloured circle, image etc
-//
-//                        }
-//                    }
                 }
-                // render dragon tokens
-//                for (int[] playerLocation: Board.getInstance().getPlayerLocationArray()) {
-//                    if (playerLocation[0] == i && playerLocation[1] == j) {
-//                        // generate token
-//                    }
-//                }
-
-
             }
         }
         ArrayList<Double> lastLocation = caveLocationArray.removeLast();
@@ -684,18 +680,31 @@ public class BoardController   {
         }
     }
 
+    /**
+     * @author  Zilei Chen
+     * @desc    Pauses the time on the screen, and saves the time to the player
+     */
     public void pauseTimer() {
         // Stop timer when turn ends
         timerController.stopTimer();
         Game.getInstance().getCurrentPlayer().setTimeRemainingSeconds(timerController.getTimeRemainingSeconds());
     }
 
+    /**
+     * @author  Zilei Chen
+     * @desc    Resumes the timer for the current player on the screen
+     */
     public void resumeTimer() {
         //When the next player is iterated, start new timer
         timerController.setTimeRemainingSeconds(Game.getInstance().getCurrentPlayer().getTimeRemainingSeconds());
         timerController.startTimer();
     }
 
+    /**
+     * @author  Krishna Pillaai Manogaran
+     * @desc    Saves the game when the save game button is clicked. Asks where to save it and uses the GameState to
+     * capture the important information
+     */
     @FXML
     private void onSaveGameClick() {
         String jarDir = new File(getClass().getProtectionDomain().getCodeSource().getLocation().getPath()).getParent();

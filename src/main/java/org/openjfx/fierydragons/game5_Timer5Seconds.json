@@ -1,0 +1,205 @@
+{
+  "game" : {
+    "playerList" : [ {
+      "name" : "Player1",
+      "id" : 1,
+      "distanceToCave" : 23,
+      "timeRemainingSeconds" : 5
+    }, {
+      "name" : "Player2",
+      "id" : 2,
+      "distanceToCave" : 23,
+      "timeRemainingSeconds" : 5
+    }, {
+      "name" : "Player3",
+      "id" : 3,
+      "distanceToCave" : 23,
+      "timeRemainingSeconds" : 5
+    } ],
+    "playerCount" : 3,
+    "currentPlayer" : {
+      "name" : "Player1",
+      "id" : 1,
+      "distanceToCave" : 23,
+      "timeRemainingSeconds" : 5
+    }
+  },
+  "board" : {
+    "mapPieces" : [ {
+      "tiles" : [ {
+        "tileType" : "BABY_DRAGON"
+      }, {
+        "tileType" : "BAT"
+      }, {
+        "tileType" : "SPIDER"
+      } ],
+      "cave" : {
+        "tileType" : "SPIDER"
+      },
+      "caveIndex" : 2
+    }, {
+      "tiles" : [ {
+        "tileType" : "BABY_DRAGON"
+      }, {
+        "tileType" : "SALAMANDER"
+      }, {
+        "tileType" : "BAT"
+      } ],
+      "cave" : null,
+      "caveIndex" : 0
+    }, {
+      "tiles" : [ {
+        "tileType" : "SALAMANDER"
+      }, {
+        "tileType" : "SPIDER"
+      }, {
+        "tileType" : "BAT"
+      } ],
+      "cave" : {
+        "tileType" : "SALAMANDER"
+      },
+      "caveIndex" : 1
+    }, {
+      "tiles" : [ {
+        "tileType" : "SALAMANDER"
+      }, {
+        "tileType" : "BABY_DRAGON"
+      }, {
+        "tileType" : "SPIDER"
+      } ],
+      "cave" : null,
+      "caveIndex" : 0
+    }, {
+      "tiles" : [ {
+        "tileType" : "BAT"
+      }, {
+        "tileType" : "SPIDER"
+      }, {
+        "tileType" : "BABY_DRAGON"
+      } ],
+      "cave" : null,
+      "caveIndex" : 0
+    }, {
+      "tiles" : [ {
+        "tileType" : "BAT"
+      }, {
+        "tileType" : "BABY_DRAGON"
+      }, {
+        "tileType" : "SALAMANDER"
+      } ],
+      "cave" : null,
+      "caveIndex" : 0
+    }, {
+      "tiles" : [ {
+        "tileType" : "SPIDER"
+      }, {
+        "tileType" : "SALAMANDER"
+      }, {
+        "tileType" : "BABY_DRAGON"
+      } ],
+      "cave" : {
+        "tileType" : "BABY_DRAGON"
+      },
+      "caveIndex" : 0
+    } ],
+    "deck" : {
+      "chitCards" : [ {
+        "key" : "BABY_DRAGON",
+        "value" : 1
+      }, {
+        "key" : "BABY_DRAGON",
+        "value" : 2
+      }, {
+        "key" : "BABY_DRAGON",
+        "value" : 3
+      }, {
+        "key" : "BAT",
+        "value" : 1
+      }, {
+        "key" : "BAT",
+        "value" : 2
+      }, {
+        "key" : "BAT",
+        "value" : 3
+      }, {
+        "key" : "SALAMANDER",
+        "value" : 1
+      }, {
+        "key" : "SALAMANDER",
+        "value" : 2
+      }, {
+        "key" : "SALAMANDER",
+        "value" : 3
+      }, {
+        "key" : "SPIDER",
+        "value" : 1
+      }, {
+        "key" : "SPIDER",
+        "value" : 2
+      }, {
+        "key" : "SPIDER",
+        "value" : 3
+      }, {
+        "key" : "PIRATE",
+        "value" : -1
+      }, {
+        "key" : "PIRATE",
+        "value" : -2
+      }, {
+        "key" : "PIRATE",
+        "value" : -1
+      }, {
+        "key" : "PIRATE",
+        "value" : -2
+      }, {
+        "key" : "SWAP",
+        "value" : 0
+      }, {
+        "key" : "SWAP",
+        "value" : 0
+      } ]
+    },
+    "playerLocationArray" : [ [ 6, -1 ], [ 0, -1 ], [ 2, -1 ] ],
+    "numTiles" : 21
+  },
+  "boardController" : {
+    "caveLocationArray" : [ [ 1096.8460737943133, 102.6229293506176 ], [ 1358.3187529632603, 645.5765422640305 ], [ 836.4232262573528, 946.8930650965478 ] ],
+    "playerColours" : [ {
+      "red" : 0.22745098173618317,
+      "green" : 0.5764706134796143,
+      "blue" : 0.8823529481887817,
+      "opacity" : 1.0,
+      "opaque" : true,
+      "hue" : 208.02395018289874,
+      "saturation" : 0.7422222227476262,
+      "brightness" : 0.8823529481887817
+    }, {
+      "red" : 0.8823529481887817,
+      "green" : 0.20000000298023224,
+      "blue" : 0.20000000298023224,
+      "opacity" : 1.0,
+      "opaque" : true,
+      "hue" : 0.0,
+      "saturation" : 0.7733333317571216,
+      "brightness" : 0.8823529481887817
+    }, {
+      "red" : 0.7921568751335144,
+      "green" : 0.1411764770746231,
+      "blue" : 0.8039215803146362,
+      "opacity" : 1.0,
+      "opaque" : true,
+      "hue" : 298.9349113144459,
+      "saturation" : 0.8243902383869707,
+      "brightness" : 0.8039215803146362
+    } ],
+    "flippedCardId" : [ ]
+  },
+  "tileLocationArray" : [ [ 1230.5611618804958, 404.2045683164561 ], [ 1245.0, 500.0 ], [ 1230.5611618804958, 595.7954316835438 ], [ 1188.5276016526984, 683.0790188706771 ], [ 1122.6341856040885, 754.0952318021097 ], [ 1038.7358329190783, 802.5339683093664 ], [ 944.2872804155879, 824.0912340838836 ], [ 847.6806964641978, 816.8515714590926 ], [ 757.5000000000001, 781.4582562299427 ], [ 681.7581416553064, 721.0561397755488 ], [ 627.1851179317139, 641.0122152132064 ], [ 598.6299814768332, 548.4387365072567 ], [ 598.6299814768331, 451.5612634927434 ], [ 627.1851179317138, 358.98778478679367 ], [ 681.7581416553064, 278.9438602244512 ], [ 757.4999999999999, 218.5417437700575 ], [ 847.6806964641975, 183.1484285409074 ], [ 944.2872804155879, 175.90876591611647 ], [ 1038.7358329190786, 197.46603169063366 ], [ 1122.6341856040883, 245.9047681978903 ], [ 1188.5276016526984, 316.92098112932285 ] ],
+  "locationIndexArray" : [ 17, 1, 6 ],
+  "flippedCardId" : [ ],
+  "playerAnchorPaneMap" : {
+    "1" : "dragon",
+    "2" : "spider",
+    "3" : "salamander"
+  }
+}

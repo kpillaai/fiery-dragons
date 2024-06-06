@@ -3,174 +3,118 @@
     "playerList" : [ {
       "name" : "Player1",
       "id" : 1,
-      "distanceToCave" : 23,
-      "timeRemainingSeconds" : 144
+      "distanceToCave" : 17,
+      "timeRemainingSeconds" : 140
     }, {
       "name" : "Player2",
       "id" : 2,
       "distanceToCave" : 26,
-      "timeRemainingSeconds" : 150
+      "timeRemainingSeconds" : 144
     }, {
       "name" : "Player3",
       "id" : 3,
-      "distanceToCave" : 26,
-      "timeRemainingSeconds" : 150
+      "distanceToCave" : 24,
+      "timeRemainingSeconds" : 120
     }, {
       "name" : "Player4",
       "id" : 4,
       "distanceToCave" : 26,
-      "timeRemainingSeconds" : 149
+      "timeRemainingSeconds" : 150
     } ],
     "playerCount" : 4,
     "currentPlayer" : {
-      "name" : "Player2",
-      "id" : 2,
-      "distanceToCave" : 26,
-      "timeRemainingSeconds" : 150
+      "name" : "Player3",
+      "id" : 3,
+      "distanceToCave" : 24,
+      "timeRemainingSeconds" : 120
     }
   },
   "board" : {
     "mapPieces" : [ {
       "tiles" : [ {
-        "tileType" : "BABY_DRAGON",
-        "playerId" : 0,
-        "cave" : null
+        "tileType" : "BABY_DRAGON"
       }, {
-        "tileType" : "BAT",
-        "playerId" : 0,
-        "cave" : null
+        "tileType" : "BAT"
       }, {
-        "tileType" : "SPIDER",
-        "playerId" : 0,
-        "cave" : null
+        "tileType" : "SPIDER"
       } ],
       "cave" : {
-        "tileType" : "SPIDER",
-        "playerId" : 0,
-        "cave" : null
+        "tileType" : "SPIDER"
       },
       "caveIndex" : 0
     }, {
       "tiles" : [ {
-        "tileType" : "BABY_DRAGON",
-        "playerId" : 0,
-        "cave" : null
+        "tileType" : "BABY_DRAGON"
       }, {
-        "tileType" : "SALAMANDER",
-        "playerId" : 0,
-        "cave" : null
+        "tileType" : "SALAMANDER"
       }, {
-        "tileType" : "BAT",
-        "playerId" : 0,
-        "cave" : null
+        "tileType" : "BAT"
       } ],
       "cave" : null,
       "caveIndex" : 0
     }, {
       "tiles" : [ {
-        "tileType" : "SALAMANDER",
-        "playerId" : 0,
-        "cave" : null
+        "tileType" : "SALAMANDER"
       }, {
-        "tileType" : "SPIDER",
-        "playerId" : 0,
-        "cave" : null
+        "tileType" : "SPIDER"
       }, {
-        "tileType" : "BAT",
-        "playerId" : 0,
-        "cave" : null
+        "tileType" : "BAT"
       } ],
       "cave" : {
-        "tileType" : "SALAMANDER",
-        "playerId" : 0,
-        "cave" : null
+        "tileType" : "SALAMANDER"
       },
       "caveIndex" : 0
     }, {
       "tiles" : [ {
-        "tileType" : "SALAMANDER",
-        "playerId" : 0,
-        "cave" : null
+        "tileType" : "SALAMANDER"
       }, {
-        "tileType" : "BABY_DRAGON",
-        "playerId" : 0,
-        "cave" : null
+        "tileType" : "BABY_DRAGON"
       }, {
-        "tileType" : "SPIDER",
-        "playerId" : 0,
-        "cave" : null
+        "tileType" : "SPIDER"
       } ],
       "cave" : null,
       "caveIndex" : 0
     }, {
       "tiles" : [ {
-        "tileType" : "BAT",
-        "playerId" : 0,
-        "cave" : null
+        "tileType" : "BAT"
       }, {
-        "tileType" : "SPIDER",
-        "playerId" : 0,
-        "cave" : null
+        "tileType" : "SPIDER"
       }, {
-        "tileType" : "BABY_DRAGON",
-        "playerId" : 0,
-        "cave" : null
+        "tileType" : "BABY_DRAGON"
       } ],
       "cave" : {
-        "tileType" : "BAT",
-        "playerId" : 0,
-        "cave" : null
+        "tileType" : "BAT"
       },
       "caveIndex" : 0
     }, {
       "tiles" : [ {
-        "tileType" : "BAT",
-        "playerId" : 0,
-        "cave" : null
+        "tileType" : "BAT"
       }, {
-        "tileType" : "BABY_DRAGON",
-        "playerId" : 0,
-        "cave" : null
+        "tileType" : "BABY_DRAGON"
       }, {
-        "tileType" : "SALAMANDER",
-        "playerId" : 0,
-        "cave" : null
+        "tileType" : "SALAMANDER"
       } ],
       "cave" : null,
       "caveIndex" : 0
     }, {
       "tiles" : [ {
-        "tileType" : "SPIDER",
-        "playerId" : 0,
-        "cave" : null
+        "tileType" : "SPIDER"
       }, {
-        "tileType" : "SALAMANDER",
-        "playerId" : 0,
-        "cave" : null
+        "tileType" : "SALAMANDER"
       }, {
-        "tileType" : "BABY_DRAGON",
-        "playerId" : 0,
-        "cave" : null
+        "tileType" : "BABY_DRAGON"
       } ],
       "cave" : {
-        "tileType" : "BABY_DRAGON",
-        "playerId" : 0,
-        "cave" : null
+        "tileType" : "BABY_DRAGON"
       },
       "caveIndex" : 0
     }, {
       "tiles" : [ {
-        "tileType" : "SPIDER",
-        "playerId" : 0,
-        "cave" : null
+        "tileType" : "SPIDER"
       }, {
-        "tileType" : "BAT",
-        "playerId" : 0,
-        "cave" : null
+        "tileType" : "BAT"
       }, {
-        "tileType" : "SALAMANDER",
-        "playerId" : 0,
-        "cave" : null
+        "tileType" : "SALAMANDER"
       } ],
       "cave" : null,
       "caveIndex" : 0
@@ -232,7 +176,7 @@
         "value" : 0
       } ]
     },
-    "playerLocationArray" : [ [ 7, 0 ], [ 0, -1 ], [ 2, -1 ], [ 4, -1 ] ],
+    "playerLocationArray" : [ [ 0, 2 ], [ 7, 2 ], [ 2, 1 ], [ 4, -1 ] ],
     "numTiles" : 24
   },
   "boardController" : {
@@ -243,42 +187,42 @@
       "blue" : 0.8823529481887817,
       "opacity" : 1.0,
       "opaque" : true,
+      "hue" : 208.02395018289874,
       "saturation" : 0.7422222227476262,
-      "brightness" : 0.8823529481887817,
-      "hue" : 208.02395018289874
+      "brightness" : 0.8823529481887817
     }, {
       "red" : 0.8823529481887817,
       "green" : 0.20000000298023224,
       "blue" : 0.20000000298023224,
       "opacity" : 1.0,
       "opaque" : true,
+      "hue" : 0.0,
       "saturation" : 0.7733333317571216,
-      "brightness" : 0.8823529481887817,
-      "hue" : 0.0
+      "brightness" : 0.8823529481887817
     }, {
       "red" : 0.7921568751335144,
       "green" : 0.1411764770746231,
       "blue" : 0.8039215803146362,
       "opacity" : 1.0,
       "opaque" : true,
+      "hue" : 298.9349113144459,
       "saturation" : 0.8243902383869707,
-      "brightness" : 0.8039215803146362,
-      "hue" : 298.9349113144459
+      "brightness" : 0.8039215803146362
     }, {
       "red" : 0.0470588244497776,
       "green" : 0.6313725709915161,
       "blue" : 0.26274511218070984,
       "opacity" : 1.0,
       "opaque" : true,
+      "hue" : 142.14765156638586,
       "saturation" : 0.9254658396454002,
-      "brightness" : 0.6313725709915161,
-      "hue" : 142.14765156638586
+      "brightness" : 0.6313725709915161
     } ],
-    "flippedCardId" : [ ]
+    "flippedCardId" : [ 7 ]
   },
   "tileLocationArray" : [ [ 1233.9258935439473, 415.88381034168077 ], [ 1245.0, 500.0 ], [ 1233.9258935439473, 584.1161896583193 ], [ 1201.4582562299427, 662.5 ], [ 1149.8097038856279, 729.8097038856279 ], [ 1082.5, 781.4582562299425 ], [ 1004.1161896583192, 813.9258935439473 ], [ 920.0, 825.0 ], [ 835.8838103416807, 813.9258935439473 ], [ 757.5000000000001, 781.4582562299427 ], [ 690.1902961143721, 729.809703885628 ], [ 638.5417437700573, 662.5 ], [ 606.0741064560528, 584.1161896583193 ], [ 595.0, 500.0 ], [ 606.0741064560527, 415.8838103416807 ], [ 638.5417437700575, 337.5 ], [ 690.190296114372, 270.1902961143721 ], [ 757.4999999999999, 218.5417437700575 ], [ 835.8838103416808, 186.0741064560528 ], [ 919.9999999999999, 175.0 ], [ 1004.1161896583192, 186.0741064560528 ], [ 1082.5, 218.54174377005745 ], [ 1149.8097038856279, 270.190296114372 ], [ 1201.4582562299424, 337.4999999999999 ] ],
-  "locationIndexArray" : [ 21, 0, 6, 12 ],
-  "flippedCardId" : [ ],
+  "locationIndexArray" : [ 2, 23, 7, 11 ],
+  "flippedCardId" : [ 7 ],
   "playerAnchorPaneMap" : {
     "1" : "dragon",
     "2" : "spider",

@@ -144,18 +144,6 @@ public class Turn {
         return t0.handleTurn(chitCard);
     }
 
-    // Save the entire game state to a JSON file
-    public void saveGame(String filePath) throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(filePath), this);
-    }
-
-    // Load the entire game state from a JSON file
-    public static Turn loadGame(String filePath) throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.readValue(new File(filePath), Turn.class);
-    }
-
     private Player calculateTimeWin() {
         // find all player distances, find the least distance, they win, if tie, no one wins
         Player minDistancePlayer = new Player("ITS A TIE", 10000);

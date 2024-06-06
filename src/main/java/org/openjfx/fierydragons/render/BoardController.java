@@ -547,6 +547,7 @@ public class BoardController   {
      *          tokens. Also based on number of players, initialise an array based on relative token position.
      *          locationIndexArray stores indexes that refer to tileLocationArray, so tokens can be moved to the correct
      *          co-ordinates during turns.
+     *          Also initialises a HashMap to store player and their AnchorPane tokens as key,value pairs.
      */
     public void renderDragonTokens() throws NoSuchFieldException, IllegalAccessException {
         int playerCount = Game.getInstance().getPlayerCount();
@@ -610,6 +611,10 @@ public class BoardController   {
         playerCountLabel.setText("Number of Players: " + playerCount);
     }
 
+    /**
+     * @author  Krishna Pillaai Manogaran
+     * @desc    Updates player token locations after loading a game.
+     */
     public void updatePlayerLocation() throws NoSuchFieldException, IllegalAccessException {
         ArrayList<AnchorPane> anchorPanes = new ArrayList<>();
         for (int i = 0; i < locationIndexArray.size(); i++) {
@@ -622,6 +627,12 @@ public class BoardController   {
         }
     }
 
+    /**
+     * @author  Jeffrey Yan
+     * @desc    Given a string, get the corresponding anchorPane
+     *          Uses field.get() as AnchorPanes are not serialisable when trying to save the game, therefore a string is
+     *          stored in a Map instead.
+     */
     public Object getAnchorPane(String creature) throws NoSuchFieldException, IllegalAccessException {
         String fieldName = creature + "AnchorPane";
         Field field = this.getClass().getDeclaredField(fieldName);
@@ -735,6 +746,12 @@ public class BoardController   {
         }
     }
 
+    /**
+     * @author  Jeffrey Yan
+     * @desc    Takes two players as input, and swaps token locations and corresponding stored locations.
+     * param:   player1 player to swap
+     * param:   player2 player to swap
+     */
     public void swapPlayerToken(Player player1, Player player2) throws NoSuchFieldException, IllegalAccessException {
         AnchorPane player1AnchorPane = (AnchorPane) getAnchorPane(playerAnchorPaneMap.get(player1.getId()));
         AnchorPane player2AnchorPane = (AnchorPane) getAnchorPane(playerAnchorPaneMap.get(player2.getId()));

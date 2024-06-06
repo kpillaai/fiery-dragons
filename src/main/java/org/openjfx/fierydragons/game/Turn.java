@@ -63,6 +63,10 @@ public class Turn {
         return true;
     }
 
+    /**
+     * @author  Zilei Chen
+     * @desc    Checks at the start of everyone's turn if all players have run out of time.
+     */
     private boolean checkTurnTimers() throws IOException, NoSuchFieldException, IllegalAccessException {
         // Check if all players run out of time
         ArrayList<Player> playerList = Game.getInstance().getPlayerList();
@@ -81,7 +85,7 @@ public class Turn {
     }
 
     /**
-     * @author  Zilei Chen
+     * @author  Zilei Chen, Jeffrey Yan
      * @desc    Based on the results of Turn logic, it will play out the turn by either moving the player or ending
      * turn
      * Param is the index of the Chit Card the player flipped.
@@ -130,7 +134,7 @@ public class Turn {
     }
 
     /**
-     * @author  Zilei Chen
+     * @author  Zilei Chen, Jeffrey Yan
      * @desc    Handles the Turn Logic of a turn using the Chain of Responsibility design pattern.
      * Param is the index of the Chit Card the player flipped.
      */
@@ -152,6 +156,10 @@ public class Turn {
         return t0.handleTurn(chitCard);
     }
 
+    /**
+     * @author  Zilei Chen
+     * @desc    Calculates which players win when all timers reach 0 based on their distance to winning the game.
+     */
     private Player calculateTimeWin() {
         // find all player distances, find the least distance, they win, if tie, no one wins
         Player minDistancePlayer = new Player("ITS A TIE", 10000);

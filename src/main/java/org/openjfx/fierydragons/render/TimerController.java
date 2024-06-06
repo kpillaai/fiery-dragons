@@ -12,6 +12,11 @@ public class TimerController {
     private final Label timerLabel;
     private Timeline timeline;
 
+    /**
+     * @author  Zilei Chen
+     * @desc    This class extends creates a timer that ticks down based on the input it is given in seconds.
+     * Will end the players turn if the timer reaches 0.
+     */
     public TimerController(int timeRemainingSeconds, Label timerLabel) {
         this.timeRemainingSeconds = timeRemainingSeconds; // Default Game Clock
         this.timerLabel = timerLabel;
@@ -34,14 +39,26 @@ public class TimerController {
         timeline.setCycleCount(this.timeRemainingSeconds);
     }
 
+    /**
+     * @author  Zilei Chen
+     * @desc    This method extends starts the timer count down
+     */
     public void startTimer() {
         timeline.play();
     }
 
+    /**
+     * @author  Zilei Chen
+     * @desc    This method will stop the timer countdown
+     */
     public void stopTimer() {
         timeline.stop();
     }
 
+    /**
+     * @author  Zilei Chen
+     * @desc    This method will format the time such that when printed on screen, it shows correctly.
+     */
     private String formatTime(int timeSeconds) {
         if (timeSeconds < 0) {
             timeSeconds = 0;

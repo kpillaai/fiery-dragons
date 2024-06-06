@@ -262,8 +262,8 @@ public class Board {
     /**
      * @author  Jeffrey Yan
      * @desc    Gets tile position on board given volcano and tile indexes, assumes player is not in cave
-     * param: position array where [volcanoIndex, tileIndex] represents a player's position
-     * returns: an int between 0 and 23 that represents the tile the player is currently on.
+     * param:   position array where [volcanoIndex, tileIndex] represents a player's position
+     * returns: an int between 0 and numTiles that represents the tile the player is currently on.
      */
     public int getTileLocation(int[] position) {
         int counter = 0;
@@ -278,13 +278,17 @@ public class Board {
         return counter;
     }
 
+    /**
+     * @author  Jeffrey Yan
+     * @desc    Gets tile position on board of where the cave should be
+     * param:   position array where [volcanoIndex, tileIndex] represents a player's position
+     * returns: an int between 0 and numTiles that represents where the cave is.
+     */
     public int getCaveTileLocation(int[] position) {
         int counter = 0;
         for (int i = 0; i < mapPieces.size(); i++) {
             for (int j = 0; j < mapPieces.get(i).getTiles().size(); j++) {
-                if (i == position[0] && j == position[1]) {
-                    return counter;
-                } else if (i == position[0] && j == mapPieces.get(i).getCaveIndex()) {
+                if (i == position[0] && j == mapPieces.get(i).getCaveIndex()) {
                     return counter;
                 }
                 counter++;
@@ -358,6 +362,12 @@ public class Board {
         setPlayerLocation(player2, player1Location);
     }
 
+    /*
+     * @author  Jeffrey Yan
+     * @desc    Function used to calculate a player's distance from their starting cave given some location on the board
+     * param:   player player to check distance of
+     * param:   targetLocation location to check
+     */
     private int calculateDistanceToCave(Player player, int[] targetLocation) {
         int currentTile = getTileLocation(getPlayerLocation(player));
         int targetTile = getTileLocation(targetLocation);

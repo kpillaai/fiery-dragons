@@ -16,8 +16,8 @@ public class CheckTimer extends TurnHandler {
     /**
      * @author  Zilei Chen
      * @desc    This method extends TurnHandler, intends to check whether the player has run out of time.
-     * Returns 2 booleans representing if the player can move, and if the player will win this turn. Takes a Pair which
-     * represents chit cards and their number value.
+     * Returns 3 booleans representing if the player can move, if the player will win this turn and if a player can swap.
+     * Takes a Pair which represents chit cards and their number value.
      */
     @Override
     public ArrayList<Boolean> handleTurn(CustomPair<TileType, Integer> chitCard) {

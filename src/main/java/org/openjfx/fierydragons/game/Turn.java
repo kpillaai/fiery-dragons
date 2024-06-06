@@ -104,6 +104,9 @@ public class Turn {
                 BoardController.getInstance().swapPlayerToken(Game.getInstance().getCurrentPlayer(), playerToSwap);
             }
             endTurn();
+
+            System.out.println(Game.getInstance().getCurrentPlayer().getDistanceToCave());
+            System.out.println(Game.getInstance().getCurrentPlayer().getName());
             return; // Exit method after swap
         }
 
@@ -111,6 +114,10 @@ public class Turn {
             int moveValue = chitCard.getValue();
             Board.getInstance().movePlayer(Game.getInstance().getCurrentPlayer(), moveValue);
             BoardController.movePlayer(chitCard);
+
+            System.out.println(Board.getInstance().getPlayerLocation(Game.getInstance().getCurrentPlayer())[0]);
+            System.out.println(Board.getInstance().getPlayerLocation(Game.getInstance().getCurrentPlayer())[1]);
+            System.out.println("distaqnce to cave: " + Game.getInstance().getCurrentPlayer().getDistanceToCave());
 
             if (chitCard.getValue() < 0) { // End turn if player cannot move or pirate
                 endTurn();

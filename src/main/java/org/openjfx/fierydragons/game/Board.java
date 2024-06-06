@@ -175,15 +175,18 @@ public class Board {
                 case 2:
                     playerLocationArray.add(new int[]{6, -1});
                     playerLocationArray.add(new int[]{2, -1});
+                    break;
                 case 3:
                     playerLocationArray.add(new int[]{6, -1});
                     playerLocationArray.add(new int[]{0, -1});
                     playerLocationArray.add(new int[]{2, -1});
+                    break;
                 case 4:
                     playerLocationArray.add(new int[]{6, -1});
                     playerLocationArray.add(new int[]{0, -1});
                     playerLocationArray.add(new int[]{2, -1});
                     playerLocationArray.add(new int[]{4, -1});
+                    break;
             }
         }
     }
@@ -325,8 +328,12 @@ public class Board {
      * param:   player2 player to swap
      */
     public void swapPlayers(Player player1, Player player2) {
-        int[] player1Location = getPlayerLocation(player1);
-        int[] player2Location = getPlayerLocation(player2);
+        int[] player1Location = {0, 0};
+        int[] player2Location = {0, 0};
+        player1Location[0] = getPlayerLocation(player1)[0] + 0;
+        player1Location[1] = getPlayerLocation(player1)[1] + 0;
+        player2Location[0] = getPlayerLocation(player2)[0] + 0;
+        player2Location[1] = getPlayerLocation(player2)[1] + 0;
 
         int player1NewDistance = calculateDistanceToCave(player1, player2Location);
         int player2NewDistance = calculateDistanceToCave(player2, player1Location);
@@ -346,8 +353,14 @@ public class Board {
         int forwardDistance = (targetTile - currentTile + numTiles) % numTiles;
         int backwardDistance = (currentTile - targetTile + numTiles) % numTiles;
         if (forwardDistance <= backwardDistance) {
+            if (distanceToCave - forwardDistance < 0) {
+                return distanceToCave - forwardDistance + numTiles + 1;
+            }
             return distanceToCave - forwardDistance;
         } else {
+            if (distanceToCave + backwardDistance > numTiles) {
+                return distanceToCave + backwardDistance - 1;
+            }
             return distanceToCave + backwardDistance;
         }
     }

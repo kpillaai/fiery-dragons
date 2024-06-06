@@ -3,40 +3,40 @@
     "playerList" : [ {
       "name" : "Player1",
       "id" : 1,
-      "distanceToCave" : 5,
-      "timeRemainingSeconds" : 10
+      "distanceToCave" : 23,
+      "timeRemainingSeconds" : 140
     }, {
       "name" : "Player2",
       "id" : 2,
-      "distanceToCave" : 23,
-      "timeRemainingSeconds" : 10
+      "distanceToCave" : 3,
+      "timeRemainingSeconds" : 119
     }, {
       "name" : "Player3",
       "id" : 3,
-      "distanceToCave" : 23,
-      "timeRemainingSeconds" : 10
+      "distanceToCave" : 20,
+      "timeRemainingSeconds" : 143
     } ],
     "playerCount" : 3,
     "currentPlayer" : {
-      "name" : "Player2",
-      "id" : 2,
-      "distanceToCave" : 23,
-      "timeRemainingSeconds" : 15
+      "name" : "Player3",
+      "id" : 3,
+      "distanceToCave" : 20,
+      "timeRemainingSeconds" : 143
     }
   },
   "board" : {
     "mapPieces" : [ {
       "tiles" : [ {
-        "tileType" : "BABY_DRAGON"
-      }, {
         "tileType" : "BAT"
       }, {
         "tileType" : "SPIDER"
+      }, {
+        "tileType" : "BABY_DRAGON"
       } ],
       "cave" : {
         "tileType" : "SPIDER"
       },
-      "caveIndex" : 2
+      "caveIndex" : 1
     }, {
       "tiles" : [ {
         "tileType" : "BABY_DRAGON"
@@ -61,31 +61,33 @@
       "caveIndex" : 1
     }, {
       "tiles" : [ {
-        "tileType" : "SALAMANDER"
-      }, {
-        "tileType" : "BABY_DRAGON"
-      }, {
         "tileType" : "SPIDER"
+      }, {
+        "tileType" : "BAT"
+      }, {
+        "tileType" : "SALAMANDER"
       } ],
       "cave" : null,
       "caveIndex" : 0
     }, {
       "tiles" : [ {
+        "tileType" : "BABY_DRAGON"
+      }, {
         "tileType" : "BAT"
       }, {
         "tileType" : "SPIDER"
-      }, {
-        "tileType" : "BABY_DRAGON"
       } ],
-      "cave" : null,
-      "caveIndex" : 0
+      "cave" : {
+        "tileType" : "BAT"
+      },
+      "caveIndex" : 1
     }, {
       "tiles" : [ {
-        "tileType" : "BAT"
+        "tileType" : "SALAMANDER"
       }, {
         "tileType" : "BABY_DRAGON"
       }, {
-        "tileType" : "SALAMANDER"
+        "tileType" : "SPIDER"
       } ],
       "cave" : null,
       "caveIndex" : 0
@@ -100,6 +102,16 @@
       "cave" : {
         "tileType" : "BABY_DRAGON"
       },
+      "caveIndex" : 1
+    }, {
+      "tiles" : [ {
+        "tileType" : "BAT"
+      }, {
+        "tileType" : "BABY_DRAGON"
+      }, {
+        "tileType" : "SALAMANDER"
+      } ],
+      "cave" : null,
       "caveIndex" : 0
     } ],
     "deck" : {
@@ -159,44 +171,53 @@
         "value" : 0
       } ]
     },
-    "playerLocationArray" : [ [ 4, 2 ], [ 0, -1 ], [ 2, -1 ] ],
-    "numTiles" : 21
+    "playerLocationArray" : [ [ 7, 0 ], [ 7, 2 ], [ 4, 0 ] ],
+    "numTiles" : 24
   },
   "boardController" : {
-    "caveLocationArray" : [ [ 1096.8460737943133, 102.6229293506176 ], [ 1358.3187529632603, 645.5765422640305 ], [ 836.4232262573528, 946.8930650965478 ] ],
+    "caveLocationArray" : [ [ 934.9999999999999, 72.0 ], [ 1378.0, 515.0 ], [ 935.0, 958.0 ], [ 492.0, 515.0 ] ],
     "playerColours" : [ {
       "red" : 0.22745098173618317,
       "green" : 0.5764706134796143,
       "blue" : 0.8823529481887817,
       "opacity" : 1.0,
       "opaque" : true,
+      "hue" : 208.02395018289874,
       "saturation" : 0.7422222227476262,
-      "brightness" : 0.8823529481887817,
-      "hue" : 208.02395018289874
+      "brightness" : 0.8823529481887817
     }, {
       "red" : 0.8823529481887817,
       "green" : 0.20000000298023224,
       "blue" : 0.20000000298023224,
       "opacity" : 1.0,
       "opaque" : true,
+      "hue" : 0.0,
       "saturation" : 0.7733333317571216,
-      "brightness" : 0.8823529481887817,
-      "hue" : 0.0
+      "brightness" : 0.8823529481887817
     }, {
       "red" : 0.7921568751335144,
       "green" : 0.1411764770746231,
       "blue" : 0.8039215803146362,
       "opacity" : 1.0,
       "opaque" : true,
+      "hue" : 298.9349113144459,
       "saturation" : 0.8243902383869707,
-      "brightness" : 0.8039215803146362,
-      "hue" : 298.9349113144459
+      "brightness" : 0.8039215803146362
+    }, {
+      "red" : 0.0470588244497776,
+      "green" : 0.6313725709915161,
+      "blue" : 0.26274511218070984,
+      "opacity" : 1.0,
+      "opaque" : true,
+      "hue" : 142.14765156638586,
+      "saturation" : 0.9254658396454002,
+      "brightness" : 0.6313725709915161
     } ],
-    "flippedCardId" : [ ]
+    "flippedCardId" : [ 8, 11 ]
   },
-  "tileLocationArray" : [ [ 1230.5611618804958, 404.2045683164561 ], [ 1245.0, 500.0 ], [ 1230.5611618804958, 595.7954316835438 ], [ 1188.5276016526984, 683.0790188706771 ], [ 1122.6341856040885, 754.0952318021097 ], [ 1038.7358329190783, 802.5339683093664 ], [ 944.2872804155879, 824.0912340838836 ], [ 847.6806964641978, 816.8515714590926 ], [ 757.5000000000001, 781.4582562299427 ], [ 681.7581416553064, 721.0561397755488 ], [ 627.1851179317139, 641.0122152132064 ], [ 598.6299814768332, 548.4387365072567 ], [ 598.6299814768331, 451.5612634927434 ], [ 627.1851179317138, 358.98778478679367 ], [ 681.7581416553064, 278.9438602244512 ], [ 757.4999999999999, 218.5417437700575 ], [ 847.6806964641975, 183.1484285409074 ], [ 944.2872804155879, 175.90876591611647 ], [ 1038.7358329190786, 197.46603169063366 ], [ 1122.6341856040883, 245.9047681978903 ], [ 1188.5276016526984, 316.92098112932285 ] ],
-  "locationIndexArray" : [ 14, 1, 6 ],
-  "flippedCardId" : [ ],
+  "tileLocationArray" : [ [ 1233.9258935439473, 415.88381034168077 ], [ 1245.0, 500.0 ], [ 1233.9258935439473, 584.1161896583193 ], [ 1201.4582562299427, 662.5 ], [ 1149.8097038856279, 729.8097038856279 ], [ 1082.5, 781.4582562299425 ], [ 1004.1161896583192, 813.9258935439473 ], [ 920.0, 825.0 ], [ 835.8838103416807, 813.9258935439473 ], [ 757.5000000000001, 781.4582562299427 ], [ 690.1902961143721, 729.809703885628 ], [ 638.5417437700573, 662.5 ], [ 606.0741064560528, 584.1161896583193 ], [ 595.0, 500.0 ], [ 606.0741064560527, 415.8838103416807 ], [ 638.5417437700575, 337.5 ], [ 690.190296114372, 270.1902961143721 ], [ 757.4999999999999, 218.5417437700575 ], [ 835.8838103416808, 186.0741064560528 ], [ 919.9999999999999, 175.0 ], [ 1004.1161896583192, 186.0741064560528 ], [ 1082.5, 218.54174377005745 ], [ 1149.8097038856279, 270.190296114372 ], [ 1201.4582562299424, 337.4999999999999 ] ],
+  "locationIndexArray" : [ 21, 23, 12 ],
+  "flippedCardId" : [ 8, 11 ],
   "playerAnchorPaneMap" : {
     "1" : "dragon",
     "2" : "spider",

@@ -229,7 +229,8 @@ public class Board {
             newTileIndex = currTileIndex + noOfMoves;
             while (newTileIndex > mapPieces.get(currVolcanoIndex).getTiles().size() - 1) {
                 newTileIndex = newTileIndex - mapPieces.get(currVolcanoIndex).getTiles().size();
-                newVolcanoIndex = currVolcanoIndex + 1;
+                System.out.println("calculating movement");
+                newVolcanoIndex++;
                 if (newVolcanoIndex > mapPieces.size() - 1) {
                     newVolcanoIndex = 0;
                 }

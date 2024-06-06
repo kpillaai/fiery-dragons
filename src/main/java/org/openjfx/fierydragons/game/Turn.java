@@ -113,8 +113,14 @@ public class Turn {
             Board.getInstance().movePlayer(Game.getInstance().getCurrentPlayer(), moveValue);
             BoardController.movePlayer(chitCard);
 
+            System.out.println();
+
             System.out.println(Game.getInstance().getCurrentPlayer().getDistanceToCave());
             System.out.println(Game.getInstance().getCurrentPlayer().getName());
+
+
+            System.out.println(Board.getInstance().getMapPieces().get(Board.getInstance().getPlayerLocation(Game.getInstance().getCurrentPlayer())[0]).getTiles().get(Board.getInstance().getPlayerLocation(Game.getInstance().getCurrentPlayer())[1]).getTileType());
+
             if (chitCard.getValue() < 0) { // End turn if player cannot move or pirate
                 endTurn();
             }

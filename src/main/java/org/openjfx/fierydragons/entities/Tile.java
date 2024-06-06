@@ -7,26 +7,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Tile {
 
-    private final Boolean isCave;
     private TileType tileType;
-    private int playerId = 0;
 
     @JsonCreator
-    public Tile(@JsonProperty("isCave") Boolean isCave, @JsonProperty("tileType") TileType tileType) {
+    public Tile(@JsonProperty("tileType") TileType tileType) {
         this.tileType = tileType;
-        this.isCave = isCave;
-    }
-
-    public Boolean isCave() {
-        return isCave;
-    }
-
-    public int getPlayerId() {
-        return playerId;
-    }
-
-    public void setPlayerId(int playerId) {
-        this.playerId = playerId;
     }
 
     /**

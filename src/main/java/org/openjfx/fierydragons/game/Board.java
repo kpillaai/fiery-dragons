@@ -92,23 +92,23 @@ public class Board {
         this.mapPieces = new ArrayList<MapPiece>();
         // create normal pieces
         ArrayList<MapPiece> normalPiece = new ArrayList<>();
-        normalPiece.add(new MapPiece(new Tile(false, TileType.SPIDER), new Tile(false, TileType.BAT), new Tile(false, TileType.SALAMANDER)));
-        normalPiece.add(new MapPiece(new Tile(false, TileType.BABY_DRAGON), new Tile(false, TileType.SALAMANDER), new Tile(false, TileType.BAT)));
-        normalPiece.add(new MapPiece(new Tile(false, TileType.BAT), new Tile(false, TileType.BABY_DRAGON), new Tile(false, TileType.SALAMANDER)));
-        normalPiece.add(new MapPiece(new Tile(false, TileType.SALAMANDER), new Tile(false, TileType.BABY_DRAGON), new Tile(false, TileType.SPIDER)));
+        normalPiece.add(new MapPiece(new Tile(TileType.SPIDER), new Tile(TileType.BAT), new Tile(TileType.SALAMANDER)));
+        normalPiece.add(new MapPiece(new Tile(TileType.BABY_DRAGON), new Tile(TileType.SALAMANDER), new Tile(TileType.BAT)));
+        normalPiece.add(new MapPiece(new Tile(TileType.BAT), new Tile(TileType.BABY_DRAGON), new Tile(TileType.SALAMANDER)));
+        normalPiece.add(new MapPiece(new Tile(TileType.SALAMANDER), new Tile(TileType.BABY_DRAGON), new Tile(TileType.SPIDER)));
 
         // create cave pieces
         ArrayList<MapPiece> cavePiece = new ArrayList<>();
-        MapPiece mapPiece1 = new MapPiece(new Tile(false, TileType.BABY_DRAGON), new Tile(false, TileType.BAT), new Tile(false, TileType.SPIDER));
+        MapPiece mapPiece1 = new MapPiece(new Tile(TileType.BABY_DRAGON), new Tile(TileType.BAT), new Tile(TileType.SPIDER));
         mapPiece1.setCaveIndex(1);
         cavePiece.add(mapPiece1);
-        MapPiece mapPiece2 = new MapPiece(new Tile(false, TileType.SALAMANDER), new Tile(false, TileType.SPIDER), new Tile(false, TileType.BAT));
+        MapPiece mapPiece2 = new MapPiece(new Tile(TileType.SALAMANDER), new Tile(TileType.SPIDER), new Tile(TileType.BAT));
         mapPiece2.setCaveIndex(1);
         cavePiece.add(mapPiece2);
-        MapPiece mapPiece3 = new MapPiece(new Tile(false, TileType.SPIDER), new Tile(false, TileType.SALAMANDER), new Tile(false, TileType.BABY_DRAGON));
+        MapPiece mapPiece3 = new MapPiece(new Tile(TileType.SPIDER), new Tile(TileType.SALAMANDER), new Tile(TileType.BABY_DRAGON));
         mapPiece3.setCaveIndex(1);
         cavePiece.add(mapPiece3);
-        MapPiece mapPiece4 = new MapPiece(new Tile(false, TileType.BAT), new Tile(false, TileType.SPIDER), new Tile(false, TileType.BABY_DRAGON));
+        MapPiece mapPiece4 = new MapPiece(new Tile(TileType.BAT), new Tile(TileType.SPIDER), new Tile(TileType.BABY_DRAGON));
         mapPiece4.setCaveIndex(1);
         cavePiece.add(mapPiece4);
 
@@ -121,16 +121,16 @@ public class Board {
             // setting the caves
             switch (i) {
                 case 0:
-                    cavePiece.get(i).addCave(new Tile(true, TileType.SPIDER));
+                    cavePiece.get(i).addCave(new Tile(TileType.SPIDER));
                     break;
                 case 1:
-                    cavePiece.get(i).addCave(new Tile(true, TileType.SALAMANDER));
+                    cavePiece.get(i).addCave(new Tile(TileType.SALAMANDER));
                     break;
                 case 2:
-                    cavePiece.get(i).addCave(new Tile(true, TileType.BAT));
+                    cavePiece.get(i).addCave(new Tile(TileType.BAT));
                     break;
                 case 3:
-                    cavePiece.get(i).addCave(new Tile(true, TileType.BABY_DRAGON));
+                    cavePiece.get(i).addCave(new Tile(TileType.BABY_DRAGON));
                     break;
             }
 

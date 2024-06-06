@@ -149,10 +149,12 @@ public class BoardController   {
      * @desc    Renders the winning game token back in its own cave, and switches to win scene.
      */
     public void switchToWinScene(Node node, Player winningPlayer) throws IOException, NoSuchFieldException, IllegalAccessException {
-        // move player's tile back to own cave
-        int playerId = winningPlayer.getId();
-        AnchorPane playerAnchorPane = (AnchorPane) getAnchorPane(playerAnchorPaneMap.get(playerId));
-        moveToken(playerAnchorPane, caveLocationArray.get(playerId - 1));
+        if (winningPlayer.getId() > 0) {
+            // move player's tile back to own cave
+            int playerId = winningPlayer.getId();
+            AnchorPane playerAnchorPane = (AnchorPane) getAnchorPane(playerAnchorPaneMap.get(playerId));
+            moveToken(playerAnchorPane, caveLocationArray.get(playerId - 1));
+        }
         try {
             // load the win scene
             fxmlLoader = new FXMLLoader(StartApplication.class.getResource("win-scene.fxml"));
@@ -251,7 +253,7 @@ public class BoardController   {
         }
 
         // Starting timer
-        this.timerController = new TimerController(900, timeRemainingText);
+        this.timerController = new TimerController(10, timeRemainingText);
         timerController.startTimer();
     }
 

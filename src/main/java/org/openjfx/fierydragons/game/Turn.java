@@ -166,7 +166,7 @@ public class Turn {
     }
 
     private Player calculateTimeWin() {
-        // Todo: find all player distances, find the least, they win, if tie, no one wins
+        // find all player distances, find the least distance, they win, if tie, no one wins
         Player minDistancePlayer = new Player("ITS A TIE", 10000);
         Integer minDistance = Integer.MAX_VALUE;
         // Find the player closest to winning

@@ -562,10 +562,9 @@ public class BoardController   {
             switch (playerCount) {
                 case 2:
                     // Case where two players, start opposite to each other
-                    anchorPane.getChildren().remove(batAnchorPane);
-                    anchorPane.getChildren().remove(spiderAnchorPane);
                     playerAnchorPaneMap.put(1, "dragon");
                     playerAnchorPaneMap.put(2, "salamander");
+
                     for (int i = 0; i < playerCount; i++) {
                         int[] player1Location = Board.getInstance().getPlayerLocationArray().get(i);
                         locationIndexArray.add(Board.getInstance().getTileLocation(player1Location) - 1);
@@ -573,7 +572,6 @@ public class BoardController   {
                     }
                     break;
                 case 3:
-                    anchorPane.getChildren().remove(batAnchorPane);
                     playerAnchorPaneMap.put(1, "dragon");
                     playerAnchorPaneMap.put(2, "spider");
                     playerAnchorPaneMap.put(3, "salamander");
@@ -600,6 +598,12 @@ public class BoardController   {
 
         if (playerCount == 2) {
             caveLocationArray.set(1, caveLocationArray.get(2));
+            anchorPane.getChildren().remove(batAnchorPane);
+            anchorPane.getChildren().remove(spiderAnchorPane);
+
+        }
+        if (playerCount == 3) {
+            anchorPane.getChildren().remove(batAnchorPane);
         }
         for (int i = 0; i <  playerCount; i++) {
             AnchorPane playerAnchorPane = (AnchorPane) getAnchorPane(playerAnchorPaneMap.get(i+1));

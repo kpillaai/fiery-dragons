@@ -253,7 +253,11 @@ public class BoardController   {
         }
 
         // Starting timer
-        this.timerController = new TimerController(10, timeRemainingText);
+        if (Game.getInstance().getCurrentPlayer() == null) {
+            this.timerController = new TimerController(150, timeRemainingText);
+        } else {
+            this.timerController = new TimerController(Game.getInstance().getCurrentPlayer().getTimeRemainingSeconds(), timeRemainingText);
+        }
         timerController.startTimer();
     }
 

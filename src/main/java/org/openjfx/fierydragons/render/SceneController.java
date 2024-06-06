@@ -34,6 +34,11 @@ public class SceneController {
         stage.show();
     }
 
+    /**
+     * @author  Krishna Pillaai Manogaran
+     * @desc    Called when the load game button is pressed. Asks for a JSON file and deserialises it. The deserialised
+     * info is then set to the relevant attributes using getters and setters to effectively present the saved game
+     */
     @FXML
     private void loadGame(ActionEvent event) {
         // Get the directory containing the JAR file and decode the path
@@ -71,7 +76,6 @@ public class SceneController {
                 BoardController.setTileLocationArray(gameState.getTileLocationArray());
                 BoardController.getInstance().setFlippedCardId(gameState.getFlippedCardId());
                 BoardController.setPlayerAnchorPaneMap(gameState.getPlayerAnchorPaneMap());
-                // Update your UI with the loaded game state if necessary
                 SettingsController settingsController = new SettingsController();
                 settingsController.switchToBoardScene(event);
 

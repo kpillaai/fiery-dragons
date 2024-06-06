@@ -271,6 +271,19 @@ public class Board {
             for (int j = 0; j < mapPieces.get(i).getTiles().size(); j++) {
                 if (i == position[0] && j == position[1]) {
                     return counter;
+                }
+                counter++;
+            }
+        }
+        return counter;
+    }
+
+    public int getCaveTileLocation(int[] position) {
+        int counter = 0;
+        for (int i = 0; i < mapPieces.size(); i++) {
+            for (int j = 0; j < mapPieces.get(i).getTiles().size(); j++) {
+                if (i == position[0] && j == position[1]) {
+                    return counter;
                 } else if (i == position[0] && j == mapPieces.get(i).getCaveIndex()) {
                     return counter;
                 }
@@ -353,13 +366,13 @@ public class Board {
         int forwardDistance = (targetTile - currentTile + numTiles) % numTiles;
         int backwardDistance = (currentTile - targetTile + numTiles) % numTiles;
         if (forwardDistance <= backwardDistance) {
-            if (distanceToCave - forwardDistance < 0) {
-                return distanceToCave - forwardDistance + numTiles + 1;
+            if (distanceToCave - forwardDistance <= 0) {
+                return distanceToCave - forwardDistance + numTiles;
             }
             return distanceToCave - forwardDistance;
         } else {
             if (distanceToCave + backwardDistance > numTiles) {
-                return distanceToCave + backwardDistance - 1;
+                return distanceToCave + backwardDistance;
             }
             return distanceToCave + backwardDistance;
         }

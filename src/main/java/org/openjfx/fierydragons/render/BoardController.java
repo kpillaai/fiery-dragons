@@ -121,6 +121,7 @@ public class BoardController   {
     }
 
     public void switchToStartScene(ActionEvent event) throws IOException {
+        timerController.stopTimer();
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Warning");
         alert.setContentText("Are you sure you want to return? Any unsaved changes will be lost.");
@@ -564,7 +565,7 @@ public class BoardController   {
 
                     for (int i = 0; i < playerCount; i++) {
                         int[] player1Location = Board.getInstance().getPlayerLocationArray().get(i);
-                        locationIndexArray.add(Board.getInstance().getTileLocation(player1Location) - 1);
+                        locationIndexArray.add(Board.getInstance().getCaveTileLocation(player1Location) - 1);
                     }
                     break;
                 case 3:
@@ -573,7 +574,7 @@ public class BoardController   {
                     playerAnchorPaneMap.put(3, "salamander");
                     for (int i = 0; i < playerCount; i++) {
                         int[] player1Location = Board.getInstance().getPlayerLocationArray().get(i);
-                        locationIndexArray.add(Board.getInstance().getTileLocation(player1Location) - 1);
+                        locationIndexArray.add(Board.getInstance().getCaveTileLocation(player1Location) - 1);
                     }
                     break;
                 case 4:
@@ -583,7 +584,7 @@ public class BoardController   {
                     playerAnchorPaneMap.put(4, "bat");
                     for (int i = 0; i < playerCount; i++) {
                         int[] player1Location = Board.getInstance().getPlayerLocationArray().get(i);
-                        locationIndexArray.add(Board.getInstance().getTileLocation(player1Location) - 1);
+                        locationIndexArray.add(Board.getInstance().getCaveTileLocation(player1Location) - 1);
                     }
                     break;
 

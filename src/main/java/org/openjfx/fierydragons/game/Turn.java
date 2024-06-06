@@ -105,8 +105,9 @@ public class Turn {
             }
             endTurn();
 
-            System.out.println(Game.getInstance().getCurrentPlayer().getDistanceToCave());
-            System.out.println(Game.getInstance().getCurrentPlayer().getName());
+            System.out.println("location[0]:" + Board.getInstance().getPlayerLocation(Game.getInstance().getCurrentPlayer())[0]);
+            System.out.println("location[1]:" + Board.getInstance().getPlayerLocation(Game.getInstance().getCurrentPlayer())[1]);
+            System.out.println("distance to cave: " + Game.getInstance().getCurrentPlayer().getDistanceToCave());
             return; // Exit method after swap
         }
 
@@ -115,9 +116,9 @@ public class Turn {
             Board.getInstance().movePlayer(Game.getInstance().getCurrentPlayer(), moveValue);
             BoardController.movePlayer(chitCard);
 
-            System.out.println(Board.getInstance().getPlayerLocation(Game.getInstance().getCurrentPlayer())[0]);
-            System.out.println(Board.getInstance().getPlayerLocation(Game.getInstance().getCurrentPlayer())[1]);
-            System.out.println("distaqnce to cave: " + Game.getInstance().getCurrentPlayer().getDistanceToCave());
+            System.out.println("location[0]:" + Board.getInstance().getPlayerLocation(Game.getInstance().getCurrentPlayer())[0]);
+            System.out.println("location[1]:" + Board.getInstance().getPlayerLocation(Game.getInstance().getCurrentPlayer())[1]);
+            System.out.println("distance to cave: " + Game.getInstance().getCurrentPlayer().getDistanceToCave());
 
             if (chitCard.getValue() < 0) { // End turn if player cannot move or pirate
                 endTurn();

@@ -178,7 +178,7 @@ public class Turn {
         if (winnersList.size() > 1) {
             minDistancePlayer = new Player("", -100);
             for (Player winner : winnersList) {
-                minDistancePlayer.setName(STR."\{minDistancePlayer.getName()} \{winner.getName()}");
+                minDistancePlayer.setName(minDistancePlayer.getName() + " " + winner.getName());
             }
         }
         return minDistancePlayer;

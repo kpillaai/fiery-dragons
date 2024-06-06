@@ -351,29 +351,4 @@ public class Board {
             return distanceToCave + backwardDistance;
         }
     }
-
-    public int calculateTilesBetween(int[] location1, int[] location2) {
-        int tile1Index = getTileLocation(location1);
-        int tile2Index = getTileLocation(location2);
-
-        // Calculate the direct distance
-        int directDistance = Math.abs(tile1Index - tile2Index);
-        // Calculate the wrap-around distance
-        int wrapAroundDistance = numTiles - directDistance;
-
-        // Return the minimum distance
-        return Math.min(directDistance, wrapAroundDistance);
-    }
-
-    // Save the entire game state to a JSON file
-    public void saveGame(String filePath) throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(filePath), this);
-    }
-
-    // Load the entire game state from a JSON file
-    public static Board loadGame(String filePath) throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.readValue(new File(filePath), Board.class);
-    }
 }

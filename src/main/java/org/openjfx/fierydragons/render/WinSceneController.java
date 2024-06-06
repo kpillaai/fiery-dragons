@@ -15,6 +15,10 @@ public class WinSceneController {
         winLabel.setText("Game Over. " + playerName + " wins!");
     }
 
+    /**
+     * @author  Zilei Chen
+     * @desc    Function used to set label and show tie.
+     */
     public void displayDraw(String playersWhoTied) {
         winLabel.setText("All players ran out of time! Game Over.\n" + playersWhoTied + " are Tied!");
     }

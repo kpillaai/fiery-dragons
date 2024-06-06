@@ -8,6 +8,12 @@ import java.util.ArrayList;
 
 public class CheckSwap extends TurnHandler{
 
+    /**
+     * @author  Jeffrey Yan
+     * @desc    This method extends TurnHandler, intends to check whether the player flipped a swap chit card.
+     * Returns 3 booleans representing if the player can move, if the player will win this turn and if a player can swap.
+     * Takes a Pair which represents chit cards and their number value.
+     */
     @Override
     public ArrayList<Boolean> handleTurn(CustomPair<TileType, Integer> chitCard) {
         if (chitCard.getKey() == TileType.SWAP) {

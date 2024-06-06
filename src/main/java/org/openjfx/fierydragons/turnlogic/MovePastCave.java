@@ -18,8 +18,8 @@ public class MovePastCave extends TurnHandler {
      * @author  Krishna Pillaai Manogaran
      * @desc    This method extends TurnHandler, intends to calculate if the player will move past the cave when winning
      * the game.
-     * Returns 2 booleans representing if the player can move, and if the player will win this turn. Takes a Pair which
-     * represents chit cards and their number value.
+     * Returns 3 booleans representing if the player can move, if the player will win this turn and if a player can swap.
+     * Takes a Pair which represents chit cards and their number value.
      */
     @Override
     public ArrayList<Boolean> handleTurn(CustomPair<TileType, Integer> chitCard) {

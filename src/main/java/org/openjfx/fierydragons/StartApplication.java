@@ -14,7 +14,7 @@ public class StartApplication extends Application {
         // Rendering the initial screen
         FXMLLoader fxmlLoader = new FXMLLoader(StartApplication.class.getResource("main-menu.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Hello!");
+        stage.setTitle("Fiery Dragons");
         stage.setScene(scene);
         stage.show();
 

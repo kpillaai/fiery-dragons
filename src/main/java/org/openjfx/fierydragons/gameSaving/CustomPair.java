@@ -7,6 +7,10 @@ public class CustomPair<K, V> {
     private K key;
     private V value;
 
+    /**
+     * @author  Krishna Pillaai Manogaran
+     * @desc    Using a custom pair class as Jackson (serializer) cannot serialize Java pairs
+     */
     public CustomPair(K key, V value) {
         this.key = key;
         this.value = value;
@@ -33,5 +37,4 @@ public class CustomPair<K, V> {
         return new CustomPair<>(key, value);
     }
 
-    // Optional: Override toString(), equals(), and hashCode() methods as needed
 }

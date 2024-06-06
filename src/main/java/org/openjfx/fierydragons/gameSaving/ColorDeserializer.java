@@ -10,6 +10,10 @@ import javafx.scene.paint.Color;
 import java.io.IOException;
 
 public class ColorDeserializer extends JsonDeserializer<Color> {
+    /**
+     * @author  Krishna Pillaai Manogaran
+     * @desc    Converts RGB values into a usable JavaFX Color
+     */
     @Override
     public Color deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
         JsonNode node = jsonParser.getCodec().readTree(jsonParser);

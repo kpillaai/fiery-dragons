@@ -99,13 +99,20 @@ public class GameState {
         this.playerAnchorPaneMap = playerAnchorPaneMap;
     }
 
-    // Save the entire game state to a JSON file
+    /**
+     * @author  Krishna Pillaai Manogaran
+     * @desc    Writes what is labeled with JsonPropertys to a JSON file, effectively saving the game
+     */
     public void saveGame(String filePath) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(filePath), this);
     }
 
-    // Load the entire game state from a JSON file
+    /**
+     * @author  Krishna Pillaai Manogaran
+     * @desc    Loads the game from a previously saved JSON file. Returns a GameState object which contains all of the
+     * save information.
+     */
     public static GameState loadGame(String filePath) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
 

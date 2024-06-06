@@ -202,7 +202,7 @@ public class Board {
         // if on cave
         if (currTileIndex < 0) {
             newTileIndex = mapPieces.get(playerLocationArray.get(playerId - 1)[0]).getCaveIndex() + noOfMoves - 1;
-            if (newTileIndex > mapPieces.get(currVolcanoIndex).getTiles().size() - 1) {
+            while (newTileIndex > mapPieces.get(currVolcanoIndex).getTiles().size() - 1) {
                 newTileIndex = newTileIndex - mapPieces.get(currVolcanoIndex).getTiles().size();
                 newVolcanoIndex = currVolcanoIndex + 1;
                 if (newVolcanoIndex > mapPieces.size()) {
@@ -214,7 +214,7 @@ public class Board {
 
         } else if (noOfMoves < 0) { // pirate card
             newTileIndex = currTileIndex + noOfMoves;
-            if (newTileIndex < 0) {
+            while (newTileIndex < 0) {
                 newVolcanoIndex = currVolcanoIndex - 1;
                 if (newVolcanoIndex < 0) {
                     newVolcanoIndex = mapPieces.size() - 1;
@@ -227,7 +227,7 @@ public class Board {
         }
         else { // if on board
             newTileIndex = currTileIndex + noOfMoves;
-            if (newTileIndex > mapPieces.get(currVolcanoIndex).getTiles().size() - 1) {
+            while (newTileIndex > mapPieces.get(currVolcanoIndex).getTiles().size() - 1) {
                 newTileIndex = newTileIndex - mapPieces.get(currVolcanoIndex).getTiles().size();
                 newVolcanoIndex = currVolcanoIndex + 1;
                 if (newVolcanoIndex > mapPieces.size() - 1) {
